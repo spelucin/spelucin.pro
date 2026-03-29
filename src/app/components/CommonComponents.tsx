@@ -30,9 +30,18 @@ export function Card({
   );
 }
 
-export function Eyebrow({ children }: { children: React.ReactNode }) {
+export function Eyebrow({
+  children,
+  style,
+  className,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
   return (
     <p
+      className={className}
       style={{
         fontFamily: "Inter, sans-serif",
         fontSize: "0.7rem",
@@ -41,6 +50,7 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
         textTransform: "uppercase",
         marginBottom: 12,
         fontWeight: 500,
+        ...style,
       }}
     >
       {children}
@@ -126,9 +136,17 @@ export function FAQ({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function Testimonial({ quote, name }: { quote: string; name: string }) {
+export function Testimonial({
+  quote,
+  name,
+  style,
+}: {
+  quote: string;
+  name: string;
+  style?: React.CSSProperties;
+}) {
   return (
-    <Card style={{ padding: "40px", position: "relative" }}>
+    <Card style={{ padding: "40px", position: "relative", ...style }}>
       <Quote
         size={42}
         color={C.sage}

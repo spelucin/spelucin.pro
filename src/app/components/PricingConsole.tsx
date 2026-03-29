@@ -1,5 +1,5 @@
 import React from "react";
-import { AlertCircle, BarChart3, Clock, Database, Slack } from "lucide-react";
+import { AlertCircle, Database, Slack } from "lucide-react";
 import { C, getTier } from "../constants";
 import { Card, Eyebrow, SectionH2 } from "./CommonComponents";
 
@@ -15,7 +15,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
   return (
     <section id="paquetes" style={sectionStyle}>
       <div style={{ textAlign: "center", marginBottom: 64 }}>
-        <Eyebrow>Modelo de suscripción B2B</Eyebrow>
+        <Eyebrow>MODELO DE SUSCRIPCIÓN</Eyebrow>
         <SectionH2>
           Precios que escalan junto con tu cartera de clientes.
         </SectionH2>
@@ -29,8 +29,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
             margin: "16px auto 0",
           }}
         >
-          Un modelo predecible de analítica fraccionada. Sin contratos a largo plazo, 
-          diseñado para agencias que necesitan infraestructura de datos sin el costo de un equipo in-house.
+          Olvídate de sueldos fijos costosos. Un modelo predecible basado en las cuentas activas que gestionas.
         </p>
       </div>
 
@@ -41,13 +40,28 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
         overflow: "hidden",
         border: `1px solid ${C.border}`,
       }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr" }} className="flex flex-col md:grid">
+        <div className="flex flex-col md:grid md:grid-cols-[1.2fr_0.8fr]">
           {/* Left: Configuration */}
-          <div style={{ padding: "48px 40px", borderRight: `1px solid ${C.border}` }}>
+          <div 
+            style={{ 
+              padding: "32px 24px", 
+              borderRight: "none", 
+              borderBottom: `1px solid ${C.border}` 
+            }} 
+            className="md:p-12 md:border-r md:border-b-0"
+          >
             <div style={{ marginBottom: 40 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-                <p style={{ fontFamily: "Lexend, sans-serif", color: C.text, fontSize: "1rem", fontWeight: 500 }}>
-                  Capacidad de Clientes
+              <div 
+                style={{ 
+                  display: "flex", 
+                  flexDirection: "column", 
+                  gap: 12, 
+                  marginBottom: 20 
+                }}
+                className="md:flex-row md:justify-between md:items-center"
+              >
+                <p style={{ fontFamily: "Lexend, sans-serif", color: C.text, fontSize: "1rem", fontWeight: 500, margin: 0 }}>
+                  ¿Cuántos clientes activos necesitan reportes?
                 </p>
                 <span style={{ 
                   fontFamily: "Inter, sans-serif", 
@@ -57,7 +71,8 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                   background: `${C.sage}10`,
                   padding: "4px 12px",
                   borderRadius: 99,
-                  border: `1px solid ${C.sage}20`
+                  border: `1px solid ${C.sage}20`,
+                  width: "fit-content"
                 }}>
                   {clients >= 31 ? "30+" : clients} Clientes Activos
                 </span>
@@ -95,7 +110,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
             </div>
 
             {/* Divider */}
-            <div style={{ margin: "40px 0 24px", borderTop: `1px solid ${C.border}`, opacity: 0.5 }} />
+            <div style={{ margin: "32px 0 24px", borderTop: `1px solid ${C.border}`, opacity: 0.5 }} />
 
             {/* Expanded Benefits List / No box */}
             <div style={{ padding: "0 12px", position: "relative" }}>
@@ -111,23 +126,14 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
               }} />
 
               <p style={{ fontSize: "0.95rem", color: C.text, fontWeight: 500, marginBottom: 24, fontFamily: "Lexend, sans-serif" }}>
-                {clients <= 10 ? "Estructura Base" : clients <= 20 ? "Crecimiento Acelerado" : "Infraestructura Enterprise"}
+                Tu Departamento de Datos
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 {[
-                  { text: "Dashboards operativos en tiempo real.", icon: <BarChart3 size={16} /> },
-                  { text: "Centralización de fuentes de datos.", icon: <Database size={16} /> },
-                  { text: "Soporte vía Slack para consultas técnicas.", icon: <Slack size={16} /> },
-                  { 
-                    text: `SLA: ${
-                      clients <= 10 ? "24 hrs" 
-                      : clients <= 20 ? "12 hrs" 
-                      : clients <= 30 ? "12 hrs" 
-                      : "8 hrs"
-                    }`, 
-                    icon: <Clock size={16} /> 
-                  }
+                  { text: "Soporte continuo.", icon: <Slack size={16} /> },
+                  { text: "Mantenimiento de conectores.", icon: <Database size={16} /> },
+                  { text: "Resolución de bugs.", icon: <AlertCircle size={16} /> },
                 ].map((benefit, i) => (
                   <div key={i} style={{ 
                     display: "flex", 
@@ -159,13 +165,16 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
           </div>
 
           {/* Right: Price Console */}
-          <div style={{ 
-            padding: "48px 40px", 
-            background: "rgba(255,248,235,0.02)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between"
-          }}>
+          <div 
+            style={{ 
+              padding: "32px 24px", 
+              background: "rgba(255,248,235,0.02)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between"
+            }}
+            className="md:p-12"
+          >
             <div>
               <p style={{ 
                 fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: C.sage, 
@@ -173,11 +182,14 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
               }}>
                 Inversión Mensual
               </p>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8 }}>
-                <h3 style={{ 
-                  fontFamily: "Lexend, sans-serif", color: C.text, fontSize: "4rem", 
-                  fontWeight: 500, margin: 0, lineHeight: 1 
-                }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
+                <h3 
+                  style={{ 
+                    fontFamily: "Lexend, sans-serif", color: C.text, 
+                    fontWeight: 500, margin: 0, lineHeight: 1 
+                  }}
+                  className="text-5xl md:text-6xl"
+                >
                   ${tier.price}
                 </h3>
                 <span style={{ color: `${C.text}40`, fontSize: "1.1rem" }}>/ mes</span>
@@ -196,7 +208,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                 alignItems: "center",
                 marginBottom: 40
               }}>
-                <span style={{ fontSize: "0.8rem", color: C.orange, fontWeight: 500 }}>Setup de Activación</span>
+                <span style={{ fontSize: "0.8rem", color: C.orange, fontWeight: 500 }}>Setup Inicial de Agencia</span>
                 <span style={{ fontSize: "1.1rem", color: C.text, fontFamily: "Lexend, sans-serif", fontWeight: 600 }}>
                   ${tier.setup} <small style={{ fontSize: "0.6rem", fontWeight: 400 }}>USD</small>
                 </span>

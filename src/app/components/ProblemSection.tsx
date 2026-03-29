@@ -20,7 +20,7 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
         zIndex: -1,
         opacity: 0.6,
       }} />
-      
+
       <div style={{ position: "relative", width: "100%" }}>
         <div
           style={{
@@ -29,12 +29,12 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
             overflow: "hidden",
           }}
         >
-          <Eyebrow>Status Quo</Eyebrow>
+          <Eyebrow>El Problema</Eyebrow>
           <SectionH2 style={{ marginBottom: 64, maxWidth: 650, margin: "0 auto 64px" }}>
-            Tu equipo pierde horas en Excel y tus clientes dudan de los resultados.
+            Tu equipo pierde horas en tareas manuales y tus clientes dudan de los resultados.
           </SectionH2>
 
-          <div 
+          <div
             style={{
               display: "grid",
               gap: 24,
@@ -43,34 +43,34 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
             className="custom-grid-3"
           >
             {[
-              { 
-                icon: <Clock size={28} strokeWidth={1.5} />, 
-                title: "Horas perdidas en Excel", 
-                desc: "Tu equipo pasa más tiempo limpiando celdas que analizando campañas. El error humano es inevitable.", 
+              {
+                icon: <Clock size={28} strokeWidth={1.5} />,
+                title: "Reportes Manuales",
+                desc: "Tus ejecutivos pierden el viernes entero cruzando datos de Meta y GA4 en lugar de optimizar las campañas publicitarias.",
                 impact: "Pérdida de Margen",
                 color: C.sage
               },
-              { 
-                icon: <AlertCircle size={28} strokeWidth={1.5} />, 
-                title: "Reportes ignorados", 
-                desc: "Clientes que no entienden el impacto de tus campañas. Sin claridad, es imposible escalar.", 
-                impact: "Crecimiento Frenado",
+              {
+                icon: <AlertCircle size={28} strokeWidth={1.5} />,
+                title: "Tracking Roto",
+                desc: "Fugas de información, conversiones duplicadas y píxeles que dejan de medir de la noche a la mañana sin que nadie lo note a tiempo.",
+                impact: "Datos Corruptos",
                 color: C.orange
               },
-              { 
-                icon: <Network size={28} strokeWidth={1.5} />, 
-                title: "Tracking descalibrado", 
-                desc: "Conexiones que fallan, eventos mal configurados y pérdida de atribución real.", 
-                impact: "Inversión Ineficiente",
+              {
+                icon: <Network size={28} strokeWidth={1.5} />,
+                title: "Fricción con Clientes",
+                desc: "Cuando los números de la agencia no cuadran con el CRM del cliente, la confianza se rompe y la cuenta se pierde.",
+                impact: "Riesgo de Churn",
                 color: C.sage
               }
             ].map((item, i) => (
-              <Card 
-                key={i} 
-                style={{ 
-                  padding: "36px", 
-                  height: "100%", 
-                  display: "flex", 
+              <Card
+                key={i}
+                style={{
+                  padding: "36px",
+                  height: "100%",
+                  display: "flex",
                   flexDirection: "column",
                 }}
               >
@@ -98,7 +98,7 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
                 }}>
                   {item.title}
                 </h3>
-                
+
                 <p style={{
                   fontFamily: "Inter, sans-serif",
                   color: `${C.text}60`,
@@ -140,7 +140,7 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
             lineHeight: 1.8,
             fontStyle: "italic",
           }}>
-            Nosotros eliminamos la fricción técnica. Mientras tus ejecutivos escalan, nosotros 
+            Nosotros eliminamos la fricción técnica. Mientras tus ejecutivos escalan, nosotros
             garantizamos que los números cuadren a la perfección.
           </p>
         </div>

@@ -10,17 +10,12 @@ interface BioSectionProps {
 export function BioSection({ sectionStyle }: BioSectionProps) {
   return (
     <section id="bio" style={{ ...sectionStyle, paddingTop: 120 }}>
+      {/* Mobile-optimized grid: stacking for mobile, side-by-side for md+ */}
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1.2fr",
-          gap: 64,
-          alignItems: "center",
-        }}
-        className="flex flex-col md:grid"
+        className="flex flex-col gap-12 md:grid md:grid-cols-[1fr_1.2fr] md:gap-16 md:items-center"
       >
         {/* Photo Column — Large & Atmospheric */}
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", width: "100%", maxWidth: 460, margin: "0 auto" }}>
           <div style={{
             position: "absolute",
             inset: "-20px",
@@ -30,11 +25,13 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
           }} />
 
           <div style={{
-            borderRadius: 48,
+            borderRadius: 32,
             overflow: "hidden",
             boxShadow: `0 20px 40px -10px rgba(0,0,0,0.4)`,
             border: `1px solid ${C.border}`,
-          }}>
+          }}
+            className="md:rounded-[48px]"
+          >
             <img
               src="/img/pfp.jpg"
               alt="Alex Spelucin"
@@ -51,16 +48,17 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
         </div>
 
         {/* Content Column — High-end Typography */}
-        <div style={{ padding: "12px 0" }}>
-          <Eyebrow>Tu próximo Data Lead</Eyebrow>
+        <div style={{ padding: "12px 0", textAlign: "left" }}>
+          <Eyebrow style={{ textAlign: "inherit" }}>Tu próximo Data Lead</Eyebrow>
           <h3
             style={{
               fontFamily: "Lexend, sans-serif",
               color: C.text,
-              fontSize: "clamp(1.8rem, 4vw, 2.6rem)",
+              fontSize: "clamp(2rem, 5vw, 2.6rem)",
               fontWeight: 500,
               marginBottom: 24,
               lineHeight: 1.1,
+              textAlign: "inherit",
             }}
           >
             Alex Spelucin.
@@ -72,12 +70,10 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
               fontSize: "1rem",
               lineHeight: 1.8,
               marginBottom: 32,
+              textAlign: "inherit",
             }}
           >
-            Llevo años construyendo departamentos de datos para agencias en LATAM.
-            Mi objetivo no es venderte un software más, sino actuar como tu socio
-            estratégico <em style={{ color: C.sage }}>in-house</em> para que tu agencia
-            escale con claridad y sin depender de procesos manuales.
+            Llevo 7 años construyendo departamentos de datos rentables para agencias en LATAM. Conozco desde adentro cómo la falta de medición técnica frena tu crecimiento y quema a tus equipos. Mi objetivo no es venderte un dashboard o reporte, sino actuar como tu socio estratégico in-house para que escales tu agencia con seguridad matemática.
           </p>
 
           <div style={{
@@ -85,43 +81,58 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
             alignItems: "center",
             gap: 24,
             marginTop: 40,
+            justifyContent: "flex-start",
           }}>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/spelucin"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                color: C.text,
+                color: `${C.text}60`,
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
                 fontSize: "0.85rem",
                 fontFamily: "Lexend, sans-serif",
                 textDecoration: "none",
-                transition: "opacity 0.2s"
+                transition: "all 0.2s"
               }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "0.7"}
-              onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+              onMouseEnter={e => {
+                e.currentTarget.style.opacity = "0.7";
+                e.currentTarget.style.color = C.text;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.color = `${C.text}60`;
+              }}
             >
-              <div style={{ width: 36, height: 36, borderRadius: "50%", background: `${C.text}10`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ width: 36, height: 36, borderRadius: "50%", background: `${C.text}05`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Linkedin size={18} />
               </div>
               LinkedIn
             </a>
             <a
-              href="mailto:alex@spelucin.com"
+              href="mailto:hola@spelucin.pro"
               style={{
-                color: C.text,
+                color: `${C.text}60`,
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
                 fontSize: "0.85rem",
                 fontFamily: "Lexend, sans-serif",
                 textDecoration: "none",
-                transition: "opacity 0.2s"
+                transition: "all 0.2s"
               }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "0.7"}
-              onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+              onMouseEnter={e => {
+                e.currentTarget.style.opacity = "0.7";
+                e.currentTarget.style.color = C.text;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.color = `${C.text}60`;
+              }}
             >
-              <div style={{ width: 36, height: 36, borderRadius: "50%", background: `${C.text}10`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ width: 36, height: 36, borderRadius: "50%", background: `${C.text}05`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Mail size={18} />
               </div>
               Email

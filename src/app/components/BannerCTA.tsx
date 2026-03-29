@@ -44,7 +44,7 @@ export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
               marginBottom: 24,
             }}
           >
-            Deja de perder tiempo en Excel.
+            Deja de perder tiempo con reportes manuales.
           </h2>
           <p
             style={{
@@ -55,8 +55,7 @@ export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
               marginBottom: 48,
             }}
           >
-            Integramos tu infraestructura de datos de clase mundial para que tu agencia 
-            opere con claridad y margen real.
+            Agendemos 20 minutos para revisar tu stack actual y activar tu Setup.
           </p>
           <button
             onClick={() => setShowBooking(true)}
@@ -85,7 +84,7 @@ export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
               e.currentTarget.style.boxShadow = `0 10px 30px -10px ${C.sage}50`;
             }}
           >
-            Reservar Sesión de Diagnóstico
+            Agendar Llamada
             <ArrowRight size={18} />
           </button>
           <p style={{ marginTop: 24, fontSize: "0.8rem", color: `${C.text}30`, fontFamily: "Inter, sans-serif" }}>

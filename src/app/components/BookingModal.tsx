@@ -9,7 +9,13 @@ interface BookingModalProps {
 
 export function BookingModal({ showBooking, setShowBooking }: BookingModalProps) {
   useEffect(() => {
-    if (!showBooking) return;
+    if (!showBooking) {
+      document.body.style.overflow = "auto";
+      return;
+    }
+
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = "hidden";
 
     // Initialize Cal.com if not already done
     const cal = (window as any).Cal;
@@ -22,9 +28,14 @@ export function BookingModal({ showBooking, setShowBooking }: BookingModalProps)
       });
       cal.ns.diagnostico("ui", {
         "hideEventTypeDetails": false,
-        "layout": "month_view"
+        "layout": "month_view",
+        "theme": "dark"
       });
     }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [showBooking]);
 
   if (!showBooking) return null;
@@ -84,6 +95,16 @@ export function BookingModal({ showBooking, setShowBooking }: BookingModalProps)
         <X size={24} />
       </button>
       
+      <style>{`
+        #my-cal-inline-diagnostico::-webkit-scrollbar {
+          display: none;
+        }
+        #my-cal-inline-diagnostico {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+
       <div 
         id="my-cal-inline-diagnostico" 
         style={{ 
@@ -93,7 +114,8 @@ export function BookingModal({ showBooking, setShowBooking }: BookingModalProps)
           maxHeight: 800,
           position: "relative",
           zIndex: 101,
-          overflow: "scroll",
+          overflow: "hidden", 
+          background: "transparent",
           animation: "slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)"
         }} 
       />

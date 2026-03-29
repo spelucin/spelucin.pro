@@ -17,59 +17,51 @@ export const C = {
 
 export const faqs = [
   {
-    q: "¿Puedo contratar el servicio para un solo cliente?",
-    a: "Sí. El Plan Boutique parte desde 1 cliente activo. Puedes comenzar pequeño y escalar cuando crezcas.",
+    q: "¿Qué pasa si pierdo un cliente, mi tarifa baja?",
+    a: "Exactamente. El modelo se adapta a tu realidad. Si pasas de 10 a 5 clientes activos, automáticamente bajas al Tier de menor costo. Escalas y desescalas sin riesgo.",
   },
   {
-    q: "¿Cómo funciona el proceso de onboarding?",
-    a: "Comenzamos con una auditoría técnica de tu stack actual. En 2 semanas tienes tu infraestructura operativa y tus primeros dashboards funcionando.",
+    q: "¿Tienen acceso a la facturación de mis clientes?",
+    a: "No. Trabajamos bajo estrictos acuerdos de confidencialidad (NDA). Solo solicitamos acceso de visualización y edición a las plataformas técnicas (GA4, GTM, Looker), nunca a la facturación financiera de la agencia.",
   },
   {
-    q: "¿Qué pasa si necesito pausar el servicio?",
-    a: "Puedes pausar con 30 días de aviso. No hay contratos anuales obligatorios ni penalizaciones.",
+    q: "¿Cuánto demora el Setup inicial?",
+    a: "El proceso de auditoría y creación de plantillas maestras toma entre 7 y 14 días laborables, dependiendo del desorden actual de la infraestructura.",
   },
   {
-    q: "Trabajan con plataformas además de Google?",
-    a: "Sí. Integramos Meta Ads, TikTok Ads, LinkedIn, HubSpot, Salesforce y cualquier fuente vía API o conector nativo.",
+    q: "¿Cómo se comunican con mi equipo?",
+    a: "Nos integramos a tu flujo. Abrimos un canal compartido en Slack o Teams donde tus media buyers pueden etiquetarnos si hay discrepancias de datos o píxeles caídos.",
   },
   {
-    q: "¿Qué tan rápido ven resultados mis clientes?",
-    a: "Los primeros dashboards en tiempo real están listos en los primeros 10 días hábiles tras el setup.",
+    q: "¿Es mejor esto que contratar un Analista Junior?",
+    a: "Un Junior te cuesta más de $1,000 USD al mes, requiere capacitación y tiene alta rotación. Con nosotros obtienes infraestructura nivel Senior, automatización con IA y soporte continuo por una fracción del costo.",
   },
   {
-    q: "¿Los talleres son en vivo o grabados?",
-    a: "Todos los talleres son en vivo vía Google Meet. Se entregan grabaciones para que tu equipo pueda repasar el contenido.",
-  },
-  {
-    q: "¿Pueden construir mi equipo de datos interno?",
-    a: "Sí. Además del servicio gestionado, ofrecemos consultoría para que tu agencia desarrolle capacidades internas de datos.",
-  },
-  {
-    q: "¿Tienen soporte técnico continuo?",
-    a: "Todos los planes incluyen soporte continuo vía Slack con tiempos de respuesta garantizados en días hábiles.",
+    q: "¿Cómo se factura el Setup y el primer mes?",
+    a: "Para iniciar el proceso de auditoría y activación, el pago del Setup ($500 USD) se abona junto con tu primera mensualidad. A partir del segundo mes, únicamente pagas tu tarifa plana basada en el volumen de tus clientes activos.",
   },
 ];
 
 export const steps = [
   {
     icon: <Search size={22} strokeWidth={1.5} />,
-    title: "Auditoría de datos",
-    desc: "Revisamos que las fuentes de información se alimenten correctamente. Aseguramos que tu web tenga el tracking saneado y que las plataformas reciban la data exacta.",
+    title: "Auditoría de Tracking",
+    desc: "Revisamos que la web de tu cliente tenga el código saneado y que las plataformas reciban la data exacta mediante scripts automatizados.",
   },
   {
     icon: <CheckCircle size={22} strokeWidth={1.5} />,
-    title: "Implementación e integración",
-    desc: "Ejecutamos los cambios técnicos para el tracking y creamos las conexiones con todas las fuentes de datos correspondientes a tu agencia.",
+    title: "Implementación e Integración",
+    desc: "Ejecutamos los cambios técnicos necesarios para el rastreo y creamos las conexiones (Pipelines) con las fuentes de datos.",
   },
   {
     icon: <BarChart2 size={22} strokeWidth={1.5} />,
-    title: "Dashboards y reportes",
-    desc: "Diseñamos reportes a medida del cliente final. Pueden usarse para presentar resultados o como paneles operativos en tiempo real.",
+    title: "Diseño de Dashboards",
+    desc: "Construimos paneles a medida. Útiles para el reporte mensual del cliente y para el monitoreo diario de tu equipo de media buying.",
   },
   {
     icon: <Network size={22} strokeWidth={1.5} />,
-    title: "Mantenimiento continuo",
-    desc: "Mantenemos los conectores funcionando, creamos reportes para tus clientes nuevos y llevamos este estándar a cada cuenta.",
+    title: "Mantenimiento y Soporte",
+    desc: "Monitoreamos los conectores, creamos reportes para tus cuentas nuevas y resolvemos bugs por Slack antes de que el cliente pregunte.",
   },
 ];
 

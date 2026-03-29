@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
 
 // Components
 import { GridBackground } from "./components/GridBackground";
@@ -21,7 +20,6 @@ import { C, faqs, agencyLogos } from "./constants";
 
 export default function App() {
   const [clients, setClients] = useState(10);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
 
@@ -63,7 +61,6 @@ export default function App() {
   }, []);
 
   const scrollTo = (id: string) => {
-    setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -82,7 +79,14 @@ export default function App() {
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes marqueeTools { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { 
+          scroll-behavior: smooth; 
+          scrollbar-gutter: stable;
+        }
+        body {
+          margin: 0;
+          overflow-x: hidden;
+        }
         input[type="range"] {
           -webkit-appearance: none;
           appearance: none;
@@ -129,22 +133,17 @@ export default function App() {
           right: 0,
           zIndex: 50,
           padding: "12px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           transition: "all 0.3s",
         }}
+        className="flex items-center justify-center"
       >
         {/* Pill navbar */}
         <div
-          className="hidden md:flex"
+          className="hidden md:flex items-center justify-between"
           style={{
             width: "100%",
             maxWidth: 860,
             height: 52,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
             background: scrolled ? "rgba(6,20,15,0.85)" : "rgba(255,248,235,0.05)",
             backdropFilter: "blur(16px)",
             border: `1px solid ${C.border}`,
@@ -158,8 +157,8 @@ export default function App() {
           <nav style={{ display: "flex", gap: 4 }}>
             {[
               ["Proceso", "proceso"],
-              ["Suscripción", "paquetes"],
-              ["Sobre Mí", "bio"],
+              ["Beneficios", "solucion"],
+              ["Precios", "paquetes"],
               ["FAQs", "faq"],
             ].map(([label, id]) => (
               <button
@@ -208,18 +207,16 @@ export default function App() {
             onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.04)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
           >
-            Contacto
+            Agendar Llamada
           </button>
         </div>
 
         {/* Mobile row */}
         <div
-          className="flex md:hidden"
+          className="flex md:hidden items-center justify-between"
           style={{
             width: "100%",
             height: 52,
-            alignItems: "center",
-            justifyContent: "space-between",
             background: "rgba(255,248,235,0.05)",
             backdropFilter: "blur(16px)",
             border: `1px solid ${C.border}`,
@@ -227,69 +224,27 @@ export default function App() {
             padding: "0 8px 0 20px",
           }}
         >
-          <span style={{ fontFamily: "Lexend, sans-serif", fontWeight: 700, fontSize: "0.9rem", color: C.text }}>
-            ALEX SPELUCIN.
-          </span>
+          <img src="/img/logo.png" alt="Alex Spelucin" style={{ height: 20, width: "auto", flexShrink: 0 }} />
+          
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            style={{ background: "none", border: "none", cursor: "pointer", color: C.text, padding: "8px 12px" }}
+            onClick={() => setShowBooking(true)}
+            style={{
+              background: C.sage,
+              color: C.bg,
+              border: "none",
+              borderRadius: 99,
+              padding: "7px 16px",
+              fontFamily: "Lexend, sans-serif",
+              fontSize: "0.75rem",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
           >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+            Agendar
           </button>
         </div>
       </header>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 64,
-            left: 0,
-            right: 0,
-            background: `rgba(6,20,15,0.97)`,
-            backdropFilter: "blur(16px)",
-            zIndex: 49,
-            padding: "24px",
-            borderBottom: `1px solid ${C.border}`,
-            display: "flex",
-            flexDirection: "column",
-            gap: 16,
-          }}
-        >
-          {[
-            ["Proceso", "proceso"],
-            ["Suscripción", "paquetes"],
-            ["Sobre Mí", "bio"],
-            ["FAQs", "faq"],
-            ["Contacto", "contacto"],
-          ].map(([label, id]) => (
-            <button
-              key={id}
-              onClick={() => {
-                if (id === "contacto") {
-                  setShowBooking(true);
-                  setMenuOpen(false);
-                } else {
-                  scrollTo(id);
-                }
-              }}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "1rem",
-                color: C.text,
-                textAlign: "left",
-                padding: "4px 0",
-              }}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      )}
 
       {/* Main Content */}
       <Hero setShowBooking={setShowBooking} scrollTo={scrollTo} sectionStyle={sectionStyle} />
@@ -299,7 +254,7 @@ export default function App() {
           fontFamily: "Inter, sans-serif", fontSize: "0.68rem", letterSpacing: "0.14em",
           color: `${C.text}30`, textTransform: "uppercase", textAlign: "center", marginBottom: 32,
         }}>
-          Agencias que escalan con nosotros
+          AGENCIAS QUE YA ESCALAN CON NOSOTROS
         </p>
         <Marquee items={agencyLogos} maxWidth={1100} />
       </section>
@@ -311,17 +266,19 @@ export default function App() {
 
       <section style={{ ...sectionStyle, paddingBottom: 0 }}>
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <Eyebrow>Resultados comprobados</Eyebrow>
+          <Eyebrow>RESULTADOS</Eyebrow>
           <SectionH2>Lo que dicen nuestros partners.</SectionH2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 48, alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 32, alignItems: "stretch" }}>
           <Testimonial
-            quote="Pasamos de reportar manualmente cada semana a tener dashboards en tiempo real. Mi equipo ahorra horas de trabajo en minutos, no en días."
-            name="Director de Operaciones, Agencia de Performance"
+            quote="Creó nuestro dashboard de analytics asegurándose de que todo estuviera estructurado y funcionando a la perfección. Resolvió problemas de tracking que no teníamos mapeados y dejó todas las conexiones listas. ¡Totalmente recomendado!"
+            name="Milagros Meier, Growth Lead en Laboratoria"
+            style={{ height: "100%" }}
           />
           <Testimonial
-            quote="Nos ayudaron a integrar múltiples fuentes de datos en un solo lugar. La claridad que tenemos ahora para reportar a nuestros clientes es de otro nivel."
-            name="Head of Data, Agencia B2B"
+            quote="Su extenso conocimiento técnico logra intersecciones fascinantes entre SEO y tecnología. Automatizó nuestra reportería manteniendo siempre el foco en el crecimiento del negocio y los objetivos del cliente."
+            name="Darío Vergara, SEO Lead Attach Media"
+            style={{ height: "100%" }}
           />
         </div>
       </section>
@@ -330,7 +287,7 @@ export default function App() {
       <PricingConsole clients={clients} setClients={setClients} sectionStyle={sectionStyle} />
 
       <section id="faq" style={{ ...sectionStyle, textAlign: "center" }}>
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
+        <Eyebrow>RESOLVAMOS DUDAS</Eyebrow>
         <SectionH2 style={{ marginBottom: 40 }}>¿Tienes dudas?</SectionH2>
         <div>
           {faqs.map((faq, i) => (

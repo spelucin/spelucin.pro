@@ -40,13 +40,13 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
           fontSize: "clamp(0.9rem, 2vw, 1.05rem)",
           color: `${C.text}70`,
           lineHeight: 1.8,
-          maxWidth: 580,
+          maxWidth: 640,
           margin: "0 auto 40px auto",
         }}
       >
-        Automatizamos tus reportes, saneamos tu tracking y demostramos el ROI
-        real a tus clientes. Eliminamos el trabajo manual para que tu equipo
-        se enfoque exclusivamente en optimizar campañas.
+        Automatizamos tus reportes, saneamos tu tracking publicitario y
+        demostramos el ROI real a tus clientes mediante agentes IA e
+        integraciones directas.
       </p>
       <div
         style={{
@@ -80,7 +80,7 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
             (e.currentTarget.style.transform = "scale(1)")
           }
         >
-          Separa una Cita
+          Agendar Llamada
           <ArrowRight size={15} />
         </button>
         <button
@@ -105,7 +105,7 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
             e.currentTarget.style.transform = "scale(1)";
           }}
         >
-          Calcula tu Inversión
+          Conocer Planes
         </button>
       </div>
     </section>

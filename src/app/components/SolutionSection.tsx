@@ -1,5 +1,5 @@
 import React from "react";
-import { SiGooglecloud, SiGoogletagmanager, SiLooker } from "react-icons/si";
+import { Database, Crosshair, BarChart3 } from "lucide-react";
 import { C } from "../constants";
 import { Eyebrow, SectionH2 } from "./CommonComponents";
 
@@ -10,27 +10,30 @@ interface SolutionSectionProps {
 export function SolutionSection({ sectionStyle }: SolutionSectionProps) {
   return (
     <section id="solucion" style={{ ...sectionStyle, paddingTop: 120 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="flex flex-col md:grid">
+      {/* Mobile-optimized grid: smaller gap on mobile, md:grid for desktop */}
+      <div 
+        className="flex flex-col items-center gap-12 md:grid md:grid-cols-2 md:gap-20 md:items-start"
+      >
         {/* Dashboard Visual — Left */}
-        <div style={{ position: "relative" }}>
-           <div style={{
+        <div style={{ position: "relative", width: "100%", maxWidth: 500 }}>
+          <div style={{
             position: "absolute",
             inset: "-30px",
             background: `radial-gradient(circle, ${C.sage}20 0%, transparent 70%)`,
             filter: "blur(50px)",
             zIndex: -1,
           }} />
-          
-          <div style={{ 
-            borderRadius: 32, 
-            overflow: "hidden", 
-            boxShadow: `0 40px 80px -20px rgba(0,0,0,0.6)`,
-            border: `1px solid ${C.border}`,
-            transform: "perspective(1000px) rotateY(-5deg) rotateX(2deg)",
-            transition: "transform 0.5s ease",
-          }}
-          onMouseEnter={e => e.currentTarget.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg)"}
-          onMouseLeave={e => e.currentTarget.style.transform = "perspective(1000px) rotateY(-5deg) rotateX(2deg)"}
+
+          {/* Transform is removed on mobile by default, added back for md screens */}
+          <div 
+            style={{
+              borderRadius: 32,
+              overflow: "hidden",
+              boxShadow: `0 40px 80px -20px rgba(0,0,0,0.6)`,
+              border: `1px solid ${C.border}`,
+              transition: "transform 0.5s ease",
+            }}
+            className="md:[transform:perspective(1000px)_rotateY(-5deg)_rotateX(2deg)] md:hover:[transform:perspective(1000px)_rotateY(0deg)_rotateX(0deg)]"
           >
             <img
               src="/img/example.jpg"
@@ -46,9 +49,9 @@ export function SolutionSection({ sectionStyle }: SolutionSectionProps) {
         </div>
 
         {/* Text Content — Right */}
-        <div>
-          <Eyebrow>La Solución</Eyebrow>
-          <SectionH2 style={{ marginBottom: 24, fontSize: "clamp(1.8rem, 4vw, 2.4rem)" }}>
+        <div style={{ textAlign: "left" }}>
+          <Eyebrow style={{ textAlign: "inherit" }}>La Solución</Eyebrow>
+          <SectionH2 style={{ marginBottom: 24, fontSize: "clamp(1.8rem, 4vw, 2.4rem)", textAlign: "inherit" }}>
             Tu propia infraestructura de datos de clase mundial.
           </SectionH2>
           <p style={{
@@ -57,21 +60,21 @@ export function SolutionSection({ sectionStyle }: SolutionSectionProps) {
             fontSize: "1.05rem",
             lineHeight: 1.8,
             marginBottom: 40,
+            textAlign: "inherit",
           }}>
-            Dejamos de jugar con Excels y empezamos a construir activos de datos 
-            reales. Transformamos el caos manual en un motor de decisiones 100% automatizado.
+            Pasamos a tu agencia de lo manual a la automatización total.
           </p>
-          
+
           <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
             {[
-              { title: "Dashboards en Tiempo Real", desc: "Visualiza tu rentabilidad sin esperar al lunes.", icon: <SiLooker size={20} /> },
-              { title: "Tracking Unificado", desc: "Atribución perfecta en todas tus plataformas de publicidad.", icon: <SiGoogletagmanager size={20} /> },
-              { title: "Escalabilidad Sin Fricción", desc: "Tu equipo enfocado en optimizar, no en limpiar filas.", icon: <SiGooglecloud size={20} /> },
+              { title: "Conectores Estables", desc: "Datos fluyendo 24/7 sin caídas.", icon: <Database size={20} /> },
+              { title: "Atribución Clara", desc: "Demuestra exactamente de dónde vienen las ventas.", icon: <Crosshair size={20} /> },
+              { title: "Dashboards Modernos", desc: "Visualiza tu rentabilidad sin esperar al lunes.", icon: <BarChart3 size={20} /> },
             ].map((point, i) => (
               <div key={i} style={{ display: "flex", gap: 20 }}>
-                <div style={{ 
-                  width: 48, height: 48, borderRadius: 12, background: `${C.sage}15`, 
-                  display: "flex", alignItems: "center", justifyContent: "center", color: C.sage, flexShrink: 0 
+                <div style={{
+                  width: 48, height: 48, borderRadius: 12, background: `${C.sage}15`,
+                  display: "flex", alignItems: "center", justifyContent: "center", color: C.sage, flexShrink: 0
                 }}>
                   {point.icon}
                 </div>

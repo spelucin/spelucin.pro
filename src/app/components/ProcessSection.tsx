@@ -11,8 +11,8 @@ export function ProcessSection({ sectionStyle }: ProcessSectionProps) {
     <section id="proceso" style={sectionStyle}>
       {/* Header */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: 64 }}>
-        <Eyebrow>Nuestro proceso</Eyebrow>
-        <SectionH2 style={{ marginBottom: 12 }}>¿Cómo funciona?</SectionH2>
+        <Eyebrow>CÓMO FUNCIONA</Eyebrow>
+        <SectionH2 style={{ marginBottom: 12 }}>Tu nuevo departamento opera en 4 pasos.</SectionH2>
         <p
           style={{
             fontFamily: "Inter, sans-serif",

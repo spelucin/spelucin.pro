@@ -1,6 +1,6 @@
 import React from "react";
 import { SiGoogleanalytics, SiGooglegemini, SiGooglecloud, SiGooglesheets, SiGoogletagmanager, SiLooker } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
+import { TbApi, TbPlugConnected } from "react-icons/tb";
 import { C } from "../constants";
 import { Eyebrow, SectionH2 } from "./CommonComponents";
 
@@ -23,8 +23,7 @@ export function ToolsSection({ sectionStyle }: ToolsSectionProps) {
           margin: "0 auto 48px",
         }}
       >
-        No improvisamos. Utilizamos el stack líder de la industria para garantizar
-        que tu infraestructura sea escalable, segura y 100% automatizada.
+        Conectamos e integramos el stack más robusto del mercado.
       </p>
 
       <div style={{
@@ -43,6 +42,7 @@ export function ToolsSection({ sectionStyle }: ToolsSectionProps) {
           { name: "Apps Script", icon: <SiGooglecloud size={16} /> },
           { name: "APIs y Webhooks", icon: <TbApi size={18} /> },
           { name: "Gemini", icon: <SiGooglegemini size={16} /> },
+          { name: "Porter Metrics", icon: <TbPlugConnected size={18} /> },
         ].map((tool, i) => (
           <div
             key={i}
