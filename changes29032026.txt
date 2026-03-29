@@ -1,0 +1,147 @@
+Guía Maestra de Copy: Landing Page Agencia SaaS
+
+1. Header & Hero Section
+
+Navegación: Proceso, Beneficios, Precios, FAQs.
+
+Botón Header: Agendar Llamada (Acento Verde).
+
+H1: El departamento de datos que tu agencia necesita para escalar.
+
+Subtítulo: Automatizamos tus reportes, saneamos tu tracking publicitario y demostramos el ROI real a tus clientes mediante agentes IA e integraciones directas.
+
+CTA Principal: Agendar Llamada (Verde Salvia)
+
+CTA Secundario: Conocer Planes (Outline / Naranja Arena)
+
+2. Social Proof Inicial
+
+Eyebrow: AGENCIAS QUE YA ESCALAN CON NOSOTROS
+
+Cinta Infinita: [Logos de Agencias en escala de grises / baja opacidad]
+
+3. Sección del Problema (3 Tarjetas)
+
+H2: Tu equipo pierde horas en Excel y tus clientes dudan de los resultados.
+
+Tarjeta 1: Reportes Manuales. Tus ejecutivos pierden el viernes entero cruzando datos de Meta y GA4 en lugar de optimizar las campañas publicitarias.
+
+Tarjeta 2: Tracking Roto. Fugas de información, conversiones duplicadas y píxeles que dejan de medir de la noche a la mañana sin que nadie lo note a tiempo.
+
+Tarjeta 3: Fricción con Clientes. Cuando los números de la agencia no cuadran con el CRM del cliente, la confianza se rompe y la cuenta se pierde.
+
+4. La Solución (Sección del Dashboard)
+
+Visual: [Mockup del dashboard con brillo sutil de fondo]
+
+H2: Tu propia infraestructura de datos de clase mundial.
+
+Párrafo: Pasamos a tu agencia de la prehistoria del Excel a la automatización total.
+
+Bullet 1: Conectores Estables. Datos fluyendo 24/7 sin caídas.
+
+Bullet 2: Atribución Clara. Demuestra exactamente de dónde vienen las ventas.
+
+Bullet 3: Auditoría IA. Sistemas automatizados que detectan fallos en tu tracking en tiempo real.
+
+5. El Proceso
+
+Eyebrow: CÓMO FUNCIONA
+
+H2: Tu nuevo departamento opera en 4 pasos.
+
+Paso 1: Auditoría de Tracking. Revisamos que la web de tu cliente tenga el código saneado y que las plataformas reciban la data exacta mediante scripts automatizados.
+
+Paso 2: Implementación e Integración. Ejecutamos los cambios técnicos necesarios para el rastreo y creamos las conexiones (Pipelines) con las fuentes de datos.
+
+Paso 3: Diseño de Dashboards. Construimos paneles a medida. Útiles para el reporte mensual del cliente y para el monitoreo diario de tu equipo de media buying.
+
+Paso 4: Mantenimiento y Soporte. Monitoreamos los conectores, creamos reportes para tus cuentas nuevas y resolvemos bugs por Slack antes de que el cliente pregunte.
+
+6. Stack Tecnológico
+
+H2: Nuestras herramientas
+
+Subtítulo: Conectamos e integramos el stack más robusto del mercado.
+
+Logos: Google Analytics 4, Looker Studio, BigQuery, Google Tag Manager, Gemini.
+
+7. Social Proof (Testimonios)
+
+Eyebrow: RESULTADOS
+
+H2: Lo que dicen nuestros partners.
+
+Testimonio 1: "Pasamos de reportar manualmente a tener dashboards en tiempo real. Mi equipo ahora ahorra horas de trabajo en minutos." (Director de Operaciones, Agencia de Performance)
+
+Testimonio 2: "Nos ayudaron a integrar múltiples fuentes en un solo lugar. La claridad que tenemos hoy para justificar el ROI a los clientes es de otro nivel." (Head of Data, Agencia B2B)
+
+8. Autoridad (Biografía)
+
+Visual: [Tu foto de perfil nítida e iluminada]
+
+H2: Alex Spelucin
+
+Párrafo: Llevo años construyendo departamentos de datos rentables para agencias en LATAM. Conozco desde adentro cómo la falta de medición técnica frena tu crecimiento y quema a tus equipos. Mi objetivo no es venderte un software, sino actuar como tu socio estratégico in-house para que escales tu agencia con seguridad matemática.
+
+Links: [Icono LinkedIn] [Icono Email]
+
+9. Pricing (Calculadora Interactiva)
+
+Eyebrow: MODELO DE SUSCRIPCIÓN
+
+H2: Precios que escalan junto con tu cartera de clientes.
+
+Párrafo: Olvídate de sueldos fijos costosos. Un modelo predecible basado en las cuentas activas que gestionas.
+
+Visual Slider: "¿Cuántos clientes activos necesitan reportes?" [Slider de 1 a 30]
+
+Columna Izquierda (Retainer Mensual):
+
+Título: Tu Departamento de Datos
+
+Precio: [Número dinámico generado por el slider]
+
+Lista: Soporte continuo, mantenimiento de conectores, resolución de bugs.
+
+Columna Derecha (Setup):
+
+Título: Setup Inicial de Agencia
+
+Precio: $500 USD (Pago Único)
+
+Lista: Auditoría total de tu stack, estandarización técnica de cuentas.
+
+10. Preguntas Frecuentes (FAQ)
+
+Eyebrow: RESOLVAMOS DUDAS
+
+H2: ¿Tienes dudas?
+
+FAQ 1: ¿Qué pasa si pierdo un cliente, mi tarifa baja?
+
+Respuesta: Exactamente. El modelo se adapta a tu realidad. Si pasas de 10 a 5 clientes activos, automáticamente bajas al Tier de menor costo. Escalas y desescalas sin riesgo.
+
+FAQ 2: ¿Tienen acceso a la facturación de mis clientes?
+
+Respuesta: No. Trabajamos bajo estrictos acuerdos de confidencialidad (NDA). Solo solicitamos acceso de visualización y edición a las plataformas técnicas (GA4, GTM, Looker), nunca a la facturación financiera de la agencia.
+
+FAQ 3: ¿Cuánto demora el Setup inicial?
+
+Respuesta: El proceso de auditoría y creación de plantillas maestras toma entre 7 y 14 días laborables, dependiendo del desorden actual de la infraestructura.
+
+FAQ 4: ¿Cómo se comunican con mi equipo?
+
+Respuesta: Nos integramos a tu flujo. Abrimos un canal compartido en Slack o Teams donde tus media buyers pueden etiquetarnos si hay discrepancias de datos o píxeles caídos.
+
+FAQ 5: ¿Es mejor esto que contratar un Analista Junior?
+
+Respuesta: Un Junior te cuesta más de $1,000 USD al mes, requiere capacitación y tiene alta rotación. Con nosotros obtienes infraestructura nivel Senior, automatización con IA y soporte continuo por una fracción del costo.
+
+11. Final CTA
+
+H2: Deja de perder tiempo en Excel.
+
+Párrafo: Agendemos 20 minutos para revisar tu stack actual y activar tu Setup.
+
+Botón CTA: Agendar Llamada (Lleva directo al Embed de TidyCal o a la URL).
