@@ -112,7 +112,7 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
               LinkedIn
             </a>
             <a
-              href="mailto:hola@spelucin.pro"
+              href="mailto:spelucinalex@gmail.com"
               style={{
                 color: `${C.text}60`,
                 display: "flex",

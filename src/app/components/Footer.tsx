@@ -54,7 +54,7 @@ export function Footer() {
           <Linkedin size={20} />
         </a>
         <a
-          href="mailto:hola@spelucin.pro"
+          href="mailto:spelucinalex@gmail.com"
           style={{ color: `${C.text}50`, transition: "color 0.2s" }}
           onMouseEnter={(e) => (e.currentTarget.style.color = C.sage)}
           onMouseLeave={(e) =>
