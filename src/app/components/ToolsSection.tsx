@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { SiGoogleanalytics, SiGooglegemini, SiGooglecloud, SiGooglesheets, SiGoogletagmanager, SiLooker } from "react-icons/si";
 import { TbApi, TbPlugConnected } from "react-icons/tb";
 import { C } from "../constants";
@@ -9,10 +10,23 @@ interface ToolsSectionProps {
 }
 
 export function ToolsSection({ sectionStyle }: ToolsSectionProps) {
+  const { t } = useTranslation();
+
+  const tools = [
+    { name: "Looker Studio", icon: <SiLooker size={16} /> },
+    { name: "Google Analytics 4", icon: <SiGoogleanalytics size={16} /> },
+    { name: "Google Tag Manager", icon: <SiGoogletagmanager size={16} /> },
+    { name: "Google Sheets", icon: <SiGooglesheets size={16} /> },
+    { name: "Apps Script", icon: <SiGooglecloud size={16} /> },
+    { name: t('tools.list.apis'), icon: <TbApi size={18} /> },
+    { name: "Gemini", icon: <SiGooglegemini size={16} /> },
+    { name: "Porter Metrics", icon: <TbPlugConnected size={18} /> },
+  ];
+
   return (
     <section style={{ ...sectionStyle, paddingTop: 40, textAlign: "center" }}>
-      <Eyebrow>Tecnología de última generación</Eyebrow>
-      <SectionH2 style={{ marginBottom: 16 }}>Nuestras herramientas</SectionH2>
+      <Eyebrow>{t('tools.eyebrow')}</Eyebrow>
+      <SectionH2 style={{ marginBottom: 16 }}>{t('tools.title')}</SectionH2>
       <p
         style={{
           fontFamily: "Inter, sans-serif",
@@ -23,7 +37,7 @@ export function ToolsSection({ sectionStyle }: ToolsSectionProps) {
           margin: "0 auto 48px",
         }}
       >
-        Conectamos e integramos el stack más robusto del mercado.
+        {t('tools.description')}
       </p>
 
       <div style={{
@@ -34,16 +48,7 @@ export function ToolsSection({ sectionStyle }: ToolsSectionProps) {
         maxWidth: 900,
         margin: "0 auto",
       }}>
-        {[
-          { name: "Looker Studio", icon: <SiLooker size={16} /> },
-          { name: "Google Analytics 4", icon: <SiGoogleanalytics size={16} /> },
-          { name: "Google Tag Manager", icon: <SiGoogletagmanager size={16} /> },
-          { name: "Google Sheets", icon: <SiGooglesheets size={16} /> },
-          { name: "Apps Script", icon: <SiGooglecloud size={16} /> },
-          { name: "APIs y Webhooks", icon: <TbApi size={18} /> },
-          { name: "Gemini", icon: <SiGooglegemini size={16} /> },
-          { name: "Porter Metrics", icon: <TbPlugConnected size={18} /> },
-        ].map((tool, i) => (
+        {tools.map((tool, i) => (
           <div
             key={i}
             style={{
@@ -81,3 +86,4 @@ export function ToolsSection({ sectionStyle }: ToolsSectionProps) {
     </section>
   );
 }
+

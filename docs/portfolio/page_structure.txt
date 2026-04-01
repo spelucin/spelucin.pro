@@ -1,0 +1,105 @@
+Website Structure: Alex Spelucin | Data Showcase
+
+This document outlines the sitemap, page content, and UI/UX strategy for a pure, project-focused one page portfolio.
+
+1. Visual Identity & Interactive Strategy
+
+Aesthetic: "The Dark Lab." A high-contrast, dark-mode interface (Deep Charcoal/Black) where projects are treated like "data experiments."
+
+Interactivity (No Embeds):
+
+Single-Page Navigation: Smooth scroll anchors that jump to specific sections.
+
+Magnetic Project Grid: Hover effects on the main grid reveal quick ROI stats.
+
+Interactive Modals: Clicking a project opens a full-screen modal (overlay) containing the case study, keeping the user on the main page.
+
+Progressive Reveal: Storytelling via scroll-triggered text that fades in alongside static images.
+
+2. One-Page Navigation
+
+Hero Section (The Hook)
+
+Project Showcase (Interactive Gallery Grid)
+
+The Engine (Integrated Tech Stack)
+
+The Strategist (About & Instant Contact)
+
+3. Section-by-Section Breakdown
+
+A. Hero Section (The Entry Point)
+
+Headline: Data Architecture Showcase.
+
+Sub-headline: Exploring the intersection of high-budget marketing and precise data engineering. A collection of systems built for global agencies.
+
+Scroll Indicator: A subtle animated arrow pointing down to the gallery.
+
+B. Project Showcase (The Interactive Grid)
+
+This is the core of the site. Instead of separate pages, projects are displayed in a masonry grid.
+
+Filter Bar: 
+
+$$All$$
+
+$$E-commerce$$
+
+$$SEO$$
+
+$$AI/LLM$$
+
+ (Filters the grid items with a smooth shuffle animation).
+
+Grid Items: Large thumbnails of dashboard screens.
+
+The Modal Experience: When a project is clicked, a modal slides in with:
+
+The "Hero" Screenshot: Full-width dashboard mockup.
+
+The Challenge: 2 to 3 sentences on the "chaos" solved.
+
+Architecture Gallery: A vertical scroll of annotated images (Funnel, Maps, CPC).
+
+The "Under the Hood" Snippet: A crisp image of the SQL or BigQuery logic.
+
+The Victory: Bold typography showing the final result (e.g., +86% Conversion).
+
+C. Case Study Highlights (Within Modals)
+
+Showcase 1: Owlbox (E-commerce Giant)
+
+Visual Focus: Purchase Funnel and multi-platform billing.
+
+Showcase 2: Laboratoria (Behavior & Subscriptions)
+
+Visual Focus: Engagement heatmaps and regional distribution.
+
+Showcase 3: SEO Notebook (Competitive Intel)
+
+Visual Focus: Share of Voice and Query Explorer tables.
+
+Showcase 4: LLM Dashboard
+
+Visual Focus: LLM Referrer trends and AI-driven event metrics.
+
+D. The Engine (Tech Stack Section)
+
+Visual Grid: Minimalist icons for BigQuery, SQL, Python, and Looker Studio.
+
+Interaction: Hovering over an icon highlights (glows) the project thumbnails in the grid above that used that specific tool.
+
+E. The Strategist (About & Contact)
+
+Brief Bio: "Alex Spelucin. 30 years old. Peruvian. Data Architect."
+
+4. UI/UX Recommendations for One-Page Layout
+
+Sticky Navigation: A glassmorphism blur effect header that stays at the top for quick jumping between sections.
+
+Mockup Wrappers: Ensure all screenshots are inside premium device frames (Laptop/Monitor).
+
+Hotspot Annotations: On images within modals, use '+' icons that show tooltips when hovered to explain specific KPIs.
+
+Performance: Use lazy loading for images to ensure the single page loads instantly despite the high-res gallery.

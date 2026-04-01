@@ -1,0 +1,262 @@
+{
+  "seo": {
+    "title": "Alex Spelucin | Data Strategy & Automation for Marketing Agencies",
+    "description": "Scale your agency with world-class data infrastructure. We automate your reporting, fix your tracking, and prove real ROI to your clients through advanced data engineering."
+  },
+  "nav": {
+    "process": "Process",
+    "cases": "Cases",
+    "benefits": "Benefits",
+    "pricing": "Pricing",
+    "faqs": "FAQs",
+    "bookCall": "Book a Call",
+    "book": "Book"
+  },
+  "hero": {
+    "eyebrow": "Turn your data into profitability",
+    "title": "The data department your agency needs to scale.",
+    "description": "We automate your reports, sanitize your ad tracking, and prove real ROI to your clients through AI agents and direct integrations.",
+    "ctaPrimary": "Book a Call",
+    "ctaSecondary": "View Plans"
+  },
+  "marquee": {
+    "title": "AGENCIES ALREADY SCALING WITH US"
+  },
+  "problem": {
+    "eyebrow": "The Problem",
+    "title": "Your team wastes hours on manual tasks and your clients doubt the results.",
+    "cards": {
+      "reports": {
+        "title": "Manual Reporting",
+        "desc": "Your account managers waste entire Fridays cross-referencing Meta and GA4 data instead of optimizing campaigns.",
+        "impact": "Margin Loss"
+      },
+      "tracking": {
+        "title": "Broken Tracking",
+        "desc": "Data leaks, duplicate conversions, and pixels that stop measuring overnight without anyone noticing in time.",
+        "impact": "Corrupted Data"
+      },
+      "friction": {
+        "title": "Client Friction",
+        "desc": "When agency numbers don't match the client's CRM, trust breaks and the account is lost.",
+        "impact": "Churn Risk"
+      }
+    },
+    "footer": "We eliminate technical friction. While your executives scale, we ensure the numbers match perfectly."
+  },
+  "solution": {
+    "eyebrow": "THE SOLUTION",
+    "title": "Your own world-class data infrastructure.",
+    "description": "We take your agency from manual to total automation.",
+    "points": {
+      "connectors": {
+        "title": "Stable Connectors",
+        "desc": "Data flowing 24/7 without drops."
+      },
+      "attribution": {
+        "title": "Clear Attribution",
+        "desc": "Prove exactly where the sales are coming from."
+      },
+      "dashboards": {
+        "title": "Modern Dashboards",
+        "desc": "Visualize your profitability without waiting for Monday."
+      }
+    }
+  },
+  "tools": {
+    "eyebrow": "State-of-the-art technology",
+    "title": "Our tools",
+    "description": "We connect and integrate the most robust stack on the market.",
+    "list": {
+      "apis": "APIs and Webhooks"
+    }
+  },
+  "portfolio": {
+    "eyebrow": "SUCCESS CASES",
+    "title": "Real business-oriented impact.",
+    "viewCase": "View case",
+    "caseStudy": "CASE STUDY",
+    "sections": {
+      "challenge": "The Challenge",
+      "strategy": "Strategy",
+      "impact": "Key Results"
+    },
+    "projects": [
+      {
+        "id": "ecommerce",
+        "title": "E-commerce Reporting",
+        "shortDesc": "Unified attribution and blended CPC and ROAS control for Meta and Google.",
+        "challenge": "Chronic data dispersion between Meta Ads, Google Ads, and Shopify, which prevented a clear view of net ROAS. Media buyers lost 5+ hours weekly manually reconciling spreadsheets.",
+        "strategy": [
+          "Data Blending infrastructure unifying ad API costs with real store transactions.",
+          "Real-time dashboard for CPC control and profitability (ROAS) alerts by channel or campaign.",
+          "Advanced Google Analytics implementation for Shopify or TiendaNube to sanitize records."
+        ],
+        "impact": [
+          "95% more accurate sales attribution. Total reduction of manual reporting tasks.",
+          "Ability to scale operations to more than 10 premium accounts without technical friction.",
+          "Precise calculation of combined ROAS and a clear view of real margin per channel."
+        ]
+      },
+      {
+        "id": "laboratoria",
+        "title": "Analytics for Membership Sites",
+        "shortDesc": "Behavioral analysis and membership growth in Peru, Chile, and Colombia.",
+        "challenge": "Need to understand conversion rates and churn for recurring users in diverse markets. GA4 data failed to correctly capture critical subscription events.",
+        "strategy": [
+          "GTM/GA4 audit and cleanup with implementation of deep event tracking (registrations, subscriptions).",
+          "Geographic cohort segmentation to detect retention efficiency in Peru, Chile, and Colombia.",
+          "Channel Efficiency: Strategic reallocation of efforts towards high user retention channels."
+        ],
+        "impact": [
+          "Proven 86.1% increase in paid conversions.",
+          "Full visibility of the regional retention funnel segmented by country and user type.",
+          "18.4% reduction in bounce rate through navigation path optimization."
+        ]
+      },
+      {
+        "id": "seo-notebook",
+        "title": "Strategic SEO Intelligence",
+        "shortDesc": "Share of Voice and growth of queries, impressions, and clicks.",
+        "challenge": "Difficulty demonstrating the real value of SEO against the immediacy of paid ads. Lack of real-time competitive monitoring for tactical queries.",
+        "strategy": [
+          "Automated 'Share of Voice' (SOV) monitoring system for competitor domains.",
+          "Advanced GSC analysis to detect 'low-hanging fruit' opportunities by crossing CTR vs. Position.",
+          "Query Explorer: Identification of content gaps based on technical search intent."
+        ],
+        "impact": [
+          "Proven 70% increase in total organic sessions.",
+          "Technical justification of SEO investment through assisted attribution and conversion value data.",
+          "Content prioritization based on business Key Events, not just generic click volume."
+        ]
+      },
+      {
+        "id": "llm-attribution",
+        "title": "AI Attribution Innovation",
+        "shortDesc": "Measurement of traffic and conversions from AIs (ChatGPT, Gemini).",
+        "challenge": "Traffic from LLMs (ChatGPT, Gemini) is invisible in traditional tools, generating gaps in the measurement of new brand discovery sources.",
+        "strategy": [
+          "AI Referrer detection architecture through header filtering and specific traffic patterns.",
+          "Technical dashboard to diagnose the real impact of generative AIs on user acquisition.",
+          "Landing Page Mapping: Identification of pages and guides most cited by language models."
+        ],
+        "impact": [
+          "Positioning as a pioneer agency in the AI source measurement market.",
+          "Useful dashboard for diagnosis, sales support, and premium client prospecting.",
+          "Identification of 12.16% of key events originating from language model traffic."
+        ]
+      }
+    ]
+  },
+  "bio": {
+    "eyebrow": "Your next Data Lead",
+    "title": "Alex Spelucin.",
+    "description": "I've spent 7 years building profitable data departments for agencies in LATAM. I know from the inside how the lack of technical measurement hampers your growth and burns your teams. My goal is not to sell you a dashboard or report, but to act as your in-house strategic partner so you can scale your agency with mathematical security."
+  },
+  "process": {
+    "eyebrow": "OUR METHOD",
+    "title": "How we secure your data in 4 steps.",
+    "description": "A 4-step workflow designed to integrate your data infrastructure without interrupting your operations.",
+    "steps": [
+      {
+        "title": "Tracking Audit",
+        "desc": "We ensure your client's website has clean code and that platforms receive exact data via automated scripts."
+      },
+      {
+        "title": "Implementation & Integration",
+        "desc": "We execute the technical changes needed for tracking and create connections (Pipelines) with data sources."
+      },
+      {
+        "title": "Dashboard Design",
+        "desc": "We build custom dashboards. Useful for monthly client reporting and daily monitoring for your media buying team."
+      },
+      {
+        "title": "Maintenance & Support",
+        "desc": "We monitor connectors, create reports for your new accounts, and resolve bugs on Slack before the client asks."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "SUBSCRIPTION MODEL",
+    "title": "Pricing that scales with your client portfolio.",
+    "description": "Forget about expensive fixed salaries. A predictable model based on the active accounts you manage.",
+    "question": "How many active clients need reporting?",
+    "activeClients": "Active Clients",
+    "activeClientsPlus": "30+ Active Clients",
+    "clients": "Clients",
+    "tiersInfo": "Scale / Enterprise",
+    "dataDept": "Your Data Department",
+    "benefits": {
+      "support": "Continuous support.",
+      "connectors": "Connector maintenance.",
+      "bugs": "Bug resolution."
+    },
+    "monthlyInvestment": "Monthly Investment",
+    "perMonth": "/ month",
+    "setupTitle": "Initial Agency Setup",
+    "estimatedSaving": "Estimated annual savings",
+    "vs": "vs.",
+    "inHouse": "in-house",
+    "note": "Note: The comparison includes burdened labor costs (salary + benefits) and the opportunity cost of manual management time.",
+    "benchmark": {
+      "junior": "Junior Support",
+      "full": "Full Operations",
+      "dept": "Data Dept.",
+      "enterprise": "Enterprise Scale"
+    },
+    "cta": "Get Started Now"
+  },
+  "faq": {
+    "eyebrow": "SOLVING DOUBTS",
+    "title": "Any questions?",
+    "items": [
+      {
+        "q": "What happens if I lose a client, does my rate go down?",
+        "a": "Exactly. The model adapts to your reality. If you go from 10 to 5 active clients, you automatically move to the lower-cost Tier. Scale up and down without risk."
+      },
+      {
+        "q": "Do you have access to my clients' billing?",
+        "a": "No. We work under strict Non-Disclosure Agreements (NDA). We only request view and edit access to technical platforms (GA4, GTM, Looker), never to the agency's financial billing."
+      },
+      {
+        "q": "How long does the initial Setup take?",
+        "a": "The audit process and creation of master templates takes between 7 and 14 business days, depending on the current state of the infrastructure."
+      },
+      {
+        "q": "How do you communicate with my team?",
+        "a": "We integrate into your workflow. We open a shared channel on Slack or Teams where your media buyers can tag us if there are data discrepancies or broken pixels."
+      },
+      {
+        "q": "Is this better than hiring a Junior Analyst?",
+        "a": "A Junior costs you over $1,000 USD/month, requires training, and has high turnover. With us, you get Senior-level infrastructure, AI automation, and continuous support for a fraction of the cost."
+      },
+      {
+        "q": "How is the Setup and first month billed?",
+        "a": "To start the audit and activation process, the Setup fee ($500 USD) is paid along with your first monthly installment. From the second month onwards, you only pay your flat rate based on your active client volume."
+      }
+    ]
+  },
+  "footer": {
+    "rights": "© 2026 Alex Spelucin. All rights reserved.",
+    "cookies": "Cookie Policy",
+    "legal": "Legal Notice",
+    "privacy": "Privacy"
+  },
+  "testimonials": {
+    "meier": {
+      "quote": "He created our analytics dashboard ensuring everything was structured and working perfectly. He solved tracking issues we hadn't mapped and left all connections ready. Totally recommended!",
+      "role": "Milagros Meier, Growth Lead @ Laboratoria"
+    },
+    "vergara": {
+      "quote": "His extensive technical knowledge achieves fascinating intersections between SEO and technology. He automated our reporting while always maintaining focus on business growth and client objectives.",
+      "role": "Darío Vergara, SEO Lead @ Attach Media"
+    }
+  },
+  "ctaBanner": {
+    "eyebrow": "Ready to scale?",
+    "title": "Stop wasting time on manual reports.",
+    "description": "Let's schedule 20 minutes to review your current stack and activate your Setup.",
+    "cta": "Book a Call",
+    "footer": "No commitment. No annual contracts."
+  }
+}

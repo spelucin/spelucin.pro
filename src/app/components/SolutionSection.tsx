@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Database, Crosshair, BarChart3 } from "lucide-react";
 import { C } from "../constants";
 import { Eyebrow, SectionH2 } from "./CommonComponents";
@@ -8,6 +9,14 @@ interface SolutionSectionProps {
 }
 
 export function SolutionSection({ sectionStyle }: SolutionSectionProps) {
+  const { t } = useTranslation();
+
+  const points = [
+    { title: t('solution.points.connectors.title'), desc: t('solution.points.connectors.desc'), icon: <Database size={20} /> },
+    { title: t('solution.points.attribution.title'), desc: t('solution.points.attribution.desc'), icon: <Crosshair size={20} /> },
+    { title: t('solution.points.dashboards.title'), desc: t('solution.points.dashboards.desc'), icon: <BarChart3 size={20} /> },
+  ];
+
   return (
     <section id="solucion" style={{ ...sectionStyle, paddingTop: 120 }}>
       {/* Mobile-optimized grid: smaller gap on mobile, md:grid for desktop */}
@@ -50,9 +59,9 @@ export function SolutionSection({ sectionStyle }: SolutionSectionProps) {
 
         {/* Text Content — Right */}
         <div style={{ textAlign: "left" }}>
-          <Eyebrow style={{ textAlign: "inherit" }}>La Solución</Eyebrow>
+          <Eyebrow style={{ textAlign: "inherit" }}>{t('solution.eyebrow')}</Eyebrow>
           <SectionH2 style={{ marginBottom: 24, fontSize: "clamp(1.8rem, 4vw, 2.4rem)", textAlign: "inherit" }}>
-            Tu propia infraestructura de datos de clase mundial.
+            {t('solution.title')}
           </SectionH2>
           <p style={{
             fontFamily: "Inter, sans-serif",
@@ -62,15 +71,11 @@ export function SolutionSection({ sectionStyle }: SolutionSectionProps) {
             marginBottom: 40,
             textAlign: "inherit",
           }}>
-            Pasamos a tu agencia de lo manual a la automatización total.
+            {t('solution.description')}
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
-            {[
-              { title: "Conectores Estables", desc: "Datos fluyendo 24/7 sin caídas.", icon: <Database size={20} /> },
-              { title: "Atribución Clara", desc: "Demuestra exactamente de dónde vienen las ventas.", icon: <Crosshair size={20} /> },
-              { title: "Dashboards Modernos", desc: "Visualiza tu rentabilidad sin esperar al lunes.", icon: <BarChart3 size={20} /> },
-            ].map((point, i) => (
+            {points.map((point, i) => (
               <div key={i} style={{ display: "flex", gap: 20 }}>
                 <div style={{
                   width: 48, height: 48, borderRadius: 12, background: `${C.sage}15`,
@@ -90,3 +95,4 @@ export function SolutionSection({ sectionStyle }: SolutionSectionProps) {
     </section>
   );
 }
+

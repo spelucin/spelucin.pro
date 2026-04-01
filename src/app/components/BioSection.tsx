@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Linkedin, Mail } from "lucide-react";
 import { C } from "../constants";
 import { Eyebrow } from "./CommonComponents";
@@ -8,6 +9,8 @@ interface BioSectionProps {
 }
 
 export function BioSection({ sectionStyle }: BioSectionProps) {
+  const { t } = useTranslation();
+
   return (
     <section id="bio" style={{ ...sectionStyle, paddingTop: 120 }}>
       {/* Mobile-optimized grid: stacking for mobile, side-by-side for md+ */}
@@ -49,7 +52,7 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
 
         {/* Content Column — High-end Typography */}
         <div style={{ padding: "12px 0", textAlign: "left" }}>
-          <Eyebrow style={{ textAlign: "inherit" }}>Tu próximo Data Lead</Eyebrow>
+          <Eyebrow style={{ textAlign: "inherit" }}>{t('bio.eyebrow')}</Eyebrow>
           <h3
             style={{
               fontFamily: "Lexend, sans-serif",
@@ -61,7 +64,7 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
               textAlign: "inherit",
             }}
           >
-            Alex Spelucin.
+            {t('bio.title')}
           </h3>
           <p
             style={{
@@ -73,7 +76,7 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
               textAlign: "inherit",
             }}
           >
-            Llevo 7 años construyendo departamentos de datos rentables para agencias en LATAM. Conozco desde adentro cómo la falta de medición técnica frena tu crecimiento y quema a tus equipos. Mi objetivo no es venderte un dashboard o reporte, sino actuar como tu socio estratégico in-house para que escales tu agencia con seguridad matemática.
+            {t('bio.description')}
           </p>
 
           <div style={{
@@ -143,3 +146,4 @@ export function BioSection({ sectionStyle }: BioSectionProps) {
     </section>
   );
 }
+

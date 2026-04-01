@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
 import { C } from "../constants";
 import { Card, Eyebrow } from "./CommonComponents";
@@ -9,6 +10,8 @@ interface BannerCTAProps {
 }
 
 export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
+  const { t } = useTranslation();
+
   return (
     <section id="banner-cta" style={{ ...sectionStyle, paddingBottom: 120 }}>
       <Card
@@ -33,7 +36,7 @@ export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
         }} />
         
         <div style={{ position: "relative", zIndex: 1, maxWidth: 600, margin: "0 auto" }}>
-          <Eyebrow>¿Listo para escalar?</Eyebrow>
+          <Eyebrow>{t('ctaBanner.eyebrow')}</Eyebrow>
           <h2
             style={{
               fontFamily: "Lexend, sans-serif",
@@ -44,7 +47,7 @@ export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
               marginBottom: 24,
             }}
           >
-            Deja de perder tiempo con reportes manuales.
+            {t('ctaBanner.title')}
           </h2>
           <p
             style={{
@@ -55,7 +58,7 @@ export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
               marginBottom: 48,
             }}
           >
-            Agendemos 20 minutos para revisar tu stack actual y activar tu Setup.
+            {t('ctaBanner.description')}
           </p>
           <button
             onClick={() => setShowBooking(true)}
@@ -84,14 +87,15 @@ export function BannerCTA({ setShowBooking, sectionStyle }: BannerCTAProps) {
               e.currentTarget.style.boxShadow = `0 10px 30px -10px ${C.sage}50`;
             }}
           >
-            Agendar Llamada
+            {t('ctaBanner.cta')}
             <ArrowRight size={18} />
           </button>
           <p style={{ marginTop: 24, fontSize: "0.8rem", color: `${C.text}30`, fontFamily: "Inter, sans-serif" }}>
-            Sin compromisos. Sin contratos anuales.
+            {t('ctaBanner.footer')}
           </p>
         </div>
       </Card>
     </section>
   );
 }
+

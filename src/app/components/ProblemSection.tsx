@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { AlertCircle, Clock, Network } from "lucide-react";
 import { C } from "../constants";
 import { Card, Eyebrow, SectionH2 } from "./CommonComponents";
@@ -8,18 +9,34 @@ interface ProblemSectionProps {
 }
 
 export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
+  const { t } = useTranslation();
+
+  const items = [
+    {
+      icon: <Clock size={28} strokeWidth={1.5} />,
+      title: t('problem.cards.reports.title'),
+      desc: t('problem.cards.reports.desc'),
+      impact: t('problem.cards.reports.impact'),
+      color: C.sage
+    },
+    {
+      icon: <AlertCircle size={28} strokeWidth={1.5} />,
+      title: t('problem.cards.tracking.title'),
+      desc: t('problem.cards.tracking.desc'),
+      impact: t('problem.cards.tracking.impact'),
+      color: C.orange
+    },
+    {
+      icon: <Network size={28} strokeWidth={1.5} />,
+      title: t('problem.cards.friction.title'),
+      desc: t('problem.cards.friction.desc'),
+      impact: t('problem.cards.friction.impact'),
+      color: C.sage
+    }
+  ];
+
   return (
     <section style={{ ...sectionStyle, paddingTop: 40, position: "relative" }}>
-      <div style={{
-        position: "absolute",
-        inset: 0,
-        backgroundImage: `url("data:image/svg+xml;base64,${btoa(`<svg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'><path d='M 40 0 L 0 0 0 40' fill='none' stroke='white' stroke-opacity='0.15' stroke-width='1'/></svg>`)}")`,
-        backgroundSize: "40px 40px",
-        maskImage: "radial-gradient(circle at center, black 0%, transparent 100%)",
-        WebkitMaskImage: "radial-gradient(circle at center, black 0%, transparent 100%)",
-        zIndex: -1,
-        opacity: 0.6,
-      }} />
 
       <div style={{ position: "relative", width: "100%" }}>
         <div
@@ -29,9 +46,9 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
             overflow: "hidden",
           }}
         >
-          <Eyebrow>El Problema</Eyebrow>
+          <Eyebrow>{t('problem.eyebrow')}</Eyebrow>
           <SectionH2 style={{ marginBottom: 64, maxWidth: 650, margin: "0 auto 64px" }}>
-            Tu equipo pierde horas en tareas manuales y tus clientes dudan de los resultados.
+            {t('problem.title')}
           </SectionH2>
 
           <div
@@ -42,29 +59,7 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
             }}
             className="custom-grid-3"
           >
-            {[
-              {
-                icon: <Clock size={28} strokeWidth={1.5} />,
-                title: "Reportes Manuales",
-                desc: "Tus ejecutivos pierden el viernes entero cruzando datos de Meta y GA4 en lugar de optimizar las campañas publicitarias.",
-                impact: "Pérdida de Margen",
-                color: C.sage
-              },
-              {
-                icon: <AlertCircle size={28} strokeWidth={1.5} />,
-                title: "Tracking Roto",
-                desc: "Fugas de información, conversiones duplicadas y píxeles que dejan de medir de la noche a la mañana sin que nadie lo note a tiempo.",
-                impact: "Datos Corruptos",
-                color: C.orange
-              },
-              {
-                icon: <Network size={28} strokeWidth={1.5} />,
-                title: "Fricción con Clientes",
-                desc: "Cuando los números de la agencia no cuadran con el CRM del cliente, la confianza se rompe y la cuenta se pierde.",
-                impact: "Riesgo de Churn",
-                color: C.sage
-              }
-            ].map((item, i) => (
+            {items.map((item, i) => (
               <Card
                 key={i}
                 style={{
@@ -115,7 +110,7 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
                     fontFamily: "Lexend, sans-serif",
                     fontSize: "0.75rem",
                     fontWeight: 600,
-                    color: item.impact.includes("In") || item.impact.includes("Fre") ? C.orange : C.sage,
+                    color: item.impact.toLowerCase().includes("in") || item.impact.toLowerCase().includes("fre") ? C.orange : C.sage,
                     letterSpacing: "0.06em",
                     textTransform: "uppercase",
                     padding: "6px 14px",
@@ -140,11 +135,11 @@ export function ProblemSection({ sectionStyle }: ProblemSectionProps) {
             lineHeight: 1.8,
             fontStyle: "italic",
           }}>
-            Nosotros eliminamos la fricción técnica. Mientras tus ejecutivos escalan, nosotros
-            garantizamos que los números cuadren a la perfección.
+            {t('problem.footer')}
           </p>
         </div>
       </div>
     </section>
   );
 }
+

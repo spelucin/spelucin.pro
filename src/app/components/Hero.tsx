@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
 import { C } from "../constants";
 import { Eyebrow } from "./CommonComponents";
@@ -10,6 +11,8 @@ interface HeroProps {
 }
 
 export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
+  const { t } = useTranslation();
+
   return (
     <section
       style={{
@@ -21,7 +24,7 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
         position: "relative",
       }}
     >
-      <Eyebrow>Convierte tus datos en rentabilidad</Eyebrow>
+      <Eyebrow>{t('hero.eyebrow')}</Eyebrow>
       <h1
         style={{
           fontFamily: "Lexend, sans-serif",
@@ -32,7 +35,7 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
           margin: "0 0 24px 0",
         }}
       >
-        El departamento de datos que tu agencia necesita para escalar.
+        {t('hero.title')}
       </h1>
       <p
         style={{
@@ -44,9 +47,7 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
           margin: "0 auto 40px auto",
         }}
       >
-        Automatizamos tus reportes, saneamos tu tracking publicitario y
-        demostramos el ROI real a tus clientes mediante agentes IA e
-        integraciones directas.
+        {t('hero.description')}
       </p>
       <div
         style={{
@@ -80,11 +81,15 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
             (e.currentTarget.style.transform = "scale(1)")
           }
         >
-          Agendar Llamada
+          {t('hero.ctaPrimary')}
           <ArrowRight size={15} />
         </button>
-        <button
-          onClick={() => scrollTo("paquetes")}
+        <a
+          href="#paquetes"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollTo("paquetes");
+          }}
           style={{
             background: "transparent",
             color: C.orange,
@@ -93,8 +98,10 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
             padding: "13px 28px",
             fontFamily: "Lexend, sans-serif",
             fontSize: "0.9rem",
+            textDecoration: "none",
             cursor: "pointer",
             transition: "all 0.2s",
+            display: "inline-block",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.background = `${C.orange}12`;
@@ -105,9 +112,10 @@ export function Hero({ setShowBooking, scrollTo, sectionStyle }: HeroProps) {
             e.currentTarget.style.transform = "scale(1)";
           }}
         >
-          Conocer Planes
-        </button>
+          {t('hero.ctaSecondary')}
+        </a>
       </div>
     </section>
   );
 }
+

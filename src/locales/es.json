@@ -1,0 +1,262 @@
+{
+  "seo": {
+    "title": "Alex Spelucin | Data Analytics y Automatización para Agencias",
+    "description": "Optimiza las operaciones de tu agencia con infraestructura de datos de clase mundial. Automatizamos tu reportería, saneamos tu tracking y demostramos el ROI real a tus clientes."
+  },
+  "nav": {
+    "process": "Proceso",
+    "cases": "Casos",
+    "benefits": "Beneficios",
+    "pricing": "Precios",
+    "faqs": "FAQs",
+    "bookCall": "Agendar Llamada",
+    "book": "Agendar"
+  },
+  "hero": {
+    "eyebrow": "Convierte tus datos en rentabilidad",
+    "title": "El departamento de datos que tu agencia necesita para escalar.",
+    "description": "Automatizamos tus reportes, saneamos tu tracking publicitario y demostramos el ROI real a tus clientes mediante agentes IA e integraciones directas.",
+    "ctaPrimary": "Agendar Llamada",
+    "ctaSecondary": "Conocer Planes"
+  },
+  "marquee": {
+    "title": "AGENCIAS QUE YA ESCALAN CON NOSOTROS"
+  },
+  "problem": {
+    "eyebrow": "El Problema",
+    "title": "Tu equipo pierde horas en tareas manuales y tus clientes dudan de los resultados.",
+    "cards": {
+      "reports": {
+        "title": "Reportes Manuales",
+        "desc": "Tus ejecutivos pierden el viernes entero cruzando datos de Meta y GA4 en lugar de optimizar las campañas publicitarias.",
+        "impact": "Pérdida de Margen"
+      },
+      "tracking": {
+        "title": "Tracking Roto",
+        "desc": "Fugas de información, conversiones duplicadas y píxeles que dejan de medir de la noche a la mañana sin que nadie lo note a tiempo.",
+        "impact": "Datos Corruptos"
+      },
+      "friction": {
+        "title": "Fricción con Clientes",
+        "desc": "Cuando los números de la agencia no cuadran con el CRM del cliente, la confianza se rompe y la cuenta se pierde.",
+        "impact": "Riesgo de Churn"
+      }
+    },
+    "footer": "Nosotros eliminamos la fricción técnica. Mientras tus ejecutivos escalan, nosotros garantizamos que los números cuadren a la perfección."
+  },
+  "solution": {
+    "eyebrow": "LA SOLUCIÓN",
+    "title": "Tu propia infraestructura de datos de clase mundial.",
+    "description": "Pasamos a tu agencia de lo manual a la automatización total.",
+    "points": {
+      "connectors": {
+        "title": "Conectores Estables",
+        "desc": "Datos fluyendo 24/7 sin caídas."
+      },
+      "attribution": {
+        "title": "Atribución Clara",
+        "desc": "Demuestra exactamente de dónde vienen las ventas."
+      },
+      "dashboards": {
+        "title": "Dashboards Modernos",
+        "desc": "Visualiza tu rentabilidad sin esperar al lunes."
+      }
+    }
+  },
+  "tools": {
+    "eyebrow": "Tecnología de última generación",
+    "title": "Nuestras herramientas",
+    "description": "Conectamos e integramos el stack más robusto del mercado.",
+    "list": {
+      "apis": "APIs y Webhooks"
+    }
+  },
+  "portfolio": {
+    "eyebrow": "CASOS DE ÉXITO",
+    "title": "Impacto real orientado al negocio.",
+    "viewCase": "Ver caso",
+    "caseStudy": "CASE STUDY",
+    "sections": {
+      "challenge": "El Reto",
+      "strategy": "Estrategia de Datos",
+      "impact": "Resultados Clave"
+    },
+    "projects": [
+      {
+        "id": "ecommerce",
+        "title": "Reportería para Comercio Electrónico",
+        "shortDesc": "Atribución unificada y control de CPC y ROAS mezclado para Meta y Google.",
+        "challenge": "Disperción crónica de datos entre Meta Ads, Google Ads y Shopify, lo que impedía una visión clara del ROAS neto. Los media buyers perdían 5+ horas semanales conciliando hojas de cálculo manualmente.",
+        "strategy": [
+          "Infraestructura de 'Data Blending' que unifica costos de APIs publicitarias con transacciones reales de tienda.",
+          "Dashboard en tiempo real para control de CPC y alertas de rentabilidad (ROAS) por canal o campaña.",
+          "Implementación de Google Analytics avanzado desde Shopify o TiendaNube para saneamiento de registros."
+        ],
+        "impact": [
+          "Atribución de ventas 95% más precisa. Reducción total de tareas manuales de reportería.",
+          "Capacidad para escalar la operación a más de 10 cuentas premium sin fricción técnica.",
+          "Cálculo preciso del ROAS combinado y visión clara del margen real por canal."
+        ]
+      },
+      {
+        "id": "laboratoria",
+        "title": "Analítica para Sitios de Membresía",
+        "shortDesc": "Análisis de comportamiento y crecimiento de membresías en Perú, Chile y Colombia.",
+        "challenge": "Necesidad de entender la tasa de conversión y el 'Churn' de usuarios recurrentes en mercados diversos. Los datos de GA4 no capturaban eventos críticos de suscripción correctamente.",
+        "strategy": [
+          "Auditoría y saneamiento de GTM/GA4 con implementación de tracking de eventos profundos (registros, suscripciones).",
+          "Segmentación por cohortes geográficas para detectar eficiencia de retención en Perú, Chile y Colombia.",
+          "Eficiencia de canales: Reasignación estratégica de esfuerzos hacia canales de alta retención de usuarios."
+        ],
+        "impact": [
+          "+86.1% de incremento comprobado en conversiones de pago.",
+          "Visibilidad total del embudo de retención regional segmentado por país y tipo de usuario.",
+          "Reducción del 18.4% en la tasa de rebote mediante optimización de rutas de navegación."
+        ]
+      },
+      {
+        "id": "seo-notebook",
+        "title": "Inteligencia SEO Estratégica",
+        "shortDesc": "Share of Voice y crecimiento de queries, impresiones y clicks.",
+        "challenge": "Dificultad para demostrar el valor real del SEO frente a la inmediatez de los anuncios pagados. Falta de monitoreo competitivo en tiempo real sobre queries tácticas.",
+        "strategy": [
+          "Sistema de monitoreo de 'Share of Voice' (SOV) automatizado para dominios de competencia.",
+          "Análisis avanzado de GSC para detectar oportunidades de 'low-hanging fruits' mediante cruce de CTR vs Posición.",
+          "Query Explorer: Identificación de brechas de contenido basadas en intención de búsqueda técnica."
+        ],
+        "impact": [
+          "Incremento comprobado del 70% en sesiones orgánicas totales.",
+          "Justificación técnica de la inversión SEO mediante datos de atribución asistida y valor de conversión.",
+          "Priorización de contenido basada en Key Events de negocio, no solo volumen de clics genéricos."
+        ]
+      },
+      {
+        "id": "llm-attribution",
+        "title": "AI Attribution Innovation",
+        "shortDesc": "Medición de tráfico y conversiones provenientes de AIs (ChatGPT, Gemini).",
+        "challenge": "El tráfico proveniente de LLMs (ChatGPT, Gemini) es invisible en las herramientas tradicionales, generando brechas en la medición de las nuevas fuentes de descubrimiento de marca.",
+        "strategy": [
+          "Arquitectura de detección de 'AI Referrers' mediante filtrado de cabeceras y patrones de tráfico específicos.",
+          "Dashboard técnico para diagnosticar el impacto real de las IAs generativas en la captación de usuarios.",
+          "Landing Page Mapping: Identificación de páginas y guías más citadas por modelos de lenguaje."
+        ],
+        "impact": [
+          "Posicionamiento como agencia pionera en el mercado de medición para fuentes de IA.",
+          "Dashboard útil para diagnóstico, soporte en ventas y prospección de clientes premium.",
+          "Identificación del 12.16% de eventos clave originados en tráfico de modelos de lenguaje."
+        ]
+      }
+    ]
+  },
+  "bio": {
+    "eyebrow": "Tu próximo Data Lead",
+    "title": "Alex Spelucin.",
+    "description": "Llevo 7 años construyendo departamentos de datos rentables para agencias en LATAM. Conozco desde adentro cómo la falta de medición técnica frena tu crecimiento y quema a tus equipos. Mi objetivo no es venderte un dashboard o reporte, sino actuar como tu socio estratégico in-house para que escales tu agencia con seguridad matemática."
+  },
+  "process": {
+    "eyebrow": "NUESTRO MÉTODO",
+    "title": "Cómo blindamos tu data en 4 pasos.",
+    "description": "Un flujo de 4 pasos diseñado para integrar tu infraestructura de datos sin interrumpir tus operaciones.",
+    "steps": [
+      {
+        "title": "Auditoría de Tracking",
+        "desc": "Revisamos que la web de tu cliente tenga el código saneado y que las plataformas reciban la data exacta mediante scripts automatizados."
+      },
+      {
+        "title": "Implementación e Integración",
+        "desc": "Ejecutamos los cambios técnicos necesarios para el rastreo y creamos las conexiones (Pipelines) con las fuentes de datos."
+      },
+      {
+        "title": "Diseño de Dashboards",
+        "desc": "Construimos paneles a medida. Útiles para el reporte mensual del cliente y para el monitoreo diario de tu equipo de media buying."
+      },
+      {
+        "title": "Mantenimiento y Soporte",
+        "desc": "Monitoreamos los conectores, creamos reportes para tus cuentas nuevas y resolvemos bugs por Slack antes de que el cliente pregunte."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "MODELO DE SUSCRIPCIÓN",
+    "title": "Precios que escalan junto con tu cartera de clientes.",
+    "description": "Olvídate de sueldos fijos costosos. Un modelo predecible basado en las cuentas activas que gestionas.",
+    "question": "¿Cuántos clientes activos necesitan reportes?",
+    "activeClients": "Clientes Activos",
+    "activeClientsPlus": "30+ Clientes Activos",
+    "clients": "Clientes",
+    "tiersInfo": "Scale / Enterprise",
+    "dataDept": "Tu Departamento de Datos",
+    "benefits": {
+      "support": "Soporte continuo.",
+      "connectors": "Mantenimiento de conectores.",
+      "bugs": "Resolución de bugs."
+    },
+    "monthlyInvestment": "Inversión Mensual",
+    "perMonth": "/ mes",
+    "setupTitle": "Setup Inicial de Agencia",
+    "estimatedSaving": "Ahorro estimado anual",
+    "vs": "vs.",
+    "inHouse": "in-house",
+    "note": "Nota: La comparativa incluye el costo cargado de personal (salario + beneficios) y el costo de oportunidad del tiempo manual de gestión.",
+    "benchmark": {
+      "junior": "Junior Support",
+      "full": "Full Operations",
+      "dept": "Data Dept.",
+      "enterprise": "Enterprise Scale"
+    },
+    "cta": "Empezar Ahora"
+  },
+  "faq": {
+    "eyebrow": "RESOLVAMOS DUDAS",
+    "title": "¿Tienes dudas?",
+    "items": [
+      {
+        "q": "¿Qué pasa si pierdo un cliente, mi tarifa baja?",
+        "a": "Exactamente. El modelo se adapta a tu realidad. Si pasas de 10 a 5 clientes activos, automáticamente bajas al Tier de menor costo. Escalas y desescalas sin riesgo."
+      },
+      {
+        "q": "¿Tienen acceso a la facturación de mis clientes?",
+        "a": "No. Trabajamos bajo estrictos acuerdos de confidencialidad (NDA). Solo solicitamos acceso de visualización y edición a las plataformas técnicas (GA4, GTM, Looker), nunca a la facturación financiera de la agencia."
+      },
+      {
+        "q": "¿Cuánto demora el Setup inicial?",
+        "a": "El proceso de auditoría y creación de plantillas maestras toma entre 7 y 14 días laborables, dependiendo del desorden actual de la infraestructura."
+      },
+      {
+        "q": "¿Cómo se comunican con mi equipo?",
+        "a": "Nos integramos a tu flujo. Abrimos un canal compartido en Slack o Teams donde tus media buyers pueden etiquetarnos si hay discrepancias de datos o píxeles caídos."
+      },
+      {
+        "q": "¿Es mejor esto que contratar un Analista Junior?",
+        "a": "Un Junior te cuesta más de $1,000 USD al mes, requiere capacitación y tiene alta rotación. Con nosotros obtienes infraestructura nivel Senior, automatización con IA y soporte continuo por una fracción del costo."
+      },
+      {
+        "q": "¿Cómo se factura el Setup y el primer mes?",
+        "a": "Para iniciar el proceso de auditoría y activación, el pago del Setup ($500 USD) se abona junto con tu primera mensualidad. A partir del segundo mes, únicamente pagas tu tarifa plana basada en el volumen de tus clientes activos."
+      }
+    ]
+  },
+  "footer": {
+    "rights": "© 2026 Alex Spelucin. Todos los derechos reservados.",
+    "cookies": "Política de Cookies",
+    "legal": "Aviso Legal",
+    "privacy": "Privacidad"
+  },
+  "testimonials": {
+    "meier": {
+      "quote": "Creó nuestro dashboard de analytics asegurándose de que todo estuviera estructurado y funcionando a la perfección. Resolvió problemas de tracking que no teníamos mapeados y dejó todas las conexiones listas. ¡Totalmente recomendado!",
+      "role": "Milagros Meier, Growth Lead @ Laboratoria"
+    },
+    "vergara": {
+      "quote": "Su extenso conocimiento técnico logra intersecciones fascinantes entre SEO y tecnología. Automatizó nuestra reportería manteniendo siempre el foco en el crecimiento del negocio y los objetivos del cliente.",
+      "role": "Darío Vergara, SEO Lead @ Attach Media"
+    }
+  },
+  "ctaBanner": {
+    "eyebrow": "¿Listo para escalar?",
+    "title": "Deja de perder tiempo con reportes manuales.",
+    "description": "Agendemos 20 minutos para revisar tu stack actual y activar tu Setup.",
+    "cta": "Agendar Llamada",
+    "footer": "Sin compromisos. Sin contratos anuales."
+  }
+}

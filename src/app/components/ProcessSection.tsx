@@ -1,5 +1,7 @@
 import React from "react";
-import { C, steps } from "../constants";
+import { useTranslation } from "react-i18next";
+import { Search, CheckCircle, BarChart2, Network } from "lucide-react";
+import { C } from "../constants";
 import { Card, Eyebrow, SectionH2 } from "./CommonComponents";
 
 interface ProcessSectionProps {
@@ -7,12 +9,27 @@ interface ProcessSectionProps {
 }
 
 export function ProcessSection({ sectionStyle }: ProcessSectionProps) {
+  const { t } = useTranslation();
+
+  const icons = [
+    <Search size={22} strokeWidth={1.5} />,
+    <CheckCircle size={22} strokeWidth={1.5} />,
+    <BarChart2 size={22} strokeWidth={1.5} />,
+    <Network size={22} strokeWidth={1.5} />,
+  ];
+
+  const stepsData = t('process.steps', { returnObjects: true });
+  const steps = (Array.isArray(stepsData) ? stepsData : []).map((step: any, i: number) => ({
+    ...step,
+    icon: icons[i],
+  }));
+
   return (
     <section id="proceso" style={sectionStyle}>
       {/* Header */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: 64 }}>
-        <Eyebrow>CÓMO FUNCIONA</Eyebrow>
-        <SectionH2 style={{ marginBottom: 12 }}>Tu nuevo departamento opera en 4 pasos.</SectionH2>
+        <Eyebrow>{t('process.eyebrow')}</Eyebrow>
+        <SectionH2 style={{ marginBottom: 12 }}>{t('process.title')}</SectionH2>
         <p
           style={{
             fontFamily: "Inter, sans-serif",
@@ -22,8 +39,7 @@ export function ProcessSection({ sectionStyle }: ProcessSectionProps) {
             maxWidth: 460,
           }}
         >
-          Un flujo de 4 pasos diseñado para integrar tu infraestructura de datos
-          sin interrumpir tus operaciones.
+          {t('process.description')}
         </p>
       </div>
 
@@ -124,3 +140,4 @@ export function ProcessSection({ sectionStyle }: ProcessSectionProps) {
     </section>
   );
 }
+

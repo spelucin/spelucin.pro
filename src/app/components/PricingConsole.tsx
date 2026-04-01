@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { AlertCircle, Database, Slack } from "lucide-react";
 import { C, getTier } from "../constants";
 import { Card, Eyebrow, SectionH2 } from "./CommonComponents";
@@ -10,14 +11,21 @@ interface PricingConsoleProps {
 }
 
 export function PricingConsole({ clients, setClients, sectionStyle }: PricingConsoleProps) {
+  const { t, i18n } = useTranslation();
   const tier = getTier(clients);
+
+  const benefits = [
+    { text: t('pricing.benefits.support'), icon: <Slack size={16} /> },
+    { text: t('pricing.benefits.connectors'), icon: <Database size={16} /> },
+    { text: t('pricing.benefits.bugs'), icon: <AlertCircle size={16} /> },
+  ];
 
   return (
     <section id="paquetes" style={sectionStyle}>
       <div style={{ textAlign: "center", marginBottom: 64 }}>
-        <Eyebrow>MODELO DE SUSCRIPCIÓN</Eyebrow>
+        <Eyebrow>{t('pricing.eyebrow')}</Eyebrow>
         <SectionH2>
-          Precios que escalan junto con tu cartera de clientes.
+          {t('pricing.title')}
         </SectionH2>
         <p
           style={{
@@ -29,7 +37,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
             margin: "16px auto 0",
           }}
         >
-          Olvídate de sueldos fijos costosos. Un modelo predecible basado en las cuentas activas que gestionas.
+          {t('pricing.description')}
         </p>
       </div>
 
@@ -61,7 +69,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                 className="md:flex-row md:justify-between md:items-center"
               >
                 <p style={{ fontFamily: "Lexend, sans-serif", color: C.text, fontSize: "1rem", fontWeight: 500, margin: 0 }}>
-                  ¿Cuántos clientes activos necesitan reportes?
+                  {t('pricing.question')}
                 </p>
                 <span style={{ 
                   fontFamily: "Inter, sans-serif", 
@@ -74,7 +82,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                   border: `1px solid ${C.sage}20`,
                   width: "fit-content"
                 }}>
-                  {clients >= 31 ? "30+" : clients} Clientes Activos
+                  {clients >= 31 ? t('pricing.activeClientsPlus') : `${clients} ${t('pricing.activeClients')}`}
                 </span>
               </div>
               
@@ -102,9 +110,9 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
               </div>
               
               <div style={{ display: "flex", justifyContent: "space-between", color: `${C.text}40`, fontSize: "0.75rem" }}>
-                <span>5 Clientes</span>
+                <span>{`5 ${t('pricing.clients')}`}</span>
                 <span style={{ color: clients >= 30 ? C.orange : `${C.text}40`, fontWeight: clients >= 30 ? 600 : 400 }}>
-                  Scale / Enterprise
+                  {t('pricing.tiersInfo')}
                 </span>
               </div>
             </div>
@@ -126,15 +134,11 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
               }} />
 
               <p style={{ fontSize: "0.95rem", color: C.text, fontWeight: 500, marginBottom: 24, fontFamily: "Lexend, sans-serif" }}>
-                Tu Departamento de Datos
+                {t('pricing.dataDept')}
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                {[
-                  { text: "Soporte continuo.", icon: <Slack size={16} /> },
-                  { text: "Mantenimiento de conectores.", icon: <Database size={16} /> },
-                  { text: "Resolución de bugs.", icon: <AlertCircle size={16} /> },
-                ].map((benefit, i) => (
+                {benefits.map((benefit, i) => (
                   <div key={i} style={{ 
                     display: "flex", 
                     gap: 16, 
@@ -180,7 +184,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                 fontFamily: "Inter, sans-serif", fontSize: "0.7rem", color: C.sage, 
                 letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 12 
               }}>
-                Inversión Mensual
+                {t('pricing.monthlyInvestment')}
               </p>
               <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
                 <h3 
@@ -192,7 +196,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                 >
                   ${tier.price}
                 </h3>
-                <span style={{ color: `${C.text}40`, fontSize: "1.1rem" }}>/ mes</span>
+                <span style={{ color: `${C.text}40`, fontSize: "1.1rem" }}>{t('pricing.perMonth')}</span>
               </div>
               <p style={{ color: `${C.text}40`, fontSize: "0.85rem", marginBottom: 32 }}>
                 {tier.name}
@@ -208,7 +212,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                 alignItems: "center",
                 marginBottom: 40
               }}>
-                <span style={{ fontSize: "0.8rem", color: C.orange, fontWeight: 500 }}>Setup Inicial de Agencia</span>
+                <span style={{ fontSize: "0.8rem", color: C.orange, fontWeight: 500 }}>{t('pricing.setupTitle')}</span>
                 <span style={{ fontSize: "1.1rem", color: C.text, fontFamily: "Lexend, sans-serif", fontWeight: 600 }}>
                   ${tier.setup} <small style={{ fontSize: "0.6rem", fontWeight: 400 }}>USD</small>
                 </span>
@@ -219,24 +223,24 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
             <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 20, marginTop: 12 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                 <div style={{ color: C.orange }}><AlertCircle size={16} /></div>
-                <p style={{ fontSize: "0.8rem", color: `${C.text}70`, fontWeight: 500, margin: 0 }}>Ahorro estimado anual</p>
+                <p style={{ fontSize: "0.8rem", color: `${C.text}70`, fontWeight: 500, margin: 0 }}>{t('pricing.estimatedSaving')}</p>
               </div>
               {(() => {
                 const benchmark = clients <= 10 
-                  ? { label: "Junior Support", cost: 2200 }
+                  ? { label: t('pricing.benchmark.junior'), cost: 2200 }
                   : clients <= 19 
-                  ? { label: "Full Operations", cost: 4500 }
+                  ? { label: t('pricing.benchmark.full'), cost: 4500 }
                   : clients <= 29 
-                  ? { label: "Data Dept.", cost: 8500 }
-                  : { label: "Enterprise Scale", cost: 15000 };
+                  ? { label: t('pricing.benchmark.dept'), cost: 8500 }
+                  : { label: t('pricing.benchmark.enterprise'), cost: 15000 };
                 
                 return (
                   <>
                     <p style={{ fontSize: "1.35rem", color: C.sage, fontFamily: "Lexend, sans-serif", fontWeight: 600, margin: 0 }}>
-                      ${((benchmark.cost - tier.price) * 12).toLocaleString("en-US")} <small style={{ fontSize: "0.7rem", fontWeight: 400, opacity: 0.6 }}>USD</small>
+                      ${((benchmark.cost - tier.price) * 12).toLocaleString(i18n.language === 'en' ? 'en-US' : 'es-ES')} <small style={{ fontSize: "0.7rem", fontWeight: 400, opacity: 0.6 }}>USD</small>
                     </p>
                     <p style={{ fontSize: "0.72rem", color: `${C.text}40`, marginTop: 2 }}>
-                      vs. {benchmark.label} in-house (${benchmark.cost.toLocaleString("en-US") || "0"}/mes)
+                      {t('pricing.vs')} {benchmark.label} {t('pricing.inHouse')} (${benchmark.cost.toLocaleString(i18n.language === 'en' ? 'en-US' : 'es-ES') || "0"}/{t('pricing.perMonth').replace('/', '').trim()})
                     </p>
                   </>
                 );
@@ -251,8 +255,7 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
                 borderTop: `1px solid ${C.border}40`,
                 paddingTop: 10
               }}>
-                Nota: La comparativa incluye el costo cargado de personal (salario + beneficios) 
-                y el costo de oportunidad del tiempo manual de gestión.
+                {t('pricing.note')}
               </p>
             </div>
           </div>
@@ -261,3 +264,4 @@ export function PricingConsole({ clients, setClients, sectionStyle }: PricingCon
     </section>
   );
 }
+

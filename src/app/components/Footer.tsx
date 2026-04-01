@@ -1,68 +1,74 @@
-// No React import needed for JSX 17+
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { Linkedin, Mail } from "lucide-react";
 import { C } from "../constants";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer
       style={{
         borderTop: `1px solid ${C.border}`,
-        padding: "48px 24px",
+        padding: "40px 24px",
         maxWidth: 1100,
         margin: "0 auto",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 24,
       }}
-      className="flex-col md:flex-row"
     >
-      <img
-        src="/img/logo.png"
-        alt="Alex Spelucin"
-        style={{
-          height: 24,
-          width: "auto",
-          opacity: 0.4,
-          filter: "grayscale(100%) brightness(1.5)"
-        }}
-        className="order-1 md:order-none"
-      />
-      <p
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "0.78rem",
-          color: `${C.text}40`,
-          margin: 0,
-          textAlign: "center",
-        }}
-        className="order-3 md:order-none"
-      >
-        © 2026 Alex Spelucin. Data Infrastructure B2B. Todos los derechos reservados.
-      </p>
-      <div style={{ display: "flex", gap: 24, alignItems: "center" }} className="order-2 md:order-none">
-        <a
-          href="https://www.linkedin.com/in/spelucin"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: `${C.text}50`, transition: "color 0.2s" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = C.sage)}
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.color = `${C.text}50`)
-          }
-        >
-          <Linkedin size={20} />
-        </a>
-        <a
-          href="mailto:spelucinalex@gmail.com"
-          style={{ color: `${C.text}50`, transition: "color 0.2s" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = C.sage)}
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.color = `${C.text}50`)
-          }
-        >
-          <Mail size={20} />
-        </a>
+      <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+        {/* Left Side: Logo & Copyright */}
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          <img
+            src="/img/logo.png"
+            alt="Alex Spelucin"
+            style={{
+              height: 20,
+              width: "auto",
+              opacity: 0.3,
+              filter: "grayscale(100%)",
+              transition: "opacity 0.3s",
+            }}
+            className="hover:opacity-100 transition-opacity"
+          />
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "0.7rem",
+              color: `${C.text}30`,
+              margin: 0,
+            }}
+          >
+            {t('footer.rights')}
+          </p>
+        </div>
+
+        {/* Right Side: Utils */}
+        <div className="flex items-center gap-8">
+          <div style={{ display: "flex", gap: 12 }}>
+            <Link to="/" style={{ fontSize: "0.7rem", color: `${C.text}30`, textDecoration: "none" }} className="hover:text-white transition-colors">ES</Link>
+            <span style={{ color: `${C.text}10`, fontSize: "0.7rem" }}>/</span>
+            <Link to="/en" style={{ fontSize: "0.7rem", color: `${C.text}30`, textDecoration: "none" }} className="hover:text-white transition-colors">EN</Link>
+          </div>
+          
+          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
+            <a
+              href="https://www.linkedin.com/in/spelucin"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: `${C.text}30`, transition: "all 0.2s" }}
+              className="hover:text-[#acd8b9]"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href="mailto:spelucinalex@gmail.com"
+              style={{ color: `${C.text}30`, transition: "all 0.2s" }}
+              className="hover:text-[#acd8b9]"
+            >
+              <Mail size={18} />
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );

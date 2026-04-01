@@ -1,0 +1,97 @@
+Alex Spelucin | Data Strategy & Marketing Analytics
+
+Transforming data chaos into profitable decisions.
+
+Introduction
+
+My approach is not just about creating attractive dashboards, but building systems that allow agencies to scale with confidence. I have managed the data architecture for accounts with monthly investments exceeding $1.5M, optimizing ROAS and automating multi-channel attribution to eliminate manual reporting.
+
+Case 1: High-Performance E-commerce Ecosystem (Multi-client Standardization)
+
+The Challenge
+
+This architecture was implemented for various agency clients, where the common challenge (exemplified by the "Llovizna" case) was data dispersion between Meta Ads, Google Ads, and their own stores. This fragmentation prevented a clear view of the real impact of investment on cash flow, wasting valuable hours reconciling billing against actual investment.
+
+The Strategy (Data Action)
+
+Unified Attribution: Integrated Meta and Google APIs with reported store revenue to calculate a real ROAS of 38.2.
+
+Friction Mapping: Designed a granular conversion funnel (Visit -> Add to Cart -> Shipping -> Payment -> Purchase).
+
+CPC Control: Implemented a comparative historical view by platform to detect cost spikes in real time.
+
+The Impact
+
+Total Visibility: Immediate identification that 87% of users abandon the cart, allowing for the execution of hyper-segmented retargeting campaigns.
+
+Scalability: Ability to manage million-dollar budgets with an attribution error close to 0%.
+
+Case 2: Performance in Membership Models (Laboratoria)
+
+The Challenge
+
+Optimizing conversion for an educational platform with over 100k monthly sessions. The main challenge was understanding which channels brought not just traffic, but effective "Registrations" and "Paid Memberships," differentiating the behavior between new and returning users across Latin America.
+
+The Strategy (Data Action)
+
+Critical Event Analysis: Configured tracking for deep interaction events (scroll, user engagement, and clicks on specific CTAs) to identify navigation bottlenecks.
+
+Geographic Segmentation: Cross-referenced acquisition metrics by country (Peru, Mexico, Chile, Colombia) to detect regional growth opportunities.
+
+Channel Efficiency: Evaluated average session duration by source (Paid Search with 17:22 min of retention) to reassign efforts toward high-retention channels.
+
+The Impact
+
+Sales Growth: Achieved an 86.1% increase in paid memberships by optimizing channels with the highest conversion rates.
+
+UX Optimization: Reduced the Bounce Rate by 18.4% by adjusting internal page routes based on the generated interaction map.
+
+Case 3: Market Intelligence and Strategic SEO (SEO Notebook)
+
+The Challenge
+
+The agency needed to justify the investment in content and SEO compared to paid channels, in addition to understanding why the competition was gaining ground on critical keywords.
+
+The Strategy (Data Action)
+
+Share of Voice (SOV): Created a competition monitor comparing domains in real time (dominating with 27% vs. 23% of the nearest follower).
+
+Query Explorer: Implemented an analysis of average position vs. CTR to identify "low-hanging fruits" (keywords on page 2 with high potential).
+
+Device Segmentation: Cross-referenced interaction metrics to optimize the mobile experience (80.8% of traffic).
+
+The Impact
+
+Content Strategy: Prioritized topics based on organic Key Events, not just click volume.
+
+Budget Defense: Clear demonstration of how organic traffic contributes 70% of sessions with a Bounce Rate lower than the paid average.
+
+Case 4: Innovation in Attribution: LLM Traffic Dashboard
+
+The Challenge
+
+In 2026, traffic no longer comes solely from Google. Clients began noticing visits from ChatGPT and Gemini but did not know how to measure the conversion of these emerging sources.
+
+The Strategy (Data Action)
+
+AI Referral Architecture: Designed a filtering system to capture and segment sessions coming from Large Language Models (LLM Referrers).
+
+Engagement Metrics: Compared traffic quality: ChatGPT vs. Gemini vs. Perplexity (discovering that ChatGPT generates a Key Event Rate of 13.7%).
+
+Landing Page Mapping: Identification of which landing pages are most cited by AIs.
+
+The Impact
+
+First-Mover Advantage: Positioned the agency as a leader in "AI Optimization," capturing a market that most standard tools still ignore.
+
+Results: 296 high-intent sessions detected and correctly attributed, with a key event rate of 12.16%.
+
+Technological Stack
+
+Visualization: Looker Studio (Expert).
+
+Data Warehousing: BigQuery, SQL for data cleaning, Google Apps Script, Python, Cloud Run.
+
+Connectivity: Google Apps Script, Python, Cloud Run.
+
+Data Sources: GA4, GTM, Search Console, Google Ads, Meta Ads.
