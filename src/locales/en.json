@@ -258,5 +258,10 @@
     "description": "Let's schedule 20 minutes to review your current stack and activate your Setup.",
     "cta": "Book a Call",
     "footer": "No commitment. No annual contracts."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "back": "Back to Home"
   }
 }
