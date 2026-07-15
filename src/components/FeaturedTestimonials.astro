@@ -5,17 +5,17 @@ import { rule } from '../data';
 const testimonials = [
   {
     quote:
-      'Alex es un excelente profesional con un extenso conocimiento a nivel técnico. Se capacita constantemente en SEO y en temas de tecnología complementarios a este, logrando intersecciones de conocimiento fascinantes sin perder el foco en el crecimiento del negocio y los objetivos del cliente.',
-    name: 'Darío Vergara',
-    role: 'SEO Lead en Attach Media',
-    context: 'Alex supervisaba a Darío',
-  },
-  {
-    quote:
       'Alex es un profesional SEO con gran conocimiento técnico y sentido crítico. Tuvimos la oportunidad de optimizar un sitio enfocado en una vertical complicada como lo es banca. Se enfoca en las necesidades del negocio y en conjunto desarrollamos una estrategia de posicionamiento orgánico efectiva. También debo destacar su compromiso y la forma profesional en que lleva sus proyectos.',
     name: 'Miguel Huahuala',
     role: 'Content Lead en Scotiabank',
     context: 'Miguel trabajó con Alex en distintas empresas',
+  },
+  {
+    quote:
+      'Alex es un excelente profesional con un extenso conocimiento a nivel técnico. Se capacita constantemente en SEO y en temas de tecnología complementarios a este, logrando intersecciones de conocimiento fascinantes sin perder el foco en el crecimiento del negocio y los objetivos del cliente.',
+    name: 'Darío Vergara',
+    role: 'SEO Lead en Attach Media',
+    context: 'Alex supervisaba a Darío',
   },
   {
     quote:
@@ -39,10 +39,10 @@ const testimonials = [
     </div>
 
     <div class="grid md:grid-cols-2 gap-6">
-      {testimonials.map((t) => (
-        <div class="testimonial-glass reveal-stagger">
+      {testimonials.map((t, i) => (
+        <div class={`testimonial-glass reveal-stagger${i === 0 ? ' testimonial-wide' : ''}`}>
           <div style="font-size: 2.75rem; color: rgba(21,96,189,0.18); line-height: 1; font-family: Georgia, serif">"</div>
-          <p style="font-size: 1rem; line-height: 1.75; color: rgba(13,31,60,0.75); margin: 0.5rem 0 1.5rem">
+          <p style="font-size: 1rem; line-height: 1.75; color: rgba(13,31,60,0.75); margin: 0.5rem 0 1.5rem; max-width: 60ch">
             {t.quote}
           </p>
           <div style="display: flex; align-items: center; gap: 0.85rem">
@@ -94,5 +94,11 @@ const testimonials = [
   .testimonial-glass > * {
     position: relative;
     z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .testimonial-wide {
+      grid-column: span 2;
+    }
   }
 </style>
