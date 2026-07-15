@@ -49,7 +49,11 @@ const faqSchema = {
 };
 ---
 
-<Base title={`${service.name} — Servicios`} description={service.description}>
+<Base
+  title={`${service.name} para Shopify - Alex Spelucin`}
+  description={service.description}
+  image={`/og/servicio-${service.slug}.jpg`}
+>
   <Fragment slot="schema">
     <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
@@ -108,7 +112,7 @@ const faqSchema = {
       </div>
     </section>
 
-    {/* ── Entregables — Lista con divisores ─────────── */}
+    {/* ── Entregables - Lista con divisores ─────────── */}
     <section style="padding: 0 0 5rem">
       <div class={`${W} reveal`}>
         <Eyebrow>Entregables</Eyebrow>

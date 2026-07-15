@@ -6,10 +6,10 @@ const reader = createReader(process.cwd(), keystaticConfig)
 
 const DEFAULT_SITE_SEO = {
   siteName: "Alex Spelucin",
-  defaultTitle: "Alex Spelucin — SEO técnico para Shopify",
+  defaultTitle: "Alex Spelucin - SEO técnico para Shopify",
   defaultDescription:
     "Consultor independiente de SEO técnico para Shopify. Auditorías, estrategia de catálogo y capacitaciones.",
-  defaultOgImage: "/og-default.jpg",
+  defaultOgImage: "/og/default.jpg",
   locale: "es_MX",
   founderName: "Alex Spelucin",
   founderJobTitle: "Consultor SEO técnico para Shopify",

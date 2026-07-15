@@ -72,7 +72,7 @@ export const services: Service[] = [
       "La Auditoría SEO Técnica es un análisis profundo del código, estructura y configuración de tu tienda Shopify. Me aseguro de que Google pueda rastrear e indexar tu catálogo de forma eficiente. Detectamos cuellos de botella en el rendimiento, problemas de canibalización y errores de schema markup que impiden que tus productos destaquen en los resultados de búsqueda. El entregable final no es un PDF automatizado, sino un plan de acción detallado y priorizado según el impacto en tus ingresos.",
     detail: {
       heroHeadline:
-        "Google rastrea tu tienda — pero probablemente no como crees",
+        "Google rastrea tu tienda - pero probablemente no como crees",
       heroSubheadline:
         "Auditoría técnica profunda de tu Shopify para identificar exactamente qué bloquea tu indexación, tu rendimiento y tus rankings.",
       problemContext:
@@ -85,7 +85,7 @@ export const services: Service[] = [
       ],
       deliverablesHeadline: "Qué obtienes con la auditoría",
       deliverablesDescription:
-        "Un reporte técnico de 60 a 120 páginas con hallazgos, evidencia y acciones priorizadas por impacto en revenue — no una lista de errores sin contexto.",
+        "Un reporte técnico de 60 a 120 páginas con hallazgos, evidencia y acciones priorizadas por impacto en revenue - no una lista de errores sin contexto.",
       idealFor: "Ideal para: tiendas con tráfico estancado o en caída",
       idealSituations: [
         "Llevas más de 6 meses sin ver crecimiento en tráfico orgánico y no sabes por qué",
@@ -164,12 +164,12 @@ export const services: Service[] = [
       pains: [
         "Tus colecciones tienen los nombres que tú usas internamente, no los que escribe tu cliente en Google",
         "Los filtros (facetas) generan cientos de URLs duplicadas que confunden al rastreador y diluyen tu autoridad",
-        "No hay jerarquía semántica clara entre categorías principales y subcategorías — todo está al mismo nivel",
+        "No hay jerarquía semántica clara entre categorías principales y subcategorías - todo está al mismo nivel",
         "El enlazado interno distribuye autoridad al azar en lugar de reforzar las páginas con mayor potencial comercial",
       ],
       deliverablesHeadline: "Qué obtienes con la estrategia",
       deliverablesDescription:
-        "Un plan completo con keyword research, jerarquía de colecciones, estructura de URLs, manejo de facetas y mapa de enlaces internos — listo para implementar.",
+        "Un plan completo con keyword research, jerarquía de colecciones, estructura de URLs, manejo de facetas y mapa de enlaces internos - listo para implementar.",
       idealFor: "Ideal para: tiendas que quieren escalar su catálogo",
       idealSituations: [
         "Planeas lanzar nuevas categorías o líneas de productos en los próximos meses",
@@ -241,13 +241,13 @@ export const services: Service[] = [
       "Transfiere mi conocimiento a tu equipo in-house. Diseñamos talleres a medida de 2 a 4 horas donde tu equipo de marketing o desarrollo aprenderá a implementar buenas prácticas de SEO en el día a día de la operación de Shopify. Desde cómo optimizar el lanzamiento de nuevas colecciones, hasta cómo interpretar los datos de Google Search Console para tomar decisiones de negocio informadas.",
     detail: {
       heroHeadline:
-        "Tu equipo toma decisiones SEO todos los días — sin saberlo.",
+        "Tu equipo toma decisiones SEO todos los días - sin saberlo.",
       heroSubheadline:
         "Talleres prácticos para equipos de ecommerce que quieren implementar SEO correctamente en Shopify desde el primer día.",
       problemContext:
         "La mayoría de equipos de marketing aplican SEO genérico que no funciona en Shopify.",
       pains: [
-        "Publican colecciones sin optimizar metadatos, H1 ni URLs — y se preguntan por qué no rankean",
+        "Publican colecciones sin optimizar metadatos, H1 ni URLs - y se preguntan por qué no rankean",
         "No entienden cómo funciona el crawl en Shopify y generan contenido duplicado sin querer",
         "Tienen Google Search Console pero no saben qué mirar ni cómo actuar sobre esa data",
         "Dependen del consultor o la agencia para cada cambio mínimo, lo que frena la velocidad de operación",

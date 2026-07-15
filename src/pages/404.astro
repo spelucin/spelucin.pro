@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import gouf404 from '../assets/404-gouf.gif';
+---
+
+<Base
+  title="404 - Página no encontrada | Alex Spelucin"
+  description="La página que buscas no existe o fue movida."
+  noindex
+>
+  <Nav />
+  <div style="background: #fcfdff; padding-top: 9rem; padding-bottom: 6rem; min-height: 100vh; display: flex; align-items: center">
+    <div class="max-w-5xl mx-auto px-6 reveal" style="text-align: center; width: 100%">
+      <img
+        src={gouf404.src}
+        alt="Gouf averiado"
+        width="320"
+        style="max-width: 100%; height: auto; margin: 0 auto 2rem; display: block"
+      />
+      <span style="font-size: 0.78rem; font-weight: 600; color: #1560bd; letter-spacing: 0.08em; text-transform: uppercase">
+        Error 404
+      </span>
+      <h1 style="font-size: clamp(3rem, 9vw, 6rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0.5rem 0 1rem; line-height: 1">
+        404
+      </h1>
+      <p style="font-size: 1.15rem; font-weight: 600; color: #0d1f3c; max-width: 44ch; margin: 0 auto 0.85rem; line-height: 1.5">
+        This is no page, boy! No page!
+      </p>
+      <p style="font-size: 1rem; color: rgba(13,31,60,0.55); max-width: 46ch; margin: 0 auto 2.5rem; line-height: 1.7">
+        Parece que esta página nunca llegó al campo de batalla.
+      </p>
+      <div style="display: flex; justify-content: center">
+        <Button href="/" variant="ghost">
+          ← Regresar al inicio
+        </Button>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Base>
