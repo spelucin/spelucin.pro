@@ -22,7 +22,7 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
       <div class="hidden md:flex items-center gap-7">
         <div class="nav-dropdown-wrapper">
           <a
-            href="/servicios"
+            href="/servicios/"
             class="nav-dropdown-trigger flex items-center gap-1"
             style={navLinkStyle}
           >
@@ -37,7 +37,7 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
                 <>
                   {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07); margin: 0 0.25rem" />}
                   <a
-                    href={`/servicios/${s.slug}`}
+                    href={`/servicios/${s.slug}/`}
                     class="flex flex-col no-underline"
                     style="padding: 0.75rem 0.85rem; border-radius: 0.5rem; transition: background 0.12s; text-decoration: none"
                   >
@@ -50,9 +50,9 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
           </div>
         </div>
 
-        <a href="/casos-de-estudio" style={navLinkStyle}>Casos</a>
-        <a href="/sobre-mi" style={navLinkStyle}>Sobre mí</a>
-        <a href="/contacto" class="btn btn-primary btn-sm">
+        <a href="/casos-de-estudio/" style={navLinkStyle}>Casos</a>
+        <a href="/sobre-mi/" style={navLinkStyle}>Sobre mí</a>
+        <a href="/contacto/" class="btn btn-primary btn-sm">
           Hablemos <IconArrowRight />
         </a>
       </div>
@@ -86,7 +86,7 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
       <div id="mobile-services-menu" class="hidden" style="padding-left: 0.75rem; padding-bottom: 0.25rem; display: none; flex-direction: column; gap: 0.25rem; border-left: 2px solid rgba(21,96,189,0.15)">
         {services.map(s => (
           <a
-            href={`/servicios/${s.slug}`}
+            href={`/servicios/${s.slug}/`}
             class="mobile-service-link"
             style="text-decoration: none; padding: 0.5rem 0.5rem; border-radius: 0.4rem"
           >
@@ -96,11 +96,11 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
         ))}
       </div>
 
-      <a href="/casos-de-estudio" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Casos</a>
-      <a href="/sobre-mi" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Sobre mí</a>
+      <a href="/casos-de-estudio/" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Casos</a>
+      <a href="/sobre-mi/" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Sobre mí</a>
       <div style="padding-top: 0.5rem">
         <a
-          href="/contacto"
+          href="/contacto/"
           class="mobile-nav-link btn btn-primary"
           style="display: flex; justify-content: center"
         >

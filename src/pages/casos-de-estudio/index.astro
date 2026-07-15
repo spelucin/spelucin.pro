@@ -35,7 +35,7 @@ const caseStudies = await getCaseStudies();
 
         {caseStudies.map((cs, i) => (
           <div>
-            <a href={`/casos-de-estudio/${cs.slug}`} style="text-decoration: none; display: block">
+            <a href={`/casos-de-estudio/${cs.slug}/`} style="text-decoration: none; display: block">
               <div class="grid md:grid-cols-12 gap-6 case-row" style="padding-top: 2rem; padding-bottom: 2rem">
                 <div style="grid-column: span 3">
                   <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.35); display: block; margin-bottom: 0.5rem">0{i + 1}</span>

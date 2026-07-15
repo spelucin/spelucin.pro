@@ -59,7 +59,7 @@ const articleSchema = {
     >
       <div class="max-w-5xl mx-auto px-6 reveal">
         <a
-          href="/casos-de-estudio"
+          href="/casos-de-estudio/"
           style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; color: rgba(21,96,189,0.55); text-decoration: none; margin-bottom: 1.5rem; font-weight: 500"
         >
           <span style="transform: rotate(180deg); display: inline-block"><IconArrowRight /></span> Casos de estudio
@@ -276,7 +276,7 @@ const articleSchema = {
       buttonText="Agendar llamada"
     >
       {relatedService && (
-        <Button href={`/servicios/${relatedService.slug}`} variant="ghost">
+        <Button href={`/servicios/${relatedService.slug}/`} variant="ghost">
           Ver servicio: {relatedService.name}
         </Button>
       )}

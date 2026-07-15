@@ -5,10 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://spelucin.pro",
-  trailingSlash: "never",
-  build: {
-    format: "file",
-  },
+  trailingSlash: "always",
   integrations: [astroIcon(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

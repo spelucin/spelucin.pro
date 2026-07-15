@@ -20,7 +20,7 @@ const caseStudies = await getCaseStudies();
       </div>
       <div style="grid-column: span 7; display: flex; align-items: flex-end; justify-content: flex-end">
         <a
-          href="/casos-de-estudio"
+          href="/casos-de-estudio/"
           style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: #1560bd; text-decoration: none; white-space: nowrap"
         >
           Ver todos <IconArrowRight />
@@ -32,7 +32,7 @@ const caseStudies = await getCaseStudies();
 
     {caseStudies.map((cs, i) => (
       <div>
-        <a href={`/casos-de-estudio/${cs.slug}`} style="text-decoration: none; display: block">
+        <a href={`/casos-de-estudio/${cs.slug}/`} style="text-decoration: none; display: block">
           <div
             class="grid md:grid-cols-12 gap-6 case-row"
             style="padding-top: 2rem; padding-bottom: 2rem"
