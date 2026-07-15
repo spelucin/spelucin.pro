@@ -135,14 +135,14 @@ const faqSchema = {
     </section>
 
     {/* ── Para quién es ─────────────────────────────── */}
-    <section class="svc-illus-section" style="padding: 0 0 5rem">
+    <section style="padding: 0 0 5rem">
       <div class={`${W} reveal`}>
         <Eyebrow>Para quién es</Eyebrow>
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2rem; line-height: 1.2">
           {d.idealFor}
         </h2>
         <div class="grid md:grid-cols-12 gap-8 items-center">
-          <div class="illus-col" style="grid-column: span 4">
+          <div style="grid-column: span 4">
             {service.slug === "auditoria-seo-tecnica" && <ServiceIllustrationAudit />}
             {service.slug === "estrategia-de-catalogo" && <ServiceIllustrationCatalog />}
             {service.slug === "talleres-y-capacitaciones" && <ServiceIllustrationWorkshop />}
@@ -289,20 +289,4 @@ const faqSchema = {
   import { initFaqAccordion } from '../../scripts/faq-accordion.js';
   initFaqAccordion();
 </script>
-
-<style>
-  @media (max-width: 768px) {
-    .svc-illus-section { text-align: center; }
-    .svc-illus-section .illus-col {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-    }
-    .svc-illus-section .illus-col :global(svg) {
-      width: 240px !important;
-      max-width: 80% !important;
-      height: auto !important;
-    }
-  }
-</style>
 
