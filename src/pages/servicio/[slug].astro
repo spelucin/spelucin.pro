@@ -1,0 +1,409 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Button from '../../components/Button.astro';
+import CTA from '../../components/CTA.astro';
+import IconArrowRight from '../../components/IconArrowRight.astro';
+import IconCheck from '../../components/IconCheck.astro';
+import ServiceIllustrationAudit from '../../components/ServiceIllustrationAudit.astro';
+import ServiceIllustrationCatalog from '../../components/ServiceIllustrationCatalog.astro';
+import ServiceIllustrationWorkshop from '../../components/ServiceIllustrationWorkshop.astro';
+import { services, rule } from '../../data';
+import type { Service } from '../../data';
+
+export function getStaticPaths() {
+  return services.map(s => ({
+    params: { slug: s.slug },
+    props: { service: s },
+  }));
+}
+
+const { service } = Astro.props as { service: Service };
+const d = service.detail;
+const W = "max-w-5xl mx-auto px-6";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: service.name,
+  name: service.name,
+  description: service.description,
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Alex Spelucin",
+    email: "alex@spelucin.pro",
+  },
+  areaServed: ["MX", "AR", "US", "ES"],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: d.faq.map(f => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<Base title={`${service.name} — Servicios`} description={service.description}>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+  <Nav />
+  <div style="background: #fff">
+
+    <section style="padding-top: 10rem; padding-bottom: 0">
+      <div class={`${W} reveal`}>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem">
+          <a href="/#servicios" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: rgba(21,96,189,0.45); text-decoration: none; text-transform: uppercase">
+            <span style="transform: rotate(180deg); display: inline-block"><IconArrowRight /></span> Servicios
+          </a>
+          <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.10)" />
+          <Eyebrow>{service.name}</Eyebrow>
+        </div>
+
+        <h1 style="font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem; max-width: 22ch">
+          {d.heroHeadline}
+        </h1>
+        <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 2.5rem; max-width: 50ch">
+          {d.heroSubheadline}
+        </p>
+        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 4rem">
+          <Button href="/contacto">
+            Agendar llamada gratuita <IconArrowRight />
+          </Button>
+          <span style="font-size: 0.875rem; font-weight: 600; color: rgba(21,96,189,0.6)">{service.price}</span>
+        </div>
+        <div style={rule} />
+      </div>
+    </section>
+
+    {/* ─ El problema ─────────────────────────────────── */}
+    <section style="padding: 5rem 0">
+      <div class={`${W} reveal`}>
+        <div class="grid md:grid-cols-12 gap-8">
+          <div style="grid-column: span 4">
+            <Eyebrow>El problema</Eyebrow>
+            <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.65rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.25">
+              {d.problemContext}
+            </h2>
+          </div>
+          <div style="grid-column: span 8">
+            {d.pains.map((pain, i, arr) => (
+              <div>
+                <div style="display: flex; gap: 1rem; padding-top: 1.25rem; padding-bottom: 1.25rem">
+                  <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.4); flex-shrink: 0; padding-top: 0.15rem; font-variant-numeric: tabular-nums">0{i + 1}</span>
+                  <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.7); margin: 0">{pain}</p>
+                </div>
+                {i < arr.length - 1 && <div style={rule} />}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Entregables — Lista con divisores ─────────── */}
+    <section style="padding: 0 0 5rem">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Entregables</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2rem; line-height: 1.2">
+          Qué recibes al contratar este servicio
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {service.deliverables.map((item, i, arr) => (
+            <>
+              {i > 0 && <div style={rule} />}
+              <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem 0">
+                <IconCheck />
+                <span style="font-size: 0.9375rem; color: rgba(13,31,60,0.78); font-weight: 500; line-height: 1.5">{item}</span>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Para quién es ─────────────────────────────── */}
+    <section style="padding: 0 0 5rem">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Para quién es</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2rem; line-height: 1.2">
+          {d.idealFor}
+        </h2>
+        <div class="grid md:grid-cols-12 gap-8 items-center">
+          <div style="grid-column: span 4">
+            {service.slug === "auditoria-seo-tecnica" && <ServiceIllustrationAudit />}
+            {service.slug === "estrategia-de-catalogo" && <ServiceIllustrationCatalog />}
+            {service.slug === "talleres-y-capacitaciones" && <ServiceIllustrationWorkshop />}
+          </div>
+          <div style="grid-column: span 8">
+            <div style="display: flex; flex-direction: column; gap: 0">
+              {d.idealSituations.map((sit, i, arr) => (
+                <div>
+                  <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 0">
+                    <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.35); flex-shrink: 0; padding-top: 0.5rem; font-variant-numeric: tabular-nums; min-width: 1.5rem">0{i + 1}</span>
+                    <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.7); margin: 0">{sit}</p>
+                  </div>
+                  {i < arr.length - 1 && <div style={rule} />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Proceso ───────────────────────────────────── */}
+    <section style="padding: 0 0 5rem">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Proceso</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2.5rem; line-height: 1.2">
+          Cómo trabajo
+        </h2>
+        
+        <div class="grid md:grid-cols-12 gap-10 items-start">
+          <div style="grid-column: span 7">
+            <div style="display: flex; flex-direction: column; gap: 0">
+              {d.processSteps.map((step, i, arr) => (
+                <div style={`display: flex; gap: 1.5rem; padding-bottom: ${i < arr.length - 1 ? '2.5rem' : '0'}`}>
+                  <div style="display: flex; flex-direction: column; align-items: center">
+                    <div style="width: 36px; height: 36px; border-radius: 50%; background: #1560bd; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0">
+                      {i + 1}
+                    </div>
+                    {i < arr.length - 1 && <div style="width: 1px; flex: 1; background: rgba(21,96,189,0.15); margin-top: 0.5rem" />}
+                  </div>
+                  <div style="padding-top: 0.35rem">
+                    <h3 style="font-size: 1rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em">{step.title}</h3>
+                    <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0; max-width: 48ch">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style="grid-column: span 5; position: sticky; top: 120px;" class="terminal-container">
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span class="terminal-title">zsh - shopify-seo</span>
+              </div>
+              <div class="terminal-body">
+                {service.slug === "auditoria-seo-tecnica" && (
+                  <>
+                    <p class="term-line term-delay-1"><span class="term-prompt">$</span> opencode crawl --site=gunplastore.mx</p>
+                    <p class="term-line term-delay-2"><span class="term-spinner"></span> Initializing crawler engine...</p>
+                    <p class="term-line term-delay-3"><span class="term-spinner"></span> Crawling 1,247 Shopify URLs...</p>
+                    <p class="term-line term-delay-4"><span class="term-bar">[██████████████████████]</span> <span class="term-pct">100%</span></p>
+                    <p class="term-line term-delay-5"><span class="term-warning">[warning]</span> Found 142 duplicate tag pages</p>
+                    <p class="term-line term-delay-6"><span class="term-success">[success]</span> Core Web Vitals audit: LCP 2.1s</p>
+                    <p class="term-line term-delay-7"><span class="term-info">[info]</span> Schema markup: Product & Offer verified</p>
+                    <p class="term-line term-delay-8"><span class="term-spinner"></span> Generating roadmap...</p>
+                    <p class="term-line term-delay-9"><span class="term-bar">[██████████████████████]</span> <span class="term-pct">100%</span></p>
+                    <p class="term-line term-delay-10"><span class="term-success">[success]</span> Audit completed successfully.</p>
+                  </>
+                )}
+                {service.slug === "estrategia-de-catalogo" && (
+                  <>
+                    <p class="term-line term-delay-1"><span class="term-prompt">$</span> opencode catalog --analyze --vertical="model-kits"</p>
+                    <p class="term-line term-delay-2"><span class="term-spinner"></span> Fetching keyword database...</p>
+                    <p class="term-line term-delay-3"><span class="term-bar">[██████████████████████]</span> <span class="term-pct">100%</span></p>
+                    <p class="term-line term-delay-4"><span class="term-spinner"></span> Clustering search intent queries...</p>
+                    <p class="term-line term-delay-5"><span class="term-info">[info]</span> Resolving filter tag faceta rules...</p>
+                    <p class="term-line term-delay-6"><span class="term-success">[success]</span> Generated hierarchy structure</p>
+                    <p class="term-line term-delay-7"><span class="term-info">[info]</span> Mapping Shopify URL templates...</p>
+                    <p class="term-line term-delay-8"><span class="term-spinner"></span> Mapping internal linking schema...</p>
+                    <p class="term-line term-delay-9"><span class="term-bar">[██████████████████████]</span> <span class="term-pct">100%</span></p>
+                    <p class="term-line term-delay-10"><span class="term-success">[success]</span> Hierarchy mapping completed.</p>
+                  </>
+                )}
+                {service.slug === "talleres-y-capacitaciones" && (
+                  <>
+                    <p class="term-line term-delay-1"><span class="term-prompt">$</span> opencode training --start --team="marketing"</p>
+                    <p class="term-line term-delay-2"><span class="term-spinner"></span> Initializing training environments...</p>
+                    <p class="term-line term-delay-3"><span class="term-info">[info]</span> Topic: Shopify SEO & GSC analytics</p>
+                    <p class="term-line term-delay-4"><span class="term-spinner"></span> Booting interactive debug labs...</p>
+                    <p class="term-line term-delay-5"><span class="term-bar">[██████████████████████]</span> <span class="term-pct">100%</span></p>
+                    <p class="term-line term-delay-6"><span class="term-success">[success]</span> Sandbox setup complete</p>
+                    <p class="term-line term-delay-7"><span class="term-info">[info]</span> GA4 datalayer debugging active</p>
+                    <p class="term-line term-delay-8"><span class="term-spinner"></span> GSC data processing session loaded...</p>
+                    <p class="term-line term-delay-9"><span class="term-bar">[██████████████████████]</span> <span class="term-pct">100%</span></p>
+                    <p class="term-line term-delay-10"><span class="term-success">[success]</span> Team training workspace ready.</p>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    {/* ── FAQ ───────────────────────────────────────── */}
+    <section style="padding: 5rem 0">
+      <div class={`${W} reveal`}>
+        <div style={rule} />
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 3rem 0 2rem; line-height: 1.2">
+          Preguntas frecuentes
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {d.faq.map((item, i) => (
+            <>
+              {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
+              <div class="faq-item" style="padding: 1.25rem 0">
+                <button class="faq-toggle" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 0; font-family: inherit">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
+                    <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4">{item.question}</div>
+                    <span class="faq-icon" style="flex-shrink: 0; color: #1560bd; font-size: 1.25rem; line-height: 1; transition: transform 0.3s ease">+</span>
+                  </div>
+                </button>
+                <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.25s ease; opacity: 0">
+                  <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0.75rem 0 0; padding-right: 2rem">{item.answer}</p>
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── CTA ───────────────────────────────────────── */}
+    <CTA
+      id="cta"
+      heading={d.ctaHeadline}
+      description="Llamada gratuita de 30 minutos. Sin compromiso."
+      buttonText="Agendar llamada"
+    />
+
+  </div>
+  <Footer />
+</Base>
+
+<script type="module">
+  import { initFaqAccordion } from '../../scripts/faq-accordion.js';
+  initFaqAccordion();
+</script>
+
+<style is:global>
+  .terminal-window {
+    background: #0d141e;
+    border-radius: 8px;
+    border: 1px solid rgba(21,96,189,0.15);
+    box-shadow: 0 20px 48px rgba(21,96,189,0.12);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+    color: #e2e8f0;
+    overflow: hidden;
+    width: 100%;
+  }
+  .terminal-header {
+    background: #151d2a;
+    padding: 0.55rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 1px solid rgba(21,96,189,0.08);
+  }
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .terminal-dot.red { background: #ef4444; }
+  .terminal-dot.yellow { background: #eab308; }
+  .terminal-dot.green { background: #22c55e; }
+  .terminal-title {
+    margin-left: 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgba(21,96,189,0.5);
+    letter-spacing: 0.05em;
+  }
+  .terminal-body {
+    padding: 1.25rem;
+    line-height: 1.6;
+    min-height: 290px;
+  }
+  .term-line {
+    margin: 0 0 0.5rem;
+    opacity: 0;
+    transform: translateY(4px);
+    animation: termFadeIn 0.35s ease-out forwards;
+  }
+  .term-prompt {
+    color: #38bdf8;
+    font-weight: 700;
+    user-select: none;
+    margin-right: 0.25rem;
+  }
+  .term-info {
+    color: #60a5fa;
+    font-weight: 500;
+  }
+  .term-warning {
+    color: #fbbf24;
+    font-weight: 500;
+  }
+  .term-success {
+    color: #34d399;
+    font-weight: 500;
+  }
+  .term-bar {
+    color: #38bdf8;
+    font-weight: 600;
+    letter-spacing: -1px;
+  }
+  .term-pct {
+    color: rgba(226,232,240,0.55);
+    margin-left: 0.3rem;
+  }
+  .term-spinner::before {
+    content: '⠋';
+    display: inline-block;
+    width: 1ch;
+    color: #38bdf8;
+    margin-right: 0.4rem;
+    animation: brailleSpin 0.8s steps(1) infinite;
+  }
+  @keyframes brailleSpin {
+    0% { content: '⠋'; }
+    10% { content: '⠙'; }
+    20% { content: '⠹'; }
+    30% { content: '⠸'; }
+    40% { content: '⠼'; }
+    50% { content: '⠴'; }
+    60% { content: '⠦'; }
+    70% { content: '⠧'; }
+    80% { content: '⠇'; }
+    90% { content: '⠏'; }
+    100% { content: '⠋'; }
+  }
+  @keyframes termFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .term-delay-1 { animation-delay: 0.2s; }
+  .term-delay-2 { animation-delay: 1.0s; }
+  .term-delay-3 { animation-delay: 1.8s; }
+  .term-delay-4 { animation-delay: 2.6s; }
+  .term-delay-5 { animation-delay: 3.4s; }
+  .term-delay-6 { animation-delay: 4.2s; }
+  .term-delay-7 { animation-delay: 5.0s; }
+  .term-delay-8 { animation-delay: 5.8s; }
+  .term-delay-9 { animation-delay: 6.6s; }
+  .term-delay-10 { animation-delay: 7.4s; }
+
+  @media (max-width: 768px) {
+    .terminal-container {
+      position: relative !important;
+      top: 0 !important;
+      margin-top: 2.5rem;
+    }
+  }
+</style>

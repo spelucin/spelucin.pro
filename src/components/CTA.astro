@@ -1,0 +1,86 @@
+---
+import Button from './Button.astro';
+import IconArrowRight from './IconArrowRight.astro';
+
+interface Props {
+  id?: string;
+  heading?: string;
+  description?: string;
+  buttonText?: string;
+  buttonHref?: string;
+}
+const {
+  id = 'contacto',
+  heading = '¿Tu tienda tiene un problema de visibilidad orgánica?',
+  description = 'En 30 minutos evaluamos si tiene sentido trabajar juntos y qué tipo de intervención tiene más impacto para tu situación.',
+  buttonText = 'Agendar llamada',
+  buttonHref = '/contacto',
+} = Astro.props;
+---
+
+<section id={id} style="background: #fff; padding: 5rem 0">
+  <div class="max-w-5xl mx-auto px-6 reveal">
+    <div class="cta-glass">
+      <h2 style="font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.25rem; line-height: 1.05; max-width: 16ch">
+        {heading}
+      </h2>
+      <p style="font-size: 1rem; color: rgba(13,31,60,0.55); line-height: 1.75; margin: 0 0 2.5rem; max-width: 44ch">
+        {description}
+      </p>
+      <Button href={buttonHref} size="lg">
+        {buttonText} <IconArrowRight />
+      </Button>
+      {Astro.slots.has('default') && (
+        <div style="margin-top: 1rem">
+          <slot />
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .cta-glass {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    padding: 3.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Subtle blue gradient */
+    background: linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%);
+
+    /* Glass border */
+    border: 1px solid rgba(21,96,189,0.14);
+    box-shadow:
+      0 4px 24px rgba(21,96,189,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+
+    /* Dot grid via background-image */
+    background-image:
+      radial-gradient(circle, rgba(21,96,189,0.18) 1px, transparent 1px),
+      linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%);
+    background-size: 20px 20px, 100% 100%;
+    background-position: 0 0, 0 0;
+  }
+
+  /* Frosted overlay to soften the dot grid */
+  .cta-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(0px);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Keep content above the overlay */
+  .cta-glass > * {
+    position: relative;
+    z-index: 1;
+  }
+</style>

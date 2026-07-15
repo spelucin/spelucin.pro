@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CTA from '../components/CTA.astro';
+import IconArrowRight from '../components/IconArrowRight.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Testimonials from '../components/Testimonials.astro';
+import IconAudit from '../components/IconAudit.astro';
+import IconCatalog from '../components/IconCatalog.astro';
+import IconWorkshop from '../components/IconWorkshop.astro';
+import { services, rule } from '../data';
+
+const allFaqs = services.flatMap(s => s.detail.faq.map(f => ({ ...f, service: s.name })));
+const icons = [IconAudit, IconCatalog, IconWorkshop];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: allFaqs.map(f => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<Base
+  title="Servicios — Alex Spelucin"
+  description="Auditoría SEO técnica, estrategia de catálogo y talleres a medida para tiendas Shopify. Sin paquetes genéricos, sin retainer mensual."
+>
+  <script slot="schema" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <Nav />
+  <main>
+    <section style="padding-top: 10rem; padding-bottom: 4rem; background: #fff">
+      <div class="max-w-5xl mx-auto px-6">
+        <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem; max-width: 16ch">
+          Servicios especializados para Shopify
+        </h1>
+        <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0; max-width: 48ch">
+          Tres servicios diseñados para resolver problemas específicos de tiendas Shopify. Sin paquetes genéricos, sin retainer mensual.
+        </p>
+      </div>
+    </section>
+
+    <section id="servicios" style="background: #fff; padding: 0 0 5rem">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+
+        <div style={rule} />
+
+        <div class="grid md:grid-cols-12 gap-8" style="padding-top: 3.5rem; margin-bottom: 3.5rem">
+          <div style="grid-column: span 5">
+            <Eyebrow>Servicios</Eyebrow>
+            <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.08">
+              Trabajo especializado,<br />no genérico.
+            </h2>
+          </div>
+          <div style="grid-column: span 7; display: flex; align-items: flex-end">
+            <p style="font-size: 1rem; color: rgba(13,31,60,0.5); line-height: 1.75; margin: 0">
+              Cada servicio está diseñado para tiendas Shopify, no adaptado de otra plataforma. No vendo "paquetes SEO mensuales" sin entregables ni promesas de ranking sin contexto de negocio. Solo proyectos con alcance definido y resultados que se miden.
+            </p>
+          </div>
+        </div>
+
+        <div style={rule} />
+
+        {services.map((s, i) => (
+          <div>
+            <div class="grid md:grid-cols-12 gap-6" style="padding-top: 2.25rem; padding-bottom: 2.25rem">
+              <div style="grid-column: span 3">
+                {icons[i] && (() => { const Icon = icons[i]; return <Icon size={32} />; })()}
+                <div style="font-size: 0.72rem; font-weight: 700; color: #1560bd; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 1rem; margin-bottom: 0.4rem">{s.price}</div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.025em; margin: 0 0 0.85rem; line-height: 1.2">{s.name}</h3>
+                <a
+                  href={`/servicio/${s.slug}`}
+                  style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: #1560bd; text-decoration: none"
+                >
+                  Ver detalle <IconArrowRight />
+                </a>
+              </div>
+              <div style="grid-column: span 5">
+                <p style="font-size: 0.9rem; color: rgba(13,31,60,0.55); line-height: 1.7; margin: 0">{s.description}</p>
+              </div>
+              <div style="grid-column: span 4">
+                <div style="display: flex; flex-direction: column; gap: 0">
+                  {s.deliverables.map((d, j, arr) => (
+                    <div>
+                      <div style="font-size: 0.78rem; color: rgba(13,31,60,0.6); padding: 0.45rem 0; line-height: 1.4; font-weight: 500">{d}</div>
+                      {j < arr.length - 1 && <div style="height: 1px; background: rgba(21,96,189,0.06)" />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div style={rule} />
+          </div>
+        ))}
+
+      </div>
+    </section>
+
+    <Testimonials />
+
+    <section style="background: #fff; padding: 4rem 0">
+      <div class="max-w-5xl mx-auto px-6">
+        <div style={rule} />
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 3rem 0 2rem; line-height: 1.2">Preguntas frecuentes</h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {allFaqs.map((faq, i) => (
+            <>
+              {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
+              <div class="faq-item" style="padding: 1.25rem 0">
+                <button class="faq-toggle" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 0; font-family: inherit">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
+                    <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4">{faq.question}</div>
+                    <span class="faq-icon" style="flex-shrink: 0; color: #1560bd; font-size: 1.25rem; line-height: 1; transition: transform 0.3s ease">+</span>
+                  </div>
+                </button>
+                <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.25s ease; opacity: 0">
+                  <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0.75rem 0 0; padding-right: 2rem">{faq.answer}</p>
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CTA
+      id="cta"
+      heading="¿No sabes cuál servicio necesitas?"
+      description="En 30 minutos evaluamos tu situación y te recomendamos el camino con mayor impacto."
+      buttonText="Consulta gratuita"
+    />
+  </main>
+  <Footer />
+</Base>
+
+<script type="module">
+  import { initFaqAccordion } from '../scripts/faq-accordion.js';
+  initFaqAccordion();
+</script>

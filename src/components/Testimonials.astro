@@ -1,0 +1,43 @@
+---
+import { getCaseStudies } from '../lib/content';
+
+interface Props {
+  paddingTop?: string;
+}
+const { paddingTop = '5rem' } = Astro.props;
+
+const caseStudies = await getCaseStudies();
+const items = caseStudies.map(cs => cs.testimonial).filter(Boolean);
+---
+
+<section style={`background: #fff; padding: ${paddingTop} 0 5rem`}>
+  <div class="max-w-5xl mx-auto px-6">
+    <div style="display: flex; flex-direction: column; gap: 2rem">
+      {items.map((t, i) => (
+        <div
+          class="reveal-stagger"
+          style={`background: linear-gradient(135deg, rgba(21,96,189,0.03) 0%, rgba(21,96,189,0.01) 100%); border-radius: 1rem; padding: 2rem; border: 1px solid rgba(21,96,189,0.06)`}
+        >
+          <div style="display: flex; flex-direction: column; gap: 1.5rem">
+            <div style="display: flex; align-items: flex-start; gap: 1rem">
+              <div style="font-size: 3rem; color: rgba(21,96,189,0.15); line-height: 1; font-family: Georgia, serif; flex-shrink: 0">"</div>
+              <p style="font-size: 1.05rem; line-height: 1.75; color: rgba(13,31,60,0.7); margin: 0; font-style: italic; flex: 1">
+                {t.quote}
+              </p>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem; padding-left: 3rem; flex-wrap: wrap">
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #1560bd 0%, #0d4a9e 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+                <span style="color: #fff; font-weight: 700; font-size: 0.875rem">{t.name.charAt(0)}</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.15rem">
+                <span style="font-size: 0.875rem; font-weight: 700; color: #0d1f3c">{t.name}</span>
+                <span style="font-size: 0.72rem; color: rgba(21,96,189,0.5); font-weight: 500">{t.role} · {t.store}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

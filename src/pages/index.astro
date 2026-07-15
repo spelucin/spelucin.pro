@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Services from '../components/Services.astro';
+import CaseStudiesPreview from '../components/CaseStudiesPreview.astro';
+import Testimonials from '../components/Testimonials.astro';
+import AboutSection from '../components/AboutSection.astro';
+import CTA from '../components/CTA.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Base
+  title="Alex Spelucin — SEO técnico para Shopify"
+  description="Consultor independiente de SEO técnico para Shopify. Auditorías, estrategia de catálogo y capacitaciones para tiendas que quieren tráfico orgánico real."
+>
+  <Nav />
+  <main>
+    <Hero />
+    <Services />
+    <CaseStudiesPreview />
+    <Testimonials paddingTop="2rem" />
+    <AboutSection />
+    <CTA />
+  </main>
+  <Footer />
+</Base>

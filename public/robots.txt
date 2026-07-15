@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://spelucin.pro/sitemap-index.xml

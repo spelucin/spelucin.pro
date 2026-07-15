@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import CTA from '../../components/CTA.astro';
+import { rule } from '../../data';
+import { getCaseStudies } from '../../lib/content';
+
+const caseStudies = await getCaseStudies();
+---
+
+<Base
+  title="Casos de estudio — Alex Spelucin"
+  description="Resultados reales de auditorías SEO técnicas y estrategias de catálogo en tiendas Shopify de LATAM."
+>
+  <Nav />
+  <main>
+    <section style="padding-top: 10rem; padding-bottom: 4rem; background: #fff">
+      <div class="max-w-5xl mx-auto px-6">
+        <Eyebrow>Casos de estudio</Eyebrow>
+        <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.04em; color: #0d1f3c; margin: 0.5rem 0 1.5rem; max-width: 16ch">
+          Resultados reales,<br />tiendas reales.
+        </h1>
+        <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0; max-width: 48ch">
+          Cada caso es una tienda Shopify real con un problema técnico específico. Sin proyecciones, sin datos ficticios.
+        </p>
+      </div>
+    </section>
+
+    <section style="background: #fff; padding: 0 0 5rem">
+      <div class="max-w-5xl mx-auto px-6">
+        <div style={rule} />
+
+        {caseStudies.map((cs, i) => (
+          <div>
+            <a href={`/casos-de-estudio/${cs.slug}`} style="text-decoration: none; display: block">
+              <div class="grid md:grid-cols-12 gap-6 case-row" style="padding-top: 2rem; padding-bottom: 2rem">
+                <div style="grid-column: span 3">
+                  <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.35); display: block; margin-bottom: 0.5rem">0{i + 1}</span>
+                  <div style="font-size: 2rem; font-weight: 700; color: #1560bd; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 0.5rem">
+                    {cs.headline.split(" ").slice(0, 2).join(" ")}
+                  </div>
+                  <div style="font-size: 0.72rem; font-weight: 700; color: rgba(21,96,189,0.45); text-transform: uppercase; letter-spacing: 0.06em">
+                    {cs.industry} · {cs.country}
+                  </div>
+                </div>
+                <div style="grid-column: span 5">
+                  <p style="font-size: 0.9rem; color: rgba(13,31,60,0.55); line-height: 1.7; margin: 0">{cs.summary}</p>
+                </div>
+                <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 0">
+                  {cs.metrics.slice(0, 2).map((m, j, arr) => (
+                    <div>
+                      <div style={`padding-top: ${j > 0 ? '0.75rem' : '0'}; padding-bottom: 0.75rem`}>
+                        <div style="font-size: 1rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.02em">{m.delta || m.after}</div>
+                        <div style="font-size: 0.72rem; color: rgba(13,31,60,0.4); margin-top: 0.15rem; line-height: 1.3">{m.label}</div>
+                      </div>
+                      {j < arr.length - 1 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </a>
+            <div style={rule} />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <CTA
+      id="cta"
+      heading="¿Quieres resultados similares?"
+      description="En 30 minutos evaluamos tu tienda y te decimos exactamente qué está frenando tu crecimiento orgánico."
+      buttonText="Consulta gratuita"
+    />
+  </main>
+  <Footer />
+</Base>

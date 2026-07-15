@@ -1,0 +1,236 @@
+---
+import { services } from '../data';
+import Logo from './Logo.astro';
+import IconMenu from './IconMenu.astro';
+import IconClose from './IconClose.astro';
+import IconArrowRight from './IconArrowRight.astro';
+import IconChevronDown from './IconChevronDown.astro';
+
+const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: color 0.15s; background: none; border: none; cursor: pointer; font-family: inherit";
+---
+
+<div id="nav-wrapper" class="nav-pill">
+  <nav
+    class="nav-pill-inner"
+    style="backdrop-filter: blur(16px); background: rgba(244,253,255,0.8); border: 1px solid rgba(21,96,189,0.10); box-shadow: 0 4px 24px rgba(21,96,189,0.08)"
+  >
+    <div class="px-5 py-2.5 flex items-center justify-between gap-6">
+      <a href="/" class="flex items-center no-underline">
+        <Logo size={24} />
+      </a>
+
+      <div class="hidden md:flex items-center gap-7">
+        <div class="nav-dropdown-wrapper">
+          <a
+            href="/servicios"
+            class="nav-dropdown-trigger flex items-center gap-1"
+            style={navLinkStyle}
+          >
+            Servicios
+            <IconChevronDown size={12} />
+          </a>
+          <div class="nav-dropdown-menu">
+            <div
+              style="background: rgba(244,253,255,0.95); border: 1px solid rgba(21,96,189,0.12); border-radius: 0.75rem; box-shadow: 0 12px 40px rgba(21,96,189,0.14); padding: 0.5rem; min-width: 240px; backdrop-filter: blur(16px)"
+            >
+              {services.map((s, i) => (
+                <>
+                  {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07); margin: 0 0.25rem" />}
+                  <a
+                    href={`/servicio/${s.slug}`}
+                    class="flex flex-col no-underline"
+                    style="padding: 0.75rem 0.85rem; border-radius: 0.5rem; transition: background 0.12s; text-decoration: none"
+                  >
+                    <div style="font-size: 0.875rem; font-weight: 600; color: #0d1f3c; margin-bottom: 0.15rem">{s.name}</div>
+                    <div style="font-size: 0.75rem; color: rgba(21,96,189,0.55); font-weight: 500">{s.price}</div>
+                  </a>
+                </>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href="/casos-de-estudio" style={navLinkStyle}>Casos</a>
+        <a href="/sobre-mi" style={navLinkStyle}>Sobre mí</a>
+        <a href="/contacto" class="btn btn-primary btn-sm">
+          Hablemos <IconArrowRight />
+        </a>
+      </div>
+
+      <button
+        id="menu-toggle"
+        class="md:hidden"
+        style="color: #1560bd; background: none; border: none; cursor: pointer; padding: 4px"
+        aria-label="Toggle menu"
+      >
+        <span id="menu-icon"><IconMenu /></span>
+        <span id="close-icon" class="hidden"><IconClose /></span>
+      </button>
+    </div>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden"
+    style="border: 1px solid rgba(21,96,189,0.10); border-radius: 1rem; box-shadow: 0 8px 32px rgba(21,96,189,0.10); backdrop-filter: blur(16px); background: rgba(244,253,255,0.97); margin-top: 8px; overflow: hidden"
+  >
+    <div class="px-5 py-4 flex flex-col gap-1">
+      <button
+        id="mobile-services-toggle"
+        style="display: flex; align-items: center; justify-content: space-between; color: #1560bd; font-weight: 500; font-size: 1rem; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0.5rem 0; width: 100%; text-align: left"
+      >
+        Servicios
+        <span id="mobile-services-chevron" style="transition: transform 0.2s"><IconChevronDown size={14} /></span>
+      </button>
+
+      <div id="mobile-services-menu" class="hidden" style="padding-left: 0.75rem; padding-bottom: 0.25rem; display: none; flex-direction: column; gap: 0.25rem; border-left: 2px solid rgba(21,96,189,0.15)">
+        {services.map(s => (
+          <a
+            href={`/servicio/${s.slug}`}
+            class="mobile-service-link"
+            style="text-decoration: none; padding: 0.5rem 0.5rem; border-radius: 0.4rem"
+          >
+            <div style="font-size: 0.9rem; font-weight: 600; color: #0d1f3c">{s.name}</div>
+            <div style="font-size: 0.75rem; color: rgba(21,96,189,0.55); font-weight: 500">{s.price}</div>
+          </a>
+        ))}
+      </div>
+
+      <a href="/casos-de-estudio" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Casos</a>
+      <a href="/sobre-mi" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Sobre mí</a>
+      <div style="padding-top: 0.5rem">
+        <a
+          href="/contacto"
+          class="mobile-nav-link btn btn-primary"
+          style="display: flex; justify-content: center"
+        >
+          Hablemos <IconArrowRight />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const navWrapper = document.getElementById('nav-wrapper');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+  const mobileServicesToggle = document.getElementById('mobile-services-toggle');
+  const mobileServicesMenu = document.getElementById('mobile-services-menu');
+  const mobileServicesChevron = document.getElementById('mobile-services-chevron');
+
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function updateNav() {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY <= 0) {
+      navWrapper?.classList.remove('nav-hidden');
+    } else if (currentScrollY > lastScrollY && currentScrollY > 60) {
+      navWrapper?.classList.add('nav-hidden');
+    } else if (currentScrollY < lastScrollY) {
+      navWrapper?.classList.remove('nav-hidden');
+    }
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateNav);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  mobileServicesToggle?.addEventListener('click', () => {
+    const isHidden = mobileServicesMenu?.classList.contains('hidden');
+    if (isHidden) {
+      mobileServicesMenu?.classList.remove('hidden');
+      mobileServicesMenu!.style.display = 'flex';
+      mobileServicesChevron!.style.transform = 'rotate(180deg)';
+    } else {
+      mobileServicesMenu?.classList.add('hidden');
+      mobileServicesMenu!.style.display = 'none';
+      mobileServicesChevron!.style.transform = 'rotate(0deg)';
+    }
+  });
+
+  document.querySelectorAll('.mobile-nav-link, .mobile-service-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
+  });
+</script>
+
+<style is:global>
+  .nav-pill {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    width: calc(100% - 24px);
+    max-width: 720px;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .nav-pill-inner {
+    border-radius: 9999px;
+  }
+  .nav-pill.nav-hidden {
+    transform: translateX(-50%) translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav-dropdown-wrapper {
+    position: relative;
+  }
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .nav-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    right: 0;
+    height: 1rem;
+  }
+  .nav-dropdown-wrapper:hover .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 767px) {
+    .nav-pill {
+      max-width: 480px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-pill {
+      transition: none;
+    }
+    .nav-dropdown-menu {
+      transition: none;
+    }
+  }
+</style>

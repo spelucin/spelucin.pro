@@ -1,0 +1,215 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTA from '../components/CTA.astro';
+import { Icon } from 'astro-icon/components';
+import IconCode from '../components/IconCode.astro';
+import IconStorefront from '../components/IconStorefront.astro';
+import IconTarget from '../components/IconTarget.astro';
+import IconShield from '../components/IconShield.astro';
+import { stats } from '../data';
+import { Image } from 'astro:assets';
+import avatarImage from '../assets/alex-spelucin-avatar.jpg';
+
+const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
+---
+
+<Base
+  title="Sobre mí — Alex Spelucin"
+  description="Consultor independiente de SEO técnico para Shopify. 7 años de trayectoria optimizando ecommerces en LATAM, Norteamérica y España."
+>
+  <Nav />
+  <div style="background: #fff">
+
+    {/* ─── Hero ─── */}
+    <section style="padding-top: 10rem; padding-bottom: 0">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <Eyebrow>Sobre mí</Eyebrow>
+        <div class="grid md:grid-cols-12 gap-10 items-center" style="padding-top: 1.75rem; margin-bottom: 4rem">
+          <div style="grid-column: span 8">
+            <h1 style="font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem">
+              De SEO en retail enterprise a{" "}
+              <em style="font-style: normal; color: #1560bd">SEO técnico para Shopify.</em>
+            </h1>
+            <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0; max-width: 46ch">
+              7+ años enfocándome en hacer que las tiendas Shopify vendan más a través de SEO técnico y visibilidad orgánica. Sin humo, sin paquetes genéricos.
+            </p>
+          </div>
+          <div style="grid-column: span 4; display: flex; justify-content: flex-end">
+            <div style="width: 100%; max-width: 280px; border-radius: 0.75rem; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 16px 48px rgba(21,96,189,0.12); border: 1px solid rgba(21,96,189,0.10);">
+              <Image
+                src={avatarImage}
+                alt="Alex Spelucin"
+                width={560}
+                height={747}
+                style="width: 100%; height: 100%; object-fit: cover; object-position: center top"
+              />
+            </div>
+          </div>
+        </div>
+        <div style={ruleStyle} />
+      </div>
+    </section>
+
+    {/* ─── Trayectoria ─── */}
+    <section style="padding: 5rem 0">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <span style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(21,96,189,0.45); display: block; margin-bottom: 3rem">
+          Trayectoria
+        </span>
+
+        {[
+          {
+            period: "2019–2022",
+            role: "SEO Enterprise",
+            companies: "Ripley · Intercorp Retail · Attach Media",
+            achievement: "3.7M sesiones en un día — Ripley CyberWow 2020.",
+            note: "Aprendí a operar SEO a escala: crawl budget en catálogos de millones de URLs, Local SEO para 1,500+ locales, y coordinación técnica con equipos enterprise.",
+          },
+          {
+            period: "2022–2025",
+            role: "Analytics Leadership",
+            companies: "Picnic · Notebook Agency · Freelance",
+            achievement: "30+ clientes · 10 auditorías GA4 · 20+ dashboards de performance.",
+            note: "Especialización en la capa de medición: implementaciones GA4, atribución de revenue orgánico y dashboards que conectan tráfico con ingresos reales.",
+          },
+          {
+            period: "2026–hoy",
+            role: "Shopify Technical SEO",
+            companies: "Consultor independiente",
+            achievement: "10+ tiendas auditadas · 280% crecimiento orgánico promedio.",
+            note: "Foco exclusivo en Shopify. Cada proyecto es auditoría técnica, estrategia de catálogo o capacitación de equipo — con alcance definido y métricas de negocio.",
+          },
+        ].map((t, i, arr) => (
+          <div>
+            <div class="grid md:grid-cols-12 gap-6" style="padding-top: 2.5rem; padding-bottom: 2.5rem">
+              <div style="grid-column: span 2">
+                <span style="font-size: 0.85rem; font-weight: 700; color: #1560bd; letter-spacing: -0.01em; font-variant-numeric: tabular-nums">
+                  {t.period}
+                </span>
+              </div>
+              <div style="grid-column: span 4">
+                <div style="font-size: 1.1rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.02em; margin-bottom: 0.3rem">{t.role}</div>
+                <div style="font-size: 0.82rem; color: rgba(13,31,60,0.45); font-weight: 500">{t.companies}</div>
+              </div>
+              <div style="grid-column: span 6">
+                <p style="font-size: 0.9375rem; font-weight: 600; color: #0d1f3c; margin: 0 0 0.6rem; line-height: 1.45">{t.achievement}</p>
+                <p style="font-size: 0.875rem; color: rgba(13,31,60,0.5); margin: 0; line-height: 1.7">{t.note}</p>
+              </div>
+            </div>
+            {i < arr.length - 1 && <div style={ruleStyle} />}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* ─── Pilares ─── */}
+    <section style="background: #f4fdff; border-top: 1px solid rgba(21,96,189,0.08); border-bottom: 1px solid rgba(21,96,189,0.08); padding: 5rem 0">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <div class="grid md:grid-cols-12 gap-8 items-start">
+          <div style="grid-column: span 5">
+            <p style="font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-weight: 600; color: #0d1f3c; line-height: 1.45; letter-spacing: -0.025em; margin: 0">
+              "Enfocado solo en lo que importa."
+            </p>
+          </div>
+          <div style="grid-column: span 7">
+            <div style="display: flex; flex-direction: column; gap: 0">
+              {[
+                { label: "Independiente", body: "Trabajo directo con el dueño o el equipo interno. Sin capas de account managers ni delegación a juniors." },
+                { label: "Especialista", body: "Solo Shopify, solo SEO técnico. No hago social media, no hago branding. La profundidad viene de no dispersarse." },
+                { label: "Antihumo", body: "No vendo humo ni promesas de ranking sin contexto. Si no puedo cuantificarlo, lo digo." },
+              ].map((p, i, arr) => (
+                <div>
+                  <div style="padding-top: 1.5rem; padding-bottom: 1.5rem">
+                    <span style="font-size: 0.78rem; font-weight: 700; color: #1560bd; letter-spacing: 0.04em; text-transform: uppercase; display: block; margin-bottom: 0.4rem">
+                      {p.label}
+                    </span>
+                    <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.65); margin: 0">{p.body}</p>
+                  </div>
+                  {i < arr.length - 1 && <div style={ruleStyle} />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ─── Stats ─── */}
+    <section style="padding: 4.5rem 0">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="reveal-stagger" style="display: flex; flex-wrap: wrap">
+          {stats.map((s, i) => (
+            <div style={`flex: 1 1 160px; padding: 0 2rem; border-left: ${i > 0 ? '1px solid rgba(21,96,189,0.10)' : 'none'}`}>
+              <div style="font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; color: #1560bd; letter-spacing: -0.05em; line-height: 1">{s.value}</div>
+              <div style="font-size: 0.8rem; color: rgba(13,31,60,0.45); font-weight: 500; margin-top: 0.5rem; line-height: 1.4">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ─── Stack + Diferenciadores ─── */}
+    <section style="background: #f4fdff; padding: 5rem 0; border-top: 1px solid rgba(21,96,189,0.08)">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <div class="grid md:grid-cols-2 gap-16">
+          <div>
+            <span style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(21,96,189,0.45); display: block; margin-bottom: 1.5rem">
+              Stack
+            </span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.6rem">
+              {[
+                { name: "Google Data Studio", icon: "simple-icons:googledatastudio" },
+                { name: "Google Search Console", icon: "simple-icons:googlesearchconsole" },
+                { name: "Google Analytics", icon: "simple-icons:googleanalytics" },
+                { name: "Python", icon: "simple-icons:python" },
+                { name: "OpenCode", icon: "simple-icons:opencode" },
+                { name: "BigQuery", icon: "simple-icons:googlebigquery" },
+                { name: "Shopify", icon: "simple-icons:shopify" },
+                { name: "Liquid", icon: "ph:drop" },
+                { name: "Ahrefs", icon: "ph:chart-line-up" },
+                { name: "DataForSEO", icon: "ph:database" },
+                { name: "Screaming Frog", icon: "ph:magnifying-glass" },
+                { name: "JavaScript", icon: "simple-icons:javascript" },
+                { name: "Google Sheets", icon: "simple-icons:googlesheets" },
+              ].map((tool) => (
+                <span style="display: inline-flex; align-items: center; gap: 0.45rem; background: #fff; border: 1px solid rgba(21,96,189,0.14); border-radius: 9999px; padding: 0.45rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #0d1f3c; box-shadow: 0 1px 3px rgba(21,96,189,0.05)">
+                  <Icon name={tool.icon} width={16} height={16} color="#1560bd" />
+                  {tool.name}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; flex-direction: column; gap: 0">
+              {[
+                { title: "SEO técnico profundo", body: "El problema casi nunca es contenido. Es la base técnica: crawl, indexación, estructura, performance.", icon: <IconCode size={28} /> },
+                { title: "Shopify-only", body: "Profundidad sobre amplitud. Conozco el motor de renderizado y las limitaciones del tema mejor que cualquier generalista.", icon: <IconStorefront size={28} /> },
+                { title: "Medición obsesiva", body: "Todo se cuantifica, todo se conecta a ingresos. Nada de métricas que solo se ven bien en un dashboard.", icon: <IconTarget size={28} /> },
+                { title: "Antihumo", body: "No sigo tendencias de Twitter. Sigo datos de tráfico, revenue y comportamiento real del crawler.", icon: <IconShield size={28} /> },
+              ].map((d, i, arr) => (
+                <div>
+                  <div style="display: flex; gap: 0.85rem; align-items: flex-start; padding-top: 1.1rem; padding-bottom: 1.1rem">
+                    {d.icon}
+                    <div>
+                      <div style="font-size: 0.875rem; font-weight: 700; color: #0d1f3c; margin-bottom: 0.25rem">{d.title}</div>
+                      <div style="font-size: 0.82rem; color: rgba(13,31,60,0.5); line-height: 1.65">{d.body}</div>
+                    </div>
+                  </div>
+                  {i < arr.length - 1 && <div style={ruleStyle} />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <CTA />
+
+  </div>
+  <Footer />
+</Base>

@@ -1,0 +1,13 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'ghost' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+}
+const { href, variant = 'primary', size = 'md' } = Astro.props;
+const sizeClass = size === 'sm' ? 'btn-sm' : size === 'lg' ? 'btn-lg' : '';
+---
+
+<a href={href} class={`btn btn-${variant} ${sizeClass}`}>
+  <slot />
+</a>

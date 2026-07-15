@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import avatarImage from '../assets/alex-spelucin-avatar.jpg';
+import IconArrowRight from './IconArrowRight.astro';
+import Button from './Button.astro';
+import { stats } from '../data';
+---
+
+<section id="sobre-mi" style="background: #fff; padding: 5rem 0">
+  <div class="max-w-5xl mx-auto px-6 reveal">
+    <div style="height: 1px; background: rgba(21,96,189,0.10)" />
+    <div class="grid md:grid-cols-12 gap-8 items-end" style="padding-top: 3.5rem">
+      <div style="grid-column: span 5">
+        <div style="border-radius: 0.5rem; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 20px 56px rgba(21,96,189,0.14)">
+          <Image src={avatarImage} alt="Alex Spelucin" width={400} height={533} style="width: 100%; height: 100%; object-fit: cover; display: block" />
+        </div>
+      </div>
+      <div style="grid-column: span 7; padding-bottom: 1rem">
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.75rem; line-height: 1.08">
+          Un consultor con foco,<br />no una agencia genérica.
+        </h2>
+        <p style="font-size: 1rem; line-height: 1.75; color: rgba(13,31,60,0.55); margin: 0 0 1rem">
+          Llevo 7 años trabajando exclusivamente con Shopify. Esta especialización me permite entender el motor de renderizado, las limitaciones del tema y el comportamiento del crawler mejor que cualquier generalista.
+        </p>
+        <p style="font-size: 1rem; line-height: 1.75; color: rgba(13,31,60,0.55); margin: 0 0 2.5rem">
+          Trabajo con marcas de LATAM, Norteamérica y España que quieren tráfico orgánico real, medible y sostenible.
+        </p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem">
+          {[stats[0], stats[2]].map((s) => (
+            <div>
+              <div style="font-size: 1.5rem; font-weight: 700; color: #1560bd; letter-spacing: -0.04em; line-height: 1">{s.value}</div>
+              <div style="font-size: 0.72rem; color: rgba(13,31,60,0.4); font-weight: 500; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em">{s.label}</div>
+            </div>
+          ))}
+        </div>
+        <Button href="/sobre-mi" variant="ghost">
+          Leer más sobre mí <IconArrowRight />
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,287 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import IconArrowRight from '../../components/IconArrowRight.astro';
+import IconCheck from '../../components/IconCheck.astro';
+import Button from '../../components/Button.astro';
+import CTA from '../../components/CTA.astro';
+import { services } from '../../data';
+import { getCaseStudies } from '../../lib/content';
+import type { CaseStudyWithSeo } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const caseStudies = await getCaseStudies();
+  return caseStudies.map(cs => ({
+    params: { slug: cs.slug },
+    props: { cs },
+  }));
+}
+
+const { cs } = Astro.props as { cs: CaseStudyWithSeo };
+const relatedService = services.find(s => s.slug === cs.serviceSlug);
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Casos de estudio", item: "https://spelucin.pro/casos-de-estudio" },
+    { "@type": "ListItem", position: 2, name: cs.headline, item: `https://spelucin.pro/casos-de-estudio/${cs.slug}` },
+  ],
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: cs.headline,
+  description: cs.summary,
+  about: cs.industry,
+  author: { "@type": "Person", name: "Alex Spelucin" },
+  publisher: { "@type": "ProfessionalService", name: "Alex Spelucin" },
+};
+---
+
+<Base
+  title={cs.seo.title || `${cs.headline} — Casos de estudio`}
+  description={cs.seo.description || cs.summary}
+  image={cs.seo.image}
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <Nav />
+  <div style="background: #fcfdff">
+
+    {/* ── Hero ──────────────────────────────────────────── */}
+    <section
+      style="background-image: radial-gradient(circle at center, rgba(21,96,189,0.14) 1px, transparent 1.2px), linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%); background-size: 22px 22px, 100% 100%; padding-top: 7rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(21,96,189,0.08)"
+    >
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <a
+          href="/casos-de-estudio"
+          style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; color: rgba(21,96,189,0.55); text-decoration: none; margin-bottom: 1.5rem; font-weight: 500"
+        >
+          <span style="transform: rotate(180deg); display: inline-block"><IconArrowRight /></span> Casos de estudio
+        </a>
+
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap">
+          <span style="font-size: 0.75rem; font-weight: 600; color: #1560bd; background: rgba(21,96,189,0.08); padding: 0.25rem 0.7rem; border-radius: 100px">
+            {cs.serviceName}
+          </span>
+          <span style="font-size: 0.75rem; font-weight: 500; color: rgba(13,31,60,0.5); background: rgba(13,31,60,0.04); padding: 0.25rem 0.7rem; border-radius: 100px">
+            {cs.industry} · {cs.country}
+          </span>
+          <span style="font-size: 0.75rem; font-weight: 500; color: rgba(13,31,60,0.4); background: rgba(13,31,60,0.03); padding: 0.25rem 0.7rem; border-radius: 100px">
+            {cs.periodStart} – {cs.periodEnd}
+          </span>
+        </div>
+
+        <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 0.35rem; line-height: 1.08">
+          {cs.headline}
+        </h1>
+        <p style="font-size: 1rem; color: rgba(13,31,60,0.5); font-weight: 500; margin: 0 0 2rem">
+          {cs.store}
+        </p>
+
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem">
+          {cs.metrics.map(m => (
+            <div style="background: #fff; border: 1px solid rgba(21,96,189,0.10); border-radius: 0.6rem; padding: 0.85rem 1rem; box-shadow: 0 2px 8px rgba(21,96,189,0.05)">
+              <div style="font-size: 1.25rem; font-weight: 700; color: #1560bd; letter-spacing: -0.03em; line-height: 1">
+                {m.delta || m.after}
+              </div>
+              <div style="font-size: 0.7rem; color: rgba(13,31,60,0.5); margin-top: 0.25rem; line-height: 1.3">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Contexto ──────────────────────────────────────── */}
+    <section style="background: #fff; padding: 3rem 0; border-bottom: 1px solid rgba(21,96,189,0.08)">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(21,96,189,0.5); margin-bottom: 0.75rem">La tienda</div>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem">
+              {[
+                ["Industria", cs.context.industry],
+                ["Tamaño", cs.context.size],
+                ["Mercado", cs.context.market],
+                ["Stack técnico", cs.context.stack],
+              ].map(([k, v]) => (
+                <div style="display: flex; gap: 0.75rem">
+                  <span style="font-size: 0.8rem; font-weight: 600; color: rgba(13,31,60,0.4); flex-shrink: 0; min-width: 90px; padding-top: 0.05rem">{k}</span>
+                  <span style="font-size: 0.85rem; color: rgba(13,31,60,0.75); line-height: 1.5">{v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(21,96,189,0.5); margin-bottom: 0.75rem">Situación antes</div>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem">
+              {[
+                ["Tráfico orgánico", cs.context.trafficBefore],
+                ["Problema principal", cs.context.mainProblem],
+                ["Qué habían intentado", cs.context.triedBefore],
+              ].map(([k, v]) => (
+                <div style="display: flex; gap: 0.75rem">
+                  <span style="font-size: 0.8rem; font-weight: 600; color: rgba(13,31,60,0.4); flex-shrink: 0; min-width: 90px; padding-top: 0.05rem">{k}</span>
+                  <span style="font-size: 0.85rem; color: rgba(13,31,60,0.75); line-height: 1.5">{v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Diagnóstico ───────────────────────────────────── */}
+    <section style="background: #f4fdff; padding: 3rem 0; border-bottom: 1px solid rgba(21,96,189,0.08)">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <h2 style="font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1.5rem; line-height: 1.2">
+          Qué estaba mal
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem">
+          {cs.problems.map((p, i) => (
+            <div style="background: #fff; border: 1px solid rgba(21,96,189,0.10); border-radius: 0.65rem; padding: 1.25rem; box-shadow: 0 2px 10px rgba(21,96,189,0.04)">
+              <div style="display: flex; gap: 0.85rem; align-items: flex-start; margin-bottom: 0.75rem">
+                <span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #1560bd; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-top: 0.05rem">
+                  {i + 1}
+                </span>
+                <h3 style="font-size: 0.9rem; font-weight: 700; color: #0d1f3c; margin: 0; line-height: 1.3">{p.title}</h3>
+              </div>
+              <div style="padding-left: 2.2rem; display: flex; flex-direction: column; gap: 0.45rem">
+                {[["Qué era", p.what], ["Por qué importaba", p.why], ["Impacto", p.impact]].map(([label, text]) => (
+                  <div style="display: flex; gap: 0.75rem">
+                    <span style="font-size: 0.72rem; font-weight: 700; color: rgba(21,96,189,0.5); text-transform: uppercase; letter-spacing: 0.04em; flex-shrink: 0; min-width: 90px; padding-top: 0.1rem">{label}</span>
+                    <span style="font-size: 0.85rem; color: rgba(13,31,60,0.65); line-height: 1.55">{text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Solución ──────────────────────────────────────── */}
+    <section style="background: #fff; padding: 3rem 0; border-bottom: 1px solid rgba(21,96,189,0.08)">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <h2 style="font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1.5rem; line-height: 1.2">
+          Qué hice
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {cs.phases.map((phase, i) => (
+            <div style={`display: flex; gap: 1.25rem; padding-bottom: ${i < cs.phases.length - 1 ? '1.75rem' : '0'}`}>
+              <div style="display: flex; flex-direction: column; align-items: center">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: #1560bd; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0">
+                  {i + 1}
+                </div>
+                {i < cs.phases.length - 1 && <div style="width: 1px; flex: 1; background: rgba(21,96,189,0.15); margin-top: 0.4rem" />}
+              </div>
+              <div style="padding-top: 0.25rem">
+                <div style="font-size: 0.95rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.02em">{phase.name}</div>
+                <div style="font-size: 0.75rem; font-weight: 600; color: rgba(21,96,189,0.55); margin-bottom: 0.65rem">{phase.weeks}</div>
+                <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem">
+                  {phase.actions.map(a => (
+                    <li style="display: flex; gap: 0.6rem; font-size: 0.85rem; color: rgba(13,31,60,0.65); line-height: 1.5">
+                      <span style="color: #1560bd; flex-shrink: 0; margin-top: 0.15rem"><IconCheck /></span>
+                      {a}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Resultados + otros logros ─────────────────────── */}
+    <section style="background: #f4fdff; padding: 3rem 0; border-bottom: 1px solid rgba(21,96,189,0.08)">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <h2 style="font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1.5rem; line-height: 1.2">
+          Resultados
+        </h2>
+
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.6rem; margin-bottom: 1.5rem">
+          {cs.metrics.map(m => (
+            <div style="background: #fff; border: 1px solid rgba(21,96,189,0.08); border-radius: 0.6rem; padding: 0.85rem 1.1rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap">
+              <span style="font-size: 0.78rem; font-weight: 600; color: rgba(13,31,60,0.5); flex: 1 1 120px">{m.label}</span>
+              <div style="display: flex; align-items: center; gap: 0.6rem">
+                <span style="font-size: 0.82rem; color: rgba(13,31,60,0.4); font-weight: 500">{m.before}</span>
+                <span style="color: rgba(21,96,189,0.3); font-size: 0.85rem">→</span>
+                <span style="font-size: 0.9rem; font-weight: 700; color: #0d1f3c">{m.after}</span>
+                {m.delta && (
+                  <span style="font-size: 0.75rem; font-weight: 700; color: #1560bd; background: rgba(21,96,189,0.08); padding: 0.12rem 0.5rem; border-radius: 100px">
+                    {m.delta}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.4rem">
+          {cs.otherWins.map(w => (
+            <div style="display: flex; gap: 0.65rem; font-size: 0.85rem; color: rgba(13,31,60,0.7); line-height: 1.5">
+              <span style="color: #1560bd; flex-shrink: 0; margin-top: 0.15rem"><IconCheck /></span>
+              {w}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Testimonial + Reflexión (merged) ─────────────── */}
+    <section style="background: #fff; padding: 3rem 0; border-bottom: 1px solid rgba(21,96,189,0.08)">
+      <div class="max-w-5xl mx-auto px-6 reveal">
+        <div class="grid md:grid-cols-2 gap-8">
+          {cs.testimonial && (
+            <div>
+              <div style="background: rgba(21,96,189,0.03); border: 1px solid rgba(21,96,189,0.10); border-left: 3px solid #1560bd; border-radius: 0 0.65rem 0.65rem 0; padding: 1.5rem 1.5rem 1.5rem 1.75rem">
+                <div style="font-size: 1.75rem; color: rgba(21,96,189,0.25); line-height: 1; margin-bottom: 0.5rem; font-family: Georgia, serif">"</div>
+                <p style="font-size: 0.95rem; line-height: 1.65; color: rgba(13,31,60,0.75); font-style: italic; margin: 0 0 1rem">
+                  {cs.testimonial.quote}
+                </p>
+                <div style="font-size: 0.82rem; font-weight: 600; color: #0d1f3c">
+                  — {cs.testimonial.name}, <span style="font-weight: 400; color: rgba(13,31,60,0.5)">{cs.testimonial.role} en {cs.testimonial.store}</span>
+                </div>
+              </div>
+            </div>
+          )}
+          <div>
+            <h2 style="font-size: clamp(1.35rem, 3vw, 1.75rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1rem; line-height: 1.2">
+              Qué aprendí
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 0.6rem">
+              {cs.learnings.map((l, i) => (
+                <div style="display: flex; gap: 0.75rem">
+                  <span style="flex-shrink: 0; font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.4); padding-top: 0.2rem; font-variant-numeric: tabular-nums; min-width: 1.5rem">0{i + 1}</span>
+                  <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(13,31,60,0.65); margin: 0">{l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── CTA ───────────────────────────────────────────── */}
+    <CTA
+      id="cta"
+      heading="¿Tienes un problema similar?"
+      description="Agenda una llamada gratuita de 30 minutos. Analizamos tu situación sin compromiso."
+      buttonText="Agendar llamada"
+    >
+      {relatedService && (
+        <Button href={`/servicio/${relatedService.slug}`} variant="ghost">
+          Ver servicio: {relatedService.name}
+        </Button>
+      )}
+    </CTA>
+
+  </div>
+  <Footer />
+</Base>

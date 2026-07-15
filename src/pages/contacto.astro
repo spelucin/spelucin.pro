@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import IconMail from '../components/IconMail.astro';
+import IconLinkedin from '../components/IconLinkedin.astro';
+import IconArrowRight from '../components/IconArrowRight.astro';
+---
+
+<Base
+  title="Contacto — Alex Spelucin"
+  description="Agenda una llamada gratuita de 30 minutos con Alex Spelucin para evaluar el SEO técnico de tu tienda Shopify."
+>
+  <Nav />
+  <div style="background: #fcfdff; padding-top: 9rem; padding-bottom: 6rem; min-height: 100vh">
+    <div class="max-w-5xl mx-auto px-6 reveal">
+
+      <div style="margin-bottom: 3rem">
+        <span style="font-size: 0.78rem; font-weight: 600; color: #1560bd; letter-spacing: 0.08em; text-transform: uppercase">
+          Contacto
+        </span>
+        <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 0.85rem; line-height: 1.1">
+          Agenda una llamada
+        </h1>
+        <p style="font-size: 1rem; color: rgba(13,31,60,0.55); line-height: 1.65; max-width: 52ch; margin: 0">
+          30 minutos. Sin compromiso. Evaluamos juntos si tiene sentido trabajar juntos y qué tipo de intervención tiene más impacto para tu tienda.
+        </p>
+      </div>
+
+      <div style="background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 24px rgba(21,96,189,0.07); margin-bottom: 2.5rem">
+        <iframe
+          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3VBJQ4Bds3MPdVVIHk0DQmUqgVXLDzwAU0N6LMxgmQcZNzplwlbvwYnCJgumVae0dHY9P3H94k?gv=true"
+          style="border: 0; width: 100%; height: 600px; display: block"
+          frameborder="0"
+          title="Agendar llamada con Alex Spelucin"
+        ></iframe>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem">
+        <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.08)" />
+        <span style="font-size: 0.78rem; color: rgba(21,96,189,0.4); font-weight: 500">o escríbeme directamente</span>
+        <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.08)" />
+      </div>
+
+      <div style="display: grid; gap: 0.85rem" class="md:grid-cols-2">
+        <a
+          href="mailto:alex@spelucin.pro"
+          style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 0.75rem; text-decoration: none; box-shadow: 0 1px 6px rgba(21,96,189,0.05); transition: border-color 0.15s, box-shadow 0.15s"
+        >
+          <div style="width: 40px; height: 40px; border-radius: 0.5rem; background: rgba(21,96,189,0.08); display: flex; align-items: center; justify-content: center; color: #1560bd; flex-shrink: 0">
+            <IconMail />
+          </div>
+          <div>
+            <div style="font-size: 0.78rem; font-weight: 600; color: rgba(21,96,189,0.5); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.15rem">Email</div>
+            <div style="font-size: 0.9rem; font-weight: 500; color: #0d1f3c">alex@spelucin.pro</div>
+          </div>
+          <span style="margin-left: auto; color: rgba(21,96,189,0.4)"><IconArrowRight /></span>
+        </a>
+
+        <a
+          href="https://linkedin.com/in/spelucin"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 0.75rem; text-decoration: none; box-shadow: 0 1px 6px rgba(21,96,189,0.05); transition: border-color 0.15s, box-shadow 0.15s"
+        >
+          <div style="width: 40px; height: 40px; border-radius: 0.5rem; background: rgba(21,96,189,0.08); display: flex; align-items: center; justify-content: center; color: #1560bd; flex-shrink: 0">
+            <IconLinkedin />
+          </div>
+          <div>
+            <div style="font-size: 0.78rem; font-weight: 600; color: rgba(21,96,189,0.5); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.15rem">LinkedIn</div>
+            <div style="font-size: 0.9rem; font-weight: 500; color: #0d1f3c">linkedin.com/in/spelucin</div>
+          </div>
+          <span style="margin-left: auto; color: rgba(21,96,189,0.4)"><IconArrowRight /></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <Footer />
+</Base>
