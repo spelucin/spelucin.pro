@@ -1,34 +1,29 @@
 /**
  * FAQ Accordion functionality
- * Shared between servicios.astro and servicio/[slug].astro
+ * All items start open. Click toggles closed/open.
  */
 
 export function initFaqAccordion() {
-  document.querySelectorAll(".faq-toggle").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const item = btn.closest(".faq-item")
-      const answer = item?.querySelector(".faq-answer")
-      const icon = btn.querySelector(".faq-icon")
-      if (!answer || !icon) return
+  document.querySelectorAll(".faq-item").forEach((item) => {
+    const answer = item.querySelector(".faq-answer")
+    const icon = item.querySelector(".faq-icon")
+    if (!answer || !icon) return
 
-      const isOpen = answer.style.maxHeight && answer.style.maxHeight !== "0px"
+    // Mark all as open by default
+    answer.classList.add("is-open")
+    icon.classList.add("is-open")
 
-      // Close all other answers
-      document.querySelectorAll(".faq-answer").forEach((a) => {
-        a.style.maxHeight = "0"
-        a.style.opacity = "0"
-      })
-      document.querySelectorAll(".faq-icon").forEach((ic) => {
-        ic.style.transform = "rotate(0deg)"
-        ic.textContent = "+"
-      })
+    item.querySelector(".faq-toggle")?.addEventListener("click", () => {
+      const wasOpen = answer.classList.contains("is-open")
 
-      // Open clicked answer if it wasn't open
-      if (!isOpen) {
-        answer.style.maxHeight = answer.scrollHeight + "px"
-        answer.style.opacity = "1"
-        icon.style.transform = "rotate(45deg)"
-        icon.textContent = "+"
+      // Close all others
+      document.querySelectorAll(".faq-answer").forEach((a) => a.classList.remove("is-open"))
+      document.querySelectorAll(".faq-icon").forEach((ic) => ic.classList.remove("is-open"))
+
+      // Toggle clicked
+      if (!wasOpen) {
+        answer.classList.add("is-open")
+        icon.classList.add("is-open")
       }
     })
   })
