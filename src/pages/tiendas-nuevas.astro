@@ -1,0 +1,288 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import CTA from '../components/CTA.astro';
+import IconArrowRight from '../components/IconArrowRight.astro';
+import IconCheck from '../components/IconCheck.astro';
+import ServiceIllustrationNewStores from '../components/ServiceIllustrationNewStores.astro';
+import { rule } from '../data';
+
+const W = "max-w-5xl mx-auto px-6";
+
+const faqs = [
+  {
+    question: "¿Cuándo debo contratar el pack?",
+    answer: "Idealmente 4 a 6 semanas antes del launch. Así la arquitectura está lista cuando tu tienda empieza a recibir tráfico y Google comienza a rastrear. Si ya lanzaste pero tienes poco contenido y mala estructura, también sirve — el cambio es más barato ahora que con 10,000 URLs.",
+  },
+  {
+    question: "¿Necesito tener los productos cargados?",
+    answer: "No necesariamente. Trabajamos con tu catálogo planificado (incluso en planilla) para definir la jerarquía y las URLs. Si ya tienes productos cargados, mejor — analizamos la estructura actual y proponemos la versión optimizada.",
+  },
+  {
+    question: "¿El pack incluye la implementación en Shopify?",
+    answer: "No. El entregable es el plan documentado: jerarquía de colecciones, estructura de URLs, contenido de cada colección y mapa de enlaces internos. La implementación la hace tu equipo o tu desarrollador. Si necesitas ayuda con eso, podemos cotizarlo aparte.",
+  },
+  {
+    question: "¿Cuánto tarda?",
+    answer: "Entre 8 y 12 días hábiles según la cantidad de categorías. Tiendas con menos de 20 colecciones principales suelen estar listas en 8 días.",
+  },
+  {
+    question: "¿Sirve para tiendas multiidioma?",
+    answer: "Sí, pero el alcance depende de la cantidad de mercados. Lo definimos en la llamada inicial para cotizar correctamente.",
+  },
+];
+
+const processSteps = [
+  {
+    title: "Llamada de diagnóstico (30 min)",
+    description: "Entendemos tu vertical, los competidores, los productos que vas a vender y el estado actual de la tienda.",
+  },
+  {
+    title: "Análisis de mercado y keywords",
+    description: "Investigamos cómo buscan tus clientes potenciales, analizamos competidores y mapeamos la demanda real para tu vertical.",
+  },
+  {
+    title: "Arquitectura + contenidos",
+    description: "Diseñamos la jerarquía de colecciones, estructura de URLs, plan de facetas, contenido optimizado para cada colección y mapa de enlaces internos.",
+  },
+  {
+    title: "Revisión y entrega",
+    description: "Recibes el plan completo y agendamos una sesión para revisar la propuesta, resolver dudas de implementación y asegurar que todo quede claro para tu equipo.",
+  },
+];
+
+const pains = [
+  "Armas las colecciones con los nombres que usas internamente, no los que escribe tu cliente en Google",
+  "Las URLs quedan generadas automáticamente sin una estructura pensada para SEO",
+  "Las colecciones no tienen contenido — solo un grid de productos sin contexto para Google",
+  "No hay un plan de enlaces internos que distribuya autoridad hacia tus páginas más importantes",
+];
+
+const deliverables = [
+  "Keyword research vertical para tu categoría",
+  "Análisis de competidores y oportunidades",
+  "Jerarquía de colecciones y subcolecciones",
+  "Estructura de URLs y naming optimizado",
+  "Contenido de colecciones (título, descripción, metadata)",
+  "Plan de enlaces internos",
+  "Manejo de facetas y filtros",
+];
+
+const idealSituations = [
+  "Estás armando tu catálogo en Shopify y quieres que la estructura esté optimizada desde el primer día",
+  "Tienes productos cargados pero la tienda todavía no está live",
+  "Migraste de otra plataforma y quieres aprovechar para reestructurar bien",
+  "Vas a expandir tu catálogo con nuevas categorías y necesitas una base sólida",
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Pack Tiendas Nuevas",
+  name: "Pack Tiendas Nuevas",
+  description: "Arquitectura de catálogo y contenidos para tiendas Shopify que están por lanzar. Keyword research, jerarquía de colecciones, estructura de URLs y contenido optimizado.",
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Alex Spelucin",
+    email: "alex@spelucin.pro",
+  },
+  areaServed: ["MX", "AR", "US", "ES"],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(f => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<Base
+  title="Pack Tiendas Nuevas - Arquitectura de catálogo para Shopify - Alex Spelucin"
+  description="Arquitectura de catálogo y contenidos para tiendas Shopify que están por lanzar. $900 USD (precio inaugural)."
+  image="/og/tiendas-nuevas.jpg"
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+  <Nav />
+  <div style="background: #fff">
+
+    {/* ── Hero ──────────────────────────────────────── */}
+    <section style="padding-top: 10rem; padding-bottom: 0">
+      <div class={`${W} reveal`}>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem">
+          <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.10)" />
+          <Eyebrow>Tiendas nuevas</Eyebrow>
+        </div>
+
+        <h1 style="font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem; max-width: 22ch">
+          Tu tienda merece la estructura correcta desde el día uno
+        </h1>
+        <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 2.5rem; max-width: 52ch">
+          Arquitectura de catálogo y contenidos optimizados para que Google entienda tu tienda desde el primer crawl. Sin tener que reestructurar todo después.
+        </p>
+        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 4rem">
+          <Button href="/contacto/">
+            Agendar llamada gratuita <IconArrowRight />
+          </Button>
+          <span style="display: inline-flex; align-items: center; gap: 0.6rem">
+            <span style="font-size: 0.875rem; font-weight: 500; color: rgba(13,31,60,0.35); text-decoration: line-through">$1,400 USD</span>
+            <span style="font-size: 0.875rem; font-weight: 700; color: #1560bd">$900 USD</span>
+          </span>
+        </div>
+        <div style={rule} />
+      </div>
+    </section>
+
+    {/* ── El problema ─────────────────────────────── */}
+    <section style="padding: 5rem 0">
+      <div class={`${W} reveal`}>
+        <div class="grid md:grid-cols-12 gap-8">
+          <div style="grid-column: span 4">
+            <Eyebrow>El problema</Eyebrow>
+            <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.65rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.25">
+              La mayoría de tiendas nuevas arrancan con la estructura mal hecha
+            </h2>
+          </div>
+          <div style="grid-column: span 8">
+            {pains.map((pain, i) => (
+              <div>
+                <div style="display: flex; gap: 1rem; padding-top: 1.25rem; padding-bottom: 1.25rem">
+                  <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.4); flex-shrink: 0; padding-top: 0.15rem; font-variant-numeric: tabular-nums">0{i + 1}</span>
+                  <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.7); margin: 0">{pain}</p>
+                </div>
+                {i < pains.length - 1 && <div style={rule} />}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Qué incluye ─────────────────────────────── */}
+    <section style="padding: 0 0 5rem">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Qué incluye</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2rem; line-height: 1.2">
+          Todo lo que necesitas para lanzar con la estructura correcta
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {deliverables.map((item, i) => (
+            <>
+              {i > 0 && <div style={rule} />}
+              <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem 0">
+                <IconCheck />
+                <span style="font-size: 0.9375rem; color: rgba(13,31,60,0.78); font-weight: 500; line-height: 1.5">{item}</span>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Para quién es ──────────────────────────── */}
+    <section style="padding: 0 0 5rem">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Para quién es</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2rem; line-height: 1.2">
+          Ideal para tiendas que están por lanzar o acaban de hacerlo
+        </h2>
+        <div class="grid md:grid-cols-12 gap-8 items-center">
+          <div style="grid-column: span 4">
+            <ServiceIllustrationNewStores />
+          </div>
+          <div style="grid-column: span 8">
+            <div style="display: flex; flex-direction: column; gap: 0">
+              {idealSituations.map((sit, i) => (
+                <div>
+                  <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 0">
+                    <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.35); flex-shrink: 0; padding-top: 0.5rem; font-variant-numeric: tabular-nums; min-width: 1.5rem">0{i + 1}</span>
+                    <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.7); margin: 0">{sit}</p>
+                  </div>
+                  {i < idealSituations.length - 1 && <div style={rule} />}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Proceso ────────────────────────────────── */}
+    <section style="padding: 0 0 5rem">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Proceso</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2.5rem; line-height: 1.2">
+          Cómo funciona
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {processSteps.map((step, i, arr) => (
+            <div style={`display: flex; gap: 1.5rem; padding-bottom: ${i < arr.length - 1 ? '2.5rem' : '0'}`}>
+              <div style="display: flex; flex-direction: column; align-items: center">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: #1560bd; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0">
+                  {i + 1}
+                </div>
+                {i < arr.length - 1 && <div style="width: 1px; flex: 1; background: rgba(21,96,189,0.15); margin-top: 0.5rem" />}
+              </div>
+              <div style="padding-top: 0.35rem">
+                <h3 style="font-size: 1rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em">{step.title}</h3>
+                <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0; max-width: 48ch">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── FAQ ────────────────────────────────────── */}
+    <section style="padding: 5rem 0">
+      <div class={`${W} reveal`}>
+        <div style={rule} />
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 3rem 0 2rem; line-height: 1.2">
+          Preguntas frecuentes
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {faqs.map((item, i) => (
+            <>
+              {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
+              <div class="faq-item" style="padding: 1.25rem 0">
+                <button class="faq-toggle" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 0; font-family: inherit">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
+                    <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4">{item.question}</div>
+                    <span class="faq-icon" style="flex-shrink: 0; color: #1560bd; font-size: 1.25rem; line-height: 1; transform: rotate(45deg); transition: transform 0.3s ease">+</span>
+                  </div>
+                </button>
+                <div class="faq-answer" style="max-height: 500px; overflow: hidden; transition: max-height 0.35s ease, opacity 0.25s ease; opacity: 1">
+                  <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0.75rem 0 0; padding-right: 2rem">{item.answer}</p>
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── CTA ────────────────────────────────────── */}
+    <CTA
+      id="cta"
+      heading="Arranca con la estructura correcta"
+      description="Llamada gratuita de 30 minutos. Evaluamos tu catálogo y te proponemos el camino."
+      buttonText="Agendar llamada"
+    />
+
+  </div>
+  <Footer />
+</Base>
+
+<script type="module">
+  import { initFaqAccordion } from '../scripts/faq-accordion.js';
+  initFaqAccordion();
+</script>
