@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { rule } from '../data';
+---
+
+<Base
+  title="Política de privacidad - Alex Spelucin"
+  description="Política de privacidad de spelucin.pro"
+>
+  <Nav />
+  <main style="background: #fff; padding: 10rem 0 5rem">
+    <div class="max-w-3xl mx-auto px-6">
+      <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem; line-height: 1.08">
+        Política de privacidad
+      </h1>
+      <div style={rule} />
+
+      <div style="padding-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem">
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.75rem; letter-spacing: -0.02em">1. Datos que recopilo</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: rgba(13,31,60,0.6); margin: 0">
+            A través de spelucin.pro puedo recopilar datos personales que me proporcionas directamente, como tu nombre, correo electrónico y empresa, cuando completas un formulario de contacto o agendás una llamada. También se recopilan datos de navegación de forma automática (IP, navegador, páginas visitadas) mediante herramientas de analítica.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.75rem; letter-spacing: -0.02em">2. Uso de la información</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: rgba(13,31,60,0.6); margin: 0">
+            La información recopilada se utiliza para: responder a consultas, agendar llamadas de diagnóstico, enviar propuestas de trabajo y mejorar la experiencia de navegación del sitio. No se utiliza para fines distintos a la prestación de servicios de consultoría SEO.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.75rem; letter-spacing: -0.02em">3. Cookies y analítica</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: rgba(13,31,60,0.6); margin: 0">
+            Este sitio puede utilizar cookies y herramientas de analítica (como Google Analytics) para obtener información agregada sobre el tráfico y el comportamiento de los visitantes. Esta información es anónima y se usa exclusivamente para mejorar el sitio.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.75rem; letter-spacing: -0.02em">4. Compartir datos con terceros</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: rgba(13,31,60,0.6); margin: 0">
+            No se comparten datos personales con terceros, salvo obligación legal o cuando sea necesario para la prestación de un servicio contratado (por ejemplo, herramientas de email o CRM).
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.75rem; letter-spacing: -0.02em">5. Seguridad</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: rgba(13,31,60,0.6); margin: 0">
+            Se aplican medidas de seguridad razonables para proteger la información personal contra acceso no autorizado, pérdida o alteración. Sin embargo, ningún sistema de transmisión por internet es 100% seguro.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.75rem; letter-spacing: -0.02em">6. Tus derechos</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: rgba(13,31,60,0.6); margin: 0">
+            Podés solicitar acceso, rectificación o eliminación de tus datos personales escribiéndome a través del formulario de contacto del sitio.
+          </p>
+        </div>
+
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.75rem; letter-spacing: -0.02em">7. Cambios en esta política</h2>
+          <p style="font-size: 0.9375rem; line-height: 1.75; color: rgba(13,31,60,0.6); margin: 0">
+            Esta política puede actualizarse sin previo aviso. La fecha de la última modificación se indicará al final de esta página.
+          </p>
+        </div>
+
+        <p style="font-size: 0.8rem; color: rgba(13,31,60,0.35); margin: 0">Última actualización: julio 2026</p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
