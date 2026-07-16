@@ -21,7 +21,6 @@ export const GET: APIRoute = async () => {
     "/casos-de-estudio/",
     "/servicios/",
     "/tiendas-nuevas/",
-    "/politica-de-privacidad/",
   ]
   const servicePages = services.map((s) => `/servicios/${s.slug}/`)
 
