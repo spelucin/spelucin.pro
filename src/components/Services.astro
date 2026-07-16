@@ -5,62 +5,56 @@ import IconArrowRight from './IconArrowRight.astro';
 import IconAudit from './IconAudit.astro';
 import IconCatalog from './IconCatalog.astro';
 import IconWorkshop from './IconWorkshop.astro';
+import IconCheck from './IconCheck.astro';
+
+const icons = [IconAudit, IconCatalog, IconWorkshop];
 ---
 
-<section id="servicios" style="background: #fff; padding: 5rem 0">
+<section id="servicios" style="background: #fff; padding: 5rem 0 2rem">
   <div class="max-w-5xl mx-auto px-6 reveal">
 
     <div style={rule} />
 
-    <div class="grid md:grid-cols-12 gap-8" style="padding-top: 3.5rem; margin-bottom: 3.5rem">
-      <div style="grid-column: span 5">
-        <Eyebrow>Servicios</Eyebrow>
-        <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.08">
-          Especialista en SEO para Shopify.
-        </h2>
-      </div>
-      <div style="grid-column: span 7; display: flex; align-items: flex-end">
-        <p style="font-size: 1rem; color: rgba(13,31,60,0.5); line-height: 1.75; margin: 0">
-          Cada servicio está diseñado para tiendas Shopify, no adaptado de otra plataforma. No vendo "paquetes SEO mensuales" sin entregables ni promesas de ranking sin contexto de negocio. Solo proyectos con alcance definido y resultados que se miden.
-        </p>
-      </div>
+    <div style="padding-top: 3.5rem; margin-bottom: 3rem">
+      <Eyebrow>Servicios</Eyebrow>
+      <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.08">
+        Especialista en SEO para Shopify.
+      </h2>
+      <p style="font-size: 1rem; color: rgba(13,31,60,0.5); line-height: 1.75; margin: 0.75rem 0 0; max-width: 56ch">
+        Cada servicio está diseñado para tiendas Shopify, no adaptado de otra plataforma. Proyectos con alcance definido y resultados que se miden.
+      </p>
     </div>
 
-    <div style={rule} />
-
-    {services.map((s, i) => (
-      <div>
-        <div class="grid md:grid-cols-12 gap-6" style="padding-top: 2.25rem; padding-bottom: 2.25rem">
-          <div style="grid-column: span 3">
-            {i === 0 && <IconAudit size={32} />}
-            {i === 1 && <IconCatalog size={32} />}
-            {i === 2 && <IconWorkshop size={32} />}
-            <div style="font-size: 0.72rem; font-weight: 700; color: #1560bd; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 1rem; margin-bottom: 0.4rem">{s.price}</div>
-            <h3 style="font-size: 1.25rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.025em; margin: 0 0 0.85rem; line-height: 1.2">{s.name}</h3>
-            <a
-              href={`/servicios/${s.slug}/`}
-              style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: #1560bd; text-decoration: none"
-            >
-              Ver detalle <IconArrowRight />
-            </a>
+    <div class="grid md:grid-cols-3 gap-6">
+      {services.map((s, i) => (
+        <a href={`/servicios/${s.slug}/`} class="service-card" style="text-decoration: none; display: flex; flex-direction: column; border-radius: 1rem; padding: 2rem; border: 1px solid rgba(21,96,189,0.10); background: #f8fbff; transition: transform 0.2s, box-shadow 0.2s">
+          <div style="margin-bottom: 1.25rem">
+            {icons[i] && (() => { const Icon = icons[i]; return <Icon size={28} />; })()}
           </div>
-          <div style="grid-column: span 5">
-            <p style="font-size: 0.9rem; color: rgba(13,31,60,0.55); line-height: 1.7; margin: 0">{s.description}</p>
+          <div style="font-size: 0.72rem; font-weight: 700; color: #1560bd; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.35rem">{s.price}</div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.025em; margin: 0 0 0.75rem; line-height: 1.25">{s.name}</h3>
+          <p style="font-size: 0.875rem; color: rgba(13,31,60,0.55); line-height: 1.65; margin: 0 0 1.5rem; flex: 1">{s.description}</p>
+          <div style="display: flex; flex-direction: column; gap: 0; margin-bottom: 1.5rem">
+            {s.deliverables.slice(0, 3).map((d, j, arr) => (
+              <div style="display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.4rem 0">
+                <span style="flex-shrink: 0; margin-top: 0.1rem"><IconCheck /></span>
+                <span style="font-size: 0.8rem; color: rgba(13,31,60,0.6); line-height: 1.4; font-weight: 500">{d}</span>
+              </div>
+            ))}
           </div>
-          <div style="grid-column: span 4">
-            <div style="display: flex; flex-direction: column; gap: 0">
-              {s.deliverables.map((d, j, arr) => (
-                <div>
-                  <div style="font-size: 0.78rem; color: rgba(13,31,60,0.6); padding: 0.45rem 0; line-height: 1.4; font-weight: 500">{d}</div>
-                  {j < arr.length - 1 && <div style="height: 1px; background: rgba(21,96,189,0.06)" />}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div style={rule} />
-      </div>
-    ))}
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: #1560bd">
+            Ver detalle <IconArrowRight />
+          </span>
+        </a>
+      ))}
+    </div>
 
   </div>
 </section>
+
+<style is:global>
+  .service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(21,96,189,0.1);
+  }
+</style>
