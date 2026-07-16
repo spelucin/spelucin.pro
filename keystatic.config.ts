@@ -24,19 +24,16 @@ export default config({
         founderName: fields.text({ label: "Nombre (schema Person)" }),
         founderJobTitle: fields.text({ label: "Puesto (schema Person)" }),
         email: fields.text({ label: "Email de contacto" }),
-        sameAs: fields.array(
-          fields.url({ label: "URL" }),
-          {
-            label: "Redes sociales / perfiles (sameAs)",
-            itemLabel: (props) => props.value || "URL",
-          }
-        ),
+        sameAs: fields.array(fields.url({ label: "URL" }), {
+          label: "Redes sociales / perfiles (sameAs)",
+          itemLabel: (props) => props.value || "URL",
+        }),
         areaServed: fields.array(
           fields.text({ label: "Código de país (ej. MX)" }),
           {
             label: "Áreas atendidas",
             itemLabel: (props) => props.value || "País",
-          }
+          },
         ),
       },
     }),
@@ -58,8 +55,14 @@ export default config({
           label: "Servicio relacionado",
           options: [
             { label: "Auditoría SEO Técnica", value: "auditoria-seo-tecnica" },
-            { label: "Estrategia de Catálogo", value: "estrategia-de-catalogo" },
-            { label: "Talleres y Capacitaciones", value: "talleres-y-capacitaciones" },
+            {
+              label: "Estrategia de Catálogo",
+              value: "estrategia-de-catalogo",
+            },
+            {
+              label: "Talleres y Capacitaciones",
+              value: "talleres-y-capacitaciones",
+            },
           ],
           defaultValue: "auditoria-seo-tecnica",
         }),
@@ -75,7 +78,7 @@ export default config({
           {
             label: "Métricas",
             itemLabel: (props) => props.fields.label.value || "Métrica",
-          }
+          },
         ),
         context: fields.object(
           {
@@ -84,10 +87,16 @@ export default config({
             market: fields.text({ label: "Mercado" }),
             stack: fields.text({ label: "Stack técnico" }),
             trafficBefore: fields.text({ label: "Tráfico antes" }),
-            mainProblem: fields.text({ label: "Problema principal", multiline: true }),
-            triedBefore: fields.text({ label: "Qué habían intentado", multiline: true }),
+            mainProblem: fields.text({
+              label: "Problema principal",
+              multiline: true,
+            }),
+            triedBefore: fields.text({
+              label: "Qué habían intentado",
+              multiline: true,
+            }),
           },
-          { label: "Contexto" }
+          { label: "Contexto" },
         ),
         problems: fields.array(
           fields.object({
@@ -99,34 +108,31 @@ export default config({
           {
             label: "Problemas",
             itemLabel: (props) => props.fields.title.value || "Problema",
-          }
+          },
         ),
         phases: fields.array(
           fields.object({
             name: fields.text({ label: "Nombre de fase" }),
             weeks: fields.text({ label: "Semanas" }),
-            actions: fields.array(
-              fields.text({ label: "Acción" }),
-              {
-                label: "Acciones",
-                itemLabel: (props) => props.value || "Acción",
-              }
-            ),
+            actions: fields.array(fields.text({ label: "Acción" }), {
+              label: "Acciones",
+              itemLabel: (props) => props.value || "Acción",
+            }),
           }),
           {
             label: "Fases",
             itemLabel: (props) => props.fields.name.value || "Fase",
-          }
+          },
         ),
-        otherWins: fields.array(
-          fields.text({ label: "Logro" }),
-          {
-            label: "Otros logros",
-            itemLabel: (props) => props.value || "Logro",
-          }
-        ),
+        otherWins: fields.array(fields.text({ label: "Logro" }), {
+          label: "Otros logros",
+          itemLabel: (props) => props.value || "Logro",
+        }),
         testimonial: fields.conditional(
-          fields.checkbox({ label: "¿Incluir testimonio?", defaultValue: false }),
+          fields.checkbox({
+            label: "¿Incluir testimonio?",
+            defaultValue: false,
+          }),
           {
             true: fields.object({
               quote: fields.text({ label: "Cita", multiline: true }),
@@ -135,14 +141,14 @@ export default config({
               store: fields.text({ label: "Tienda" }),
             }),
             false: fields.empty(),
-          }
+          },
         ),
         learnings: fields.array(
           fields.text({ label: "Aprendizaje", multiline: true }),
           {
             label: "Aprendizajes",
             itemLabel: (props) => props.value || "Aprendizaje",
-          }
+          },
         ),
         seoTitle: fields.text({
           label: "Título SEO (opcional, override)",

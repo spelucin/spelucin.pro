@@ -14,7 +14,14 @@ function url(loc: string, lastmod?: string) {
 export const GET: APIRoute = async () => {
   const now = new Date().toISOString().split("T")[0]
 
-  const staticPages = ["/", "/sobre-mi/", "/contacto/", "/casos-de-estudio/", "/servicios/"]
+  const staticPages = [
+    "/",
+    "/sobre-mi/",
+    "/contacto/",
+    "/casos-de-estudio/",
+    "/servicios/",
+    "/tiendas-nuevas/",
+  ]
   const servicePages = services.map((s) => `/servicios/${s.slug}/`)
 
   let caseStudyPages: string[] = []

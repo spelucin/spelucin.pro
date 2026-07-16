@@ -1,0 +1,61 @@
+---
+import Button from './Button.astro';
+import IconArrowRight from './IconArrowRight.astro';
+import ServiceIllustrationNewStores from './ServiceIllustrationNewStores.astro';
+import { rule } from '../data';
+---
+
+<section style="background: #fff; padding: 5rem 0">
+  <div class="max-w-5xl mx-auto px-6 reveal">
+    <div class="new-stores-banner" style="margin-top: 3rem; border-radius: 1.25rem; padding: 3rem; display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: center">
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem">
+          <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1560bd">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #1560bd; box-shadow: 0 0 6px rgba(21,96,189,0.6), 0 0 12px rgba(21,96,189,0.3)"></span>
+            Nuevo
+          </span>
+        </div>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1rem; line-height: 1.15; max-width: 20ch">
+          Tienda nueva? Arranca con la estructura correcta.
+        </h2>
+        <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 1.5rem; max-width: 40ch">
+          Arquitectura de catálogo y contenidos para tiendas Shopify que están por lanzar. Keyword research, jerarquía de colecciones, URLs y contenido optimizado.
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem">
+          <span style="display: inline-flex; align-items: center; gap: 0.5rem">
+            <span style="font-size: 0.82rem; font-weight: 500; color: rgba(13,31,60,0.35); text-decoration: line-through">$1,400 USD</span>
+            <span style="font-size: 0.95rem; font-weight: 700; color: #1560bd">$900 USD</span>
+          </span>
+          <span style="font-size: 0.72rem; font-weight: 600; color: #1560bd; background: rgba(21,96,189,0.08); padding: 0.25rem 0.6rem; border-radius: 999px; letter-spacing: 0.02em">Precio inaugural</span>
+        </div>
+        <Button href="/tiendas-nuevas/">
+          Ver detalle <IconArrowRight />
+        </Button>
+      </div>
+      <div style="display: flex; justify-content: center">
+        <ServiceIllustrationNewStores />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .new-stores-banner {
+    position: relative;
+    overflow: hidden;
+    background: #f8fbff;
+    border: 1px solid rgba(21,96,189,0.14);
+    box-shadow:
+      0 4px 24px rgba(21,96,189,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  @media (max-width: 767px) {
+    .new-stores-banner {
+      grid-template-columns: 1fr !important;
+      padding: 2rem !important;
+    }
+    .new-stores-banner > div:last-child {
+      display: none;
+    }
+  }
+</style>

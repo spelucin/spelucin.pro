@@ -20,6 +20,7 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
       </a>
 
       <div class="hidden md:flex items-center gap-7">
+        <a href="/tiendas-nuevas/" class="nav-glow-link" style={navLinkStyle}>Tiendas nuevas</a>
         <div class="nav-dropdown-wrapper">
           <a
             href="/servicios/"
@@ -75,6 +76,7 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
     style="border: 1px solid rgba(21,96,189,0.10); border-radius: 1rem; box-shadow: 0 8px 32px rgba(21,96,189,0.10); backdrop-filter: blur(16px); background: rgba(244,253,255,0.97); margin-top: 8px; overflow: hidden"
   >
     <div class="px-5 py-4 flex flex-col gap-1">
+      <a href="/tiendas-nuevas/" class="mobile-nav-link nav-glow-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Tiendas nuevas</a>
       <button
         id="mobile-services-toggle"
         style="display: flex; align-items: center; justify-content: space-between; color: #1560bd; font-weight: 500; font-size: 1rem; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0.5rem 0; width: 100%; text-align: left"
@@ -232,5 +234,30 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
     .nav-dropdown-menu {
       transition: none;
     }
+    .nav-glow-link::before {
+      animation: none;
+      opacity: 0.6;
+    }
+  }
+
+  .nav-glow-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .nav-glow-link::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #1560bd;
+    box-shadow: 0 0 6px rgba(21,96,189,0.6), 0 0 12px rgba(21,96,189,0.3);
+    animation: glow-pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(21,96,189,0.6), 0 0 12px rgba(21,96,189,0.3); }
+    50% { opacity: 0.5; box-shadow: 0 0 3px rgba(21,96,189,0.3), 0 0 6px rgba(21,96,189,0.15); }
   }
 </style>

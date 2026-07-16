@@ -23,14 +23,17 @@ export async function getSiteSeo() {
   return {
     siteName: entry?.siteName || DEFAULT_SITE_SEO.siteName,
     defaultTitle: entry?.defaultTitle || DEFAULT_SITE_SEO.defaultTitle,
-    defaultDescription: entry?.defaultDescription || DEFAULT_SITE_SEO.defaultDescription,
+    defaultDescription:
+      entry?.defaultDescription || DEFAULT_SITE_SEO.defaultDescription,
     defaultOgImage: entry?.defaultOgImage || DEFAULT_SITE_SEO.defaultOgImage,
     locale: entry?.locale || DEFAULT_SITE_SEO.locale,
     founderName: entry?.founderName || DEFAULT_SITE_SEO.founderName,
     founderJobTitle: entry?.founderJobTitle || DEFAULT_SITE_SEO.founderJobTitle,
     email: entry?.email || DEFAULT_SITE_SEO.email,
     sameAs: entry?.sameAs?.length ? entry.sameAs : DEFAULT_SITE_SEO.sameAs,
-    areaServed: entry?.areaServed?.length ? entry.areaServed : DEFAULT_SITE_SEO.areaServed,
+    areaServed: entry?.areaServed?.length
+      ? entry.areaServed
+      : DEFAULT_SITE_SEO.areaServed,
   }
 }
 
@@ -42,7 +45,10 @@ export type CaseStudySeo = {
 
 export type CaseStudyWithSeo = CaseStudy & { seo: CaseStudySeo }
 
-function mapCaseStudyEntry(slug: string, entry: Awaited<ReturnType<typeof reader.collections.caseStudies.read>>): CaseStudyWithSeo {
+function mapCaseStudyEntry(
+  slug: string,
+  entry: Awaited<ReturnType<typeof reader.collections.caseStudies.read>>,
+): CaseStudyWithSeo {
   const e = entry as NonNullable<typeof entry>
   return {
     slug,
@@ -75,7 +81,9 @@ export async function getCaseStudies(): Promise<CaseStudyWithSeo[]> {
   return all.map(({ slug, entry }) => mapCaseStudyEntry(slug, entry))
 }
 
-export async function getCaseStudy(slug: string): Promise<CaseStudyWithSeo | null> {
+export async function getCaseStudy(
+  slug: string,
+): Promise<CaseStudyWithSeo | null> {
   const entry = await reader.collections.caseStudies.read(slug)
   if (!entry) return null
   return mapCaseStudyEntry(slug, entry)
