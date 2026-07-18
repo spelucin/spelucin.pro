@@ -5,12 +5,15 @@ import Footer from '../components/Footer.astro';
 import IconMail from '../components/IconMail.astro';
 import IconLinkedin from '../components/IconLinkedin.astro';
 import IconArrowRight from '../components/IconArrowRight.astro';
+import { getPageMeta } from '../lib/content';
+
+const meta = await getPageMeta('contacto');
 ---
 
 <Base
-  title="Contacto - Consultoría SEO Shopify | Alex Spelucin"
-  description="Agenda una llamada gratuita de 30 minutos con Alex Spelucin para evaluar el SEO técnico de tu tienda Shopify."
-  image="/og/contacto.jpg"
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   <Nav />
   <div style="background: #fcfdff; padding-top: 9rem; padding-bottom: 6rem; min-height: 100vh">

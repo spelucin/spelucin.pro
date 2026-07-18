@@ -1,8 +1,14 @@
-import { createReader } from "@keystatic/core/reader"
-import keystaticConfig from "../../keystatic.config"
+import { readFileSync, readdirSync, existsSync } from "node:fs"
+import { join } from "node:path"
+import * as yaml from "js-yaml"
 import type { CaseStudy } from "../data"
 
-const reader = createReader(process.cwd(), keystaticConfig)
+function readYaml<T>(relativePath: string): T | null {
+  const fullPath = join(process.cwd(), relativePath)
+  if (!existsSync(fullPath)) return null
+  const raw = readFileSync(fullPath, "utf-8")
+  return yaml.load(raw) as T
+}
 
 const DEFAULT_SITE_SEO = {
   siteName: "Alex Spelucin",
@@ -19,21 +25,38 @@ const DEFAULT_SITE_SEO = {
 }
 
 export async function getSiteSeo() {
-  const entry = await reader.singletons.siteSeo.read()
+  const entry = readYaml<Record<string, unknown>>("src/content/site-seo/index.yaml")
   return {
-    siteName: entry?.siteName || DEFAULT_SITE_SEO.siteName,
-    defaultTitle: entry?.defaultTitle || DEFAULT_SITE_SEO.defaultTitle,
+    siteName: (entry?.siteName as string) || DEFAULT_SITE_SEO.siteName,
+    defaultTitle: (entry?.defaultTitle as string) || DEFAULT_SITE_SEO.defaultTitle,
     defaultDescription:
-      entry?.defaultDescription || DEFAULT_SITE_SEO.defaultDescription,
-    defaultOgImage: entry?.defaultOgImage || DEFAULT_SITE_SEO.defaultOgImage,
-    locale: entry?.locale || DEFAULT_SITE_SEO.locale,
-    founderName: entry?.founderName || DEFAULT_SITE_SEO.founderName,
-    founderJobTitle: entry?.founderJobTitle || DEFAULT_SITE_SEO.founderJobTitle,
-    email: entry?.email || DEFAULT_SITE_SEO.email,
-    sameAs: entry?.sameAs?.length ? entry.sameAs : DEFAULT_SITE_SEO.sameAs,
-    areaServed: entry?.areaServed?.length
-      ? entry.areaServed
+      (entry?.defaultDescription as string) || DEFAULT_SITE_SEO.defaultDescription,
+    defaultOgImage: (entry?.defaultOgImage as string) || DEFAULT_SITE_SEO.defaultOgImage,
+    locale: (entry?.locale as string) || DEFAULT_SITE_SEO.locale,
+    founderName: (entry?.founderName as string) || DEFAULT_SITE_SEO.founderName,
+    founderJobTitle: (entry?.founderJobTitle as string) || DEFAULT_SITE_SEO.founderJobTitle,
+    email: (entry?.email as string) || DEFAULT_SITE_SEO.email,
+    sameAs: (entry?.sameAs as string[] | undefined)?.length
+      ? (entry.sameAs as string[])
+      : DEFAULT_SITE_SEO.sameAs,
+    areaServed: (entry?.areaServed as string[] | undefined)?.length
+      ? (entry.areaServed as string[])
       : DEFAULT_SITE_SEO.areaServed,
+  }
+}
+
+export type PageMeta = {
+  title: string
+  description: string
+  image: string
+}
+
+export async function getPageMeta(slug: string): Promise<PageMeta> {
+  const entry = readYaml<Record<string, string>>(`src/content/pages/${slug}.yaml`)
+  return {
+    title: entry?.title || "",
+    description: entry?.description || "",
+    image: entry?.image || "",
   }
 }
 
@@ -45,46 +68,59 @@ export type CaseStudySeo = {
 
 export type CaseStudyWithSeo = CaseStudy & { seo: CaseStudySeo }
 
-function mapCaseStudyEntry(
-  slug: string,
-  entry: Awaited<ReturnType<typeof reader.collections.caseStudies.read>>,
-): CaseStudyWithSeo {
-  const e = entry as NonNullable<typeof entry>
+function mapCaseStudyEntry(slug: string, entry: Record<string, unknown>): CaseStudyWithSeo {
   return {
     slug,
-    headline: e.headline,
-    store: e.store,
-    industry: e.industry,
-    country: e.country,
-    periodStart: e.periodStart,
-    periodEnd: e.periodEnd,
-    serviceSlug: e.serviceSlug,
-    serviceName: e.serviceName,
-    summary: e.summary,
-    metrics: e.metrics,
-    context: e.context,
-    problems: e.problems,
-    phases: e.phases,
-    otherWins: e.otherWins,
-    testimonial: e.testimonial.discriminant ? e.testimonial.value : null,
-    learnings: e.learnings,
+    headline: entry.headline as string,
+    store: entry.store as string,
+    industry: entry.industry as string,
+    country: entry.country as string,
+    periodStart: entry.periodStart as string,
+    periodEnd: entry.periodEnd as string,
+    serviceSlug: entry.serviceSlug as string,
+    serviceName: entry.serviceName as string,
+    summary: entry.summary as string,
+    metrics: entry.metrics as CaseStudy["metrics"],
+    context: entry.context as CaseStudy["context"],
+    problems: entry.problems as CaseStudy["problems"],
+    phases: entry.phases as CaseStudy["phases"],
+    otherWins: entry.otherWins as string[],
+    testimonial: (entry.testimonial as { discriminant?: boolean; value?: CaseStudy["testimonial"] })
+      ?.discriminant
+      ? (entry.testimonial.value as CaseStudy["testimonial"])
+      : null,
+    learnings: entry.learnings as string[],
     seo: {
-      title: e.seoTitle || undefined,
-      description: e.seoDescription || undefined,
-      image: e.ogImage || undefined,
+      title: (entry.seoTitle as string) || undefined,
+      description: (entry.seoDescription as string) || undefined,
+      image: (entry.ogImage as string) || undefined,
     },
   }
 }
 
-export async function getCaseStudies(): Promise<CaseStudyWithSeo[]> {
-  const all = await reader.collections.caseStudies.all()
-  return all.map(({ slug, entry }) => mapCaseStudyEntry(slug, entry))
+function getCaseStudySlugs(): string[] {
+  const dir = join(process.cwd(), "src/content/case-studies")
+  if (!existsSync(dir)) return []
+  return readdirSync(dir, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name)
 }
 
-export async function getCaseStudy(
-  slug: string,
-): Promise<CaseStudyWithSeo | null> {
-  const entry = await reader.collections.caseStudies.read(slug)
+export async function getCaseStudies(): Promise<CaseStudyWithSeo[]> {
+  const slugs = getCaseStudySlugs()
+  return slugs
+    .map((slug) => {
+      const entry = readYaml<Record<string, unknown>>(
+        `src/content/case-studies/${slug}/index.yaml`,
+      )
+      if (!entry) return null
+      return mapCaseStudyEntry(slug, entry)
+    })
+    .filter((cs): cs is CaseStudyWithSeo => cs !== null)
+}
+
+export async function getCaseStudy(slug: string): Promise<CaseStudyWithSeo | null> {
+  const entry = readYaml<Record<string, unknown>>(`src/content/case-studies/${slug}/index.yaml`)
   if (!entry) return null
   return mapCaseStudyEntry(slug, entry)
 }

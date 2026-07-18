@@ -1,0 +1,222 @@
+media:
+  input: public/og
+  output: /og
+
+content:
+  - name: site
+    label: Configuración del sitio
+    type: file
+    path: src/content/site-seo/index.yaml
+    format: yaml
+    fields:
+      - name: siteName
+        type: string
+        label: Nombre del sitio
+      - name: defaultTitle
+        type: string
+        label: Título por defecto
+      - name: defaultDescription
+        type: text
+        label: Descripción por defecto
+      - name: locale
+        type: string
+        label: Locale OG (ej. es_MX)
+      - name: founderName
+        type: string
+        label: Nombre (schema Person)
+      - name: founderJobTitle
+        type: string
+        label: Puesto (schema Person)
+      - name: email
+        type: string
+        label: Email de contacto
+      - name: sameAs
+        type: list
+        label: Redes sociales / perfiles (sameAs)
+        field:
+          type: string
+          label: URL
+      - name: areaServed
+        type: list
+        label: Áreas atendidas
+        field:
+          type: string
+          label: Código de país (ej. MX)
+
+  - name: pages
+    label: Páginas
+    type: collection
+    path: src/content/pages
+    format: yaml
+    view:
+      primary: title
+    fields:
+      - name: title
+        type: string
+        label: Título SEO
+      - name: description
+        type: text
+        label: Meta descripción
+      - name: image
+        type: image
+        label: Imagen OG
+        folder: public/og
+        path: /og
+
+  - name: caseStudies
+    label: Casos de estudio
+    type: collection
+    path: src/content/case-studies
+    format: yaml
+    subfolders: true
+    view:
+      primary: headline
+      sort: periodStart
+      order: desc
+    fields:
+      - name: headline
+        type: string
+        label: Titular (H1)
+      - name: store
+        type: string
+        label: Nombre de la tienda
+      - name: industry
+        type: string
+        label: Industria (badge corto)
+      - name: country
+        type: string
+        label: País
+      - name: periodStart
+        type: string
+        label: Período inicio
+      - name: periodEnd
+        type: string
+        label: Período fin
+      - name: serviceSlug
+        type: select
+        label: Servicio relacionado
+        options:
+          - label: Auditoría SEO Técnica
+            value: auditoria-seo-tecnica
+          - label: Estrategia de Catálogo
+            value: estrategia-de-catalogo
+          - label: Talleres y Capacitaciones
+            value: talleres-y-capacitaciones
+      - name: serviceName
+        type: string
+        label: Nombre del servicio (mostrado)
+      - name: summary
+        type: text
+        label: Resumen
+      - name: metrics
+        type: list
+        label: Métricas
+        fields:
+          - name: label
+            type: string
+            label: Métrica
+          - name: before
+            type: string
+            label: Antes
+          - name: after
+            type: string
+            label: Después
+          - name: delta
+            type: string
+            label: Delta (ej. +280%)
+      - name: context
+        type: object
+        label: Contexto
+        fields:
+          - name: industry
+            type: string
+            label: Industria (detalle)
+          - name: size
+            type: string
+            label: Tamaño
+          - name: market
+            type: string
+            label: Mercado
+          - name: stack
+            type: string
+            label: Stack técnico
+          - name: trafficBefore
+            type: string
+            label: Tráfico antes
+          - name: mainProblem
+            type: text
+            label: Problema principal
+          - name: triedBefore
+            type: text
+            label: Qué habían intentado
+      - name: problems
+        type: list
+        label: Problemas
+        fields:
+          - name: title
+            type: string
+            label: Título
+          - name: what
+            type: text
+            label: Qué era
+          - name: why
+            type: text
+            label: Por qué importaba
+          - name: impact
+            type: string
+            label: Impacto
+      - name: phases
+        type: list
+        label: Fases
+        fields:
+          - name: name
+            type: string
+            label: Nombre de fase
+          - name: weeks
+            type: string
+            label: Semanas
+          - name: actions
+            type: list
+            label: Acciones
+            field:
+              type: string
+              label: Acción
+      - name: otherWins
+        type: list
+        label: Otros logros
+        field:
+          type: string
+          label: Logro
+      - name: testimonial
+        type: object
+        label: Testimonio
+        fields:
+          - name: quote
+            type: text
+            label: Cita
+          - name: name
+            type: string
+            label: Nombre
+          - name: role
+            type: string
+            label: Rol
+          - name: store
+            type: string
+            label: Tienda
+      - name: learnings
+        type: list
+        label: Aprendizajes
+        field:
+          type: text
+          label: Aprendizaje
+      - name: seoTitle
+        type: string
+        label: Título SEO (opcional, override)
+      - name: seoDescription
+        type: text
+        label: Meta descripción (opcional, override)
+      - name: ogImage
+        type: image
+        label: Imagen OG (opcional, override)
+        folder: public/og/case-studies
+        path: /og/case-studies

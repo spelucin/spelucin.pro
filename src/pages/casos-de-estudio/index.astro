@@ -5,15 +5,16 @@ import Footer from '../../components/Footer.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import CTA from '../../components/CTA.astro';
 import { rule } from '../../data';
-import { getCaseStudies } from '../../lib/content';
+import { getCaseStudies, getPageMeta } from '../../lib/content';
 
+const meta = await getPageMeta('casos-de-estudio');
 const caseStudies = await getCaseStudies();
 ---
 
 <Base
-  title="Casos de estudio - Alex Spelucin"
-  description="Resultados reales de auditorías SEO técnicas y estrategias de catálogo en tiendas Shopify de LATAM."
-  image="/og/casos-de-estudio.jpg"
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   <Nav />
   <main>

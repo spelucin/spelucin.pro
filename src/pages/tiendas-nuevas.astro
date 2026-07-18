@@ -9,7 +9,9 @@ import IconArrowRight from '../components/IconArrowRight.astro';
 import IconCheck from '../components/IconCheck.astro';
 import ServiceIllustrationNewStores from '../components/ServiceIllustrationNewStores.astro';
 import { rule } from '../data';
+import { getPageMeta } from '../lib/content';
 
+const meta = await getPageMeta('tiendas-nuevas');
 const W = "max-w-5xl mx-auto px-6";
 
 const faqs = [
@@ -104,9 +106,9 @@ const faqSchema = {
 ---
 
 <Base
-  title="Pack Tiendas Nuevas - Arquitectura de catálogo para Shopify - Alex Spelucin"
-  description="Arquitectura de catálogo y contenidos para tiendas Shopify que están por lanzar. $900 USD (precio inaugural)."
-  image="/og/tiendas-nuevas.jpg"
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   <Fragment slot="schema">
     <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />

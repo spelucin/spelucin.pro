@@ -10,12 +10,15 @@ import Testimonials from '../components/Testimonials.astro';
 import AboutSection from '../components/AboutSection.astro';
 import CTA from '../components/CTA.astro';
 import Hero from '../components/Hero.astro';
+import { getPageMeta } from '../lib/content';
+
+const meta = await getPageMeta('home');
 ---
 
 <Base
-  title="Alex Spelucin - SEO técnico para Shopify"
-  description="Consultor independiente de SEO técnico para Shopify. Auditorías, estrategia de catálogo y capacitaciones para tiendas que quieren tráfico orgánico real."
-  image="/og/home.jpg"
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   <Nav />
   <main>

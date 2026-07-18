@@ -12,7 +12,9 @@ import IconWorkshop from '../components/IconWorkshop.astro';
 import IconCheck from '../components/IconCheck.astro';
 import { services, rule } from '../data';
 import Terminal from '../components/Terminal.astro';
+import { getPageMeta } from '../lib/content';
 
+const meta = await getPageMeta('servicios');
 const allFaqs = services.flatMap(s => s.detail.faq.map(f => ({ ...f, service: s.name })));
 const icons = [IconAudit, IconCatalog, IconWorkshop];
 
@@ -28,9 +30,9 @@ const faqSchema = {
 ---
 
 <Base
-  title="Servicios de SEO técnico para Shopify - Alex Spelucin"
-  description="Auditoría SEO técnica, estrategia de catálogo y talleres a medida para tiendas Shopify. Sin paquetes genéricos, sin retainer mensual."
-  image="/og/servicios.jpg"
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
 >
   <script slot="schema" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Nav />
