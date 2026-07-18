@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import IconMail from '../components/IconMail.astro';
 import IconLinkedin from '../components/IconLinkedin.astro';
+import IconBluesky from '../components/IconBluesky.astro';
 import IconArrowRight from '../components/IconArrowRight.astro';
 import { getPageMeta } from '../lib/content';
 
@@ -46,7 +47,7 @@ const meta = await getPageMeta('contacto');
         <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.08)" />
       </div>
 
-      <div style="display: grid; gap: 0.85rem" class="md:grid-cols-2">
+      <div style="display: grid; gap: 0.85rem" class="md:grid-cols-3">
         <a
           href="mailto:alex@spelucin.pro"
           style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 0.75rem; text-decoration: none; box-shadow: 0 1px 6px rgba(21,96,189,0.05); transition: border-color 0.15s, box-shadow 0.15s"
@@ -73,6 +74,22 @@ const meta = await getPageMeta('contacto');
           <div>
             <div style="font-size: 0.78rem; font-weight: 600; color: rgba(21,96,189,0.5); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.15rem">LinkedIn</div>
             <div style="font-size: 0.9rem; font-weight: 500; color: #0d1f3c">linkedin.com/in/spelucin</div>
+          </div>
+          <span style="margin-left: auto; color: rgba(21,96,189,0.4)"><IconArrowRight /></span>
+        </a>
+
+        <a
+          href="https://bsky.app/profile/spelucin.bsky.social"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 0.75rem; text-decoration: none; box-shadow: 0 1px 6px rgba(21,96,189,0.05); transition: border-color 0.15s, box-shadow 0.15s"
+        >
+          <div style="width: 40px; height: 40px; border-radius: 0.5rem; background: rgba(21,96,189,0.08); display: flex; align-items: center; justify-content: center; color: #1560bd; flex-shrink: 0">
+            <IconBluesky />
+          </div>
+          <div>
+            <div style="font-size: 0.78rem; font-weight: 600; color: rgba(21,96,189,0.5); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.15rem">Bluesky</div>
+            <div style="font-size: 0.9rem; font-weight: 500; color: #0d1f3c">@spelucin.bsky.social</div>
           </div>
           <span style="margin-left: auto; color: rgba(21,96,189,0.4)"><IconArrowRight /></span>
         </a>

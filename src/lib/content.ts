@@ -20,7 +20,7 @@ const DEFAULT_SITE_SEO = {
   founderName: "Alex Spelucin",
   founderJobTitle: "Consultor SEO técnico para Shopify",
   email: "alex@spelucin.pro",
-  sameAs: ["https://linkedin.com/in/spelucin"],
+  sameAs: ["https://linkedin.com/in/spelucin", "https://bsky.app/profile/spelucin.bsky.social"],
   areaServed: ["MX", "AR", "US", "ES"],
 }
 
