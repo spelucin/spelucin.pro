@@ -3,12 +3,12 @@ import { Image } from 'astro:assets';
 import avatarImage from '../assets/alex-spelucin-avatar.jpg';
 import IconArrowRight from './IconArrowRight.astro';
 import Button from './Button.astro';
-import { stats } from '../data';
+import { stats, rule } from '../data';
 ---
 
 <section id="sobre-mi" style="background: #fff; padding: 5rem 0">
   <div class="max-w-5xl mx-auto px-6 reveal">
-    <div style="height: 1px; background: rgba(21,96,189,0.10)" />
+    <div style={rule} />
     <div class="grid md:grid-cols-12 gap-8 items-end" style="padding-top: 3.5rem">
       <div style="grid-column: span 5">
         <div style="border-radius: 0.5rem; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 20px 56px rgba(21,96,189,0.14)">

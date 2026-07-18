@@ -9,7 +9,6 @@ import Testimonials from '../components/Testimonials.astro';
 import IconAudit from '../components/IconAudit.astro';
 import IconCatalog from '../components/IconCatalog.astro';
 import IconWorkshop from '../components/IconWorkshop.astro';
-import IconCheck from '../components/IconCheck.astro';
 import { services, rule } from '../data';
 import Terminal from '../components/Terminal.astro';
 import { getPageMeta } from '../lib/content';
@@ -55,21 +54,13 @@ const faqSchema = {
 
         <div class="grid md:grid-cols-3 gap-6" style="padding-top: 3rem">
           {services.map((s, i) => (
-            <a href={`/servicios/${s.slug}/`} class="service-card" style="text-decoration: none; display: flex; flex-direction: column; border-radius: 1rem; padding: 2rem; border: 1px solid rgba(21,96,189,0.10); background: #f8fbff; transition: transform 0.2s, box-shadow 0.2s">
+            <a href={`/servicios/${s.slug}/`} class="service-card" style="text-decoration: none; display: flex; flex-direction: column; border-radius: 1rem; padding: 2rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s">
               <div style="margin-bottom: 1.25rem">
                 {icons[i] && (() => { const Icon = icons[i]; return <Icon size={28} />; })()}
               </div>
               <div style="font-size: 0.72rem; font-weight: 700; color: #1560bd; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.35rem">{s.price}</div>
               <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.025em; margin: 0 0 0.75rem; line-height: 1.25">{s.name}</h2>
               <p style="font-size: 0.875rem; color: rgba(13,31,60,0.55); line-height: 1.65; margin: 0 0 1.5rem; flex: 1">{s.description}</p>
-              <div style="display: flex; flex-direction: column; gap: 0; margin-bottom: 1.5rem">
-                {s.deliverables.slice(0, 3).map((d) => (
-                  <div style="display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.4rem 0">
-                    <span style="flex-shrink: 0; margin-top: 0.1rem"><IconCheck /></span>
-                    <span style="font-size: 0.8rem; color: rgba(13,31,60,0.6); line-height: 1.4; font-weight: 500">{d}</span>
-                  </div>
-                ))}
-              </div>
               <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: #1560bd">
                 Ver detalle <IconArrowRight />
               </span>
@@ -103,9 +94,9 @@ const faqSchema = {
       </div>
     </section>
 
-    <Testimonials paddingTop="1.5rem" />
+    <Testimonials />
 
-    <section style="background: #fff; padding: 4rem 0">
+    <section style="background: #fff; padding: 5rem 0">
       <div class="max-w-5xl mx-auto px-6">
         <div style={rule} />
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 3rem 0 2rem; line-height: 1.2">Preguntas frecuentes</h2>

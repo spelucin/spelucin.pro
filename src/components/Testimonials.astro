@@ -1,16 +1,11 @@
 ---
 import { getCaseStudies } from '../lib/content';
 
-interface Props {
-  paddingTop?: string;
-}
-const { paddingTop = '5rem' } = Astro.props;
-
 const caseStudies = await getCaseStudies();
 const items = caseStudies.map(cs => cs.testimonial).filter(Boolean);
 ---
 
-<section style={`background: #fff; padding: ${paddingTop} 0 5rem`}>
+<section style="background: #fff; padding: 5rem 0">
   <div class="max-w-5xl mx-auto px-6">
     <div style="display: flex; flex-direction: column; gap: 2rem">
       {items.map((t, i) => (

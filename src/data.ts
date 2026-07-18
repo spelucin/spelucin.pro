@@ -23,29 +23,23 @@ export type Service = {
 export type CaseStudy = {
   slug: string
   headline: string
-  store: string
-  industry: string
-  country: string
-  periodStart: string
-  periodEnd: string
-  serviceSlug: string
-  serviceName: string
   summary: string
-  metrics: { label: string before: string after: string delta: string }[]
-  context: {
-    industry: string
-    size: string
-    market: string
-    stack: string
-    trafficBefore: string
-    mainProblem: string
-    triedBefore: string
-  }
-  problems: { title: string what: string why: string impact: string }[]
-  phases: { name: string weeks: string actions: string[] }[]
-  otherWins: string[]
-  testimonial: { quote: string name: string role: string store: string } | null
-  learnings: string[]
+  shortDescription: string
+  cover: string
+  client: string
+  platform: string
+  industry: string
+  market: string
+  timeline: string
+  role: string
+  team: string
+  challenge: string
+  whatIdid: string[]
+  results: { value: string; label: string }[]
+  whyItWorked: string
+  tools: string
+  serviceSlug?: string
+  serviceName?: string
 }
 
 export const stats = [

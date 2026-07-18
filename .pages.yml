@@ -66,32 +66,74 @@ content:
     path: src/content/case-studies
     format: yaml
     subfolders: true
+    filename: "{primary}/index.yaml"
     view:
       primary: headline
-      sort: periodStart
+      sort: timeline
       order: desc
     fields:
       - name: headline
         type: string
         label: Titular (H1)
-      - name: store
+      - name: shortDescription
+        type: text
+        label: Descripción corta (para tarjeta)
+      - name: cover
+        type: image
+        label: Imagen de portada
+        folder: public/og/case-studies
+        path: /og/case-studies
+      - name: summary
+        type: text
+        label: Resumen (subtítulo detalle)
+      - name: client
         type: string
-        label: Nombre de la tienda
+        label: Cliente
+      - name: platform
+        type: string
+        label: Plataforma
       - name: industry
         type: string
-        label: Industria (badge corto)
-      - name: country
+        label: Industria
+      - name: market
         type: string
-        label: País
-      - name: periodStart
+        label: Mercado
+      - name: timeline
         type: string
-        label: Período inicio
-      - name: periodEnd
+        label: Duración (ej. 5 meses)
+      - name: role
         type: string
-        label: Período fin
+        label: Rol
+      - name: team
+        type: string
+        label: Equipo (opcional)
+      - name: challenge
+        type: text
+        label: El desafío
+      - name: whatIdid
+        type: string
+        list: true
+        label: Qué hice
+      - name: results
+        type: object
+        list: true
+        label: Resultados
+        fields:
+          - name: value
+            type: string
+            label: Valor (ej. +43%)
+          - name: label
+            type: string
+            label: Etiqueta (ej. Revenue orgánico)
+      - name: whyItWorked
+        type: text
+        label: Por qué funcionó
+      - name: tools
+        type: string
+        label: Herramientas (separadas por coma)
       - name: serviceSlug
         type: select
-        label: Servicio relacionado
+        label: Slug del servicio (opcional)
         options:
           - label: Auditoría SEO Técnica
             value: auditoria-seo-tecnica
@@ -101,116 +143,15 @@ content:
             value: talleres-y-capacitaciones
       - name: serviceName
         type: string
-        label: Nombre del servicio (mostrado)
-      - name: summary
-        type: text
-        label: Resumen
-      - name: metrics
-        type: object
-        list: true
-        label: Métricas
-        fields:
-          - name: label
-            type: string
-            label: Métrica
-          - name: before
-            type: string
-            label: Antes
-          - name: after
-            type: string
-            label: Después
-          - name: delta
-            type: string
-            label: Delta (ej. +280%)
-      - name: context
-        type: object
-        label: Contexto
-        fields:
-          - name: industry
-            type: string
-            label: Industria (detalle)
-          - name: size
-            type: string
-            label: Tamaño
-          - name: market
-            type: string
-            label: Mercado
-          - name: stack
-            type: string
-            label: Stack técnico
-          - name: trafficBefore
-            type: string
-            label: Tráfico antes
-          - name: mainProblem
-            type: text
-            label: Problema principal
-          - name: triedBefore
-            type: text
-            label: Qué habían intentado
-      - name: problems
-        type: object
-        list: true
-        label: Problemas
-        fields:
-          - name: title
-            type: string
-            label: Título
-          - name: what
-            type: text
-            label: Qué era
-          - name: why
-            type: text
-            label: Por qué importaba
-          - name: impact
-            type: string
-            label: Impacto
-      - name: phases
-        type: object
-        list: true
-        label: Fases
-        fields:
-          - name: name
-            type: string
-            label: Nombre de fase
-          - name: weeks
-            type: string
-            label: Semanas
-          - name: actions
-            type: string
-            list: true
-            label: Acciones
-      - name: otherWins
-        type: string
-        list: true
-        label: Otros logros
-      - name: testimonial
-        type: object
-        label: Testimonio
-        fields:
-          - name: quote
-            type: text
-            label: Cita
-          - name: name
-            type: string
-            label: Nombre
-          - name: role
-            type: string
-            label: Rol
-          - name: store
-            type: string
-            label: Tienda
-      - name: learnings
-        type: text
-        list: true
-        label: Aprendizajes
+        label: Nombre del servicio (opcional, mostrado)
       - name: seoTitle
         type: string
-        label: Título SEO (opcional, override)
+        label: Título SEO (override opcional)
       - name: seoDescription
         type: text
-        label: Meta descripción (opcional, override)
+        label: Meta descripción (override opcional)
       - name: ogImage
         type: image
-        label: Imagen OG (opcional, override)
+        label: Imagen OG (override opcional)
         folder: public/og/case-studies
         path: /og/case-studies

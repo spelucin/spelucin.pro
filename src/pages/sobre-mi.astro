@@ -9,13 +9,12 @@ import IconCode from '../components/IconCode.astro';
 import IconStorefront from '../components/IconStorefront.astro';
 import IconTarget from '../components/IconTarget.astro';
 import IconShield from '../components/IconShield.astro';
-import { stats } from '../data';
+import { stats, rule } from '../data';
 import { Image } from 'astro:assets';
 import avatarImage from '../assets/alex-spelucin-avatar.jpg';
 import { getPageMeta } from '../lib/content';
 
 const meta = await getPageMeta('sobre-mi');
-const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
 ---
 
 <Base
@@ -52,7 +51,7 @@ const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
             </div>
           </div>
         </div>
-        <div style={ruleStyle} />
+        <div style={rule} />
       </div>
     </section>
 
@@ -102,14 +101,14 @@ const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
                 <p style="font-size: 0.875rem; color: rgba(13,31,60,0.5); margin: 0; line-height: 1.7">{t.note}</p>
               </div>
             </div>
-            {i < arr.length - 1 && <div style={ruleStyle} />}
+            {i < arr.length - 1 && <div style={rule} />}
           </div>
         ))}
       </div>
     </section>
 
     {/* ─── Pilares ─── */}
-    <section style="background: #f4fdff; border-top: 1px solid rgba(21,96,189,0.08); border-bottom: 1px solid rgba(21,96,189,0.08); padding: 5rem 0">
+    <section style="background: #fff; border-top: 1px solid rgba(21,96,189,0.08); border-bottom: 1px solid rgba(21,96,189,0.08); padding: 5rem 0">
       <div class="max-w-5xl mx-auto px-6 reveal">
         <div class="grid md:grid-cols-12 gap-8 items-start">
           <div style="grid-column: span 5">
@@ -131,7 +130,7 @@ const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
                     </span>
                     <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.65); margin: 0">{p.body}</p>
                   </div>
-                  {i < arr.length - 1 && <div style={ruleStyle} />}
+                  {i < arr.length - 1 && <div style={rule} />}
                 </div>
               ))}
             </div>
@@ -141,7 +140,7 @@ const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
     </section>
 
     {/* ─── Stats ─── */}
-    <section style="padding: 4.5rem 0">
+    <section style="padding: 5rem 0">
       <div class="max-w-5xl mx-auto px-6">
         <div class="reveal-stagger" style="display: flex; flex-wrap: wrap">
           {stats.map((s, i) => (
@@ -155,7 +154,7 @@ const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
     </section>
 
     {/* ─── Stack + Diferenciadores ─── */}
-    <section style="background: #f4fdff; padding: 5rem 0; border-top: 1px solid rgba(21,96,189,0.08)">
+    <section style="background: #fff; padding: 5rem 0; border-top: 1px solid rgba(21,96,189,0.08)">
       <div class="max-w-5xl mx-auto px-6 reveal">
         <div class="grid md:grid-cols-2 gap-16">
           <div>
@@ -201,7 +200,7 @@ const ruleStyle = "height: 1px; background: rgba(21,96,189,0.10); margin: 0";
                       <div style="font-size: 0.82rem; color: rgba(13,31,60,0.5); line-height: 1.65">{d.body}</div>
                     </div>
                   </div>
-                  {i < arr.length - 1 && <div style={ruleStyle} />}
+                  {i < arr.length - 1 && <div style={rule} />}
                 </div>
               ))}
             </div>

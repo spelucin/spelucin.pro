@@ -28,225 +28,56 @@ const caseStudies = await getCaseStudies();
       </div>
     </div>
 
-    <div style={rule} />
-
-    {caseStudies.map((cs, i) => (
-      <div>
-        <a href={`/casos-de-estudio/${cs.slug}/`} style="text-decoration: none; display: block">
-          <div
-            class="grid md:grid-cols-12 gap-6 case-row"
-            style="padding-top: 2rem; padding-bottom: 2rem"
-          >
-            <div style="grid-column: span 3">
-              <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.35); display: block; margin-bottom: 0.5rem">0{i + 1}</span>
-              <div style="font-size: 2rem; font-weight: 700; color: #1560bd; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 0.5rem">
-                {cs.headline.split(" ").slice(0, 2).join(" ")}
-              </div>
-              <div style="font-size: 0.72rem; font-weight: 700; color: rgba(21,96,189,0.45); text-transform: uppercase; letter-spacing: 0.06em">
-                {cs.industry} · {cs.country}
-              </div>
-            </div>
-            <div style="grid-column: span 5">
-              <p style="font-size: 0.9rem; color: rgba(13,31,60,0.55); line-height: 1.7; margin: 0">{cs.summary}</p>
-            </div>
-            <div style="grid-column: span 4; display: flex; flex-direction: column; gap: 0">
-              {cs.metrics.slice(0, 2).map((m, j, arr) => (
+    <div class="grid gap-6">
+      {caseStudies.map((cs) => (
+        <a href={`/casos-de-estudio/${cs.slug}/`} class="case-card" style="text-decoration: none; display: flex; flex-direction: row; border-radius: 1rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s">
+          {cs.cover && (
+            <img
+              src={cs.cover}
+              alt={cs.client}
+              class="case-card-image"
+              style="width: 260px; flex-shrink: 0; object-fit: cover; display: block"
+            />
+          )}
+          <div style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 0">
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.025em; margin: 0 0 0.5rem; line-height: 1.25">
+              {cs.client}
+            </h2>
+            <p style="font-size: 0.875rem; color: rgba(13,31,60,0.55); line-height: 1.65; margin: 0 0 1.25rem">
+              {cs.shortDescription || cs.summary}
+            </p>
+            <div style="display: flex; gap: 1.75rem; padding-top: 1rem; border-top: 1px solid rgba(21,96,189,0.07)">
+              {cs.results.slice(0, 3).map((m) => (
                 <div>
-                  <div style={`padding-top: ${j > 0 ? '0.75rem' : '0'}; padding-bottom: 0.75rem`}>
-                    <div style="font-size: 1rem; font-weight: 700; color: #0d1f3c; letter-spacing: -0.02em">{m.delta || m.after}</div>
-                    <div style="font-size: 0.72rem; color: rgba(13,31,60,0.4); margin-top: 0.15rem; line-height: 1.3">{m.label}</div>
-                  </div>
-                  {j < arr.length - 1 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
+                  <div style="font-size: 0.95rem; font-weight: 700; color: #1560bd; letter-spacing: -0.02em">{m.value}</div>
+                  <div style="font-size: 0.68rem; color: rgba(13,31,60,0.45); margin-top: 0.1rem; line-height: 1.3">{m.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </a>
-        <div style={rule} />
-      </div>
-    ))}
-
-    <div style="max-w: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 0">
-      <div class="looker-dashboard">
-        <div class="looker-header">
-          <span style="font-size: 0.72rem; font-weight: 500; color: #5f6368">RESULTADOS - GUNPLASTORE MX · MODEL KITS · MÉXICO</span>
-          <span style="font-size: 0.72rem; color: #9aa0a6">Compartido</span>
-        </div>
-
-        <div class="looker-grid">
-          <div class="looker-panel looker-kpi">
-            <div class="looker-panel-label">SESIONES / MES</div>
-            <div class="looker-kpi-value" style="color: #1560bd">30.8K</div>
-          </div>
-          <div class="looker-panel looker-kpi">
-            <div class="looker-panel-label">CRECIMIENTO</div>
-            <div class="looker-kpi-value" style="color: #1560bd">+280%</div>
-          </div>
-          <div class="looker-panel looker-kpi">
-            <div class="looker-panel-label">REVENUE / MES</div>
-            <div class="looker-kpi-value" style="color: #7c3aed">$70K</div>
-          </div>
-        </div>
-
-        <div class="looker-charts-container">
-          <div class="looker-chart-panel">
-            <div class="looker-panel-label">SESIONES ORGÁNICAS / MES</div>
-            <svg viewBox="0 0 960 380" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block" class="looker-svg">
-              <defs>
-                <linearGradient id="lsSessions" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#1560bd" stop-opacity="0.18" />
-                  <stop offset="100%" stop-color="#1560bd" stop-opacity="0" />
-                </linearGradient>
-              </defs>
-              {[54, 109, 163, 217, 271, 326].map((y) => (
-                <line x1="40" y1={y} x2="920" y2={y} stroke="rgba(0,0,0,0.04)" stroke-width="1" />
-              ))}
-              {[
-                { label: "32K", y: 60 },
-                { label: "24K", y: 114 },
-                { label: "16K", y: 168 },
-                { label: "8K", y: 223 },
-                { label: "0", y: 277 },
-              ].map((ax) => (
-                <text x="32" y={ax.y} font-size="10" fill="#9aa0a6" font-family="DM Sans, sans-serif" text-anchor="end">{ax.label}</text>
-              ))}
-              <path class="dashboard-line" d="M 60 326 L 60 285 L 206 282 L 352 275 L 498 259 L 644 244 L 790 214 L 920 170 L 920 326 Z" fill="url(#lsSessions)" />
-              <path class="dashboard-line" d="M 60 285 L 206 282 L 352 275 L 498 259 L 644 244 L 790 214 L 920 170" fill="none" stroke="#1560bd" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-              {[
-                { x: 60, y: 285 }, { x: 206, y: 282 }, { x: 352, y: 275 },
-                { x: 498, y: 259 }, { x: 644, y: 244 }, { x: 790, y: 214 },
-                { x: 920, y: 170 },
-              ].map((pt, i) => (
-                <circle cx={pt.x} cy={pt.y} r={i === 6 ? 5 : 3.5} fill="#fff" stroke="#1560bd" stroke-width={i === 6 ? 2.5 : 1.5} />
-              ))}
-              <text x="885" y="155" font-size="12" fill="#1560bd" font-family="DM Sans, sans-serif" font-weight="700">30,800</text>
-              {["Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb"].map((m, i) => (
-                <text x={60 + i * 143} y="360" font-size="10" fill="#9aa0a6" font-family="DM Sans, sans-serif" text-anchor="middle">{m}</text>
-              ))}
-            </svg>
-          </div>
-
-          <div class="looker-chart-panel">
-            <div class="looker-panel-label">REVENUE ORGÁNICO / MES</div>
-            <svg viewBox="0 0 960 380" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block" class="looker-svg">
-              <defs>
-                <linearGradient id="lsRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.18" />
-                  <stop offset="100%" stop-color="#7c3aed" stop-opacity="0" />
-                </linearGradient>
-              </defs>
-              {[54, 109, 163, 217, 271, 326].map((y) => (
-                <line x1="40" y1={y} x2="920" y2={y} stroke="rgba(0,0,0,0.04)" stroke-width="1" />
-              ))}
-              {[
-                { label: "$80K", y: 60 },
-                { label: "$60K", y: 114 },
-                { label: "$40K", y: 168 },
-                { label: "$20K", y: 223 },
-                { label: "$0", y: 277 },
-              ].map((ax) => (
-                <text x="32" y={ax.y} font-size="10" fill="#9aa0a6" font-family="DM Sans, sans-serif" text-anchor="end">{ax.label}</text>
-              ))}
-              <path class="dashboard-line" d="M 60 326 L 60 326 L 206 316 L 352 301 L 498 281 L 644 255 L 790 228 L 920 183 L 920 326 Z" fill="url(#lsRevenue)" />
-              <path class="dashboard-line" d="M 60 326 L 206 316 L 352 301 L 498 281 L 644 255 L 790 228 L 920 183" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-              {[
-                { x: 60, y: 326 }, { x: 206, y: 316 }, { x: 352, y: 301 },
-                { x: 498, y: 281 }, { x: 644, y: 255 }, { x: 790, y: 228 },
-                { x: 920, y: 183 },
-              ].map((pt, i) => (
-                <circle cx={pt.x} cy={pt.y} r={i === 6 ? 5 : 3.5} fill="#fff" stroke="#7c3aed" stroke-width={i === 6 ? 2.5 : 1.5} />
-              ))}
-              <text x="885" y="170" font-size="12" fill="#7c3aed" font-family="DM Sans, sans-serif" font-weight="700">$70,000</text>
-              {["Ago", "Sep", "Oct", "Nov", "Dic", "Ene", "Feb"].map((m, i) => (
-                <text x={60 + i * 143} y="360" font-size="10" fill="#9aa0a6" font-family="DM Sans, sans-serif" text-anchor="middle">{m}</text>
-              ))}
-            </svg>
-          </div>
-        </div>
-
-      </div>
+      ))}
     </div>
 
   </div>
 </section>
 
 <style is:global>
-  .looker-dashboard {
-    border-radius: 0.5rem;
-    overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-    background: #eef1f5;
+  .case-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(21,96,189,0.1);
   }
-  .looker-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.4rem 0.75rem;
-    background: #fff;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+  .case-card-image {
+    align-self: stretch;
+    height: auto;
   }
-  .looker-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-    padding: 6px;
-  }
-  .looker-panel {
-    background: #fff;
-    border-radius: 4px;
-    padding: 0.85rem 0.75rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  }
-  .looker-panel-label {
-    font-size: 0.55rem;
-    font-weight: 700;
-    color: #9aa0a6;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.3rem;
-  }
-  .looker-kpi-value {
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-  .looker-charts-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    padding: 0 6px 6px;
-  }
-  .looker-chart-panel {
-    background: #fff;
-    border-radius: 4px;
-    padding: 1.1rem 0.75rem 1.4rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  }
-  .looker-chart-panel + .looker-chart-panel {
-    margin-top: 0;
-  }
-  @media (max-width: 768px) {
-    .looker-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 767px) {
+    .case-card {
+      flex-direction: column !important;
     }
-    .looker-charts-container {
-      grid-template-columns: 1fr;
-    }
-  }
-  .dashboard-line {
-    stroke-dasharray: 2000;
-    stroke-dashoffset: 2000;
-    transition: stroke-dashoffset 1.5s ease-out 0.3s;
-  }
-  .reveal.in-view .dashboard-line {
-    stroke-dashoffset: 0;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .dashboard-line {
-      stroke-dasharray: none;
-      stroke-dashoffset: 0;
-      transition: none;
+    .case-card-image {
+      width: 100% !important;
+      aspect-ratio: 16 / 9;
     }
   }
 </style>
