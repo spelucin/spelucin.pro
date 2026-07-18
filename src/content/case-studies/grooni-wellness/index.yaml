@@ -1,0 +1,53 @@
+headline: "SEO técnico duplicó la visibilidad orgánica de Grooni Wellness - y expuso el verdadero cuello de botella"
+shortDescription: "Corregir contenido duplicado y schema de producto mejoró clics, impresiones y posición promedio, pero el revenue orgánico cayó - la conversión en PDP, no la discoverability, es el problema real."
+summary: >-
+  Corrección de contenido duplicado, schema de producto y optimización de PDPs para intención
+  de búsqueda que aumentó la visibilidad orgánica y la calidad del tráfico, pero no (todavía)
+  el revenue - un caso honesto sobre qué resuelve el SEO técnico y qué no.
+cover: "https://picsum.photos/seed/grooni-wellness/1200/600"
+client: "Grooni Wellness"
+platform: "Shopify"
+industry: "Salud y bienestar"
+market: "Estados Unidos"
+timeline: "69 días antes vs. 69 días después (2 mar - 17 jul 2026)"
+role: "SEO técnico"
+team: ""
+challenge: >-
+  El catálogo tenía contenido duplicado entre variantes y colecciones, el schema de producto
+  estaba mal implementado, y las páginas de producto (PDP) no estaban alineadas con la intención
+  de búsqueda real de cada consulta. El 10 de mayo de 2026 se corrigieron estos tres problemas
+  de forma simultánea, y se comparó el rendimiento 69 días antes y 69 días después del cambio.
+whatIdid:
+  - "Eliminé el contenido duplicado entre variantes y colecciones"
+  - "Corregí el schema de producto (product markup) en todas las PDPs"
+  - "Reoptimicé el copy y la estructura de las PDPs para la intención de búsqueda real de cada término"
+  - "Comparé 69 días antes y 69 días después del cambio para aislar el impacto en Search Console y GA4"
+results:
+  - value: "+26.5%"
+    label: "Impresiones orgánicas"
+  - value: "+14.7%"
+    label: "Clics orgánicos"
+  - value: "13.9"
+    label: "Posición promedio (antes 14.8)"
+  - value: "+15.1%"
+    label: "AOV del canal orgánico"
+  - value: "-24.4%"
+    label: "Ingresos orgánicos"
+  - value: "-34.3%"
+    label: "Pedidos orgánicos"
+whyItWorked: >-
+  Corregir schema y contenido duplicado amplió el alcance en buscadores: más queries mostrando
+  el sitio y en mejor posición promedio (14.8 → 13.9). El tráfico que sí convirtió gastó más por
+  pedido (AOV +15.1%), lo que confirma que alinear las PDPs con la intención de búsqueda atrajo
+  usuarios más cualificados. Pero más clics e impresiones no se tradujeron en más pedidos ni más
+  ingresos: el problema no era discoverability (eso se resolvió) sino algo en el tramo final -
+  conversión en la PDP, disponibilidad de producto o precio. La conclusión honesta: el SEO técnico
+  resolvió la visibilidad; el siguiente sprint debe atacar la conversión en PDP.
+tools: "Shopify, Google Search Console, Google Analytics 4"
+serviceSlug: "auditoria-seo-tecnica"
+serviceName: "Auditoría SEO Técnica"
+seoTitle: "Caso de estudio: Grooni Wellness - SEO técnico para Shopify (salud y bienestar)"
+seoDescription: >-
+  Cómo corregir contenido duplicado y schema de producto mejoró la visibilidad orgánica de una
+  tienda Shopify de salud y bienestar - y qué reveló sobre el verdadero cuello de botella en conversión.
+ogImage: /og/case-studies/grooni-wellness.jpg
