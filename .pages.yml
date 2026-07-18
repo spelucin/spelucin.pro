@@ -31,23 +31,20 @@ content:
         type: string
         label: Email de contacto
       - name: sameAs
-        type: list
+        type: string
+        list: true
         label: Redes sociales / perfiles (sameAs)
-        field:
-          type: string
-          label: URL
       - name: areaServed
-        type: list
+        type: string
+        list: true
         label: Áreas atendidas
-        field:
-          type: string
-          label: Código de país (ej. MX)
 
   - name: pages
     label: Páginas
     type: collection
     path: src/content/pages
     format: yaml
+    filename: "{primary}.yaml"
     view:
       primary: title
     fields:
@@ -109,7 +106,8 @@ content:
         type: text
         label: Resumen
       - name: metrics
-        type: list
+        type: object
+        list: true
         label: Métricas
         fields:
           - name: label
@@ -150,7 +148,8 @@ content:
             type: text
             label: Qué habían intentado
       - name: problems
-        type: list
+        type: object
+        list: true
         label: Problemas
         fields:
           - name: title
@@ -166,7 +165,8 @@ content:
             type: string
             label: Impacto
       - name: phases
-        type: list
+        type: object
+        list: true
         label: Fases
         fields:
           - name: name
@@ -176,17 +176,13 @@ content:
             type: string
             label: Semanas
           - name: actions
-            type: list
+            type: string
+            list: true
             label: Acciones
-            field:
-              type: string
-              label: Acción
       - name: otherWins
-        type: list
+        type: string
+        list: true
         label: Otros logros
-        field:
-          type: string
-          label: Logro
       - name: testimonial
         type: object
         label: Testimonio
@@ -204,11 +200,9 @@ content:
             type: string
             label: Tienda
       - name: learnings
-        type: list
+        type: text
+        list: true
         label: Aprendizajes
-        field:
-          type: text
-          label: Aprendizaje
       - name: seoTitle
         type: string
         label: Título SEO (opcional, override)
