@@ -101,8 +101,8 @@ function getCaseStudySlugs(): string[] {
   const dir = join(process.cwd(), "src/content/case-studies")
   if (!existsSync(dir)) return []
   return readdirSync(dir, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
+    .filter((d) => d.isFile() && d.name.endsWith(".yaml"))
+    .map((d) => d.name.replace(/\.yaml$/, ""))
 }
 
 export async function getCaseStudies(): Promise<CaseStudyWithSeo[]> {
@@ -110,7 +110,7 @@ export async function getCaseStudies(): Promise<CaseStudyWithSeo[]> {
   return slugs
     .map((slug) => {
       const entry = readYaml<Record<string, unknown>>(
-        `src/content/case-studies/${slug}/index.yaml`,
+        `src/content/case-studies/${slug}.yaml`,
       )
       if (!entry) return null
       return mapCaseStudyEntry(slug, entry)
@@ -119,7 +119,7 @@ export async function getCaseStudies(): Promise<CaseStudyWithSeo[]> {
 }
 
 export async function getCaseStudy(slug: string): Promise<CaseStudyWithSeo | null> {
-  const entry = readYaml<Record<string, unknown>>(`src/content/case-studies/${slug}/index.yaml`)
+  const entry = readYaml<Record<string, unknown>>(`src/content/case-studies/${slug}.yaml`)
   if (!entry) return null
   return mapCaseStudyEntry(slug, entry)
 }
