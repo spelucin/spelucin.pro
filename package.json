@@ -7,9 +7,10 @@
     "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview --host",
-"format": "oxfmt"
+    "format": "oxfmt"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/simple-icons": "^1.2.90",
