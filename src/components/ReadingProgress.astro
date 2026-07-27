@@ -1,0 +1,16 @@
+---
+---
+<div class="reading-progress" id="reading-progress" aria-hidden="true" style="transform: scaleX(0);"></div>
+
+<script>
+  const progressBar = document.getElementById('reading-progress');
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0) {
+        const scrolled = window.scrollY / scrollHeight;
+        progressBar.style.transform = `scaleX(${scrolled})`;
+      }
+    }, { passive: true });
+  }
+</script>

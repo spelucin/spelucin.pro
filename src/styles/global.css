@@ -133,6 +133,12 @@ body {
   opacity: 1;
 }
 
+/* ── Process sticky mockup ───────────────────────── */
+.process-sticky {
+  position: sticky;
+  top: 6rem;
+}
+
 /* ── Reduced Motion ────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-stagger > * { opacity: 1 !important; animation: none !important; }

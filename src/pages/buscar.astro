@@ -1,0 +1,271 @@
+---
+import Base from '../layouts/Base.astro';
+import SidebarLayout from '../layouts/SidebarLayout.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base
+  title="Buscar - Alex Spelucin"
+  description="Busca artículos y guías sobre SEO técnico, Shopify y analítica web."
+>
+  <SidebarLayout>
+    <main class="search-page-main">
+      <div class="search-container reveal">
+        <h1 class="search-title">Buscar</h1>
+        <p class="search-subtitle">Encuentra notas, tutoriales y aprendizajes en el archivo.</p>
+        
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input 
+            type="search" 
+            id="search-input" 
+            placeholder="Escribe para buscar (ej. Shopify, crawl, schema)..." 
+            aria-label="Buscar artículos"
+            class="search-input"
+            autofocus
+          />
+        </div>
+
+        <div id="search-status" class="search-status" aria-live="polite">Cargando archivo de artículos...</div>
+        
+        <div id="search-results" class="search-results-list"></div>
+      </div>
+      <Footer />
+    </main>
+  </SidebarLayout>
+</Base>
+
+<script>
+  interface SearchItem {
+    title: string;
+    description: string;
+    summary: string;
+    category: string;
+    tags: string[];
+    slug: string;
+    pubDate: string;
+  }
+
+  let searchIndex: SearchItem[] = [];
+  const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+  const searchStatus = document.getElementById('search-status') as HTMLElement | null;
+  const searchResults = document.getElementById('search-results') as HTMLElement | null;
+
+  async function initSearch() {
+    try {
+      const res = await fetch('/buscar.json');
+      if (!res.ok) throw new Error('Error al cargar índice');
+      searchIndex = await res.json();
+      
+      if (searchStatus) {
+        searchStatus.textContent = `Listado con ${searchIndex.length} artículos. Escribe algo arriba.`;
+      }
+
+      // Check URL query param
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('q') || '';
+      if (query && searchInput) {
+        searchInput.value = query;
+        performSearch(query);
+      }
+
+      searchInput?.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        performSearch(target.value);
+      });
+    } catch (err) {
+      if (searchStatus) {
+        searchStatus.textContent = 'No se pudo cargar el archivo de búsqueda.';
+      }
+      console.error(err);
+    }
+  }
+
+  function performSearch(query: string) {
+    const cleanQuery = query.toLowerCase().trim();
+    if (!cleanQuery) {
+      if (searchResults) searchResults.innerHTML = '';
+      if (searchStatus) searchStatus.textContent = `Listado con ${searchIndex.length} artículos. Escribe algo arriba.`;
+      return;
+    }
+
+    const matches = searchIndex.filter(item => {
+      return (
+        item.title.toLowerCase().includes(cleanQuery) ||
+        item.description.toLowerCase().includes(cleanQuery) ||
+        item.summary.toLowerCase().includes(cleanQuery) ||
+        item.category.toLowerCase().includes(cleanQuery) ||
+        item.tags.some(tag => tag.toLowerCase().includes(cleanQuery))
+      );
+    });
+
+    if (searchStatus) {
+      searchStatus.textContent = `Se encontraron ${matches.length} artículo${matches.length === 1 ? '' : 's'} para "${query}"`;
+    }
+
+    renderResults(matches);
+  }
+
+  function renderResults(items: SearchItem[]) {
+    if (!searchResults) return;
+    
+    if (items.length === 0) {
+      searchResults.innerHTML = `
+        <div class="search-empty">
+          <p>No se encontraron resultados para tu búsqueda.</p>
+        </div>
+      `;
+      return;
+    }
+
+    searchResults.innerHTML = items.map(item => {
+      const date = new Date(item.pubDate).toLocaleDateString('es-AR', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+      return `
+        <div class="search-result-item">
+          <div class="search-result-meta">
+            <time>${date}</time>
+            <span class="search-result-category">${item.category}</span>
+          </div>
+          <h3 class="search-result-title">
+            <a href="/escritura/${item.slug}/">${item.title}</a>
+          </h3>
+          <p class="search-result-description">${item.summary || item.description}</p>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Start
+  initSearch();
+</script>
+
+<style is:global>
+  .search-page-main {
+    background: var(--color-background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .search-container {
+    max-width: 44rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+    flex-grow: 1;
+  }
+  .search-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-foreground);
+    margin-bottom: 0.5rem;
+  }
+  .search-subtitle {
+    font-size: 1rem;
+    color: var(--color-prose-muted);
+    margin-bottom: 2rem;
+  }
+  .search-input-wrapper {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-muted-foreground);
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 2.75rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-foreground);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    font-family: inherit;
+  }
+  .search-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-ring);
+  }
+  .search-status {
+    font-size: 0.78rem;
+    color: var(--color-muted-foreground);
+    margin-bottom: 2rem;
+  }
+  .search-results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .search-result-item {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+  }
+  .search-result-item:last-child {
+    border-bottom: none;
+  }
+  .search-result-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .search-result-meta time {
+    font-size: 0.6875rem;
+    color: var(--color-muted-foreground);
+    font-variant-numeric: tabular-nums;
+  }
+  .search-result-category {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .search-result-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    line-height: 1.3;
+  }
+  .search-result-title a {
+    color: var(--color-foreground);
+    text-decoration: none;
+  }
+  .search-result-title a:hover {
+    color: var(--color-primary);
+  }
+  .search-result-description {
+    font-size: 0.875rem;
+    color: var(--color-prose-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .search-empty {
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-prose-muted);
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
+    background: var(--color-surface);
+  }
+
+  @media (max-width: 1023px) {
+    .search-container {
+      padding-top: 4rem;
+    }
+  }
+</style>

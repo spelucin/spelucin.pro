@@ -1,0 +1,79 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{filteredHeadings.length > 0 && (
+  <nav class="toc" aria-label="Tabla de contenidos">
+    <div style="font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-foreground); margin-bottom: 0.75rem">
+      En este artículo
+    </div>
+    <ul style="list-style: none; padding: 0; margin: 0">
+      {filteredHeadings.map((heading) => (
+        <li class={`toc-item depth-${heading.depth}`}>
+          <a href={`#${heading.slug}`} class="toc-link">
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script>
+  // Active state observer for TOC links
+  const links = document.querySelectorAll('.toc-link');
+  const headings = Array.from(document.querySelectorAll('.prose h2, .prose h3'));
+
+  if (links.length > 0 && headings.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          links.forEach((link) => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    headings.forEach((heading) => observer.observe(heading));
+  }
+</script>
+
+<style is:global>
+  .toc-item {
+    margin-bottom: 0.25rem;
+  }
+  .toc-item.depth-3 {
+    padding-left: 0.75rem;
+  }
+  .toc-link {
+    display: inline-block;
+    font-size: 0.8125rem;
+    color: var(--color-prose-muted);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+  .toc-link:hover,
+  .toc-link.active {
+    color: var(--color-primary);
+  }
+</style>

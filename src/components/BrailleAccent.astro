@@ -1,0 +1,18 @@
+---
+interface Props {
+  text?: string;
+  class?: string;
+}
+const {
+  text = '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class={`braille-accent ${className}`}
+  aria-hidden="true"
+  style="text-align: center; padding: 1.5rem 0; opacity: 0.10; font-size: 0.625rem; letter-spacing: 0.2em; color: #1560bd; line-height: 1; overflow: hidden; white-space: nowrap"
+>
+  {text}
+</div>

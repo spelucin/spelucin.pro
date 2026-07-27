@@ -1,0 +1,25 @@
+---
+interface Props {
+  categories: string[];
+  activeCategory?: string;
+}
+
+const { categories, activeCategory } = Astro.props;
+---
+
+<div style="display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 2rem">
+  <a
+    href="/blog/"
+    style={`font-size: 0.6875rem; font-weight: ${!activeCategory ? '700' : '500'}; color: ${!activeCategory ? '#0d1f3c' : 'rgba(21,96,189,0.5)'}; text-decoration: none; padding: 0.3rem 0.625rem; border-radius: 9999px; border: 1px solid ${!activeCategory ? 'rgba(21,96,189,0.2)' : 'rgba(21,96,189,0.08)'}; transition: all 0.15s`}
+  >
+    Todos
+  </a>
+  {categories.map(cat => (
+    <a
+      href={`/blog/category/${cat}/`}
+      style={`font-size: 0.6875rem; font-weight: ${activeCategory === cat ? '700' : '500'}; color: ${activeCategory === cat ? '#0d1f3c' : 'rgba(21,96,189,0.5)'}; text-decoration: none; padding: 0.3rem 0.625rem; border-radius: 9999px; border: 1px solid ${activeCategory === cat ? 'rgba(21,96,189,0.2)' : 'rgba(21,96,189,0.08)'}; transition: all 0.15s`}
+    >
+      {cat}
+    </a>
+  ))}
+</div>

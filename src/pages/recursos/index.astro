@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import { getPageMeta } from '../../lib/content';
+import { getCollection } from 'astro:content';
+
+const meta = await getPageMeta('home');
+const allResources = await getCollection('resources');
+const resources = allResources.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categories = ['Checklists', 'Frameworks', 'Templates', 'Guías', 'Prompt Libraries', 'Dashboards'];
+const activeCategory = undefined;
+---
+
+<Base
+  title={`Recursos - Alex Spelucin`}
+  description="Recursos descargables: checklists, frameworks, templates y guías para tiendas Shopify."
+>
+  <Nav />
+  <main>
+    <section style="padding-top: 8rem; padding-bottom: 0; background: #fff">
+      <div class="max-w-4xl mx-auto px-6">
+        <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 0.75rem; line-height: 1.1">
+          Recursos
+        </h1>
+        <p style="font-size: 0.875rem; line-height: 1.65; color: rgba(13,31,60,0.55); margin: 0; max-width: 52ch">
+          Checklists, frameworks, templates y guías para optimizar tu tienda Shopify.
+        </p>
+      </div>
+    </section>
+
+    <section style="background: #fff; padding: 2rem 0 4.5rem">
+      <div class="max-w-4xl mx-auto px-6">
+        <div style="display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 2rem">
+          <a
+            href="/recursos/"
+            style={`font-size: 0.6875rem; font-weight: 700; color: #0d1f3c; text-decoration: none; padding: 0.3rem 0.625rem; border-radius: 9999px; border: 1px solid rgba(21,96,189,0.2)`}
+          >
+            Todos
+          </a>
+          {categories.map(cat => (
+            <a
+              href={`/recursos/category/${encodeURIComponent(cat)}/`}
+              style={`font-size: 0.6875rem; font-weight: 500; color: rgba(21,96,189,0.5); text-decoration: none; padding: 0.3rem 0.625rem; border-radius: 9999px; border: 1px solid rgba(21,96,189,0.08); transition: all 0.15s`}
+            >
+              {cat}
+            </a>
+          ))}
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {resources.map((resource) => (
+            <ResourceCard
+              title={resource.data.title}
+              description={resource.data.description}
+              category={resource.data.category}
+              thumbnail={resource.data.thumbnail}
+              downloadLink={resource.data.downloadLink}
+              externalLink={resource.data.externalLink}
+              slug={resource.id}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

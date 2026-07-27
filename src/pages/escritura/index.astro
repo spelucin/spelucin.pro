@@ -1,0 +1,381 @@
+---
+import Base from '../../layouts/Base.astro';
+import SidebarLayout from '../../layouts/SidebarLayout.astro';
+import Footer from '../../components/Footer.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Get all unique tags and categories for filter controls
+const categories = Array.from(new Set(posts.map(p => p.data.category)));
+const tags = Array.from(new Set(posts.flatMap(p => p.data.tags)));
+
+function calculateReadingTime(content: string): string {
+  const words = content.split(/\s+/).length;
+  const minutes = Math.ceil(words / 200);
+  return `${minutes} min de lectura`;
+}
+---
+
+<Base
+  title="Archivo de Escritura - Alex Spelucin"
+  description="Notas, guías y deep dives técnicos sobre SEO técnico, Shopify y analítica web."
+>
+  <SidebarLayout>
+    <main class="writing-archive-main">
+      <div class="content-container">
+        
+        <header class="archive-header reveal">
+          <span class="eyebrow">Archivo</span>
+          <h1 class="archive-title">Escritura</h1>
+          <p class="archive-subtitle">
+            Notas de campo sobre la intersección entre desarrollo web, SEO y comercio electrónico.
+          </p>
+        </header>
+
+        {/* Search & Filters */}
+        <div class="archive-controls reveal">
+          <!-- Search box linking to dedicated search page or client-side filtering -->
+          <div class="archive-search">
+            <form action="/buscar/" method="GET" class="search-form">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input 
+                type="text" 
+                name="q" 
+                placeholder="Buscar en el archivo..." 
+                class="search-input"
+              />
+            </form>
+          </div>
+
+          <!-- Category filter list -->
+          <div class="filter-group">
+            <div class="filter-label">Categorías:</div>
+            <div class="filter-tags">
+              <button class="filter-btn active" data-filter="all">Todos</button>
+              {categories.map(cat => (
+                <button class="filter-btn" data-filter={`category-${cat}`}>{cat}</button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Tag filter list -->
+          <div class="filter-group">
+            <div class="filter-label">Temas:</div>
+            <div class="filter-tags">
+              {tags.map(tag => (
+                <button class="filter-btn-tag" data-filter={`tag-${tag}`}>#{tag}</button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Chronological list */}
+        <section class="archive-list-section reveal">
+          <div class="posts-feed" id="posts-feed">
+            {posts.map((post) => (
+              <div 
+                class="feed-item" 
+                data-category={post.data.category} 
+                data-tags={post.data.tags.join(',')}
+              >
+                <ArticleCard
+                  title={post.data.title}
+                  description={post.data.description}
+                  summary={post.data.summary}
+                  pubDate={post.data.pubDate}
+                  category={post.data.category}
+                  slug={post.id}
+                  readingTime={calculateReadingTime(post.body || '')}
+                  featured={post.data.featured}
+                  tags={post.data.tags}
+                />
+              </div>
+            ))}
+          </div>
+          <div id="no-results" class="no-results hidden">
+            No se encontraron artículos para el filtro seleccionado.
+          </div>
+        </section>
+
+      </div>
+      <Footer />
+    </main>
+  </SidebarLayout>
+</Base>
+
+<script>
+  // Client-side filtering logic
+  const feedItems = document.querySelectorAll('.feed-item');
+  const filterButtons = document.querySelectorAll('.filter-btn, .filter-btn-tag');
+  const noResults = document.getElementById('no-results');
+
+  let activeCategory = 'all';
+  let activeTag = 'all';
+
+  // Parse URL params on load
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialCategory = urlParams.get('categoria');
+  const initialTag = urlParams.get('tag');
+
+  if (initialCategory) {
+    activeCategory = initialCategory;
+    const btn = Array.from(filterButtons).find(b => b.textContent === initialCategory);
+    if (btn) {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  }
+
+  if (initialTag) {
+    activeTag = initialTag;
+    const btn = Array.from(filterButtons).find(b => b.textContent === `#${initialTag}`);
+    if (btn) {
+      btn.classList.add('active');
+    }
+  }
+
+  updateFeed();
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const button = e.currentTarget as HTMLButtonElement;
+      const filterVal = button.getAttribute('data-filter') || '';
+
+      if (filterVal.startsWith('category-')) {
+        // Toggle category
+        filterButtons.forEach(b => {
+          if (b.getAttribute('data-filter')?.startsWith('category-') || b.getAttribute('data-filter') === 'all') {
+            b.classList.remove('active');
+          }
+        });
+        button.classList.add('active');
+        activeCategory = filterVal.replace('category-', '');
+      } else if (filterVal === 'all') {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+        activeCategory = 'all';
+        activeTag = 'all';
+      } else if (filterVal.startsWith('tag-')) {
+        // Toggle tag active state
+        const tag = filterVal.replace('tag-', '');
+        if (button.classList.contains('active')) {
+          button.classList.remove('active');
+          activeTag = 'all';
+        } else {
+          // deactivate other tags
+          filterButtons.forEach(b => {
+            if (b.getAttribute('data-filter')?.startsWith('tag-')) {
+              b.classList.remove('active');
+            }
+          });
+          button.classList.add('active');
+          activeTag = tag;
+        }
+      }
+
+      updateFeed();
+      
+      // Update URL silently
+      const url = new URL(window.location.href);
+      if (activeCategory !== 'all') {
+        url.searchParams.set('categoria', activeCategory);
+      } else {
+        url.searchParams.delete('categoria');
+      }
+      if (activeTag !== 'all') {
+        url.searchParams.set('tag', activeTag);
+      } else {
+        url.searchParams.delete('tag');
+      }
+      window.history.replaceState({}, '', url.toString());
+    });
+  });
+
+  function updateFeed() {
+    let visibleCount = 0;
+
+    feedItems.forEach((el) => {
+      const item = el as HTMLElement;
+      const category = item.getAttribute('data-category') || '';
+      const tags = (item.getAttribute('data-tags') || '').split(',');
+
+      const categoryMatch = activeCategory === 'all' || category === activeCategory;
+      const tagMatch = activeTag === 'all' || tags.includes(activeTag);
+
+      if (categoryMatch && tagMatch) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+  }
+</script>
+
+<style is:global>
+  .writing-archive-main {
+    background: var(--color-background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .content-container {
+    max-width: 44rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+    flex-grow: 1;
+  }
+
+  .archive-header {
+    margin-bottom: 3rem;
+  }
+  .archive-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-foreground);
+    margin: 0.5rem 0;
+  }
+  .archive-subtitle {
+    font-size: 1rem;
+    color: var(--color-prose-muted);
+    margin: 0;
+  }
+
+  .archive-controls {
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .archive-search {
+    width: 100%;
+  }
+  .search-form {
+    position: relative;
+  }
+  .search-icon {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-muted-foreground);
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 0.625rem 1rem 0.625rem 2.25rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-foreground);
+    outline: none;
+    transition: border-color 0.15s;
+    font-family: inherit;
+  }
+  .search-input:focus {
+    border-color: var(--color-primary);
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .filter-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-foreground);
+    padding-top: 0.35rem;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+  .filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  
+  .filter-btn, .filter-btn-tag {
+    background: none;
+    border: 1px solid var(--color-border);
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    color: var(--color-prose-muted);
+    cursor: pointer;
+    transition: all 0.12s;
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .filter-btn:hover, .filter-btn-tag:hover {
+    border-color: var(--color-primary);
+    color: var(--color-foreground);
+  }
+  .filter-btn.active, .filter-btn-tag.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+  html.dark .filter-btn.active, html.dark .filter-btn-tag.active {
+    color: var(--color-background);
+  }
+
+  .filter-btn-tag {
+    border-color: transparent;
+    background: var(--color-surface);
+  }
+
+  .posts-feed {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .no-results {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--color-prose-muted);
+    font-size: 0.9375rem;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @media (max-width: 1023px) {
+    .content-container {
+      padding-top: 4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .filter-group {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .filter-label {
+      padding-top: 0;
+    }
+  }
+</style>

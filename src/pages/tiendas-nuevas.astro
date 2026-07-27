@@ -6,8 +6,7 @@ import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
 import CTA from '../components/CTA.astro';
 import IconArrowRight from '../components/IconArrowRight.astro';
-import IconCheck from '../components/IconCheck.astro';
-import ServiceIllustrationNewStores from '../components/ServiceIllustrationNewStores.astro';
+import ServiceReportMockup from '../components/ServiceReportMockup.astro';
 import { rule } from '../data';
 import { getPageMeta } from '../lib/content';
 
@@ -63,21 +62,25 @@ const pains = [
   "No hay un plan de enlaces internos que distribuya autoridad hacia tus páginas más importantes",
 ];
 
-const deliverables = [
-  "Keyword research vertical para tu categoría",
-  "Análisis de competidores y oportunidades",
-  "Jerarquía de colecciones y subcolecciones",
-  "Estructura de URLs y naming optimizado",
-  "Contenido de colecciones (título, descripción, metadata)",
-  "Plan de enlaces internos",
-  "Manejo de facetas y filtros",
+const deliverableCards = [
+  { eyebrow: "INVESTIGACIÓN", title: "Keyword research vertical", description: "Análisis completo de demanda real para tu categoría. Volúmenes, intención de búsqueda y oportunidades.", tag: "Documento vivo" },
+  { eyebrow: "ANÁLISIS", title: "Análisis de competidores", description: "Benchmarking de estructura, naming y posicionamiento de competidores clave en tu vertical.", tag: "Insights accionables" },
+  { eyebrow: "ESTRUCTURA", title: "Jerarquía de colecciones y subcolecciones", description: "Mapa documentado de categorías, relaciones semánticas y naming optimizado para SEO.", tag: "Figma + CSV" },
+  { eyebrow: "URLS", title: "Estructura de URLs y naming", description: "Reglas de URLs, manejo de facetas y filtros para evitar duplicación y maximizar indexación.", tag: "Plan de implementación" },
+  { eyebrow: "CONTENIDOS", title: "Contenido de colecciones", description: "Título, descripción y metadata optimizada para cada colección. Listo para implementar directo en Shopify.", tag: "Copy + SEO" },
+  { eyebrow: "ENLACES", title: "Plan de enlaces internos", description: "Mapa de enlaces internos que distribuye autoridad hacia tus páginas de mayor potencial comercial.", tag: "Arquitectura" },
+  { eyebrow: "SESIÓN", title: "Sesión de revisión", description: "Reunión para validar la propuesta, resolver dudas de implementación y alinear con tu equipo técnico.", tag: "Videollamada" },
 ];
 
-const idealSituations = [
+const idealCards = [
   "Estás armando tu catálogo en Shopify y quieres que la estructura esté optimizada desde el primer día",
   "Tienes productos cargados pero la tienda todavía no está live",
   "Migraste de otra plataforma y quieres aprovechar para reestructurar bien",
   "Vas a expandir tu catálogo con nuevas categorías y necesitas una base sólida",
+  "Quieres evitar el trabajo de reestructurar después de tener miles de URLs",
+  "No sabes cómo nombrar las colecciones para que Google las entienda",
+  "Los filtros de tu tienda generan páginas duplicadas sin que lo sepas",
+  "Necesitas un plan de enlaces internos antes del launch",
 ];
 
 const serviceSchema = {
@@ -145,7 +148,7 @@ const faqSchema = {
     </section>
 
     {/* ── El problema ─────────────────────────────── */}
-    <section style="padding: 5rem 0">
+    <section style="background: var(--color-surface); padding: 7rem 0">
       <div class={`${W} reveal`}>
         <div class="grid md:grid-cols-12 gap-8">
           <div style="grid-column: span 4">
@@ -170,92 +173,82 @@ const faqSchema = {
     </section>
 
     {/* ── Qué incluye ─────────────────────────────── */}
-    <section style="padding: 0 0 5rem">
+    <section style="padding: 7rem 0">
       <div class={`${W} reveal`}>
         <Eyebrow>Qué incluye</Eyebrow>
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2rem; line-height: 1.2">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3rem; line-height: 1.2">
           Todo lo que necesitas para lanzar con la estructura correcta
         </h2>
-        <div style="display: flex; flex-direction: column; gap: 0">
-          {deliverables.map((item, i) => (
-            <>
-              {i > 0 && <div style={rule} />}
-              <div style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem 0">
-                <IconCheck />
-                <span style="font-size: 0.9375rem; color: rgba(13,31,60,0.78); font-weight: 500; line-height: 1.5">{item}</span>
-              </div>
-            </>
+        <div class="grid md:grid-cols-2 gap-4">
+          {deliverableCards.map((card) => (
+            <div style="border: 1px solid rgba(21,96,189,0.08); border-radius: 0.75rem; padding: 2rem; transition: border-color 0.2s ease;">
+              <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(21,96,189,0.5); margin-bottom: 0.75rem">{card.eyebrow}</div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em; line-height: 1.3">{card.title}</h3>
+              <p style="font-size: 0.875rem; line-height: 1.65; color: rgba(13,31,60,0.55); margin: 0 0 1.25rem">{card.description}</p>
+              <span style="font-size: 0.75rem; font-weight: 600; color: rgba(21,96,189,0.4)">{card.tag}</span>
+            </div>
           ))}
         </div>
       </div>
     </section>
 
     {/* ── Para quién es ──────────────────────────── */}
-    <section style="padding: 0 0 5rem">
+    <section style="background: var(--color-surface); padding: 7rem 0">
       <div class={`${W} reveal`}>
         <Eyebrow>Para quién es</Eyebrow>
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2rem; line-height: 1.2">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3rem; line-height: 1.2">
           Ideal para tiendas que están por lanzar o acaban de hacerlo
         </h2>
-        <div class="grid md:grid-cols-12 gap-8 items-center">
-          <div style="grid-column: span 4">
-            <ServiceIllustrationNewStores />
-          </div>
-          <div style="grid-column: span 8">
-            <div style="display: flex; flex-direction: column; gap: 0">
-              {idealSituations.map((sit, i) => (
-                <div>
-                  <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 0">
-                    <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.35); flex-shrink: 0; padding-top: 0.5rem; font-variant-numeric: tabular-nums; min-width: 1.5rem">0{i + 1}</span>
-                    <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.7); margin: 0">{sit}</p>
-                  </div>
-                  {i < idealSituations.length - 1 && <div style={rule} />}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* ── Proceso ────────────────────────────────── */}
-    <section style="padding: 0 0 5rem">
-      <div class={`${W} reveal`}>
-        <Eyebrow>Proceso</Eyebrow>
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 2.5rem; line-height: 1.2">
-          Cómo funciona
-        </h2>
-        <div style="display: flex; flex-direction: column; gap: 0">
-          {processSteps.map((step, i, arr) => (
-            <div style={`display: flex; gap: 1.5rem; padding-bottom: ${i < arr.length - 1 ? '2.5rem' : '0'}`}>
-              <div style="display: flex; flex-direction: column; align-items: center">
-                <div style="width: 36px; height: 36px; border-radius: 50%; background: #1560bd; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0">
-                  {i + 1}
-                </div>
-                {i < arr.length - 1 && <div style="width: 1px; flex: 1; background: rgba(21,96,189,0.15); margin-top: 0.5rem" />}
-              </div>
-              <div style="padding-top: 0.35rem">
-                <h3 style="font-size: 1rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em">{step.title}</h3>
-                <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0; max-width: 48ch">{step.description}</p>
-              </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          {idealCards.map((sit) => (
+            <div style="border: 1px solid rgba(21,96,189,0.08); border-radius: 0.75rem; padding: 1.5rem 2rem; transition: border-color 0.2s ease;">
+              <p style="font-size: 0.9375rem; line-height: 1.65; color: rgba(13,31,60,0.7); margin: 0">{sit}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
+    {/* ── Proceso ────────────────────────────────── */}
+    <section style="padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Proceso</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3.5rem; line-height: 1.2">
+          Cómo funciona
+        </h2>
+
+        <div class="grid md:grid-cols-12 gap-10 items-start">
+          <div style="grid-column: span 7">
+            {processSteps.map((step, i, arr) => (
+              <div style={`display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding: 1.75rem 0 ${i < arr.length - 1 ? '1.75rem' : '0'}; ${i < arr.length - 1 ? 'border-bottom: 1px solid rgba(21,96,189,0.06)' : ''}`}>
+                <span style="font-size: 0.8rem; font-weight: 700; color: rgba(21,96,189,0.35); font-variant-numeric: tabular-nums; padding-top: 0.15rem; letter-spacing: 0.02em">0{i + 1}</span>
+                <div>
+                  <h3 style="font-size: 1.05rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em">{step.title}</h3>
+                  <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0; max-width: 52ch">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="process-sticky" style="grid-column: span 5;">
+            <ServiceReportMockup variant="tiendas-nuevas" />
+          </div>
+        </div>
+      </div>
+    </section>
+
     {/* ── FAQ ────────────────────────────────────── */}
-    <section style="padding: 5rem 0">
+    <section style="background: var(--color-surface); padding: 7rem 0">
       <div class={`${W} reveal`}>
         <div style={rule} />
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 3rem 0 2rem; line-height: 1.2">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 3.5rem 0 2.5rem; line-height: 1.2">
           Preguntas frecuentes
         </h2>
         <div style="display: flex; flex-direction: column; gap: 0">
           {faqs.map((item, i) => (
             <>
               {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
-              <div style="padding: 1.25rem 0">
+              <div style="padding: 1.5rem 0">
                 <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4; margin-bottom: 0.5rem">{item.question}</div>
                 <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0">{item.answer}</p>
               </div>

@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+  return resources.map(resource => ({
+    params: { slug: resource.id },
+    props: { resource },
+  }));
+}
+
+const { resource } = Astro.props;
+const { Content } = await render(resource);
+
+const dateStr = resource.data.pubDate.toLocaleDateString('es-AR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base
+  title={resource.data.seoTitle || `${resource.data.title} - Alex Spelucin`}
+  description={resource.data.seoDescription || resource.data.description}
+  image={resource.data.thumbnail}
+>
+  <Nav />
+  <main>
+    <section style="padding-top: 8rem; background: #fff">
+      <div class="max-w-4xl mx-auto px-6">
+        <div style="margin-bottom: 2rem">
+          <a href="/recursos/" style="font-size: 0.6875rem; font-weight: 600; color: rgba(21,96,189,0.5); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em">
+            ← Recursos
+          </a>
+        </div>
+
+        <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.75rem">
+          <span style="font-size: 0.625rem; font-weight: 700; color: #1560bd; letter-spacing: 0.06em; text-transform: uppercase">{resource.data.category}</span>
+          <time style="font-size: 0.625rem; color: rgba(21,96,189,0.35); font-variant-numeric: tabular-nums">{dateStr}</time>
+        </div>
+
+        <h1 style="font-size: clamp(1.5rem, 3.5vw, 2.25rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1rem; line-height: 1.1; max-width: 24ch">
+          {resource.data.title}
+        </h1>
+
+        <p style="font-size: 0.9375rem; line-height: 1.65; color: rgba(13,31,60,0.55); margin: 0 0 2rem; max-width: 56ch">
+          {resource.data.description}
+        </p>
+
+        <div style="display: flex; gap: 0.75rem; margin-bottom: 2.5rem">
+          <a
+            href={resource.data.externalLink || resource.data.downloadLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            style="display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; padding: 0.65rem 1.5rem; background: #1560bd; color: #fff; border-radius: 9999px; text-decoration: none; font-size: 0.875rem; transition: background 0.15s"
+          >
+            {resource.data.externalLink ? 'Ver recurso ↗' : 'Descargar ↗'}
+          </a>
+        </div>
+      </div>
+
+      {resource.body && (
+        <div class="max-w-[680px] mx-auto px-6" style="padding-top: 1.5rem; padding-bottom: 3.5rem">
+          <div class="prose">
+            <Content />
+          </div>
+        </div>
+      )}
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style is:global>
+  .prose {
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(13,31,60,0.75);
+  }
+  .prose h2 {
+    font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #0d1f3c;
+    margin: 2.5rem 0 1rem;
+    line-height: 1.2;
+  }
+  .prose p {
+    margin: 0 0 1.25rem;
+  }
+  .prose ul, .prose ol {
+    margin: 0 0 1.25rem;
+    padding-left: 1.5rem;
+  }
+  .prose li {
+    margin-bottom: 0.35rem;
+  }
+  .prose a {
+    color: #1560bd;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

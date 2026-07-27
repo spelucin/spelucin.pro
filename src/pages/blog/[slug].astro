@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { id: post.id },
+  }));
+}
+
+const { id } = Astro.props;
+const targetUrl = `/escritura/${id}/`;
+---
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0;url=${targetUrl}`} />
+    <link rel="canonical" href={targetUrl} />
+    <title>Redireccionando...</title>
+  </head>
+  <body>
+    <p>Redireccionando al artículo... Si no eres redirigido, <a href={targetUrl}>haz clic aquí</a>.</p>
+    <script define:vars={{ targetUrl }}>
+      window.location.replace(targetUrl);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import avatarImage from '../assets/alex-spelucin-avatar.jpg';
+---
+
+<div class="author-box">
+  <div class="author-avatar">
+    <Image
+      src={avatarImage}
+      alt="Alex Spelucin"
+      width={100}
+      height={100}
+      class="author-avatar-img"
+    />
+  </div>
+  <div class="author-info">
+    <div class="author-name">Escrito por Alex Spelucin</div>
+    <p class="author-bio">
+      Consultor independiente especializado en SEO técnico, AI Search y analítica para tiendas Shopify. Documento todo lo que aprendo mientras resuelvo problemas reales de indexación y performance.
+    </p>
+  </div>
+</div>
+
+<style is:global>
+  .author-box {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    margin-top: 3.5rem;
+    max-width: 68ch;
+  }
+  .author-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--color-border);
+  }
+  .author-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .author-info {
+    flex: 1;
+  }
+  .author-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin-bottom: 0.25rem;
+  }
+  .author-bio {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--color-prose-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .author-box {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1.25rem;
+    }
+  }
+</style>

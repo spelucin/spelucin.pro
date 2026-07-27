@@ -1,0 +1,373 @@
+---
+import Base from '../../layouts/Base.astro';
+import SidebarLayout from '../../layouts/SidebarLayout.astro';
+import Footer from '../../components/Footer.astro';
+import ReadingProgress from '../../components/ReadingProgress.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import AuthorBox from '../../components/AuthorBox.astro';
+import ArticleCTA from '../../components/ArticleCTA.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const dateStr = post.data.pubDate.toLocaleDateString('es-AR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Calculate words and reading time
+const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
+const minutes = Math.ceil(wordCount / 200);
+const readingTimeStr = `${minutes} min de lectura`;
+
+// Fetch related articles
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const relatedPosts = allPosts
+  .filter(p => p.data.category === post.data.category && p.id !== post.id)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
+// Find previous & next posts
+const activePostsSorted = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const currentIndex = activePostsSorted.findIndex(p => p.id === post.id);
+const prevPost = currentIndex < activePostsSorted.length - 1 ? activePostsSorted[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? activePostsSorted[currentIndex - 1] : null;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: post.data.updatedDate?.toISOString() || post.data.pubDate.toISOString(),
+  author: {
+    "@type": "Person",
+    name: post.data.author,
+  },
+};
+---
+
+<Base
+  title={post.data.seoTitle || `${post.data.title} - Alex Spelucin`}
+  description={post.data.seoDescription || post.data.description}
+  image={post.data.featuredImage}
+  type="article"
+  publishDate={post.data.pubDate.toISOString()}
+  updatedDate={post.data.updatedDate?.toISOString()}
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+
+  <ReadingProgress />
+
+  <SidebarLayout>
+    <main class="article-detail-main">
+      <div class="article-layout-container">
+        
+        {/* Back Link */}
+        <div class="article-back-link-wrapper reveal">
+          <a href="/escritura/" class="back-link">
+            &larr; Volver al archivo
+          </a>
+        </div>
+
+        {/* Article Header */}
+        <header class="article-header reveal">
+          <div class="article-meta">
+            <time datetime={post.data.pubDate.toISOString()}>{dateStr}</time>
+            <a href={`/escritura/?categoria=${encodeURIComponent(post.data.category)}`} class="article-category">
+              {post.data.category}
+            </a>
+            <span class="article-meta-divider">&middot;</span>
+            <span class="article-word-count">{wordCount} palabras</span>
+            <span class="article-meta-divider">&middot;</span>
+            <span class="article-reading-time">{readingTimeStr}</span>
+          </div>
+
+          <h1 class="article-title">{post.data.title}</h1>
+          <p class="article-description">{post.data.description}</p>
+        </header>
+
+        {/* Dynamic Layout: Content & Sidebar (TOC) */}
+        <div class="article-content-grid">
+          
+          {/* Main content body */}
+          <div class="article-body-col reveal">
+            <div class="prose">
+              <Content />
+            </div>
+            
+            {/* Editorial CTA */}
+            <ArticleCTA />
+
+            {/* Author Box */}
+            <AuthorBox />
+
+            {/* Prev/Next Navigation */}
+            <nav class="article-sibling-nav" aria-label="Navegación de artículos">
+              <div class="sibling-link-wrapper prev">
+                {prevPost && (
+                  <a href={`/escritura/${prevPost.id}/`} class="sibling-link">
+                    <span class="sibling-direction">Anterior</span>
+                    <span class="sibling-title">{prevPost.data.title}</span>
+                  </a>
+                )}
+              </div>
+              <div class="sibling-link-wrapper next">
+                {nextPost && (
+                  <a href={`/escritura/${nextPost.id}/`} class="sibling-link">
+                    <span class="sibling-direction">Siguiente</span>
+                    <span class="sibling-title">{nextPost.data.title}</span>
+                  </a>
+                )}
+              </div>
+            </nav>
+          </div>
+
+          {/* Table of contents column (Desktop only) */}
+          <aside class="article-sidebar-col reveal">
+            <div class="sticky-sidebar-content">
+              <TableOfContents headings={headings} />
+              
+              {relatedPosts.length > 0 && (
+                <div class="related-articles-widget">
+                  <div class="widget-title">Artículos relacionados</div>
+                  <ul class="widget-list">
+                    {relatedPosts.map(rp => (
+                      <li class="widget-item">
+                        <a href={`/escritura/${rp.id}/`} class="widget-link">
+                          {rp.data.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </aside>
+
+        </div>
+
+      </div>
+      <Footer />
+    </main>
+  </SidebarLayout>
+</Base>
+
+<style is:global>
+  .article-detail-main {
+    background: var(--color-background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .article-layout-container {
+    max-width: 58rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+    flex-grow: 1;
+  }
+
+  .article-back-link-wrapper {
+    margin-bottom: 2rem;
+  }
+  .back-link {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .article-header {
+    margin-bottom: 3.5rem;
+    max-width: 68ch;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.75rem;
+    color: var(--color-muted-foreground);
+    font-weight: 500;
+  }
+  .article-meta time {
+    font-variant-numeric: tabular-nums;
+  }
+  .article-meta-divider {
+    color: var(--color-border);
+  }
+  .article-category {
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+  .article-category:hover {
+    text-decoration: underline;
+  }
+  
+  .article-title {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--color-foreground);
+    margin: 0 0 1.25rem;
+    line-height: 1.1;
+  }
+  
+  .article-description {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-prose-muted);
+    margin: 0;
+  }
+
+  /* Grid layout for article body & sidebar */
+  .article-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .article-body-col {
+    min-width: 0;
+  }
+
+  .article-sidebar-col {
+    position: sticky;
+    top: 2.5rem;
+  }
+
+  .sticky-sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  /* Sibling prev/next navigation */
+  .article-sibling-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .sibling-link-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .sibling-link-wrapper.next {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .sibling-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-decoration: none;
+    max-width: 100%;
+  }
+
+  .sibling-direction {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted-foreground);
+  }
+
+  .sibling-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+  .sibling-link:hover .sibling-title {
+    color: var(--color-primary);
+  }
+
+  /* Related articles widget */
+  .related-articles-widget {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.25rem;
+  }
+  
+  .widget-title {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-foreground);
+    margin-bottom: 0.75rem;
+  }
+
+  .widget-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .widget-item {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .widget-link {
+    color: var(--color-prose-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .widget-link:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 1023px) {
+    .article-layout-container {
+      padding-top: 4rem;
+    }
+    .article-content-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .article-sidebar-col {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .article-sibling-nav {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .sibling-link-wrapper.next {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,150 @@
+---
+---
+
+<div id="search-modal-overlay" style="display: none; position: fixed; inset: 0; z-index: 200; background: rgba(13,31,60,0.4); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.2s ease">
+  <div id="search-modal" style="position: fixed; top: 20%; left: 50%; transform: translateX(-50%) scale(0.98); width: calc(100% - 2rem); max-width: 560px; background: #fff; border-radius: 1rem; box-shadow: 0 25px 60px rgba(13,31,60,0.25); opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; overflow: hidden">
+    <div style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; border-bottom: 1px solid rgba(21,96,189,0.08)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(21,96,189,0.4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input
+        id="search-modal-input"
+        type="text"
+        placeholder="Buscar artículos, recursos..."
+        autocomplete="off"
+        style="flex: 1; border: none; outline: none; font-size: 0.9375rem; font-family: inherit; color: #0d1f3c; background: transparent; padding: 0"
+      />
+      <kbd style="font-size: 0.625rem; font-family: inherit; color: rgba(21,96,189,0.35); border: 1px solid rgba(21,96,189,0.12); border-radius: 0.25rem; padding: 0.15rem 0.4rem; flex-shrink: 0">ESC</kbd>
+    </div>
+    <div id="search-modal-results" style="max-height: 360px; overflow-y: auto; padding: 0.5rem">
+    </div>
+    <div id="search-modal-footer" style="display: none; padding: 0.625rem 1.25rem; border-top: 1px solid rgba(21,96,189,0.06); font-size: 0.625rem; color: rgba(21,96,189,0.35); display: flex; align-items: center; gap: 1rem">
+      <span>↑↓ navegar</span>
+      <span>↵ abrir</span>
+      <span>esc cerrar</span>
+    </div>
+  </div>
+</div>
+
+<link href="/_pagefind/pagefind-ui.css" rel="stylesheet" />
+<script is:inline src="/_pagefind/pagefind.js"></script>
+
+<script is:inline>
+(function() {
+  const overlay = document.getElementById('search-modal-overlay');
+  const modal = document.getElementById('search-modal');
+  const input = document.getElementById('search-modal-input');
+  const resultsContainer = document.getElementById('search-modal-results');
+  const footer = document.getElementById('search-modal-footer');
+  let isOpen = false;
+  let activeIndex = -1;
+  let currentResults = [];
+
+  function openSearch() {
+    if (isOpen) return;
+    isOpen = true;
+    overlay.style.display = 'block';
+    footer.style.display = 'flex';
+    requestAnimationFrame(() => {
+      overlay.style.opacity = '1';
+      modal.style.opacity = '1';
+      modal.style.transform = 'translateX(-50%) scale(1)';
+      input.focus();
+    });
+  }
+
+  function closeSearch() {
+    if (!isOpen) return;
+    isOpen = false;
+    overlay.style.opacity = '0';
+    modal.style.opacity = '0';
+    modal.style.transform = 'translateX(-50%) scale(0.98)';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      input.value = '';
+      resultsContainer.innerHTML = '';
+      activeIndex = -1;
+      currentResults = [];
+    }, 200);
+  }
+
+  window.addEventListener('open-search', openSearch);
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (isOpen) closeSearch();
+      else openSearch();
+    }
+    if (e.key === 'Escape' && isOpen) {
+      closeSearch();
+    }
+    if (isOpen && currentResults.length > 0) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, currentResults.length - 1);
+        highlightResult();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, 0);
+        highlightResult();
+      } else if (e.key === 'Enter' && activeIndex >= 0) {
+        e.preventDefault();
+        const link = resultsContainer.querySelector(`[data-result-index="${activeIndex}"]`);
+        if (link) link.click();
+      }
+    }
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeSearch();
+  });
+
+  function highlightResult() {
+    resultsContainer.querySelectorAll('[data-result-index]').forEach((el, i) => {
+      if (i === activeIndex) {
+        el.style.background = 'rgba(21,96,189,0.04)';
+      } else {
+        el.style.background = 'transparent';
+      }
+    });
+  }
+
+  let debounceTimer;
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => search(input.value), 180);
+  });
+
+  async function search(query) {
+    activeIndex = -1;
+    if (!query || query.length < 2) {
+      resultsContainer.innerHTML = '';
+      currentResults = [];
+      return;
+    }
+
+    const results = await window.pagefind.search(query);
+    const limited = results.results.slice(0, 8);
+    currentResults = limited;
+
+    if (limited.length === 0) {
+      resultsContainer.innerHTML = '<div style="padding: 1.5rem 0.75rem; text-align: center; font-size: 0.8125rem; color: rgba(21,96,189,0.4)">Sin resultados</div>';
+      return;
+    }
+
+    let html = '';
+    for (let i = 0; i < limited.length; i++) {
+      const data = await limited[i].data();
+      html += `
+        <a href="${data.url}" data-result-index="${i}" style="display: block; padding: 0.75rem; border-radius: 0.5rem; text-decoration: none; transition: background 0.1s">
+          <div style="font-size: 0.875rem; font-weight: 600; color: #0d1f3c; margin-bottom: 0.15rem; line-height: 1.3">${data.meta?.title || data.url}</div>
+          <div style="font-size: 0.75rem; color: rgba(13,31,60,0.45); line-height: 1.5">${data.meta?.description || ''}</div>
+        </a>
+      `;
+    }
+    resultsContainer.innerHTML = html;
+  }
+})();
+</script>
