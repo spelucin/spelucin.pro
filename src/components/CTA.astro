@@ -27,9 +27,11 @@ const {
       <p style="font-size: 1rem; color: rgba(13,31,60,0.55); line-height: 1.75; margin: 0 0 2.5rem; max-width: 44ch">
         {description}
       </p>
-      <Button href={buttonHref} size="lg">
-        {buttonText} <IconArrowRight />
-      </Button>
+      <div class="cta-btn-wrapper" data-cta-text={buttonText}>
+        <Button href={buttonHref} size="lg">
+          {buttonText} <IconArrowRight />
+        </Button>
+      </div>
       {Astro.slots.has('default') && (
         <div style="margin-top: 1rem">
           <slot />
@@ -38,6 +40,21 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll('.cta-btn-wrapper').forEach(wrapper => {
+    const btn = wrapper.querySelector('a');
+    const text = wrapper.getAttribute('data-cta-text') || 'Agendar llamada';
+    btn?.addEventListener('click', () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'cta_click',
+        cta_text: text,
+        cta_location: 'section-cta',
+      });
+    });
+  });
+</script>
 
 <style is:global>
   .cta-glass {

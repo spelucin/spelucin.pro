@@ -37,7 +37,7 @@ const caseStudies = await getCaseStudies();
 
         <div class="grid gap-6">
           {caseStudies.map((cs) => (
-            <a href={`/casos-de-estudio/${cs.slug}/`} class="case-card" style="text-decoration: none; display: flex; flex-direction: row; border-radius: 1rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s">
+            <a href={`/casos-de-estudio/${cs.slug}/`} class="case-card track-case-study" data-cs-name={cs.client} data-cs-slug={cs.slug} data-cs-industry={cs.industry} style="text-decoration: none; display: flex; flex-direction: row; border-radius: 1rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s">
               {cs.cover && (
                 <img
                   src={cs.cover}
@@ -67,6 +67,20 @@ const caseStudies = await getCaseStudies();
         </div>
       </div>
     </section>
+
+    <script>
+      document.querySelectorAll('.track-case-study').forEach(el => {
+        el.addEventListener('click', () => {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'case_study_click',
+            case_study_name: el.getAttribute('data-cs-name') || '',
+            case_study_slug: el.getAttribute('data-cs-slug') || '',
+            case_study_industry: el.getAttribute('data-cs-industry') || '',
+          });
+        });
+      });
+    </script>
 
     <style is:global>
       .case-card:hover {

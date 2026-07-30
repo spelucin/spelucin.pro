@@ -32,14 +32,7 @@ const meta = await getPageMeta('contacto');
         </p>
       </div>
 
-      <div style="background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 24px rgba(21,96,189,0.07); margin-bottom: 2.5rem">
-        <iframe
-          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3VBJQ4Bds3MPdVVIHk0DQmUqgVXLDzwAU0N6LMxgmQcZNzplwlbvwYnCJgumVae0dHY9P3H94k?gv=true"
-          style="border: 0; width: 100%; height: 600px; display: block"
-          frameborder="0"
-          title="Agendar llamada con Alex Spelucin"
-        ></iframe>
-      </div>
+      <div id="cal-booking" style="background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 24px rgba(21,96,189,0.07); margin-bottom: 2.5rem; min-height: 600px"></div>
 
       <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem">
         <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.08)" />
@@ -97,5 +90,56 @@ const meta = await getPageMeta('contacto');
 
     </div>
   </div>
+
+  <script is:inline>
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal; let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {}; cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    Cal("init", "diagnostico", { origin: "https://cal.com" });
+    Cal.ns["diagnostico"]("inline", {
+      elementOrSelector: "#cal-booking",
+      config: { "layout": "month_view" },
+      calLink: "spelucin/diagnostico"
+    });
+    Cal.ns["diagnostico"]("ui", {
+      "hideEventTypeDetails": false,
+      "layout": "month_view"
+    });
+
+    Cal.ns["diagnostico"]("on", {
+      action: "bookingSuccessfulV2",
+      callback: function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "generate_lead",
+          lead_source: "cal.com",
+          lead_type: "diagnostico"
+        });
+      }
+    });
+  </script>
+
   <Footer />
 </Base>

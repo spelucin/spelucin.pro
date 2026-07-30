@@ -20,9 +20,11 @@ const serpImageSrc = serpImageMetadata.src;
         Auditorías técnicas y estrategia de catálogo para ecommerce. Sin paquetes genéricos.
       </p>
       <div class="reveal">
-        <Button href="/contacto/">
-          Consulta gratuita <IconArrowRight />
-        </Button>
+        <div class="hero-cta-wrapper">
+          <Button href="/contacto/">
+            Consulta gratuita <IconArrowRight />
+          </Button>
+        </div>
       </div>
     </div>
 
@@ -231,3 +233,14 @@ const serpImageSrc = serpImageMetadata.src;
     .chat-typing span { animation: none; }
   }
 </style>
+
+<script>
+  document.querySelector('.hero-cta-wrapper a')?.addEventListener('click', () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'cta_click',
+      cta_text: 'Consulta gratuita',
+      cta_location: 'hero',
+    });
+  });
+</script>

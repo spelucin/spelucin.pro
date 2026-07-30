@@ -53,7 +53,7 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
 
         <a href="/casos-de-estudio/" style={navLinkStyle}>Casos</a>
         <a href="/sobre-mi/" style={navLinkStyle}>Sobre mí</a>
-        <a href="/contacto/" class="btn btn-primary btn-sm">
+        <a href="/contacto/" class="btn btn-primary btn-sm track-cta" data-cta-text="Hablemos" data-cta-location="nav">
           Hablemos <IconArrowRight />
         </a>
       </div>
@@ -103,8 +103,10 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
       <div style="padding-top: 0.5rem">
         <a
           href="/contacto/"
-          class="mobile-nav-link btn btn-primary"
+          class="mobile-nav-link btn btn-primary track-cta"
           style="display: flex; justify-content: center"
+          data-cta-text="Hablemos"
+          data-cta-location="nav-mobile"
         >
           Hablemos <IconArrowRight />
         </a>
@@ -170,6 +172,17 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
       mobileMenu?.classList.add('hidden');
       menuIcon?.classList.remove('hidden');
       closeIcon?.classList.add('hidden');
+    });
+  });
+
+  document.querySelectorAll('.track-cta').forEach(el => {
+    el.addEventListener('click', () => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'cta_click',
+        cta_text: el.getAttribute('data-cta-text') || 'Hablemos',
+        cta_location: el.getAttribute('data-cta-location') || 'nav',
+      });
     });
   });
 </script>
