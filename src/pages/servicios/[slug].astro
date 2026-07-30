@@ -249,39 +249,6 @@ const faqSchema = {
       </div>
     </section>
 
-    {/* ── Bundle Promotion ──────────────────────────── */}
-    {(service.slug === "auditoria-seo-tecnica" || service.slug === "estrategia-de-catalogo") && (
-      <section style="background: #fff; padding: 5rem 0">
-        <div class={`${W} reveal`}>
-          <div style={rule} />
-          <div style="margin-top: 3rem; border: 1px solid rgba(21,96,189,0.08); border-radius: 1rem; padding: 2.5rem 3rem; background: var(--color-surface); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap">
-            <div>
-              <div style="display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem">
-                <span style="width: 5px; height: 5px; border-radius: 50%; background: #1560bd; box-shadow: 0 0 5px rgba(21,96,189,0.5)" />
-                <span style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #1560bd">Shopify SEO Sprint</span>
-              </div>
-              {service.slug === "auditoria-seo-tecnica" ? (
-                <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.65); margin: 0; max-width: 45ch">
-                  ¿Buscas una revisión estratégica más amplia? El <strong>Shopify SEO Sprint</strong> combina esta auditoría con una Estrategia de Catálogo completa en un solo engagement.
-                </p>
-              ) : (
-                <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.65); margin: 0; max-width: 45ch">
-                  ¿Necesitas validación técnica y dirección estratégica? El <strong>Shopify SEO Sprint</strong> combina ambos servicios en un solo engagement.
-                </p>
-              )}
-            </div>
-            <a
-              href="/sprints/shopify-seo-sprint/"
-              class="btn btn-primary"
-              style="flex-shrink: 0"
-            >
-              Ver Sprint <IconArrowRight />
-            </a>
-          </div>
-        </div>
-      </section>
-    )}
-
     {/* ── CTA ───────────────────────────────────────── */}
     <CTA
       id="cta"

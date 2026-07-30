@@ -19,8 +19,12 @@ const faqs = [
     answer: "Combina una Auditoría SEO Técnica con una Estrategia de Catálogo en un solo engagement. Recibes un informe técnico completo, un plan de contenido y arquitectura, un roadmap priorizado a 90 días, recomendaciones de consolidación de contenido y una sesión de strategy walkthrough de 60 minutos.",
   },
   {
+    question: "¿Para qué tipo de tiendas Shopify es?",
+    answer: "Para tiendas Shopify con más de 50 productos que ya tienen tráfico orgánico pero sienten que están estancadas, que no saben si su problema es técnico, de contenido o de estructura de catálogo. No es para tiendas que recién empiezan sin datos en GSC.",
+  },
+  {
     question: "¿Necesito tener los dos servicios por separado para contratar el Sprint?",
-    answer: "No. El Sprint está diseñado precisamente para eso: recibes ambos diagnósticos integrados en un solo entregable con un roadmap unificado. Es más barato y más coherente que comprar los dos servicios por separado.",
+    answer: "No. El Sprint está diseñado precisamente para eso: recibes ambos diagnósticos integrados en un solo entregable con un roadmap unificado. Sale más barato y es más coherente que comprar los dos servicios por separado.",
   },
   {
     question: "¿Esto reemplaza a la Auditoría SEO Técnica o a la Estrategia de Catálogo?",
@@ -31,75 +35,89 @@ const faqs = [
     answer: "Una semana aproximadamente, desde el kickoff hasta la entrega del roadmap. El strategy walkthrough se agenda dentro de los 5 días hábiles posteriores a la entrega.",
   },
   {
+    question: "¿Necesito acceso a Google Search Console?",
+    answer: "Sí. GSC es la fuente principal de datos para el análisis. También necesito acceso de solo lectura a GA4 y acceso colaborador en Shopify. No requiero acceso a checkout ni datos de clientes.",
+  },
+  {
     question: "¿Incluye implementación de los cambios?",
     answer: "No. El entregable es estratégico: informes, planes y roadmaps listos para que tu equipo implemente. Si necesitas ayuda con la implementación, podemos cotizarlo como proyecto aparte.",
+  },
+  {
+    question: "¿Puedo contratar solo la auditoría técnica o solo la estrategia de catálogo?",
+    answer: "Sí. Ambos servicios están disponibles por separado en sus páginas individuales. El Sprint es una oferta de lanzamiento que los combina por un precio más accesible.",
+  },
+  {
+    question: "¿Por qué el precio de lanzamiento es $500?",
+    answer: "Estoy productizando mi proceso de consultoría SEO para Shopify. Durante esta fase de lanzamiento, ofrezco el Sprint completo a un precio inaugural mientras refino el proceso y recojo retroalimentación de los primeros clientes. Una vez que termine esta etapa, el Sprint combinado tendrá un precio distinto.",
+  },
+  {
+    question: "¿Qué pasa cuando termina la oferta de lanzamiento?",
+    answer: "Ambos servicios seguirán disponibles por separado a sus tarifas estándar. El Sprint como oferta combinada podría continuar, pero a un precio diferente al inaugural.",
   },
 ];
 
 const processSteps = [
   {
     title: "Kickoff",
-    description: "Llamada de 30 minutos para entender tu tienda, tu mercado, tus objetivos y coordinar accesos a GSC, GA4 y Shopify.",
+    description: "Entiendo tu tienda, tus prioridades de negocio, tu catálogo y la situación actual de SEO. Coordinamos accesos a GSC, GA4 y Shopify.",
   },
   {
-    title: "Technical SEO Audit",
-    description: "Crawleo tu tienda, analizo Core Web Vitals, schema markup, arquitectura de URLs, canibalización y configuración técnica completa.",
+    title: "Research & Analysis",
+    description: "Revisión técnica de la tienda, análisis de demanda de búsqueda, evaluación de Google Search Console y auditoría de contenido y catálogo.",
   },
   {
-    title: "Catalog & Search Strategy Analysis",
-    description: "Investigación de keywords vertical, análisis de competencia, evaluación de la estructura actual de tus colecciones y detección de oportunidades de demanda.",
-  },
-  {
-    title: "Roadmap",
-    description: "Consolido los hallazgos del audit y la estrategia en un solo plan priorizado a 90 días con recomendaciones de contenido y consolidación.",
+    title: "Strategy & Roadmap",
+    description: "Convierto los hallazgos en un plan priorizado con acciones concretas para los próximos 90 días: qué corregir, qué consolidar, qué crear y en qué orden.",
   },
   {
     title: "Strategy Walkthrough",
-    description: "Sesión de 60 minutos para presentar el roadmap completo, resolver dudas y asegurar que tu equipo tenga claridad absoluta sobre los próximos pasos.",
+    description: "Sesión de 60 minutos para explicar los hallazgos, las recomendaciones y las prioridades. Resolvemos dudas y alineamos al equipo.",
   },
 ];
 
 const pains = [
-  "Google indexa solo una fracción de tu catálogo y no sabes por qué",
-  "Tienes colecciones que compiten entre sí por las mismas keywords sin que lo notes",
-  "Inviertes en contenido nuevo pero no sabes cuál consolidar y cuál reescribir",
-  "Las páginas delgadas y duplicadas están diluyendo tu autoridad sin que lo sepas",
+  "Has producido mucho contenido, pero parte de él compite entre sí por las mismas búsquedas",
+  "El blog posiciona para consultas que deberían llevar a categorías o productos de tu tienda",
+  "Shopify genera páginas duplicadas o innecesarias que diluyen tu autoridad en Google",
+  "No está claro qué categorías, productos o temas tienen demanda real en el mercado",
+  "El equipo sigue produciendo contenido sin saber qué debería reescribirse o consolidarse",
+  "Google Search Console muestra oportunidades, pero no existe una forma clara de priorizarlas",
 ];
 
 const outcomes = [
-  "Sabes exactamente qué está limitando tu crecimiento orgánico",
-  "Identificas qué páginas de tu catálogo compiten entre sí",
-  "Tienes claro qué contenido reescribir para capturar demanda real",
-  "Sabes qué páginas consolidar para eliminar canibalización",
-  "Conoces dónde existe demanda que tu tienda aún no está capturando",
-  "Tienes una lista priorizada de acciones para los próximos 90 días",
+  "Qué está frenando tu crecimiento orgánico — los problemas técnicos, estructurales y de contenido que merecen atención",
+  "Qué páginas están compitiendo entre sí — canibalización y oportunidades de consolidación",
+  "Qué contenido deberías reescribir — páginas desactualizadas, débiles o desalineadas con la intención de búsqueda",
+  "Qué contenido deberías consolidar — páginas superpuestas que deben convertirse en un solo recurso más fuerte",
+  "Dónde existe demanda que todavía no estás aprovechando — oportunidades basadas en datos de búsqueda reales",
+  "Qué debería hacer tu equipo durante los próximos 90 días — un roadmap priorizado por impacto potencial y esfuerzo",
 ];
 
 const deliverableCards = [
   {
     eyebrow: "AUDITORÍA",
     title: "Technical SEO Audit",
-    description: "Análisis profundo de indexación, Core Web Vitals, schema markup y arquitectura de URLs. Sabes exactamente qué bloquea a Google de rastrear e indexar tu catálogo.",
+    description: "Identificamos los problemas técnicos y de Shopify que impiden que Google descubra, entienda e indexe tu tienda eficientemente: indexación, contenido duplicado, crawlabilidad, linking interno, datos estructurados y configuración de Shopify.",
     tag: "Informe completo",
     link: { text: "Ver servicio completo →", href: "/servicios/auditoria-seo-tecnica/" },
   },
   {
     eyebrow: "ESTRATEGIA",
     title: "Catalog Strategy",
-    description: "Keyword research vertical, jerarquía de colecciones, estructura de URLs, manejo de facetas y plan de enlaces internos basado en datos de búsqueda reales.",
+    description: "Identificamos qué buscan realmente tus clientes y cómo esa demanda debería reflejarse en tu catálogo: keyword research, intención de búsqueda, mapeo de temas, oportunidades de categorías, productos y contenido.",
     tag: "Plan de implementación",
     link: { text: "Ver servicio completo →", href: "/servicios/estrategia-de-catalogo/" },
   },
   {
     eyebrow: "ROADMAP",
     title: "Roadmap priorizado a 90 días",
-    description: "No recibes una lista de tareas. Recibes exactamente qué hacer en los próximos 90 días, ordenado por impacto en revenue y esfuerzo de implementación.",
+    description: "No recibes una lista de tareas. Recibes exactamente qué hacer en los próximos 90 días, ordenado por impacto potencial y esfuerzo de implementación.",
     tag: "Quick Wins + Mediano plazo",
   },
   {
     eyebrow: "CONTENIDO",
     title: "Recomendaciones de consolidación",
-    description: "Identificamos páginas delgadas, duplicadas o superpuestas en tu catálogo y te decimos cuáles unificar, cuáles expandir y cuáles dejar morir.",
+    description: "Recomendaciones precisas sobre qué páginas reescribir, cuáles consolidar, cuáles expandir, cuáles eliminar y cuáles mantener. El objetivo no es crear más contenido, sino construir el contenido correcto.",
     tag: "Auditoría de contenido",
   },
   {
@@ -176,22 +194,41 @@ const faqSchema = {
         </div>
 
         <h1 style="font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem; max-width: 22ch">
-          Sabes que tu tienda tiene problemas de SEO. No sabes cuáles atacar primero.
+          Tu tienda tiene problemas de SEO. ¿Sabes cuáles están frenando su crecimiento?
         </h1>
         <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 2.5rem; max-width: 50ch">
-          Un engagement de una semana que combina una Auditoría SEO Técnica y una Estrategia de Catálogo en un solo roadmap priorizado. Sales con claridad, no con un informe que no sabes usar.
+          Un engagement de una semana enfocado en identificar los problemas, las oportunidades y las prioridades que afectan el crecimiento orgánico de tu tienda Shopify.
         </p>
         <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 4rem">
           <Button href="/contacto/">
-            Agendar llamada gratuita <IconArrowRight />
+            Agendar el Sprint <IconArrowRight />
           </Button>
           <span style="display: inline-flex; align-items: center; gap: 0.6rem">
-            <span style="font-size: 0.875rem; font-weight: 500; color: rgba(13,31,60,0.35); text-decoration: line-through">$1,200 USD</span>
-            <span style="font-size: 0.875rem; font-weight: 700; color: #1560bd">$500 USD</span>
-            <span style="font-size: 0.68rem; font-weight: 600; color: #1560bd; background: rgba(21,96,189,0.08); padding: 0.25rem 0.6rem; border-radius: 999px; letter-spacing: 0.02em">Precio inaugural</span>
+            <span style="font-size: 0.7rem; font-weight: 500; color: rgba(13,31,60,0.3)">$2,100+ valor por separado</span>
+            <span style="font-size: 1rem; font-weight: 700; color: #1560bd">$500</span>
+            <span style="font-size: 0.68rem; font-weight: 600; color: #1560bd; background: rgba(21,96,189,0.08); padding: 0.25rem 0.6rem; border-radius: 999px; letter-spacing: 0.02em">Lanzamiento</span>
           </span>
         </div>
         <div style={rule} />
+      </div>
+    </section>
+
+    {/* ── Positioning ──────────────────────────────────── */}
+    <section style="padding: 6rem 0">
+      <div class={`${W} reveal`}>
+        <div class="grid md:grid-cols-12 gap-8 items-center">
+          <div style="grid-column: span 5">
+            <span style="font-size: 3rem; line-height: 1; color: rgba(21,96,189,0.08); font-weight: 700; letter-spacing: -0.06em; display: block; margin-bottom: 1rem">//</span>
+            <p style="font-size: 1.15rem; line-height: 1.65; color: rgba(13,31,60,0.6); margin: 0; font-style: italic">
+              El SEO técnico no sirve de mucho si no sabes qué debería existir en tu tienda.
+            </p>
+          </div>
+          <div style="grid-column: 7 / -1">
+            <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0">
+              Una tienda puede estar técnicamente bien y aun así invertir en contenido que no genera demanda, crear páginas que compiten entre sí o hacer crecer el blog mientras sus categorías y productos quedan atrás.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -202,7 +239,7 @@ const faqSchema = {
           <div style="grid-column: span 4">
             <Eyebrow>El problema</Eyebrow>
             <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.65rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.25">
-              El diagnóstico técnico y la estrategia de contenido casi nunca se miran juntos
+              Mucho contenido no significa una mejor estrategia de búsqueda
             </h2>
           </div>
           <div style="grid-column: span 8">
@@ -314,24 +351,52 @@ const faqSchema = {
       </div>
     </section>
 
-    {/* ── Temporary Offer ──────────────────────────────── */}
-    <section style="padding: 7rem 0">
+    {/* ── Launch Offer ──────────────────────────────── */}
+    <section style="padding: 7rem 0; background: #fff">
       <div class={`${W} reveal`}>
-        <div style={rule} />
-        <div style="margin-top: 3.5rem; border: 1px solid rgba(21,96,189,0.08); border-radius: 1rem; padding: 3rem; background: var(--color-surface); max-width: 48rem">
-          <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1560bd; margin-bottom: 0.75rem">Oferta de lanzamiento</div>
-          <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.65rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1rem; line-height: 1.25">
-            Este precio solo está disponible durante el lanzamiento
-          </h2>
-          <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0 0 1.5rem; max-width: 45ch">
-            Una vez que termine el período de lanzamiento, ambos servicios continuarán disponibles por separado a sus tarifas estándar. Este Sprint combinado a precio inaugural es solo mientras dure la oferta.
-          </p>
-          <Button href="/contacto/">
-            Agendar llamada gratuita <IconArrowRight />
-          </Button>
+        <div class="launch-offer-glass" style="margin-top: 3.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 52rem; position: relative; overflow: hidden; border-radius: 1.25rem; padding: 3rem; border: 1px solid rgba(21,96,189,0.14); box-shadow: 0 4px 24px rgba(21,96,189,0.06), inset 0 1px 0 rgba(255,255,255,0.8); background: linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%); background-image: radial-gradient(circle, rgba(21,96,189,0.18) 1px, transparent 1px), linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%); background-size: 20px 20px, 100% 100%; background-position: 0 0, 0 0">
+          <div style="position: relative; z-index: 1">
+            <Eyebrow>Launch Offer</Eyebrow>
+            <p style="font-size: 1rem; line-height: 1.7; color: rgba(13,31,60,0.65); margin: 1rem 0 0; max-width: 36ch">
+              Estoy productizando mi proceso de consultoría SEO para Shopify. Por tiempo limitado, estoy abriendo un número reducido de Sprints a un precio inaugural mientras refino el proceso y recojo retroalimentación.
+            </p>
+          </div>
+
+          <div style="position: relative; z-index: 1; border-radius: 1rem; padding: 2.5rem; background: rgba(255,255,255,0.6); backdrop-filter: blur(4px); border: 1px solid rgba(21,96,189,0.10)">
+            <div style="font-size: 0.8rem; color: rgba(13,31,60,0.4); line-height: 1.6; margin-bottom: 1.5rem">
+              <span style="font-size: 0.95rem; font-weight: 700; color: #0d1f3c; display: block; margin-bottom: 0.35rem">Valor cuando se compran por separado</span>
+              <span style="font-size: 1.3rem; font-weight: 700; color: rgba(13,31,60,0.25); text-decoration: line-through">$2,100+</span>
+              <div style="font-size: 0.72rem; color: rgba(13,31,60,0.35); margin-top: 0.25rem">
+                Auditoría SEO Técnica: desde $1,200&nbsp;·&nbsp;Estrategia de Catálogo: desde $900
+              </div>
+            </div>
+
+            <div style={rule} />
+
+            <div style="margin-top: 1.5rem; margin-bottom: 1.5rem">
+              <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #1560bd; margin-bottom: 0.5rem">Precio de lanzamiento</div>
+              <div style="font-size: clamp(2.5rem, 4vw, 3rem); font-weight: 700; color: #0d1f3c; letter-spacing: -0.03em; line-height: 1">$500</div>
+              <div style="font-size: 0.8rem; color: rgba(13,31,60,0.45); margin-top: 0.35rem">Número limitado de engagements durante el lanzamiento</div>
+            </div>
+
+            <Button href="/contacto/">
+              Agendar el Sprint <IconArrowRight />
+            </Button>
+          </div>
         </div>
       </div>
     </section>
+
+    <style>
+      .launch-offer-glass::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255,255,255,0.55);
+        pointer-events: none;
+        border-radius: inherit;
+      }
+    </style>
 
     {/* ── FAQ ────────────────────────────────────────── */}
     <section style="background: var(--color-surface); padding: 7rem 0">
@@ -354,11 +419,28 @@ const faqSchema = {
       </div>
     </section>
 
+    {/* ── Final pre-CTA ─────────────────────────────── */}
+    <section style="padding: 5rem 0; background: #fff">
+      <div class={`${W} reveal`}>
+        <div style="text-align: center; max-width: 42rem; margin: 0 auto">
+          <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1rem; line-height: 1.2">
+            Deja de adivinar qué debería hacer tu equipo de SEO.
+          </h2>
+          <p style="font-size: 1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 2rem; max-width: 48ch">
+            Sal del Sprint con una visión clara de qué está frenando tu tienda, qué oportunidades existen y qué debería priorizar tu equipo durante los próximos 90 días.
+          </p>
+          <Button href="/contacto/" size="lg">
+            Agendar el Sprint <IconArrowRight />
+          </Button>
+        </div>
+      </div>
+    </section>
+
     {/* ── CTA ────────────────────────────────────────── */}
     <CTA
       id="cta"
       heading="¿No sabes si este Sprint es para tu tienda?"
-      description="Llamada gratuita de 30 minutos. Evaluamos tu situación y te confirmamos si es el engagement correcto."
+      description="Llamada gratuita de 30 minutos. Evaluamos tu situación y te confirmamos si el Sprint es el engagement correcto."
       buttonText="Agendar llamada"
     />
 
