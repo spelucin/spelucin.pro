@@ -32,7 +32,7 @@ const meta = await getPageMeta('contacto');
         </p>
       </div>
 
-      <div id="cal-booking" style="background: #fff; border: 1px solid rgba(21,96,189,0.12); border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 24px rgba(21,96,189,0.07); margin-bottom: 2.5rem; min-height: 600px"></div>
+      <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-diagnostico"></div>
 
       <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem">
         <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.08)" />
@@ -117,28 +117,17 @@ const meta = await getPageMeta('contacto');
       };
     })(window, "https://app.cal.com/embed/embed.js", "init");
 
-    Cal("init", "diagnostico", { origin: "https://cal.com" });
-    Cal.ns["diagnostico"]("inline", {
-      elementOrSelector: "#cal-booking",
-      config: { "layout": "month_view" },
-      calLink: "spelucin/diagnostico"
-    });
-    Cal.ns["diagnostico"]("ui", {
-      "hideEventTypeDetails": false,
-      "layout": "month_view"
+    Cal("init", "diagnostico", { origin: "https://app.cal.com" });
+    Cal.config = Cal.config || {};
+    Cal.config.forwardQueryParams = true;
+
+    Cal.ns.diagnostico("inline", {
+      elementOrSelector: "#my-cal-inline-diagnostico",
+      config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true", "theme": "light" },
+      calLink: "spelucin/diagnostico",
     });
 
-    Cal.ns["diagnostico"]("on", {
-      action: "bookingSuccessfulV2",
-      callback: function () {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "generate_lead",
-          lead_source: "cal.com",
-          lead_type: "diagnostico"
-        });
-      }
-    });
+    Cal.ns.diagnostico("ui", { "theme": "light", "cssVarsPerTheme": {"light": {"cal-brand": "#1560bd"},"dark": {"cal-brand": "#1560bd"}},"hideEventTypeDetails": false,"layout": "month_view" });
   </script>
 
   <Footer />
