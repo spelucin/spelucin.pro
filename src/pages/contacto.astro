@@ -128,6 +128,18 @@ const meta = await getPageMeta('contacto');
     });
 
     Cal.ns.diagnostico("ui", { "theme": "light", "cssVarsPerTheme": {"light": {"cal-brand": "#1560bd"},"dark": {"cal-brand": "#1560bd"}},"hideEventTypeDetails": false,"layout": "month_view" });
+
+    Cal.ns.diagnostico("on", {
+      action: "bookingSuccessfulV2",
+      callback: function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "generate_lead",
+          lead_source: "cal.com",
+          lead_type: "diagnostico"
+        });
+      }
+    });
   </script>
 
   <Footer />
