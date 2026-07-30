@@ -1,0 +1,367 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Button from '../../components/Button.astro';
+import CTA from '../../components/CTA.astro';
+import IconArrowRight from '../../components/IconArrowRight.astro';
+import ServiceReportMockup from '../../components/ServiceReportMockup.astro';
+import { rule } from '../../data';
+import { getPageMeta } from '../../lib/content';
+
+const meta = await getPageMeta('shopify-seo-sprint');
+const W = "max-w-5xl mx-auto px-6";
+
+const faqs = [
+  {
+    question: "¿Qué incluye exactamente el Shopify SEO Sprint?",
+    answer: "Combina una Auditoría SEO Técnica con una Estrategia de Catálogo en un solo engagement. Recibes un informe técnico completo, un plan de contenido y arquitectura, un roadmap priorizado a 90 días, recomendaciones de consolidación de contenido y una sesión de strategy walkthrough de 60 minutos.",
+  },
+  {
+    question: "¿Necesito tener los dos servicios por separado para contratar el Sprint?",
+    answer: "No. El Sprint está diseñado precisamente para eso: recibes ambos diagnósticos integrados en un solo entregable con un roadmap unificado. Es más barato y más coherente que comprar los dos servicios por separado.",
+  },
+  {
+    question: "¿Esto reemplaza a la Auditoría SEO Técnica o a la Estrategia de Catálogo?",
+    answer: "No. Ambos servicios siguen disponibles por separado si solo necesitas uno de los dos. El Sprint es una oferta temporal que los combina para darte una visión completa.",
+  },
+  {
+    question: "¿Cuánto tiempo dura el Sprint?",
+    answer: "Una semana aproximadamente, desde el kickoff hasta la entrega del roadmap. El strategy walkthrough se agenda dentro de los 5 días hábiles posteriores a la entrega.",
+  },
+  {
+    question: "¿Incluye implementación de los cambios?",
+    answer: "No. El entregable es estratégico: informes, planes y roadmaps listos para que tu equipo implemente. Si necesitas ayuda con la implementación, podemos cotizarlo como proyecto aparte.",
+  },
+];
+
+const processSteps = [
+  {
+    title: "Kickoff",
+    description: "Llamada de 30 minutos para entender tu tienda, tu mercado, tus objetivos y coordinar accesos a GSC, GA4 y Shopify.",
+  },
+  {
+    title: "Technical SEO Audit",
+    description: "Crawleo tu tienda, analizo Core Web Vitals, schema markup, arquitectura de URLs, canibalización y configuración técnica completa.",
+  },
+  {
+    title: "Catalog & Search Strategy Analysis",
+    description: "Investigación de keywords vertical, análisis de competencia, evaluación de la estructura actual de tus colecciones y detección de oportunidades de demanda.",
+  },
+  {
+    title: "Roadmap",
+    description: "Consolido los hallazgos del audit y la estrategia en un solo plan priorizado a 90 días con recomendaciones de contenido y consolidación.",
+  },
+  {
+    title: "Strategy Walkthrough",
+    description: "Sesión de 60 minutos para presentar el roadmap completo, resolver dudas y asegurar que tu equipo tenga claridad absoluta sobre los próximos pasos.",
+  },
+];
+
+const pains = [
+  "Google indexa solo una fracción de tu catálogo y no sabes por qué",
+  "Tienes colecciones que compiten entre sí por las mismas keywords sin que lo notes",
+  "Inviertes en contenido nuevo pero no sabes cuál consolidar y cuál reescribir",
+  "Las páginas delgadas y duplicadas están diluyendo tu autoridad sin que lo sepas",
+];
+
+const outcomes = [
+  "Sabes exactamente qué está limitando tu crecimiento orgánico",
+  "Identificas qué páginas de tu catálogo compiten entre sí",
+  "Tienes claro qué contenido reescribir para capturar demanda real",
+  "Sabes qué páginas consolidar para eliminar canibalización",
+  "Conoces dónde existe demanda que tu tienda aún no está capturando",
+  "Tienes una lista priorizada de acciones para los próximos 90 días",
+];
+
+const deliverableCards = [
+  {
+    eyebrow: "AUDITORÍA",
+    title: "Technical SEO Audit",
+    description: "Análisis profundo de indexación, Core Web Vitals, schema markup y arquitectura de URLs. Sabes exactamente qué bloquea a Google de rastrear e indexar tu catálogo.",
+    tag: "Informe completo",
+    link: { text: "Ver servicio completo →", href: "/servicios/auditoria-seo-tecnica/" },
+  },
+  {
+    eyebrow: "ESTRATEGIA",
+    title: "Catalog Strategy",
+    description: "Keyword research vertical, jerarquía de colecciones, estructura de URLs, manejo de facetas y plan de enlaces internos basado en datos de búsqueda reales.",
+    tag: "Plan de implementación",
+    link: { text: "Ver servicio completo →", href: "/servicios/estrategia-de-catalogo/" },
+  },
+  {
+    eyebrow: "ROADMAP",
+    title: "Roadmap priorizado a 90 días",
+    description: "No recibes una lista de tareas. Recibes exactamente qué hacer en los próximos 90 días, ordenado por impacto en revenue y esfuerzo de implementación.",
+    tag: "Quick Wins + Mediano plazo",
+  },
+  {
+    eyebrow: "CONTENIDO",
+    title: "Recomendaciones de consolidación",
+    description: "Identificamos páginas delgadas, duplicadas o superpuestas en tu catálogo y te decimos cuáles unificar, cuáles expandir y cuáles dejar morir.",
+    tag: "Auditoría de contenido",
+  },
+  {
+    eyebrow: "OPORTUNIDADES",
+    title: "Priorización de oportunidades de búsqueda",
+    description: "Mapeamos los términos con mayor potencial no aprovechado y te mostramos dónde enfocar tu esfuerzo de contenido para capturar tráfico nuevo.",
+    tag: "Análisis de brechas",
+  },
+  {
+    eyebrow: "SESIÓN",
+    title: "Strategy Walkthrough de 60 minutos",
+    description: "Sesión dedicada a recorrer todos los hallazgos, el roadmap y las recomendaciones. Resolvemos dudas y alineamos prioridades con tu equipo.",
+    tag: "Videollamada",
+  },
+];
+
+const idealCards = [
+  "Tu tráfico orgánico lleva meses estancado y no sabes por qué",
+  "Tienes problemas técnicos pero también sospechas que tu estructura de catálogo no ayuda",
+  "Quieres una visión completa antes de invertir en contenido nuevo o rediseñar la tienda",
+  "Estás considerando expandir tu catálogo y necesitas saber qué funciona y qué no",
+  "No sabes si tu prioridad debe ser técnica, estratégica o ambas",
+  "Has comprado servicios de SEO antes y terminaste con informes que no sabías cómo usar",
+  "Tu equipo necesita dirección clara para los próximos meses sin depender de suposiciones",
+  "Quieres tomar decisiones informadas sobre contenido, estructura y esfuerzo técnico",
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Shopify SEO Sprint",
+  name: "Shopify SEO Sprint",
+  description: "Engagement combinado de Technical SEO Audit y Catalog Strategy en un roadmap priorizado para Shopify. Precio inaugural.",
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Alex Spelucin",
+    email: "alex@spelucin.pro",
+  },
+  areaServed: ["MX", "AR", "US", "ES"],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(f => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<Base
+  title={meta.title}
+  description={meta.description}
+  image={meta.image}
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+  <Nav />
+  <div style="background: #fff">
+
+    {/* ── Hero ──────────────────────────────────────────── */}
+    <section style="padding-top: 10rem; padding-bottom: 0">
+      <div class={`${W} reveal`}>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem">
+          <a href="/sprints/" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: rgba(21,96,189,0.45); text-decoration: none; text-transform: uppercase">
+            <span style="transform: rotate(180deg); display: inline-block"><IconArrowRight /></span> Sprints
+          </a>
+          <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.10)" />
+          <Eyebrow>Shopify SEO Sprint</Eyebrow>
+        </div>
+
+        <h1 style="font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem; max-width: 22ch">
+          Sabes que tu tienda tiene problemas de SEO. No sabes cuáles atacar primero.
+        </h1>
+        <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 2.5rem; max-width: 50ch">
+          Un engagement de una semana que combina una Auditoría SEO Técnica y una Estrategia de Catálogo en un solo roadmap priorizado. Sales con claridad, no con un informe que no sabes usar.
+        </p>
+        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 4rem">
+          <Button href="/contacto/">
+            Agendar llamada gratuita <IconArrowRight />
+          </Button>
+          <span style="display: inline-flex; align-items: center; gap: 0.6rem">
+            <span style="font-size: 0.875rem; font-weight: 500; color: rgba(13,31,60,0.35); text-decoration: line-through">$1,200 USD</span>
+            <span style="font-size: 0.875rem; font-weight: 700; color: #1560bd">$500 USD</span>
+            <span style="font-size: 0.68rem; font-weight: 600; color: #1560bd; background: rgba(21,96,189,0.08); padding: 0.25rem 0.6rem; border-radius: 999px; letter-spacing: 0.02em">Precio inaugural</span>
+          </span>
+        </div>
+        <div style={rule} />
+      </div>
+    </section>
+
+    {/* ── El problema ───────────────────────────────────── */}
+    <section style="background: var(--color-surface); padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <div class="grid md:grid-cols-12 gap-8">
+          <div style="grid-column: span 4">
+            <Eyebrow>El problema</Eyebrow>
+            <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.65rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.25">
+              El diagnóstico técnico y la estrategia de contenido casi nunca se miran juntos
+            </h2>
+          </div>
+          <div style="grid-column: span 8">
+            {pains.map((pain, i) => (
+              <div>
+                <div style="display: flex; gap: 1rem; padding-top: 1.25rem; padding-bottom: 1.25rem">
+                  <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.4); flex-shrink: 0; padding-top: 0.15rem; font-variant-numeric: tabular-nums">0{i + 1}</span>
+                  <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.7); margin: 0">{pain}</p>
+                </div>
+                {i < pains.length - 1 && <div style={rule} />}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Lo que sabrás ──────────────────────────────── */}
+    <section style="padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Lo que sabrás después del sprint</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3rem; line-height: 1.2">
+          Claridad para tomar decisiones, no un informe para archivar
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {outcomes.map((item) => (
+            <div style="display: flex; gap: 0.75rem; align-items: flex-start; border: 1px solid rgba(21,96,189,0.08); border-radius: 0.75rem; padding: 1.25rem 1.5rem">
+              <span style="flex-shrink: 0; margin-top: 0.1rem">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1560bd" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <p style="font-size: 0.9rem; line-height: 1.6; color: rgba(13,31,60,0.7); margin: 0">{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Qué incluye ──────────────────────────────── */}
+    <section style="background: var(--color-surface); padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Qué incluye</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3rem; line-height: 1.2">
+          Los dos diagnósticos que necesitas, en un solo Sprint
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {deliverableCards.map((card) => (
+            <div style="border: 1px solid rgba(21,96,189,0.08); border-radius: 0.75rem; padding: 2rem; transition: border-color 0.2s ease;">
+              <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(21,96,189,0.5); margin-bottom: 0.75rem">{card.eyebrow}</div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em; line-height: 1.3">{card.title}</h3>
+              <p style="font-size: 0.875rem; line-height: 1.65; color: rgba(13,31,60,0.55); margin: 0 0 1rem">{card.description}</p>
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem">
+                <span style="font-size: 0.75rem; font-weight: 600; color: rgba(21,96,189,0.4)">{card.tag}</span>
+                {card.link && (
+                  <a href={card.link.href} style="font-size: 0.78rem; font-weight: 600; color: #1560bd; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem">
+                    {card.link.text}
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Para quién es ──────────────────────────────── */}
+    <section style="padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Para quién es</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3rem; line-height: 1.2">
+          Ideal para tiendas que necesitan salir del estancamiento y tener un plan claro
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {idealCards.map((sit) => (
+            <div style="border: 1px solid rgba(21,96,189,0.08); border-radius: 0.75rem; padding: 1.5rem 2rem; transition: border-color 0.2s ease;">
+              <p style="font-size: 0.9375rem; line-height: 1.65; color: rgba(13,31,60,0.7); margin: 0">{sit}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Proceso ────────────────────────────────────── */}
+    <section style="background: var(--color-surface); padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <Eyebrow>Proceso</Eyebrow>
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3.5rem; line-height: 1.2">
+          Cómo funciona el Sprint
+        </h2>
+
+        <div class="grid md:grid-cols-12 gap-10 items-start">
+          <div style="grid-column: span 7">
+            {processSteps.map((step, i, arr) => (
+              <div style={`display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding: 1.75rem 0 ${i < arr.length - 1 ? '1.75rem' : '0'}; ${i < arr.length - 1 ? 'border-bottom: 1px solid rgba(21,96,189,0.06)' : ''}`}>
+                <span style="font-size: 0.8rem; font-weight: 700; color: rgba(21,96,189,0.35); font-variant-numeric: tabular-nums; padding-top: 0.15rem; letter-spacing: 0.02em">0{i + 1}</span>
+                <div>
+                  <h3 style="font-size: 1.05rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em">{step.title}</h3>
+                  <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0; max-width: 52ch">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="process-sticky" style="grid-column: span 5;">
+            <ServiceReportMockup variant="shopify-seo-sprint" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Temporary Offer ──────────────────────────────── */}
+    <section style="padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <div style={rule} />
+        <div style="margin-top: 3.5rem; border: 1px solid rgba(21,96,189,0.08); border-radius: 1rem; padding: 3rem; background: var(--color-surface); max-width: 48rem">
+          <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #1560bd; margin-bottom: 0.75rem">Oferta de lanzamiento</div>
+          <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.65rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0 0 1rem; line-height: 1.25">
+            Este precio solo está disponible durante el lanzamiento
+          </h2>
+          <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0 0 1.5rem; max-width: 45ch">
+            Una vez que termine el período de lanzamiento, ambos servicios continuarán disponibles por separado a sus tarifas estándar. Este Sprint combinado a precio inaugural es solo mientras dure la oferta.
+          </p>
+          <Button href="/contacto/">
+            Agendar llamada gratuita <IconArrowRight />
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    {/* ── FAQ ────────────────────────────────────────── */}
+    <section style="background: var(--color-surface); padding: 7rem 0">
+      <div class={`${W} reveal`}>
+        <div style={rule} />
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 3.5rem 0 2.5rem; line-height: 1.2">
+          Preguntas frecuentes
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 0">
+          {faqs.map((item, i) => (
+            <>
+              {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
+              <div style="padding: 1.5rem 0">
+                <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4; margin-bottom: 0.5rem">{item.question}</div>
+                <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0">{item.answer}</p>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── CTA ────────────────────────────────────────── */}
+    <CTA
+      id="cta"
+      heading="¿No sabes si este Sprint es para tu tienda?"
+      description="Llamada gratuita de 30 minutos. Evaluamos tu situación y te confirmamos si es el engagement correcto."
+      buttonText="Agendar llamada"
+    />
+
+  </div>
+  <Footer />
+</Base>

@@ -20,7 +20,39 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
       </a>
 
       <div class="hidden md:flex items-center gap-7">
-        <a href="/tiendas-nuevas/" class="nav-glow-link" style={navLinkStyle}>Tiendas nuevas</a>
+        <div class="nav-dropdown-wrapper">
+          <a
+            href="/sprints/"
+            class="nav-dropdown-trigger nav-glow-link flex items-center gap-1"
+            style={navLinkStyle}
+          >
+            Sprints
+            <IconChevronDown size={12} />
+          </a>
+          <div class="nav-dropdown-menu">
+            <div
+              style="background: rgba(244,253,255,0.95); border: 1px solid rgba(21,96,189,0.12); border-radius: 0.75rem; box-shadow: 0 12px 40px rgba(21,96,189,0.14); padding: 0.5rem; min-width: 220px; backdrop-filter: blur(16px)"
+            >
+              <a
+                href="/sprints/shopify-seo-sprint/"
+                class="flex flex-col no-underline"
+                style="padding: 0.75rem 0.85rem; border-radius: 0.5rem; transition: background 0.12s; text-decoration: none"
+              >
+                <div style="font-size: 0.875rem; font-weight: 600; color: #0d1f3c; margin-bottom: 0.15rem">Shopify SEO Sprint</div>
+                <div style="font-size: 0.75rem; color: rgba(21,96,189,0.55); font-weight: 500">$500 USD</div>
+              </a>
+              <div style="height: 1px; background: rgba(21,96,189,0.07); margin: 0 0.25rem" />
+              <a
+                href="/sprints/tiendas-nuevas/"
+                class="flex flex-col no-underline"
+                style="padding: 0.75rem 0.85rem; border-radius: 0.5rem; transition: background 0.12s; text-decoration: none"
+              >
+                <div style="font-size: 0.875rem; font-weight: 600; color: #0d1f3c; margin-bottom: 0.15rem">Tiendas Nuevas</div>
+                <div style="font-size: 0.75rem; color: rgba(21,96,189,0.55); font-weight: 500">$900 USD</div>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="nav-dropdown-wrapper">
           <a
             href="/servicios/"
@@ -76,7 +108,33 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
     style="border: 1px solid rgba(21,96,189,0.10); border-radius: 1rem; box-shadow: 0 8px 32px rgba(21,96,189,0.10); backdrop-filter: blur(16px); background: rgba(244,253,255,0.97); margin-top: 8px; overflow: hidden"
   >
     <div class="px-5 py-4 flex flex-col gap-1">
-      <a href="/tiendas-nuevas/" class="mobile-nav-link nav-glow-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Tiendas nuevas</a>
+      <button
+        id="mobile-sprints-toggle"
+        style="display: flex; align-items: center; justify-content: space-between; color: #1560bd; font-weight: 500; font-size: 1rem; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0.5rem 0; width: 100%; text-align: left"
+      >
+        Sprints
+        <span id="mobile-sprints-chevron" style="transition: transform 0.2s"><IconChevronDown size={14} /></span>
+      </button>
+
+      <div id="mobile-sprints-menu" class="hidden" style="padding-left: 0.75rem; padding-bottom: 0.25rem; display: none; flex-direction: column; gap: 0.25rem; border-left: 2px solid rgba(21,96,189,0.15)">
+        <a
+          href="/sprints/shopify-seo-sprint/"
+          class="mobile-service-link"
+          style="text-decoration: none; padding: 0.5rem 0.5rem; border-radius: 0.4rem"
+        >
+          <div style="font-size: 0.9rem; font-weight: 600; color: #0d1f3c">Shopify SEO Sprint</div>
+          <div style="font-size: 0.75rem; color: rgba(21,96,189,0.55); font-weight: 500">$500 USD</div>
+        </a>
+        <a
+          href="/sprints/tiendas-nuevas/"
+          class="mobile-service-link"
+          style="text-decoration: none; padding: 0.5rem 0.5rem; border-radius: 0.4rem"
+        >
+          <div style="font-size: 0.9rem; font-weight: 600; color: #0d1f3c">Tiendas Nuevas</div>
+          <div style="font-size: 0.75rem; color: rgba(21,96,189,0.55); font-weight: 500">$900 USD</div>
+        </a>
+      </div>
+
       <button
         id="mobile-services-toggle"
         style="display: flex; align-items: center; justify-content: space-between; color: #1560bd; font-weight: 500; font-size: 1rem; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0.5rem 0; width: 100%; text-align: left"
@@ -121,6 +179,9 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
   const mobileMenu = document.getElementById('mobile-menu');
   const menuIcon = document.getElementById('menu-icon');
   const closeIcon = document.getElementById('close-icon');
+  const mobileSprintsToggle = document.getElementById('mobile-sprints-toggle');
+  const mobileSprintsMenu = document.getElementById('mobile-sprints-menu');
+  const mobileSprintsChevron = document.getElementById('mobile-sprints-chevron');
   const mobileServicesToggle = document.getElementById('mobile-services-toggle');
   const mobileServicesMenu = document.getElementById('mobile-services-menu');
   const mobileServicesChevron = document.getElementById('mobile-services-chevron');
@@ -152,6 +213,19 @@ const navLinkStyle = "color: rgba(21,96,189,0.65); font-size: 0.875rem; font-wei
     mobileMenu?.classList.toggle('hidden');
     menuIcon?.classList.toggle('hidden');
     closeIcon?.classList.toggle('hidden');
+  });
+
+  mobileSprintsToggle?.addEventListener('click', () => {
+    const isHidden = mobileSprintsMenu?.classList.contains('hidden');
+    if (isHidden) {
+      mobileSprintsMenu?.classList.remove('hidden');
+      mobileSprintsMenu!.style.display = 'flex';
+      mobileSprintsChevron!.style.transform = 'rotate(180deg)';
+    } else {
+      mobileSprintsMenu?.classList.add('hidden');
+      mobileSprintsMenu!.style.display = 'none';
+      mobileSprintsChevron!.style.transform = 'rotate(0deg)';
+    }
   });
 
   mobileServicesToggle?.addEventListener('click', () => {

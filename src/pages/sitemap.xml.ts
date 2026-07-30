@@ -20,7 +20,9 @@ export const GET: APIRoute = async () => {
     "/contacto/",
     "/casos-de-estudio/",
     "/servicios/",
-    "/tiendas-nuevas/",
+    "/sprints/",
+    "/sprints/tiendas-nuevas/",
+    "/sprints/shopify-seo-sprint/",
   ]
   const servicePages = services.map((s) => `/servicios/${s.slug}/`)
 

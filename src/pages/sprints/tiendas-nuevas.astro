@@ -1,37 +1,37 @@
 ---
-import Base from '../layouts/Base.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import Eyebrow from '../components/Eyebrow.astro';
-import Button from '../components/Button.astro';
-import CTA from '../components/CTA.astro';
-import IconArrowRight from '../components/IconArrowRight.astro';
-import ServiceReportMockup from '../components/ServiceReportMockup.astro';
-import { rule } from '../data';
-import { getPageMeta } from '../lib/content';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Button from '../../components/Button.astro';
+import CTA from '../../components/CTA.astro';
+import IconArrowRight from '../../components/IconArrowRight.astro';
+import ServiceReportMockup from '../../components/ServiceReportMockup.astro';
+import { rule } from '../../data';
+import { getPageMeta } from '../../lib/content';
 
 const meta = await getPageMeta('tiendas-nuevas');
 const W = "max-w-5xl mx-auto px-6";
 
 const faqs = [
   {
-    question: "¿Cuándo debo contratar el pack?",
-    answer: "Idealmente 4 a 6 semanas antes del launch. Así la arquitectura está lista cuando tu tienda empieza a recibir tráfico y Google comienza a rastrear. Si ya lanzaste pero tienes poco contenido y mala estructura, también sirve — el cambio es más barato ahora que con 10,000 URLs.",
+    question: "¿Cuándo debo contratar este pack?",
+    answer: "Idealmente 4 a 6 semanas antes del lanzamiento. Así la arquitectura está lista cuando tu tienda empiece a recibir tráfico y Google comience a rastrear. Si ya lanzaste pero tienes poco contenido y mala estructura, también funciona — el cambio es más barato ahora que con 10,000 URLs indexadas.",
   },
   {
     question: "¿Necesito tener los productos cargados?",
-    answer: "No necesariamente. Trabajamos con tu catálogo planificado (incluso en planilla) para definir la jerarquía y las URLs. Si ya tienes productos cargados, mejor — analizamos la estructura actual y proponemos la versión optimizada.",
+    answer: "No necesariamente. Trabajamos con tu catálogo planificado (incluso en una planilla) para definir la jerarquía y las URLs. Si ya tienes productos cargados, mejor — analizamos la estructura actual y proponemos la versión optimizada.",
   },
   {
     question: "¿El pack incluye la implementación en Shopify?",
     answer: "No. El entregable es el plan documentado: jerarquía de colecciones, estructura de URLs, contenido de cada colección y mapa de enlaces internos. La implementación la hace tu equipo o tu desarrollador. Si necesitas ayuda con eso, podemos cotizarlo aparte.",
   },
   {
-    question: "¿Cuánto tarda?",
-    answer: "Entre 8 y 12 días hábiles según la cantidad de categorías. Tiendas con menos de 20 colecciones principales suelen estar listas en 8 días.",
+    question: "¿Cuánto tiempo toma?",
+    answer: "Entre 8 y 12 días hábiles, según la cantidad de categorías. Tiendas con menos de 20 colecciones principales suelen estar listas en 8 días.",
   },
   {
-    question: "¿Sirve para tiendas multiidioma?",
+    question: "¿Funciona para tiendas multiidioma?",
     answer: "Sí, pero el alcance depende de la cantidad de mercados. Lo definimos en la llamada inicial para cotizar correctamente.",
   },
 ];
@@ -39,7 +39,7 @@ const faqs = [
 const processSteps = [
   {
     title: "Llamada de diagnóstico (30 min)",
-    description: "Entendemos tu vertical, los competidores, los productos que vas a vender y el estado actual de la tienda.",
+    description: "Entendemos tu vertical, los competidores, los productos que vas a vender y el estado actual de tu tienda.",
   },
   {
     title: "Análisis de mercado y keywords",
@@ -63,24 +63,24 @@ const pains = [
 ];
 
 const deliverableCards = [
-  { eyebrow: "INVESTIGACIÓN", title: "Keyword research vertical", description: "Análisis completo de demanda real para tu categoría. Volúmenes, intención de búsqueda y oportunidades.", tag: "Documento vivo" },
-  { eyebrow: "ANÁLISIS", title: "Análisis de competidores", description: "Benchmarking de estructura, naming y posicionamiento de competidores clave en tu vertical.", tag: "Insights accionables" },
-  { eyebrow: "ESTRUCTURA", title: "Jerarquía de colecciones y subcolecciones", description: "Mapa documentado de categorías, relaciones semánticas y naming optimizado para SEO.", tag: "Figma + CSV" },
-  { eyebrow: "URLS", title: "Estructura de URLs y naming", description: "Reglas de URLs, manejo de facetas y filtros para evitar duplicación y maximizar indexación.", tag: "Plan de implementación" },
+  { eyebrow: "INVESTIGACIÓN", title: "Keyword research vertical", description: "Análisis completo de demanda real para tu categoría. Volúmenes, intención de búsqueda y oportunidades que tu tienda no está aprovechando.", tag: "Documento vivo" },
+  { eyebrow: "ANÁLISIS", title: "Análisis de competidores", description: "Benchmarking de estructura, naming y posicionamiento de competidores clave en tu vertical. Sabes contra quién compites y cómo diferenciarte.", tag: "Insights accionables" },
+  { eyebrow: "ESTRUCTURA", title: "Jerarquía de colecciones y subcolecciones", description: "Mapa documentado de categorías, relaciones semánticas y naming optimizado para que Google entienda tu catálogo desde el primer crawl.", tag: "Figma + CSV" },
+  { eyebrow: "URLS", title: "Estructura de URLs y naming", description: "Reglas de URLs, manejo de facetas y filtros para evitar duplicación masiva y maximizar la indexación de tus páginas importantes.", tag: "Plan de implementación" },
   { eyebrow: "CONTENIDOS", title: "Contenido de colecciones", description: "Título, descripción y metadata optimizada para cada colección. Listo para implementar directo en Shopify.", tag: "Copy + SEO" },
   { eyebrow: "ENLACES", title: "Plan de enlaces internos", description: "Mapa de enlaces internos que distribuye autoridad hacia tus páginas de mayor potencial comercial.", tag: "Arquitectura" },
-  { eyebrow: "SESIÓN", title: "Sesión de revisión", description: "Reunión para validar la propuesta, resolver dudas de implementación y alinear con tu equipo técnico.", tag: "Videollamada" },
+  { eyebrow: "SESIÓN", title: "Sesión de revisión", description: "Reunión para validar la propuesta, resolver dudas de implementación y alinear a tu equipo técnico.", tag: "Videollamada" },
 ];
 
 const idealCards = [
   "Estás armando tu catálogo en Shopify y quieres que la estructura esté optimizada desde el primer día",
-  "Tienes productos cargados pero la tienda todavía no está live",
+  "Tienes productos cargados pero la tienda todavía no está en vivo",
   "Migraste de otra plataforma y quieres aprovechar para reestructurar bien",
   "Vas a expandir tu catálogo con nuevas categorías y necesitas una base sólida",
   "Quieres evitar el trabajo de reestructurar después de tener miles de URLs",
   "No sabes cómo nombrar las colecciones para que Google las entienda",
   "Los filtros de tu tienda generan páginas duplicadas sin que lo sepas",
-  "Necesitas un plan de enlaces internos antes del launch",
+  "Necesitas un plan de enlaces internos antes del lanzamiento",
 ];
 
 const serviceSchema = {
@@ -124,6 +124,9 @@ const faqSchema = {
     <section style="padding-top: 10rem; padding-bottom: 0">
       <div class={`${W} reveal`}>
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem">
+          <a href="/sprints/" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: rgba(21,96,189,0.45); text-decoration: none; text-transform: uppercase">
+            <span style="transform: rotate(180deg); display: inline-block"><IconArrowRight /></span> Sprints
+          </a>
           <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.10)" />
           <Eyebrow>Tiendas nuevas</Eyebrow>
         </div>
