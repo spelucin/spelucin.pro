@@ -1,0 +1,67 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  faqs: Faq[];
+  eyebrow?: string;
+  title?: string;
+  openCount?: number;
+  tone?: 'surface' | 'white' | 'background';
+  compact?: boolean;
+}
+
+const {
+  faqs,
+  eyebrow = 'Preguntas frecuentes',
+  title = 'Preguntas frecuentes',
+  openCount = 3,
+  tone = 'surface',
+  compact = false,
+} = Astro.props;
+---
+
+<section class:list={['faq-section', `faq-section-${tone}`, { 'faq-section-compact': compact }]}>
+  <div class="max-w-5xl mx-auto px-6 reveal">
+    <div class="faq-section-intro">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2>{title}</h2>
+    </div>
+    <div class="faq-list">
+      {faqs.map((item, index) => (
+        <details class="faq-item" open={index < openCount}>
+          <summary>{item.question}<span aria-hidden="true">+</span></summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is="global">
+  .faq-section { padding: 7rem 0; }
+  .faq-section-white { background: #fff; }
+  .faq-section-surface { background: var(--color-surface); }
+  .faq-section-background { background: var(--color-background); }
+  .faq-section-compact { padding: 5.5rem 0; }
+  .faq-section-intro { max-width: 46rem; margin-bottom: 3.25rem; }
+  .faq-section-intro h2 { max-width: 20ch; margin: 0.65rem 0 0; color: var(--color-foreground); font-size: clamp(1.8rem, 3.8vw, 3rem); font-weight: 700; letter-spacing: -0.055em; line-height: 1.05; }
+  .faq-list { border-top: 1px solid var(--color-border); }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.35rem 0; color: var(--color-foreground); cursor: pointer; font-weight: 600; list-style: none; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary span { color: var(--color-primary); font: 400 1.5rem/1 var(--font-mono); transition: transform 180ms ease; }
+  .faq-item[open] summary span { transform: rotate(45deg); }
+  .faq-item p { max-width: 65ch; margin: 0 0 1.35rem; color: var(--color-prose-muted); line-height: 1.7; }
+  @media (max-width: 767px) {
+    .faq-section { padding: 5rem 0; }
+    .faq-section-intro { margin-bottom: 2.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item summary span { transition: none; }
+  }
+</style>

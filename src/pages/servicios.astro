@@ -6,6 +6,7 @@ import CTA from '../components/CTA.astro';
 import IconArrowRight from '../components/IconArrowRight.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Testimonials from '../components/Testimonials.astro';
+import FaqSection from '../components/FaqSection.astro';
 import IconAudit from '../components/IconAudit.astro';
 import IconCatalog from '../components/IconCatalog.astro';
 import IconWorkshop from '../components/IconWorkshop.astro';
@@ -117,23 +118,7 @@ const faqSchema = {
 
     <Testimonials />
 
-    <section style="background: #fff; padding: 5rem 0">
-      <div class="max-w-5xl mx-auto px-6">
-        <div style={rule} />
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 3rem 0 2rem; line-height: 1.2">Preguntas frecuentes</h2>
-        <div style="display: flex; flex-direction: column; gap: 0">
-          {allFaqs.map((faq, i) => (
-            <>
-              {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
-              <div style="padding: 1.25rem 0">
-                <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4; margin-bottom: 0.5rem">{faq.question}</div>
-                <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0">{faq.answer}</p>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FaqSection faqs={allFaqs} tone="white" />
 
     <CTA
       id="cta"

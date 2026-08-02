@@ -151,12 +151,6 @@ body {
   .editorial-copy { max-width: 56ch; }
 }
 
-/* ── FAQ ─────────────────────────────────────────── */
-.faq-answer {
-  max-height: none;
-  opacity: 1;
-}
-
 /* ── Process sticky mockup ───────────────────────── */
 .process-sticky {
   position: sticky;
@@ -166,7 +160,6 @@ body {
 /* ── Reduced Motion ────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-stagger > * { opacity: 1 !important; animation: none !important; }
-  .faq-answer { transition: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -526,18 +519,7 @@ footer {
   .promo-strip .btn { width: 100%; justify-content: center; }
 }
 
-/* ── Case study metrics ───────────────────────── */
-.case-card-metrics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.75rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-primary-6);
-}
-@media (max-width: 480px) {
-  .case-card-metrics { gap: 1.25rem 1.5rem; }
-}
-
+/* ── Service detail ──────────────────────────── */
 .service-detail-row {
   display: grid;
   grid-template-columns: 2rem minmax(0, 1fr);

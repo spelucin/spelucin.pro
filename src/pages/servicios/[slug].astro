@@ -6,9 +6,10 @@ import Eyebrow from '../../components/Eyebrow.astro';
 import CTA from '../../components/CTA.astro';
 import ServiceHero from '../../components/ServiceHero.astro';
 import ServiceProcess from '../../components/ServiceProcess.astro';
+import FaqSection from '../../components/FaqSection.astro';
 import ProblemSection from '../../components/ProblemSection.astro';
 import { Icon } from 'astro-icon/components';
-import { services, rule } from '../../data';
+import { services } from '../../data';
 import type { Service } from '../../data';
 
 export function getStaticPaths() {
@@ -171,25 +172,7 @@ const faqSchema = {
     <ServiceProcess steps={d.processSteps} mockupVariant={service.slug} heading="Cómo trabajo" />
 
     {/* ── FAQ ───────────────────────────────────────── */}
-    <section style="background: var(--color-surface); padding: 7rem 0">
-      <div class={`${W} reveal`}>
-        <div style={rule} />
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 3.5rem 0 2.5rem; line-height: 1.2">
-          Preguntas frecuentes
-        </h2>
-        <div style="display: flex; flex-direction: column; gap: 0">
-          {d.faq.map((item, i) => (
-            <>
-              {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
-              <div style="padding: 1.5rem 0">
-                <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4; margin-bottom: 0.5rem">{item.question}</div>
-                <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0">{item.answer}</p>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FaqSection faqs={d.faq} />
 
     {/* ── CTA ───────────────────────────────────────── */}
     <CTA

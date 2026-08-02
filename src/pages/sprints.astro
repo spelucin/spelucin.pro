@@ -10,9 +10,38 @@ import Terminal from '../components/Terminal.astro';
 import { Icon } from 'astro-icon/components';
 import { rule } from '../data';
 import { getPageMeta } from '../lib/content';
+import FaqSection from '../components/FaqSection.astro';
 
 const meta = await getPageMeta('sprints');
 const W = "max-w-5xl mx-auto px-6";
+
+const sprintsFaqs = [
+  {
+    question: "¿Cuál es la diferencia entre un Sprint y un servicio?",
+    answer:
+      "Un Sprint combina varios servicios en un solo proyecto, con un entregable unificado y un plan de acción priorizado. Los servicios individuales existen por separado si solo necesitas una evaluación específica.",
+  },
+  {
+    question: "¿Puedo contratar un Sprint si ya compré un servicio por separado?",
+    answer:
+      "Sí. Si ya tienes una auditoría técnica y necesitas la estrategia de catálogo, o viceversa, el Sprint complementa lo que ya tienes y unifica todo en un solo plan de acción.",
+  },
+  {
+    question: "¿Cuánto dura cada Sprint?",
+    answer:
+      "Depende del alcance. El Shopify SEO Sprint dura aproximadamente una semana. El Sprint Tiendas Nuevas toma entre 8 y 12 días hábiles. En la llamada inicial confirmamos el plazo exacto.",
+  },
+  {
+    question: "¿Los Sprints incluyen implementación?",
+    answer:
+      "No. El entregable es estratégico: informes y planes listos para implementar. La implementación la realiza tu equipo o tu desarrollador. Si necesitas ayuda con eso, podemos cotizarlo por separado.",
+  },
+  {
+    question: "¿Qué pasa si no sé cuál Sprint necesito?",
+    answer:
+      "Agenda una llamada gratuita de 30 minutos. Evaluamos tu situación y te recomendamos el proyecto adecuado sin compromiso.",
+  },
+];
 
 const sprints = [
   {
@@ -155,51 +184,7 @@ const collectionSchema = {
     </section>
 
     {/* ── FAQ ──────────────────────────────────────── */}
-    <section style="background: var(--color-surface); padding: 6rem 0">
-      <div class={`${W} reveal`}>
-        <div style={rule} />
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 3rem 0 2.5rem; line-height: 1.2">
-          Preguntas frecuentes
-        </h2>
-        <div style="display: flex; flex-direction: column; gap: 0">
-          {[
-            {
-              question: "¿Cuál es la diferencia entre un Sprint y un servicio?",
-              answer:
-                "Un Sprint combina varios servicios en un solo proyecto, con un entregable unificado y un plan de acción priorizado. Los servicios individuales existen por separado si solo necesitas una evaluación específica.",
-            },
-            {
-              question: "¿Puedo contratar un Sprint si ya compré un servicio por separado?",
-              answer:
-                "Sí. Si ya tienes una auditoría técnica y necesitas la estrategia de catálogo, o viceversa, el Sprint complementa lo que ya tienes y unifica todo en un solo plan de acción.",
-            },
-            {
-              question: "¿Cuánto dura cada Sprint?",
-              answer:
-                "Depende del alcance. El Shopify SEO Sprint dura aproximadamente una semana. El Sprint Tiendas Nuevas toma entre 8 y 12 días hábiles. En la llamada inicial confirmamos el plazo exacto.",
-            },
-            {
-              question: "¿Los Sprints incluyen implementación?",
-              answer:
-                "No. El entregable es estratégico: informes y planes listos para implementar. La implementación la realiza tu equipo o tu desarrollador. Si necesitas ayuda con eso, podemos cotizarlo por separado.",
-            },
-            {
-              question: "¿Qué pasa si no sé cuál Sprint necesito?",
-              answer:
-                "Agenda una llamada gratuita de 30 minutos. Evaluamos tu situación y te recomendamos el proyecto adecuado sin compromiso.",
-            },
-          ].map((item, i, arr) => (
-            <>
-              {i > 0 && <div style="height: 1px; background: rgba(21,96,189,0.07)" />}
-              <div style="padding: 1.5rem 0">
-                <div style="font-size: 0.95rem; font-weight: 600; color: #0d1f3c; line-height: 1.4; margin-bottom: 0.5rem">{item.question}</div>
-                <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0">{item.answer}</p>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
-    </section>
+    <FaqSection faqs={sprintsFaqs} tone="surface" />
 
     <CTA
       id="cta"

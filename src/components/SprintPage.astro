@@ -1,6 +1,7 @@
 ---
 import CTA from './CTA.astro';
 import Eyebrow from './Eyebrow.astro';
+import FaqSection from './FaqSection.astro';
 import Footer from './Footer.astro';
 import IconArrowRight from './IconArrowRight.astro';
 import ProblemSection from './ProblemSection.astro';
@@ -195,22 +196,7 @@ const W = 'max-w-5xl mx-auto px-6';
 
   <ServiceProcess steps={process} mockupVariant={mockupVariant} />
 
-  <section class="sprint-section sprint-faq-section">
-    <div class={`${W} reveal`}>
-      <div class="sprint-section-intro">
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
-        <h2>Antes de agendar</h2>
-      </div>
-      <div class="sprint-faq-list">
-        {faqs.map((item, index) => (
-          <details class="sprint-faq" open={index === 0}>
-            <summary>{item.question}<span aria-hidden="true">+</span></summary>
-            <p>{item.answer}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
+  <FaqSection faqs={faqs} title="Antes de agendar" tone="background" compact={compact} />
 
   <CTA id="cta" heading={ctaHeading} description={ctaDescription} buttonText={ctaButtonText} />
 </div>
@@ -262,13 +248,6 @@ const W = 'max-w-5xl mx-auto px-6';
   .sprint-page-compact .service-hero { padding-bottom: 5rem; }
   .sprint-page-compact .sprint-positioning { padding-top: 6.5rem; padding-bottom: 5rem; }
   .sprint-page-compact .sprint-section-intro { margin-bottom: 2.25rem; }
-  .sprint-faq-list { border-top: 1px solid var(--color-border); }
-  .sprint-faq { border-bottom: 1px solid var(--color-border); }
-  .sprint-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.35rem 0; color: var(--color-foreground); cursor: pointer; font-weight: 600; list-style: none; }
-  .sprint-faq summary::-webkit-details-marker { display: none; }
-  .sprint-faq summary span { color: var(--color-primary); font: 400 1.5rem/1 var(--font-mono); transition: transform 180ms ease; }
-  .sprint-faq[open] summary span { transform: rotate(45deg); }
-  .sprint-faq p { max-width: 65ch; margin: 0 0 1.35rem; color: var(--color-prose-muted); line-height: 1.7; }
   @media (max-width: 767px) {
     .sprint-positioning-grid, .sprint-process-layout { grid-template-columns: 1fr; gap: 3rem; }
     .sprint-positioning { padding: 6rem 0 4.5rem; }

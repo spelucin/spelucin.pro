@@ -50,7 +50,32 @@ const { backHref, backLabel, eyebrow, title, description, ctaText, price, priceL
   .service-hero-offer { display: inline-flex; align-items: baseline; gap: 0.6rem; color: var(--color-primary); }
   .service-hero-offer span { color: var(--color-foreground-50); font: 500 0.68rem/1.2 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
   .service-hero-offer strong { font: 700 1rem/1 var(--font-mono); letter-spacing: -0.03em; }
-  .service-hero-offer em { padding: 0.25rem 0.5rem; border-left: 1px solid var(--color-primary-35); color: var(--color-primary); font: 600 0.65rem/1.2 var(--font-mono); font-style: normal; }
+  .service-hero-offer em {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.75rem 0.3rem 0.65rem;
+    border: 1px solid var(--color-primary-20);
+    border-radius: 9999px;
+    background: var(--color-primary-8);
+    color: var(--color-primary);
+    font: 600 0.65rem/1.2 var(--font-mono);
+    font-style: normal;
+  }
+  .service-hero-offer em::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    animation: badge-pulse 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  @keyframes badge-pulse {
+    0% { box-shadow: 0 0 0 0 var(--color-primary-35); opacity: 1; }
+    50% { opacity: 0.7; }
+    70% { box-shadow: 0 0 0 0.45rem transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; opacity: 1; }
+  }
   @media (max-width: 767px) {
     .service-hero { padding: 5.5rem 0 4rem; }
     .service-hero-topline { margin-bottom: 2.5rem; }
