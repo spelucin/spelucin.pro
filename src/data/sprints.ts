@@ -111,9 +111,7 @@ export const sprints: Sprint[] = [
     priceLabel: 'Precio del Sprint',
     price: '$900',
     mockupVariant: 'tiendas-nuevas',
-    positioningIcon: 'ph:storefront',
-    positioningTitle: 'Lo más caro en SEO no es hacerlo bien. Es reestructurar después de tener miles de URLs.',
-    positioningDescription: 'La mayoría de tiendas nuevas lanzan con colecciones nombradas internamente, URLs generadas automáticamente y páginas sin contenido. Google empieza a rastrear sobre una base frágil, y cada cambio posterior cuesta más caro mientras más páginas tenga el catálogo. Este Sprint está diseñado para que tu tienda arranque con una arquitectura de catálogo pensada para búsqueda desde el día uno.',
+    showPositioning: false,
     problemTitle: 'Una tienda nueva puede quedar mal estructurada desde el primer día',
     problemDescription: 'Las colecciones suelen empezar con nombres internos, las URLs se generan sin jerarquía y las páginas salen sin contenido suficiente para que Google las entienda. Si además los filtros crean duplicados, cada cambio posterior cuesta más mientras crece el catálogo.',
     pains: [
