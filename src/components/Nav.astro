@@ -5,6 +5,7 @@ import IconMenu from './IconMenu.astro';
 import IconClose from './IconClose.astro';
 import IconArrowRight from './IconArrowRight.astro';
 import IconChevronDown from './IconChevronDown.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
@@ -84,20 +85,24 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 
         <a href="/casos-de-estudio/" class={`nav-link ${isActive('/casos-de-estudio/') ? 'active' : ''}`}>Casos</a>
         <a href="/sobre-mi/" class={`nav-link ${isActive('/sobre-mi/') ? 'active' : ''}`}>Sobre mí</a>
+        <ThemeToggle />
         <a href="/contacto/" class="btn btn-primary btn-sm track-cta" data-cta-text="Hablemos" data-cta-location="nav">
           Hablemos <IconArrowRight />
         </a>
       </div>
 
-      <button
-        id="menu-toggle"
-        class="md:hidden"
-        style="color: #1560bd; background: none; border: none; cursor: pointer; padding: 4px"
-        aria-label="Toggle menu"
-      >
-        <span id="menu-icon"><IconMenu /></span>
-        <span id="close-icon" class="hidden"><IconClose /></span>
-      </button>
+      <div class="md:hidden flex items-center gap-3">
+        <ThemeToggle />
+        <button
+          id="menu-toggle"
+          class="md:hidden"
+          style="color: var(--color-primary); background: none; border: none; cursor: pointer; padding: 4px"
+          aria-label="Toggle menu"
+        >
+          <span id="menu-icon"><IconMenu /></span>
+          <span id="close-icon" class="hidden"><IconClose /></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -157,6 +162,10 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
 
       <a href="/casos-de-estudio/" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Casos</a>
       <a href="/sobre-mi/" class="mobile-nav-link" style="color: #1560bd; font-weight: 500; text-decoration: none; font-size: 1rem; padding: 0.5rem 0">Sobre mí</a>
+      <div class="theme-toggle-mobile">
+        <span class="theme-toggle-mobile-label">Modo oscuro</span>
+        <ThemeToggle />
+      </div>
       <div style="padding-top: 0.5rem">
         <a
           href="/contacto/"
@@ -268,7 +277,7 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
     transform: translateX(-50%);
     z-index: 50;
     width: calc(100% - 24px);
-    max-width: 720px;
+    max-width: 800px;
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .nav-pill-inner {
@@ -337,13 +346,13 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #1560bd;
-    box-shadow: 0 0 6px rgba(21,96,189,0.6), 0 0 12px rgba(21,96,189,0.3);
+    background: var(--color-primary);
+    box-shadow: 0 0 6px var(--color-primary-50), 0 0 12px var(--color-primary-35);
     animation: glow-pulse 2s ease-in-out infinite;
     flex-shrink: 0;
   }
   @keyframes glow-pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(21,96,189,0.6), 0 0 12px rgba(21,96,189,0.3); }
-    50% { opacity: 0.5; box-shadow: 0 0 3px rgba(21,96,189,0.3), 0 0 6px rgba(21,96,189,0.15); }
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--color-primary-50), 0 0 12px var(--color-primary-35); }
+    50% { opacity: 0.5; box-shadow: 0 0 3px var(--color-primary-35), 0 0 6px var(--color-primary-20); }
   }
 </style>

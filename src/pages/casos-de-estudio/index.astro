@@ -53,7 +53,7 @@ const caseStudies = await getCaseStudies();
                 <p style="font-size: 0.875rem; color: rgba(13,31,60,0.55); line-height: 1.65; margin: 0 0 1.25rem">
                   {cs.shortDescription || cs.summary}
                 </p>
-                <div style="display: flex; gap: 1.75rem; padding-top: 1rem; border-top: 1px solid rgba(21,96,189,0.07)">
+                <div class="case-card-metrics">
                   {cs.results.slice(0, 3).map((m) => (
                     <div>
                       <div style="font-size: 0.95rem; font-weight: 700; color: #1560bd; letter-spacing: -0.02em">{m.value}</div>

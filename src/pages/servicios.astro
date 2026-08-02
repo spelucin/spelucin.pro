@@ -54,7 +54,7 @@ const faqSchema = {
 
         <div class="grid md:grid-cols-3 gap-6" style="padding-top: 3rem">
           {services.map((s, i) => (
-            <a href={`/servicios/${s.slug}/`} class="service-card" style="text-decoration: none; display: flex; flex-direction: column; border-radius: 1rem; padding: 2rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s">
+            <a href={`/servicios/${s.slug}/`} class="service-card" style="text-decoration: none; display: flex; flex-direction: column; border-radius: 1rem; padding: clamp(1.5rem, 3.5vw, 2rem); border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s">
               <div style="margin-bottom: 1.25rem">
                 {icons[i] && (() => { const Icon = icons[i]; return <Icon size={28} />; })()}
               </div>
@@ -75,7 +75,7 @@ const faqSchema = {
     <section style="background: #fff; padding: 0 0 4rem">
       <div class="max-w-5xl mx-auto px-6 reveal">
         <div style={rule} />
-        <div style="margin-top: 2rem; border: 1px solid rgba(21,96,189,0.10); border-radius: 1rem; padding: 2.5rem; background: var(--color-surface); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap">
+        <div class="promo-strip">
           <div>
             <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem">
               <span style="width: 5px; height: 5px; border-radius: 50%; background: #1560bd; box-shadow: 0 0 5px rgba(21,96,189,0.5)" />
@@ -85,7 +85,7 @@ const faqSchema = {
               ¿Buscas un proyecto más completo? Los <strong>Sprints</strong> combinan varios servicios en un solo entregable, con alcance y plazo definidos.
             </p>
           </div>
-          <a href="/sprints/" class="btn btn-primary" style="flex-shrink: 0">
+          <a href="/sprints/" class="btn btn-primary">
             Ver Sprints <IconArrowRight />
           </a>
         </div>

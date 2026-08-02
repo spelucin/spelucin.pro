@@ -83,7 +83,7 @@ const collectionSchema = {
             <a
               href={s.href}
               class="service-card sprints-index-card"
-              style="text-decoration: none; display: flex; flex-direction: column; padding: 2.5rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s"
+              style="text-decoration: none; display: flex; flex-direction: column; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s"
             >
               <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem">
                 <div class="sprint-index-icon">
@@ -118,13 +118,13 @@ const collectionSchema = {
     <section style="background: #fff; padding: 0 0 4rem">
       <div class={`${W} reveal`}>
         <div style={rule} />
-        <div style="margin-top: 2rem; border: 1px solid rgba(21,96,189,0.10); border-radius: 1rem; padding: 2.5rem; background: var(--color-surface); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap">
+        <div class="promo-strip">
           <div>
             <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.65); margin: 0; max-width: 45ch">
               ¿Necesitas solo una evaluación específica? Los <strong>servicios individuales</strong> están disponibles por separado si tu caso requiere un diagnóstico más acotado.
             </p>
           </div>
-          <a href="/servicios/" class="btn btn-primary" style="flex-shrink: 0">
+          <a href="/servicios/" class="btn btn-primary">
             Ver servicios <IconArrowRight />
           </a>
         </div>
