@@ -43,10 +43,11 @@ const personSchema = {
 };
 ---
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
@@ -76,8 +77,9 @@ const personSchema = {
       <slot name="schema" />
     </head>
   <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <GoogleTagManager gtmId={import.meta.env.PUBLIC_GTM_ID} />
-    <slot />
+    <div id="main-content"><slot /></div>
   </body>
 </html>
 

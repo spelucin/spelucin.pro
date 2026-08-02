@@ -1,0 +1,60 @@
+---
+import Button from './Button.astro';
+import Eyebrow from './Eyebrow.astro';
+import IconArrowRight from './IconArrowRight.astro';
+
+interface Props {
+  backHref: string;
+  backLabel: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  price: string;
+  priceLabel?: string;
+  badge?: string;
+}
+
+const { backHref, backLabel, eyebrow, title, description, ctaText, price, priceLabel, badge } = Astro.props;
+---
+
+<section class="service-hero">
+  <div class="max-w-5xl mx-auto px-6 reveal">
+    <div class="service-hero-topline">
+      <a href={backHref} class="service-hero-back"><span aria-hidden="true">←</span> {backLabel}</a>
+      <div class="service-hero-rule" />
+      <Eyebrow>{eyebrow}</Eyebrow>
+    </div>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <div class="service-hero-actions">
+      <Button href="/contacto/">{ctaText} <IconArrowRight /></Button>
+      <div class="service-hero-offer" aria-label={`Precio ${price}`}>
+        {priceLabel && <span>{priceLabel}</span>}
+        <strong>{price}</strong>
+        {badge && <em>{badge}</em>}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is="global">
+  .service-hero { padding: 7.5rem 0 4rem; background: var(--color-background); }
+  .service-hero-topline { display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem; }
+  .service-hero-back { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--color-primary-50); font: 600 0.68rem/1.2 var(--font-mono); letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+  .service-hero-back:hover { color: var(--color-primary); }
+  .service-hero-rule { flex: 1; height: 1px; background: var(--color-border); }
+  .service-hero h1 { max-width: 22ch; margin: 0 0 1.5rem; color: var(--color-foreground); font: 700 clamp(2.25rem, 5.5vw, 4rem)/1.04 'DM Sans', sans-serif; letter-spacing: -0.04em; text-wrap: balance; }
+  .service-hero > .max-w-5xl > p { max-width: 50ch; margin: 0; color: var(--color-prose-muted); font-size: 1.1rem; line-height: 1.7; }
+  .service-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem 1.5rem; margin-top: 2.5rem; }
+  .service-hero-offer { display: inline-flex; align-items: baseline; gap: 0.6rem; color: var(--color-primary); }
+  .service-hero-offer span { color: var(--color-foreground-50); font: 500 0.68rem/1.2 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .service-hero-offer strong { font: 700 1rem/1 var(--font-mono); letter-spacing: -0.03em; }
+  .service-hero-offer em { padding: 0.25rem 0.5rem; border-left: 1px solid var(--color-primary-35); color: var(--color-primary); font: 600 0.65rem/1.2 var(--font-mono); font-style: normal; }
+  @media (max-width: 767px) {
+    .service-hero { padding: 5.5rem 0 4rem; }
+    .service-hero-topline { margin-bottom: 2.5rem; }
+    .service-hero h1 { font-size: clamp(2.25rem, 11vw, 3.5rem); }
+    .service-hero-actions { align-items: flex-start; flex-direction: column; }
+  }
+</style>

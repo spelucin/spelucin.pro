@@ -1,0 +1,110 @@
+---
+import Button from './Button.astro';
+import Eyebrow from './Eyebrow.astro';
+import IconArrowRight from './IconArrowRight.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  price?: string;
+  priceLabel?: string;
+  badge?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  ctaText,
+  price,
+  priceLabel,
+  badge,
+  secondaryText,
+  secondaryHref = '#cta',
+} = Astro.props;
+---
+
+<section class="page-hero sprint-hero">
+  <div class="max-w-5xl mx-auto px-6 reveal">
+    <Eyebrow>{eyebrow}</Eyebrow>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <div class="page-hero-actions">
+      <Button href="/contacto/">
+        {ctaText} <IconArrowRight />
+      </Button>
+      {(price || badge) && (
+        <span class="page-hero-offer">
+          {priceLabel && <span class="page-hero-price-label">{priceLabel}</span>}
+          {price && <strong>{price}</strong>}
+          {badge && <span class="page-hero-badge">{badge}</span>}
+        </span>
+      )}
+      {secondaryText && (
+        <a class="page-hero-secondary" href={secondaryHref}>
+          {secondaryText} <IconArrowRight />
+        </a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .page-hero {
+    padding: 10rem 0 4rem;
+    background: var(--color-background);
+  }
+  .page-hero h1 {
+    max-width: 20ch;
+    margin: 0.7rem 0 1.5rem;
+    color: var(--color-foreground) !important;
+    font: 700 clamp(2.5rem, 5vw, 4rem)/1.05 'DM Sans', sans-serif;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+  .page-hero p {
+    max-width: 52ch;
+    margin: 0;
+    color: var(--color-prose-muted) !important;
+    font: 400 1.1rem/1.7 'DM Sans', sans-serif;
+  }
+  .page-hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .page-hero-offer { display: inline-flex; align-items: center; gap: 0.6rem; }
+  .page-hero-price-label { color: var(--color-foreground-40); font-size: 0.7rem; }
+  .page-hero-offer strong { color: var(--color-primary); font-size: 1rem; }
+  .page-hero-badge {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--color-primary-20);
+    border-radius: 0.35rem;
+    background: var(--color-primary-8);
+    color: var(--color-primary);
+    font-size: 0.68rem;
+    font-weight: 600;
+  }
+  .page-hero-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-foreground-55);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 180ms ease, transform 180ms ease;
+  }
+  .page-hero-secondary:hover { color: var(--color-primary); transform: translateX(2px); }
+  .page-hero-secondary svg { width: 1rem; }
+  @media (max-width: 767px) {
+    .page-hero { padding: 6rem 0 3.5rem; }
+    .page-hero h1 { font-size: clamp(2.35rem, 12vw, 3.5rem); }
+    .page-hero-actions { align-items: flex-start; flex-direction: column; }
+  }
+</style>

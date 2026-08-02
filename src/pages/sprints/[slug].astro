@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import SprintPage from '../../components/SprintPage.astro';
+import { getPageMeta } from '../../lib/content';
+import { sprints } from '../../data/sprints';
+
+export function getStaticPaths() {
+  return sprints.map((sprint) => ({
+    params: { slug: sprint.slug },
+    props: { sprint },
+  }));
+}
+
+const { sprint } = Astro.props;
+const meta = await getPageMeta(sprint.slug);
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: sprint.eyebrow,
+  name: sprint.eyebrow,
+  description: sprint.schemaDescription,
+  provider: { '@type': 'ProfessionalService', name: 'Alex Spelucin', email: 'alex@spelucin.pro' },
+  areaServed: ['MX', 'AR', 'US', 'ES'],
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: sprint.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+---
+
+<Base title={meta.title} description={meta.description} image={meta.image}>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+  <Nav />
+  <SprintPage {...sprint} />
+</Base>

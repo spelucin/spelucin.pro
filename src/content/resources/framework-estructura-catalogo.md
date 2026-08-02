@@ -2,7 +2,7 @@
 title: "Framework de estructura de catálogo"
 description: "Plantilla para diseñar la jerarquía de colecciones, estructura de URLs y plan de enlaces internos de una tienda Shopify."
 category: "Frameworks"
-thumbnail: ""
+thumbnail: "/og/framework-estructura-catalogo.jpg"
 downloadLink: "https://docs.google.com/document/d/example-framework"
 externalLink: "https://docs.google.com/document/d/example-framework"
 pubDate: 2026-04-15

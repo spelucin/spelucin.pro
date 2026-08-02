@@ -3,10 +3,11 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
-import Button from '../../components/Button.astro';
 import CTA from '../../components/CTA.astro';
-import IconArrowRight from '../../components/IconArrowRight.astro';
-import ServiceReportMockup from '../../components/ServiceReportMockup.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceProcess from '../../components/ServiceProcess.astro';
+import ProblemSection from '../../components/ProblemSection.astro';
+import { Icon } from 'astro-icon/components';
 import { services, rule } from '../../data';
 import type { Service } from '../../data';
 
@@ -20,6 +21,7 @@ export function getStaticPaths() {
 const { service } = Astro.props as { service: Service };
 const d = service.detail;
 const W = "max-w-5xl mx-auto px-6";
+const deliverableIcons = ['ph:file-text', 'ph:tree-structure', 'ph:chat-circle', 'ph:folder-open'];
 
 const deliverableCards: Record<string, { eyebrow: string; title: string; description: string; tag: string }[]> = {
   "auditoria-seo-tecnica": [
@@ -112,56 +114,17 @@ const faqSchema = {
   <Nav />
   <div style="background: #fff">
 
-    <section style="padding-top: 10rem; padding-bottom: 0">
-      <div class={`${W} reveal`}>
-        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem">
-          <a href="/#servicios" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: rgba(21,96,189,0.45); text-decoration: none; text-transform: uppercase">
-            <span style="transform: rotate(180deg); display: inline-block"><IconArrowRight /></span> Servicios
-          </a>
-          <div style="flex: 1; height: 1px; background: rgba(21,96,189,0.10)" />
-          <Eyebrow>{service.name}</Eyebrow>
-        </div>
+    <ServiceHero
+      backHref="/#servicios"
+      backLabel="Servicios"
+      eyebrow={service.name}
+      title={d.heroHeadline}
+      description={d.heroSubheadline}
+      ctaText="Agendar llamada gratuita"
+      price={service.price}
+    />
 
-        <h1 style="font-size: clamp(2.25rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.5rem; max-width: 22ch">
-          {d.heroHeadline}
-        </h1>
-        <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 2.5rem; max-width: 50ch">
-          {d.heroSubheadline}
-        </p>
-        <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 4rem">
-          <Button href="/contacto/">
-            Agendar llamada gratuita <IconArrowRight />
-          </Button>
-          <span style="font-size: 0.875rem; font-weight: 600; color: rgba(21,96,189,0.6)">{service.price}</span>
-        </div>
-        <div style={rule} />
-      </div>
-    </section>
-
-    {/* ─ El problema ─────────────────────────────────── */}
-    <section style="background: var(--color-surface); padding: 7rem 0">
-      <div class={`${W} reveal`}>
-        <div class="grid md:grid-cols-12 gap-8">
-          <div style="grid-column: span 4">
-            <Eyebrow>El problema</Eyebrow>
-            <h2 style="font-size: clamp(1.35rem, 2.5vw, 1.65rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.25">
-              {d.problemContext}
-            </h2>
-          </div>
-          <div style="grid-column: span 8">
-            {d.pains.map((pain, i, arr) => (
-              <div>
-                <div style="display: flex; gap: 1rem; padding-top: 1.25rem; padding-bottom: 1.25rem">
-                  <span style="font-size: 0.7rem; font-weight: 700; color: rgba(21,96,189,0.4); flex-shrink: 0; padding-top: 0.15rem; font-variant-numeric: tabular-nums">0{i + 1}</span>
-                  <p style="font-size: 0.9375rem; line-height: 1.7; color: rgba(13,31,60,0.7); margin: 0">{pain}</p>
-                </div>
-                {i < arr.length - 1 && <div style={rule} />}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+    <ProblemSection title={d.problemContext} description={d.problemDescription} />
 
     {/* ── Entregables ─────────────────────────────────── */}
     <section style="padding: 7rem 0">
@@ -170,13 +133,16 @@ const faqSchema = {
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3rem; line-height: 1.2">
           Qué recibes al contratar este servicio
         </h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          {(deliverableCards[service.slug] || []).map((card) => (
-            <div style="border: 1px solid rgba(21,96,189,0.08); border-radius: 0.75rem; padding: 2rem; transition: border-color 0.2s ease;">
-              <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(21,96,189,0.5); margin-bottom: 0.75rem">{card.eyebrow}</div>
-              <h3 style="font-size: 1.1rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em; line-height: 1.3">{card.title}</h3>
-              <p style="font-size: 0.875rem; line-height: 1.65; color: rgba(13,31,60,0.55); margin: 0 0 1.25rem">{card.description}</p>
-              <span style="font-size: 0.75rem; font-weight: 600; color: rgba(21,96,189,0.4)">{card.tag}</span>
+        <div class="service-detail-deliverables">
+          {(deliverableCards[service.slug] || []).map((card, index) => (
+            <div class="service-detail-deliverable">
+              <div class="service-detail-icon" aria-hidden="true"><Icon name={deliverableIcons[index] ?? 'ph:check'} width={19} height={19} /></div>
+              <div>
+                <div class="service-detail-item-label">{card.eyebrow}</div>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+                <span>{card.tag}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -190,10 +156,11 @@ const faqSchema = {
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3rem; line-height: 1.2">
           {d.idealFor}
         </h2>
-        <div class="grid md:grid-cols-2 gap-4">
+        <div class="service-detail-ideal-grid">
           {(idealCards[service.slug] || []).map((sit) => (
-            <div style="border: 1px solid rgba(21,96,189,0.08); border-radius: 0.75rem; padding: 1.5rem 2rem; transition: border-color 0.2s ease;">
-              <p style="font-size: 0.9375rem; line-height: 1.65; color: rgba(13,31,60,0.7); margin: 0">{sit}</p>
+            <div class="service-detail-row service-detail-ideal-row">
+              <div class="service-detail-icon" aria-hidden="true"><Icon name="ph:check" width={18} height={18} /></div>
+              <p>{sit}</p>
             </div>
           ))}
         </div>
@@ -201,32 +168,7 @@ const faqSchema = {
     </section>
 
     {/* ── Proceso ───────────────────────────────────── */}
-    <section style="padding: 7rem 0">
-      <div class={`${W} reveal`}>
-        <Eyebrow>Proceso</Eyebrow>
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.03em; color: #0d1f3c; margin: 0.5rem 0 3.5rem; line-height: 1.2">
-          Cómo trabajo
-        </h2>
-
-        <div class="grid md:grid-cols-12 gap-10 items-start">
-          <div style="grid-column: span 7">
-            {d.processSteps.map((step, i, arr) => (
-              <div style={`display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding: 1.75rem 0 ${i < arr.length - 1 ? '1.75rem' : '0'}; ${i < arr.length - 1 ? 'border-bottom: 1px solid rgba(21,96,189,0.06)' : ''}`}>
-                <span style="font-size: 0.8rem; font-weight: 700; color: rgba(21,96,189,0.35); font-variant-numeric: tabular-nums; padding-top: 0.15rem; letter-spacing: 0.02em">0{i + 1}</span>
-                <div>
-                  <h3 style="font-size: 1.05rem; font-weight: 700; color: #0d1f3c; margin: 0 0 0.5rem; letter-spacing: -0.02em">{step.title}</h3>
-                  <p style="font-size: 0.9rem; line-height: 1.7; color: rgba(13,31,60,0.6); margin: 0; max-width: 52ch">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div class="process-sticky" style="grid-column: span 5;">
-            <ServiceReportMockup variant={service.slug} />
-          </div>
-        </div>
-      </div>
-    </section>
+    <ServiceProcess steps={d.processSteps} mockupVariant={service.slug} heading="Cómo trabajo" />
 
     {/* ── FAQ ───────────────────────────────────────── */}
     <section style="background: var(--color-surface); padding: 7rem 0">
@@ -261,3 +203,77 @@ const faqSchema = {
   <Footer />
 </Base>
 
+<style is="global">
+  .service-detail-row {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: start;
+    padding: 1.15rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .service-detail-row p {
+    margin: 0;
+    color: var(--color-foreground-70);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .service-detail-icon {
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 1px solid var(--color-primary-35);
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-8);
+    color: var(--color-primary);
+  }
+  .service-detail-deliverables {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 3rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .service-detail-deliverable {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .service-detail-item-label {
+    margin-top: 0.1rem;
+    color: var(--color-primary);
+    font: 600 0.68rem/1.2 var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .service-detail-deliverable h3 {
+    margin: 0.45rem 0 0.55rem;
+    color: var(--color-foreground);
+    font-size: 1.05rem;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+  }
+  .service-detail-deliverable p {
+    margin: 0 0 1rem;
+    color: var(--color-prose-muted);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .service-detail-deliverable span {
+    color: var(--color-foreground-40);
+    font: 500 0.72rem/1.2 var(--font-mono);
+  }
+  .service-detail-ideal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 3rem;
+    max-width: 62rem;
+  }
+  .service-detail-ideal-row { border-bottom: 0; }
+  @media (max-width: 767px) {
+    .service-detail-deliverables,
+    .service-detail-ideal-grid { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

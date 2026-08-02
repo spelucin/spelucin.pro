@@ -7,6 +7,7 @@ import Button from '../components/Button.astro';
 import CTA from '../components/CTA.astro';
 import IconArrowRight from '../components/IconArrowRight.astro';
 import Terminal from '../components/Terminal.astro';
+import { Icon } from 'astro-icon/components';
 import { rule } from '../data';
 import { getPageMeta } from '../lib/content';
 
@@ -20,7 +21,7 @@ const sprints = [
     icon: "ph:target",
     title: "Shopify SEO Sprint",
     description:
-      "Un engagement de una semana que combina una Auditoría SEO Técnica y una Estrategia de Catálogo en un roadmap priorizado para tu tienda Shopify.",
+      "Un proyecto de una semana que combina una Auditoría SEO Técnica y una Estrategia de Catálogo en un plan de acción para tu tienda Shopify.",
     price: "$500 USD",
     cta: "Ver Sprint",
     href: "/sprints/shopify-seo-sprint/",
@@ -33,7 +34,7 @@ const sprints = [
     description:
       "Lanza tu tienda Shopify con una base SEO sólida desde el día uno: arquitectura de información, estructura de colecciones y mejores prácticas técnicas.",
     price: "$900 USD",
-    cta: "Ver servicio",
+    cta: "Ver Sprint",
     href: "/sprints/tiendas-nuevas/",
   },
 ];
@@ -43,7 +44,7 @@ const collectionSchema = {
   "@type": "CollectionPage",
   name: "Sprints de SEO para Shopify",
   description:
-    "Engagementes productizados con alcance definido y resultados medibles para tiendas Shopify.",
+    "Proyectos cortos, con alcance definido y entregables claros para tiendas Shopify.",
 };
 ---
 
@@ -68,7 +69,7 @@ const collectionSchema = {
           Sprints de SEO hechos para priorizar lo que cambiará a tu tienda
         </h1>
         <p style="font-size: 1.1rem; line-height: 1.7; color: rgba(13,31,60,0.55); margin: 0 0 1.5rem; max-width: 52ch">
-          Proyectos con entregables claros, timelines cortos y resultados que se miden. Sin retainer, sin ambigüedad.
+          Proyectos cortos para resolver problemas concretos de SEO en Shopify. Diagnóstico claro, prioridades concretas y trabajo implementable.
         </p>
       </div>
     </section>
@@ -81,25 +82,12 @@ const collectionSchema = {
           {sprints.map((s) => (
             <a
               href={s.href}
-              class="service-card"
-              style="text-decoration: none; display: flex; flex-direction: column; border-radius: 1rem; padding: 2.5rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s"
+              class="service-card sprints-index-card"
+              style="text-decoration: none; display: flex; flex-direction: column; padding: 2.5rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s"
             >
               <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem">
-                <div style="color: #1560bd">
-                  <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-                    {s.slug === "shopify-seo-sprint" ? (
-                      <>
-                        <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1.5" fill="none" />
-                        <circle cx="16" cy="16" r="4" fill="currentColor" />
-                      </>
-                    ) : (
-                      <>
-                        <rect x="6" y="10" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" />
-                        <path d="M6 14h20" stroke="currentColor" stroke-width="1.5" />
-                        <path d="M10 10V8a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.5" fill="none" />
-                      </>
-                    )}
-                  </svg>
+                <div class="sprint-index-icon">
+                  <Icon name={s.icon} width={26} height={26} />
                 </div>
                 {s.badge && (
                   <span style="font-size: 0.68rem; font-weight: 700; color: #1560bd; background: rgba(21,96,189,0.08); padding: 0.3rem 0.7rem; border-radius: 999px; letter-spacing: 0.04em; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.3rem">
@@ -157,10 +145,10 @@ const collectionSchema = {
             <p class="term-line term-delay-7"><span class="term-spinner"></span> Agrupando intención de búsqueda...</p>
             <p class="term-line term-delay-8"><span class="term-success">[success]</span> Jerarquía de 3 niveles generada · 248 colecciones</p>
             <p class="term-line term-delay-9"><span class="term-info">[info]</span> Consolidación de contenido: 34 páginas delgadas</p>
-            <p class="term-line term-delay-10"><span class="term-prompt">$</span> opencode roadmap --merge</p>
+            <p class="term-line term-delay-10"><span class="term-prompt">$</span> opencode plan --merge</p>
             <p class="term-line term-delay-11"><span class="term-spinner"></span> Unificando hallazgos técnicos + estratégicos...</p>
-            <p class="term-line term-delay-12"><span class="term-success">[success]</span> Roadmap priorizado a 90 días generado</p>
-            <p class="term-line term-delay-13"><span class="term-success">[success]</span> Sesión de strategy walkthrough agendada.</p>
+            <p class="term-line term-delay-12"><span class="term-success">[success]</span> Plan priorizado a 90 días generado</p>
+            <p class="term-line term-delay-13"><span class="term-success">[success]</span> Sesión de revisión agendada.</p>
           </div>
         </Terminal>
       </div>
@@ -178,7 +166,7 @@ const collectionSchema = {
             {
               question: "¿Cuál es la diferencia entre un Sprint y un servicio?",
               answer:
-                "Un Sprint combina múltiples servicios en un solo engagement con un entregable unificado y un roadmap priorizado. Los servicios individuales existen por separado si solo necesitas una evaluación específica.",
+                "Un Sprint combina varios servicios en un solo proyecto, con un entregable unificado y un plan de acción priorizado. Los servicios individuales existen por separado si solo necesitas una evaluación específica.",
             },
             {
               question: "¿Puedo contratar un Sprint si ya compré un servicio por separado?",
@@ -188,17 +176,17 @@ const collectionSchema = {
             {
               question: "¿Cuánto dura cada Sprint?",
               answer:
-                "Depende del alcance. El Shopify SEO Sprint tiene una duración estimada de una semana. El pack Tiendas Nuevas toma entre 8 y 12 días hábiles. En la llamada inicial confirmamos el timeline exacto para tu caso.",
+                "Depende del alcance. El Shopify SEO Sprint dura aproximadamente una semana. El Sprint Tiendas Nuevas toma entre 8 y 12 días hábiles. En la llamada inicial confirmamos el plazo exacto.",
             },
             {
               question: "¿Los Sprints incluyen implementación?",
               answer:
-                "No. El entregable es estratégico: informes, planes y roadmaps listos para implementar. La implementación la realiza tu equipo o tu desarrollador. Si necesitas ayuda con eso, podemos cotizarlo por separado.",
+                "No. El entregable es estratégico: informes y planes listos para implementar. La implementación la realiza tu equipo o tu desarrollador. Si necesitas ayuda con eso, podemos cotizarlo por separado.",
             },
             {
               question: "¿Qué pasa si no sé cuál Sprint necesito?",
               answer:
-                "Agenda una llamada gratuita de 30 minutos. Evaluamos tu situación y te recomendamos el engagement correcto sin compromiso.",
+                "Agenda una llamada gratuita de 30 minutos. Evaluamos tu situación y te recomendamos el proyecto adecuado sin compromiso.",
             },
           ].map((item, i, arr) => (
             <>
@@ -215,10 +203,15 @@ const collectionSchema = {
 
     <CTA
       id="cta"
-      heading="¿No sabes cuál engagement se ajusta a tu tienda?"
-      description="En 30 minutos evaluamos tu situación y te recomendamos el camino con mayor impacto."
-      buttonText="Consulta gratuita"
+      heading="¿No sabes qué necesita tu tienda?"
+      description="En 30 minutos evaluamos tu situación y te recomendamos el siguiente paso."
+      buttonText="Agendar una llamada"
     />
   </main>
   <Footer />
 </Base>
+
+<style is="global">
+  .sprints-index-card { border-radius: var(--radius-md) !important; }
+  .sprint-index-icon { color: var(--color-primary); }
+</style>

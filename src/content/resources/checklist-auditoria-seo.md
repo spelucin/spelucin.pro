@@ -2,7 +2,7 @@
 title: "Checklist de auditoría SEO técnica para Shopify"
 description: "Lista completa de verificación técnica para auditar tiendas Shopify. Indexación, Core Web Vitals, schema, arquitectura y más."
 category: "Checklists"
-thumbnail: ""
+thumbnail: "/og/checklist-auditoria-seo.jpg"
 downloadLink: "https://docs.google.com/document/d/example-checklist"
 externalLink: "https://docs.google.com/document/d/example-checklist"
 pubDate: 2026-03-01

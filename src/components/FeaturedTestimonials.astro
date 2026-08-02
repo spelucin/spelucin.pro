@@ -27,31 +27,32 @@ const testimonials = [
 ];
 ---
 
-<section style="background: #fff; padding: 5rem 0">
+<section class="testimonials-section">
   <div class="max-w-5xl mx-auto px-6 reveal">
-    <div style={rule} />
+    <div class="editorial-rule" />
 
-    <div style="padding-top: 3.5rem; margin-bottom: 3.5rem">
+    <div class="testimonials-heading">
       <Eyebrow>Testimonios</Eyebrow>
-      <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0.5rem 0 0; line-height: 1.08; max-width: 24ch">
+      <h2>
         Lo que dicen quienes trabajaron conmigo.
       </h2>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6">
+    <div class="testimonials-grid">
       {testimonials.map((t, i) => (
         <div class={`testimonial-glass reveal-stagger${i === 0 ? ' testimonial-wide' : ''}`}>
-          <div style="font-size: 2.75rem; color: rgba(21,96,189,0.18); line-height: 1; font-family: Georgia, serif">"</div>
-          <p style="font-size: 1rem; line-height: 1.75; color: rgba(13,31,60,0.75); margin: 0.5rem 0 1.5rem; max-width: 60ch">
-            {t.quote}
-          </p>
-          <div style="display: flex; align-items: center; gap: 0.85rem">
-            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #1560bd 0%, #0d4a9e 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0">
-              <span style="color: #fff; font-weight: 700; font-size: 0.9rem">{t.name.charAt(0)}</span>
+          <div class="testimonial-topline">
+            <span>0{i + 1}</span>
+            <span>Recomendación</span>
+          </div>
+          <p class="testimonial-quote">{t.quote}</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <span>{t.name.charAt(0)}</span>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 0.15rem">
-              <span style="font-size: 0.9rem; font-weight: 700; color: #0d1f3c">{t.name}</span>
-              <span style="font-size: 0.75rem; color: rgba(21,96,189,0.6); font-weight: 500">{t.role}</span>
+            <div class="testimonial-author-copy">
+              <span>{t.name}</span>
+              <span>{t.role}</span>
             </div>
           </div>
         </div>
@@ -61,44 +62,89 @@ const testimonials = [
 </section>
 
 <style is:global>
+  .testimonials-section {
+    padding: 7rem 0 8rem;
+    background: var(--color-background);
+  }
+  .testimonials-heading {
+    padding-top: 2rem;
+    margin-bottom: 2.75rem;
+  }
+  .testimonials-heading h2 {
+    max-width: 20ch;
+    margin: 0.6rem 0 0;
+    color: var(--color-foreground) !important;
+    font: 700 clamp(2rem, 4vw, 3.5rem)/1.02 'DM Sans', sans-serif;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
   .testimonial-glass {
     position: relative;
-    overflow: hidden;
-    border-radius: 1.25rem;
-    padding: 2rem;
+    min-height: 18rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-
-    background: linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%);
-    border: 1px solid rgba(21,96,189,0.14);
-    box-shadow:
-      0 4px 24px rgba(21,96,189,0.06),
-      inset 0 1px 0 rgba(255,255,255,0.8);
-
-    background-image:
-      radial-gradient(circle, rgba(21,96,189,0.18) 1px, transparent 1px),
-      linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%);
-    background-size: 20px 20px, 100% 100%;
-    background-position: 0 0, 0 0;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    background: var(--color-card);
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
   }
-
-  .testimonial-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.55);
-    pointer-events: none;
-    border-radius: inherit;
+  .testimonial-glass:hover {
+    border-color: var(--color-primary-35);
+    background: #18202b;
+    transform: translateY(-3px);
   }
-
-  .testimonial-glass > * {
-    position: relative;
-    z-index: 1;
+  .testimonial-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-primary);
+    font: 600 0.65rem/1 'DM Sans', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
-
+  .testimonial-topline span:last-child { color: var(--color-foreground-40); }
+  .testimonial-quote {
+    flex: 1;
+    margin: 1.5rem 0 2rem;
+    max-width: 64ch;
+    color: var(--color-foreground-70) !important;
+    font: 500 1.02rem/1.65 'DM Sans', sans-serif;
+    letter-spacing: -0.012em;
+  }
+  .testimonial-wide .testimonial-quote { max-width: 78ch; font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.55; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testimonial-avatar {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 auto;
+    border: 1px solid var(--color-primary-35);
+    border-radius: 0.65rem;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    font: 700 0.9rem/1 'DM Sans', sans-serif;
+  }
+  .testimonial-author-copy { display: flex; flex-direction: column; gap: 0.2rem; }
+  .testimonial-author-copy span:first-child { color: var(--color-foreground); font: 600 0.85rem/1.2 'DM Sans', sans-serif; }
+  .testimonial-author-copy span:last-child { color: var(--color-foreground-50); font: 400 0.72rem/1.3 'DM Sans', sans-serif; }
   @media (min-width: 768px) {
     .testimonial-wide {
       grid-column: span 2;
     }
+  }
+  @media (max-width: 767px) {
+    .testimonials-section { padding: 5rem 0 6rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonial-wide { grid-column: auto; }
   }
 </style>

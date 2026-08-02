@@ -18,9 +18,9 @@ const {
 } = Astro.props;
 ---
 
-<section id={id} style="background: #fff; padding: 5rem 0">
+<section id={id} class="editorial-surface cta-section" style="padding: 5rem 0">
   <div class="max-w-5xl mx-auto px-6 reveal">
-    <div class="cta-glass">
+    <div class="cta-panel editorial-cta">
       <h2 style="font-size: clamp(2rem, 4.5vw, 3.25rem); font-weight: 700; letter-spacing: -0.04em; color: #0d1f3c; margin: 0 0 1.25rem; line-height: 1.05; max-width: 16ch">
         {heading}
       </h2>
@@ -57,47 +57,24 @@ const {
 </script>
 
 <style is:global>
-  .cta-glass {
+  .cta-panel {
     position: relative;
     overflow: hidden;
-    border-radius: 1.25rem;
+    border-radius: var(--radius-lg);
     padding: 3.5rem;
-    text-align: center;
+    text-align: left;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    /* Subtle blue gradient */
-    background: linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%);
-
-    /* Glass border */
-    border: 1px solid rgba(21,96,189,0.14);
-    box-shadow:
-      0 4px 24px rgba(21,96,189,0.06),
-      inset 0 1px 0 rgba(255,255,255,0.8);
-
-    /* Dot grid via background-image */
-    background-image:
-      radial-gradient(circle, rgba(21,96,189,0.18) 1px, transparent 1px),
-      linear-gradient(135deg, rgba(21,96,189,0.06) 0%, rgba(21,96,189,0.02) 50%, rgba(124,58,237,0.04) 100%);
-    background-size: 20px 20px, 100% 100%;
-    background-position: 0 0, 0 0;
+    border: 1px solid var(--color-primary-14);
+    background-color: var(--color-card);
+    background-image: var(--dot-grid), var(--gradient-section);
+    background-size: 24px 24px, 100% 100%;
+    box-shadow: var(--shadow-elevated);
   }
-
-  /* Frosted overlay to soften the dot grid */
-  .cta-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(0px);
-    pointer-events: none;
-    border-radius: inherit;
-  }
-
-  /* Keep content above the overlay */
-  .cta-glass > * {
-    position: relative;
-    z-index: 1;
-  }
+  .cta-panel > * { position: relative; z-index: 1; }
+  .editorial-cta { align-items: flex-start; }
+  .cta-panel h2 { color: var(--color-foreground) !important; }
+  .cta-panel p { color: var(--color-prose-muted) !important; }
+  @media (max-width: 640px) { .cta-panel { padding: 2rem 1.5rem; } }
 </style>

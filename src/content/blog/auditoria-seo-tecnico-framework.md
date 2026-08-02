@@ -1,6 +1,7 @@
 ---
 title: "Auditoría SEO técnica: el framework que uso"
 description: "El proceso paso a paso que sigo para auditar tiendas Shopify. Qué reviso, en qué orden y por qué cada hallazgo importa."
+featuredImage: "/og/auditoria-seo-tecnico-framework.jpg"
 pubDate: 2026-05-10
 author: "Alex Spelucin"
 category: "SEO Técnico"

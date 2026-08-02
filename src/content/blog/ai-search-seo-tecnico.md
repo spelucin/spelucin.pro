@@ -1,6 +1,7 @@
 ---
 title: "AI Search y SEO técnico: lo que cambia en 2026"
 description: "Cómo los motores de búsqueda con IA están transformando la visibilidad orgánica y qué significa para el SEO técnico de tiendas Shopify."
+featuredImage: "/og/ai-search-seo-tecnico.jpg"
 pubDate: 2026-04-22
 author: "Alex Spelucin"
 category: "AI Search"

@@ -9,6 +9,7 @@ export type Service = {
     heroHeadline: string
     heroSubheadline: string
     problemContext: string
+    problemDescription: string
     pains: string[]
     deliverablesHeadline: string
     deliverablesDescription: string
@@ -70,7 +71,9 @@ export const services: Service[] = [
       heroSubheadline:
         "Auditoría técnica profunda de tu Shopify para identificar exactamente qué bloquea tu indexación, tu rendimiento y tus rankings.",
       problemContext:
-        "La mayoría de tiendas Shopify tienen problemas técnicos críticos que ni siquiera saben que existen.",
+        "Google no está viendo todo lo que tu tienda ofrece.",
+      problemDescription:
+        "Google puede indexar solo una fracción de tu catálogo mientras los Core Web Vitals, el schema mal configurado y la canibalización entre colecciones frenan su visibilidad. El problema no siempre está en una sola URL: suele estar en cómo se rastrea, interpreta y conecta toda la tienda.",
       pains: [
         "Tu catálogo tiene miles de URLs pero Google indexa solo una fracción de ellas",
         "Los Core Web Vitals están en rojo y afectan tu posición sin que lo notes en el día a día",
@@ -154,7 +157,9 @@ export const services: Service[] = [
       heroSubheadline:
         "Reestructura colecciones, filtros y navegación en Shopify para capturar la demanda real del mercado con datos, no suposiciones.",
       problemContext:
-        "La mayoría de tiendas pierden ventas porque su arquitectura no coincide con cómo busca su cliente.",
+        "Tu catálogo no sigue la forma en que tus clientes buscan.",
+      problemDescription:
+        "Tus colecciones pueden tener nombres internos, los filtros pueden generar cientos de URLs duplicadas y la jerarquía puede dejar todas las categorías al mismo nivel. Cuando la arquitectura no refleja cómo busca tu cliente, el enlazado interno tampoco refuerza las páginas con mayor potencial comercial.",
       pains: [
         "Tus colecciones tienen los nombres que tú usas internamente, no los que escribe tu cliente en Google",
         "Los filtros (facetas) generan cientos de URLs duplicadas que confunden al rastreador y diluyen tu autoridad",
@@ -239,7 +244,9 @@ export const services: Service[] = [
       heroSubheadline:
         "Talleres prácticos para equipos de ecommerce que quieren implementar SEO correctamente en Shopify desde el primer día.",
       problemContext:
-        "La mayoría de equipos de marketing aplican SEO genérico que no funciona en Shopify.",
+        "Tu equipo está haciendo SEO sin un sistema compartido.",
+      problemDescription:
+        "Tu equipo puede publicar colecciones sin optimizar metadatos, generar contenido duplicado sin querer o mirar Search Console sin saber qué decisión tomar. Sin una forma práctica de aplicar SEO en Shopify, cada cambio depende del consultor o la agencia y la operación pierde velocidad.",
       pains: [
         "Publican colecciones sin optimizar metadatos, H1 ni URLs - y se preguntan por qué no rankean",
         "No entienden cómo funciona el crawl en Shopify y generan contenido duplicado sin querer",

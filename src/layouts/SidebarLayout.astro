@@ -1,12 +1,10 @@
 ---
-import Sidebar from '../components/Sidebar.astro';
-import MobileTopbar from '../components/MobileTopbar.astro';
+import Nav from '../components/Nav.astro';
 ---
 
 <div class="site-layout">
-  <Sidebar />
-  <MobileTopbar />
   <div class="site-content">
+    <Nav />
     <slot />
   </div>
 </div>

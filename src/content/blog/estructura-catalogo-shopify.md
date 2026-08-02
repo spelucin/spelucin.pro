@@ -1,6 +1,7 @@
 ---
 title: "Cómo estructurar el catálogo de una tienda Shopify para SEO"
 description: "Guía práctica para crear una jerarquía de colecciones, estructura de URLs y enlazado interno que Google pueda rastrear e indexar correctamente."
+featuredImage: "/og/estructura-catalogo-shopify.jpg"
 pubDate: 2026-03-15
 author: "Alex Spelucin"
 category: "Shopify"

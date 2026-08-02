@@ -26,7 +26,7 @@ const icons = [IconAudit, IconCatalog, IconWorkshop];
 
     <div class="grid md:grid-cols-3 gap-6">
       {services.map((s, i) => (
-          <a href={`/servicios/${s.slug}/`} class="service-card" style="text-decoration: none; display: flex; flex-direction: column; border-radius: 1rem; padding: 2rem; border: 1px solid rgba(21,96,189,0.10); background: var(--color-surface); transition: transform 0.2s, box-shadow 0.2s">
+          <a href={`/servicios/${s.slug}/`} class="service-card">
           <div style="margin-bottom: 1.25rem">
             {icons[i] && (() => { const Icon = icons[i]; return <Icon size={28} />; })()}
           </div>

@@ -1,0 +1,286 @@
+---
+import CTA from './CTA.astro';
+import Eyebrow from './Eyebrow.astro';
+import Footer from './Footer.astro';
+import IconArrowRight from './IconArrowRight.astro';
+import ProblemSection from './ProblemSection.astro';
+import ServiceHero from './ServiceHero.astro';
+import ServiceProcess from './ServiceProcess.astro';
+import { Icon } from 'astro-icon/components';
+
+interface ListItem {
+  text: string;
+  icon?: string;
+}
+
+interface Deliverable {
+  eyebrow: string;
+  title: string;
+  description: string;
+  tag: string;
+  link?: { text: string; href: string };
+}
+
+interface ProcessStep {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  priceLabel: string;
+  price: string;
+  badge?: string;
+  mockupVariant: string;
+  compact?: boolean;
+  showPositioning?: boolean;
+  positioningIcon?: string;
+  positioningTitle?: string;
+  positioningDescription?: string;
+  problemTitle: string;
+  problemDescription: string;
+  pains: ListItem[];
+  outcomesTitle: string;
+  outcomes: ListItem[];
+  deliverablesTitle: string;
+  deliverables: Deliverable[];
+  audienceTitle: string;
+  audience: ListItem[];
+  process: ProcessStep[];
+  faqs: Faq[];
+  ctaHeading: string;
+  ctaDescription: string;
+  ctaButtonText: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  ctaText,
+  priceLabel,
+  price,
+  badge,
+  mockupVariant,
+  compact = false,
+  showPositioning = true,
+  positioningIcon,
+  positioningTitle,
+  positioningDescription,
+  problemTitle,
+  problemDescription,
+  pains,
+  outcomesTitle,
+  outcomes,
+  deliverablesTitle,
+  deliverables,
+  audienceTitle,
+  audience,
+  process,
+  faqs,
+  ctaHeading,
+  ctaDescription,
+  ctaButtonText,
+} = Astro.props;
+
+const W = 'max-w-5xl mx-auto px-6';
+---
+
+<div class:list={['sprint-page', { 'sprint-page-compact': compact }]}>
+  <ServiceHero
+    backHref="/sprints/"
+    backLabel="Sprints"
+    eyebrow={eyebrow}
+    title={title}
+    description={description}
+    ctaText={ctaText}
+    price={price}
+    priceLabel={priceLabel}
+    badge={badge}
+  />
+
+  {showPositioning && (
+    <section class="sprint-positioning">
+      <div class={`${W} reveal`}>
+        <div class="sprint-positioning-grid">
+          <div class="sprint-positioning-lead">
+            <div class="sprint-icon sprint-positioning-icon" aria-hidden="true">
+              <Icon name={positioningIcon ?? 'ph:target'} width={24} height={24} />
+            </div>
+            <p>{positioningTitle}</p>
+          </div>
+          <p class="sprint-positioning-description">{positioningDescription}</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <ProblemSection title={problemTitle} description={problemDescription} />
+
+  <section id="entregables" class="sprint-section sprint-outcomes">
+    <div class={`${W} reveal`}>
+      <div class="sprint-section-intro">
+        <Eyebrow>Lo que sabrás después</Eyebrow>
+        <h2>{outcomesTitle}</h2>
+      </div>
+      <div class="sprint-outcomes-grid">
+        {outcomes.map((item) => (
+          <div class="sprint-outcome-item">
+            <div class="sprint-icon sprint-check-icon" aria-hidden="true">
+              <Icon name={item.icon ?? 'ph:check'} width={18} height={18} />
+            </div>
+            <p>{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sprint-section sprint-section-muted sprint-deliverables">
+    <div class={`${W} reveal`}>
+      <div class="sprint-section-intro">
+        <Eyebrow>Qué incluye</Eyebrow>
+        <h2>{deliverablesTitle}</h2>
+      </div>
+      <div class="sprint-deliverables-list">
+        {deliverables.map((item, index) => (
+          <article class="sprint-deliverable">
+            <div class="sprint-deliverable-mark" aria-hidden="true">
+              <Icon name={index === deliverables.length - 1 ? 'ph:video-camera' : 'ph:arrow-up-right'} width={18} height={18} />
+            </div>
+            <div class="sprint-deliverable-copy">
+              <div class="sprint-item-eyebrow">{item.eyebrow}</div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <div class="sprint-deliverable-footer">
+                <span>{item.tag}</span>
+                {item.link && <a href={item.link.href}>{item.link.text} <IconArrowRight /></a>}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sprint-section sprint-audience">
+    <div class={`${W} reveal`}>
+      <div class="sprint-section-intro">
+        <Eyebrow>Para quién es</Eyebrow>
+        <h2>{audienceTitle}</h2>
+      </div>
+      <div class="sprint-audience-grid">
+        {audience.map((item) => (
+          <div class="sprint-audience-item">
+            <div class="sprint-icon sprint-audience-icon" aria-hidden="true">
+              <Icon name={item.icon ?? 'ph:check'} width={18} height={18} />
+            </div>
+            <p>{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ServiceProcess steps={process} mockupVariant={mockupVariant} />
+
+  <section class="sprint-section sprint-faq-section">
+    <div class={`${W} reveal`}>
+      <div class="sprint-section-intro">
+        <Eyebrow>Preguntas frecuentes</Eyebrow>
+        <h2>Antes de agendar</h2>
+      </div>
+      <div class="sprint-faq-list">
+        {faqs.map((item, index) => (
+          <details class="sprint-faq" open={index === 0}>
+            <summary>{item.question}<span aria-hidden="true">+</span></summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA id="cta" heading={ctaHeading} description={ctaDescription} buttonText={ctaButtonText} />
+</div>
+
+<Footer />
+
+<style is:global>
+  .sprint-page {
+    overflow: hidden;
+    background: var(--color-background);
+  }
+  .sprint-page > section { position: relative; }
+  .sprint-page > section::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: var(--color-border);
+    opacity: 0.7;
+  }
+  .sprint-page h1, .sprint-page h2, .sprint-page h3 { text-wrap: balance; }
+  .sprint-positioning { padding: 8rem 0 6rem; }
+  .sprint-positioning-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 4rem; align-items: center; }
+  .sprint-positioning-lead p { max-width: 28ch; margin: 0; color: var(--color-foreground-70); font-size: 1.2rem; font-weight: 500; letter-spacing: -0.025em; line-height: 1.55; }
+  .sprint-positioning-description { max-width: 58ch; margin: 0; color: var(--color-prose-muted); font-size: 0.95rem; line-height: 1.8; }
+  .sprint-icon { display: grid; place-items: center; color: var(--color-primary); }
+  .sprint-positioning-icon { width: 3rem; height: 3rem; margin-bottom: 1.25rem; border: 1px solid var(--color-primary-35); border-radius: var(--radius-sm); background: var(--color-primary-8); }
+  .sprint-section { padding: 7rem 0; }
+  .sprint-section-muted { background: var(--color-primary-3); }
+  .sprint-section-intro { max-width: 46rem; margin-bottom: 3.25rem; }
+  .sprint-section-intro h2 { max-width: 20ch; margin: 0.65rem 0 0; color: var(--color-foreground); font-size: clamp(1.8rem, 3.8vw, 3rem); font-weight: 700; letter-spacing: -0.055em; line-height: 1.05; }
+  .sprint-list { border-top: 1px solid var(--color-border); }
+  .sprint-list-item { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--color-border); align-items: start; }
+  .sprint-list-icon { width: 2rem; height: 2rem; border: 1px solid var(--color-primary-20); border-radius: var(--radius-sm); background: var(--color-primary-6); }
+  .sprint-list-item p, .sprint-outcome-item p, .sprint-audience-item p { margin: 0; color: var(--color-foreground-70); font-size: 0.95rem; line-height: 1.7; }
+  .sprint-problem-list { max-width: 51rem; margin-left: auto; }
+  .sprint-outcomes-grid, .sprint-audience-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 3rem; }
+  .sprint-outcome-item, .sprint-audience-item { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.85rem; align-items: start; padding: 1.15rem 0; border-top: 1px solid var(--color-border); }
+  .sprint-check-icon, .sprint-audience-icon { width: 1.8rem; height: 1.8rem; border: 1px solid var(--color-primary-35); border-radius: 999px; background: var(--color-primary-8); }
+  .sprint-deliverables-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 3rem; border-top: 1px solid var(--color-border); }
+  .sprint-deliverable { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 1rem; padding: 1.75rem 0; border-bottom: 1px solid var(--color-border); }
+  .sprint-deliverable-mark { display: grid; place-items: center; width: 2rem; height: 2rem; margin-top: 0.1rem; border: 1px solid var(--color-primary-20); border-radius: var(--radius-sm); color: var(--color-primary); }
+  .sprint-deliverable h3 { margin: 0.45rem 0 0.55rem; color: var(--color-foreground); font-size: 1.05rem; letter-spacing: -0.025em; line-height: 1.25; }
+  .sprint-deliverable p { margin: 0 0 1rem; color: var(--color-prose-muted); font-size: 0.875rem; line-height: 1.7; }
+  .sprint-deliverable-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--color-foreground-40); font-size: 0.72rem; }
+  .sprint-deliverable-footer a { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--color-primary); text-decoration: none; }
+  .sprint-deliverable-footer a svg { width: 0.9rem; }
+  .sprint-audience-grid { max-width: 62rem; }
+  .sprint-process-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(15rem, 0.6fr); gap: 5rem; align-items: start; }
+  .sprint-process-list { border-top: 1px solid var(--color-border); }
+  .sprint-process-step { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1.25rem; padding: 1.6rem 0; border-bottom: 1px solid var(--color-border); }
+  .sprint-process-icon { width: 2.35rem; height: 2.35rem; border: 1px solid var(--color-primary-35); border-radius: var(--radius-sm); background: var(--color-primary-8); }
+  .sprint-process-step h3 { margin: 0 0 0.45rem; color: var(--color-foreground); font-size: 1rem; letter-spacing: -0.02em; }
+  .sprint-process-step p { max-width: 55ch; margin: 0; color: var(--color-prose-muted); font-size: 0.875rem; line-height: 1.7; }
+  .sprint-process-mockup { min-width: 0; }
+  .sprint-process-mockup svg { width: 100%; height: auto; display: block; }
+  .sprint-page-compact .sprint-section { padding-top: 5.5rem; padding-bottom: 5.5rem; }
+  .sprint-page-compact .service-hero { padding-bottom: 5rem; }
+  .sprint-page-compact .sprint-positioning { padding-top: 6.5rem; padding-bottom: 5rem; }
+  .sprint-page-compact .sprint-section-intro { margin-bottom: 2.25rem; }
+  .sprint-faq-list { border-top: 1px solid var(--color-border); }
+  .sprint-faq { border-bottom: 1px solid var(--color-border); }
+  .sprint-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.35rem 0; color: var(--color-foreground); cursor: pointer; font-weight: 600; list-style: none; }
+  .sprint-faq summary::-webkit-details-marker { display: none; }
+  .sprint-faq summary span { color: var(--color-primary); font: 400 1.5rem/1 var(--font-mono); transition: transform 180ms ease; }
+  .sprint-faq[open] summary span { transform: rotate(45deg); }
+  .sprint-faq p { max-width: 65ch; margin: 0 0 1.35rem; color: var(--color-prose-muted); line-height: 1.7; }
+  @media (max-width: 767px) {
+    .sprint-positioning-grid, .sprint-process-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .sprint-positioning { padding: 6rem 0 4.5rem; }
+    .sprint-section { padding: 5rem 0; }
+    .sprint-section-intro { margin-bottom: 2.25rem; }
+    .sprint-outcomes-grid, .sprint-audience-grid, .sprint-deliverables-list { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

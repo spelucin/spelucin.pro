@@ -1,0 +1,52 @@
+---
+import ServiceReportMockup from './ServiceReportMockup.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Step { title: string; description: string; icon?: string }
+interface Props { steps: Step[]; mockupVariant: string; heading?: string }
+const { steps, mockupVariant, heading = 'Cómo funciona' } = Astro.props;
+const fallbackIcons = ['ph:handshake', 'ph:magnifying-glass', 'ph:tree-structure', 'ph:presentation-chart'];
+---
+
+<section class="shared-process-section">
+  <div class="max-w-5xl mx-auto px-6 reveal">
+    <div class="shared-process-intro">
+      <div class="shared-process-label">Proceso</div>
+      <h2>{heading}</h2>
+    </div>
+    <div class="shared-process-layout">
+      <div class="shared-process-list">
+        {steps.map((step, index) => (
+          <article class="shared-process-step">
+            <div class="shared-process-icon" aria-hidden="true">
+              <Icon name={step.icon ?? fallbackIcons[index] ?? 'ph:check'} width={21} height={21} />
+            </div>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="shared-process-mockup process-sticky">
+        <ServiceReportMockup variant={mockupVariant} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is="global">
+  .shared-process-section { padding: 7rem 0; background: var(--color-primary-3); }
+  .shared-process-intro { max-width: 46rem; margin-bottom: 3.25rem; }
+  .shared-process-label { color: var(--color-primary); font: 600 0.7rem/1.2 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; }
+  .shared-process-intro h2 { max-width: 20ch; margin: 0.65rem 0 0; color: var(--color-foreground); font-size: clamp(1.8rem, 3.8vw, 3rem); font-weight: 700; letter-spacing: -0.055em; line-height: 1.05; text-wrap: balance; }
+  .shared-process-layout { display: grid; grid-template-columns: minmax(0, 7fr) minmax(15rem, 5fr); gap: 5rem; align-items: start; }
+  .shared-process-list { border-top: 1px solid var(--color-border); }
+  .shared-process-step { display: grid; grid-template-columns: 2.35rem minmax(0, 1fr); gap: 1.25rem; padding: 1.6rem 0; border-bottom: 1px solid var(--color-border); }
+  .shared-process-icon { display: grid; place-items: center; width: 2.35rem; height: 2.35rem; border: 1px solid var(--color-primary-35); border-radius: var(--radius-sm); background: var(--color-primary-8); color: var(--color-primary); }
+  .shared-process-step h3 { margin: 0 0 0.45rem; color: var(--color-foreground); font-size: 1rem; letter-spacing: -0.02em; }
+  .shared-process-step p { max-width: 55ch; margin: 0; color: var(--color-prose-muted); font-size: 0.875rem; line-height: 1.7; }
+  .shared-process-mockup { min-width: 0; }
+  .shared-process-mockup svg { display: block; width: 100%; height: auto; }
+  @media (max-width: 767px) { .shared-process-section { padding: 5rem 0; } .shared-process-layout { grid-template-columns: 1fr; gap: 3rem; } .shared-process-intro { margin-bottom: 2.25rem; } }
+</style>
