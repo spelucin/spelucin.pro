@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Términos — Alex Spelucin" description="Términos de uso de spelucin.pro." noindex>
+  <Nav />
+  <main id="main-content">
+    <header class="page-head">
+      <div class="container-site max-w-[760px]">
+        <div class="breadcrumb"><a href="/">Inicio</a><span class="breadcrumb-sep">/</span><span aria-current="page">Términos</span></div>
+        <h1 class="page-head-title">Términos de uso</h1>
+        <p class="page-head-sub">Las reglas básicas para usar este sitio y consultar sus contenidos.</p>
+      </div>
+    </header>
+    <section class="pb-[80px] md:pb-[110px]">
+      <div class="container-site max-w-[760px] prose">
+        <h2>Contenido del sitio</h2>
+        <p>Los textos, casos y recursos de spelucin.pro se comparten con fines informativos. No constituyen asesoría legal, financiera ni una garantía de resultados.</p>
+        <h2>Productos y servicios</h2>
+        <p>Las páginas de productos describen sistemas en desarrollo. El alcance, precio y disponibilidad se confirman por escrito antes de iniciar cualquier trabajo.</p>
+        <h2>Uso responsable</h2>
+        <p>No uses este sitio para enviar contenido ilegal, abusivo o que infrinja derechos de terceros. Si tenés dudas, escribime a <a href="mailto:alex@spelucin.pro">alex@spelucin.pro</a>.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

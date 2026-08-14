@@ -1,0 +1,327 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '../data/site';
+
+const expertise = [
+  { name: 'Analítica digital', icon: 'tabler:chart-histogram' },
+  { name: 'Marketing analytics', icon: 'tabler:target-arrow' },
+  { name: 'Medición', icon: 'tabler:ruler-2' },
+  { name: 'Reporting', icon: 'tabler:report-analytics' },
+  { name: 'Data visualization', icon: 'tabler:layout-dashboard' },
+  { name: 'Data infrastructure', icon: 'tabler:database' },
+  { name: 'Marketing operations', icon: 'tabler:settings' },
+];
+
+const tools = [
+  { name: 'Google Analytics 4', icon: 'simple-icons:googleanalytics' },
+  { name: 'Google Tag Manager', icon: 'simple-icons:googletagmanager' },
+  { name: 'Google Sheets', icon: 'simple-icons:googlesheets' },
+  { name: 'Python', icon: 'simple-icons:python' },
+  { name: 'SQL', icon: 'tabler:database' },
+  { name: 'Looker Studio', icon: 'simple-icons:looker' },
+  { name: 'BigQuery', icon: 'simple-icons:googlebigquery' },
+  { name: 'Google Cloud Platform', icon: 'simple-icons:googlecloud' },
+  { name: 'OpenCode', icon: 'simple-icons:opencode' },
+  { name: 'APIs', icon: 'tabler:api' },
+  { name: 'Apps Script', icon: 'simple-icons:googleappsscript' },
+];
+
+const credentials = [
+  {
+    number: '01',
+    title: 'Operaciones de analítica a escala de agencia',
+    text: 'Gestioné 15-20 cuentas concurrentes en Notebook Agency: tagging, reporting y medición para equipos de performance.',
+  },
+  {
+    number: '02',
+    title: 'Sistemas de reporting para agencias',
+    text: 'Construí frameworks de reporting para Torices y Owlbox, cada uno con 10+ clientes operados desde un mismo sistema.',
+  },
+  {
+    number: '03',
+    title: 'Medición corregida en contexto real',
+    text: '10+ auditorías de GA4 y 10+ correcciones de medición de conversiones hechas en agencia, no en teoría.',
+  },
+];
+
+const proof = [
+  { value: '15–20', label: 'cuentas gestionadas en paralelo' },
+  { value: '10+', label: 'auditorías de GA4 realizadas' },
+  { value: '10+', label: 'correcciones de medición' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  jobTitle: 'Digital Analytics & Marketing Data',
+  description: site.description,
+  sameAs: [site.linkedin, site.github],
+  knowsAbout: tools.map((t) => t.name),
+};
+---
+
+<Layout
+  title="Acerca de — Alex Spelucin"
+  description="Analista digital y especialista en data de marketing: medición, reporting, visualización e infraestructura de analítica."
+>
+  <Fragment slot="jsonld">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <Nav />
+
+  <main id="main-content">
+    <header class="page-head">
+      <div class="container-site">
+        <div class="breadcrumb">
+          <a href="/">Inicio</a>
+          <span class="breadcrumb-sep">/</span>
+          <span aria-current="page">Acerca de</span>
+        </div>
+        <p class="page-head-eyebrow">Sobre mí</p>
+        <h1 class="page-head-title">Analítica digital y<br />data de marketing</h1>
+        <p class="page-head-sub">
+          Construyo los sistemas que convierten la data de marketing en algo que los equipos pueden usar.
+        </p>
+      </div>
+    </header>
+
+    {/* ---------- INTRO ---------- */}
+    <section class="pb-[80px] md:pb-[110px]">
+      <div class="container-site grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-start">
+        <figure class="authority-portrait reveal">
+          <div class="authority-image-frame">
+            <div class="img-ph img-ph--fill"><span>alex-spelucin-avatar.jpg</span></div>
+            <span class="authority-index">AL</span>
+          </div>
+          <figcaption>
+            <strong>Alex Spelucin</strong>
+            <span>Analítica digital y data de marketing</span>
+          </figcaption>
+        </figure>
+
+        <div class="reveal">
+          <div class="prose">
+            <p>
+              Trabajo en la intersección entre <strong>marketing y data</strong>. Mi foco es la analítica digital y los sistemas que la sostienen: medición confiable, reporting que escala y data estructurada que los equipos pueden usar sin depender de una sola persona.
+            </p>
+            <p>
+              Mi experiencia viene del día a día de las operaciones de marketing: cuentas concurrentes, clientes que necesitan respuestas y equipos que necesitan confiar en sus números. Por eso construyo sistemas que se pueden operar, no solo presentar.
+            </p>
+            <p>
+              Además del trabajo profesional, desarrollo <a href="/productos">productos de analítica</a>: sistemas de reporting, dashboards y frameworks listos para desplegar.
+            </p>
+          </div>
+
+          <div class="authority-proof-grid">
+            {proof.map((item) => (
+              <div class="authority-proof">
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- TRAYECTORIA ---------- */}
+    <section class="py-[80px] md:py-[110px] border-t border-primary-6">
+      <div class="container-site grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-start">
+        <div class="about-aside reveal">
+          <p class="section-kicker">Trayectoria</p>
+          <h2 class="mt-4 text-[28px] md:text-[34px] font-semibold tracking-tight leading-[1.15] max-w-[360px]">
+            Experiencia <span class="text-primary">operativa.</span>
+          </h2>
+          <p class="mt-5 text-[16px] leading-[1.6] text-muted-foreground max-w-[400px]">
+            Del día a día de las operaciones de marketing: cuentas concurrentes, clientes que necesitan respuestas y números en los que confiar.
+          </p>
+        </div>
+
+        <ul class="border-t border-primary-14 reveal">
+          {credentials.map((item) => (
+            <li class="grid grid-cols-[42px_1fr] gap-3 py-6 border-b border-primary-14">
+              <span class="font-mono text-[13px] text-primary tracking-[0.1em] pt-[3px]">{item.number}</span>
+              <div>
+                <strong class="block text-[16px] font-semibold tracking-tight leading-snug">{item.title}</strong>
+                <p class="mt-[5px] text-[14px] leading-[1.55] text-foreground-55">{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    {/* ---------- STACK ---------- */}
+    <section class="py-[80px] md:py-[110px] border-t border-primary-6">
+      <div class="container-site">
+        <div class="stack-head reveal">
+          <p class="section-kicker">Stack y enfoque</p>
+          <h2 class="mt-4 text-[28px] md:text-[34px] font-semibold tracking-tight leading-[1.15] max-w-[580px]">
+            Lo que uso para <span class="text-primary">construir analítica.</span>
+          </h2>
+          <p class="mt-5 text-[16px] leading-[1.6] text-muted-foreground max-w-[520px]">
+            Menos tecnología por la tecnología, más sistemas que resuelven problemas reales de medición y reporting.
+          </p>
+        </div>
+
+        <div class="mt-14 reveal">
+          <h2 class="detail-section-title">Áreas de expertise</h2>
+          <div class="flex flex-wrap gap-2 mt-5">
+            {expertise.map((item) => (
+              <span class="icon-pill">
+                <Icon name={item.icon} aria-hidden="true" />
+                {item.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-14 reveal">
+          <h2 class="detail-section-title">Herramientas</h2>
+          <div class="flex flex-wrap gap-2 mt-5">
+            {tools.map((item) => (
+              <span class="icon-pill">
+                <Icon name={item.icon} aria-hidden="true" />
+                {item.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-14 flex flex-wrap gap-3 reveal">
+          <a href={site.linkedin} target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+            <Icon name="simple-icons:linkedin" width="16" height="16" />
+            LinkedIn
+          </a>
+          <a href={site.github} target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+            <Icon name="simple-icons:github" width="16" height="16" />
+            GitHub
+          </a>
+          <a href={`mailto:${site.email}`} class="btn btn-primary btn-sm">Contacto</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .authority-portrait { margin: 0; }
+  .detail-section-title { padding-top: 16px; border-top: 1px solid var(--color-primary-14); font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+  .about-aside { align-self: start; }
+  .stack-head { max-width: 620px; }
+
+  .icon-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    background: var(--color-primary-4);
+    color: var(--color-foreground-70);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .icon-pill svg { width: 14px; height: 14px; color: var(--color-primary); flex-shrink: 0; }
+  .icon-pill:hover { border-color: var(--color-primary-28); color: var(--color-foreground); }
+
+  .authority-image-frame {
+    position: relative;
+    max-width: 390px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid var(--color-primary-20);
+    border-radius: 14px;
+    background: var(--color-card);
+    box-shadow: 0 20px 50px rgba(5,8,14,0.36), 0 0 0 8px var(--color-primary-4);
+  }
+  .authority-image-frame::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(10,13,20,0.52));
+    content: '';
+    pointer-events: none;
+  }
+  .authority-index {
+    position: absolute;
+    right: 18px;
+    bottom: 16px;
+    z-index: 1;
+    color: rgba(240,246,255,0.68);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+  .authority-portrait figcaption {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 390px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .authority-portrait figcaption strong { font-size: 15px; }
+  .authority-portrait figcaption span {
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-align: right;
+  }
+  .authority-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 620px;
+    margin-top: 38px;
+    border-top: 1px solid var(--color-primary-14);
+    border-bottom: 1px solid var(--color-primary-14);
+  }
+  .authority-proof {
+    display: grid;
+    gap: 7px;
+    min-height: 112px;
+    padding: 20px 18px 18px 0;
+  }
+  .authority-proof + .authority-proof {
+    padding-left: 18px;
+    border-left: 1px solid var(--color-primary-14);
+  }
+  .authority-proof strong {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 27px;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+  }
+  .authority-proof span {
+    max-width: 120px;
+    color: var(--color-foreground-55);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  @media (min-width: 1024px) {
+    .about-aside { position: sticky; top: 112px; }
+  }
+  @media (max-width: 640px) {
+    .authority-image-frame { max-width: none; aspect-ratio: 1 / 1; }
+    .authority-portrait figcaption { align-items: flex-start; flex-direction: column; gap: 5px; }
+    .authority-portrait figcaption span { text-align: left; }
+    .authority-proof { padding-right: 10px; }
+    .authority-proof + .authority-proof { padding-left: 10px; }
+    .authority-proof strong { font-size: 22px; }
+    .authority-proof span { font-size: 11px; }
+  }
+</style>

@@ -1,0 +1,289 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { Icon } from 'astro-icon/components';
+import { getCollection, render } from 'astro:content';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const productos = (await getCollection('productos')).filter((entry) => entry.data.published);
+  return productos.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+const path = `/productos/${entry.id}/`;
+const comingSoon = data.status === 'coming-soon';
+const subject = encodeURIComponent(`Interés en producto: ${data.title}`);
+const mailto = `mailto:${site.email}?subject=${subject}`;
+const asset = (data.image ?? '/assets/dashboard-mock-card.jpg').replace(/^\/assets\//, '');
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: data.title,
+    description: data.tagline,
+    brand: { '@type': 'Brand', name: site.name },
+    ...(data.price
+      ? { offers: { '@type': 'Offer', price: data.price, priceCurrency: 'USD', availability: 'https://schema.org/InStock' } }
+      : {}),
+  },
+];
+if (data.faqs.length > 0) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: data.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  });
+}
+---
+
+<Layout
+  title={`${data.title} — Productos de analítica`}
+  description={data.tagline}
+  canonical={`${site.url}${path}`}
+  type="product"
+>
+  <Fragment slot="jsonld">
+    {jsonLd.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+  </Fragment>
+
+  <Nav />
+
+  <main id="main-content">
+    <header class="page-head pb-6">
+      <div class="container-site max-w-[1100px]">
+        <div class="breadcrumb">
+          <a href="/">Inicio</a>
+          <span class="breadcrumb-sep">/</span>
+          <a href="/productos/">Productos</a>
+          <span class="breadcrumb-sep">/</span>
+          <span aria-current="page">{data.title}</span>
+        </div>
+      </div>
+    </header>
+
+    {/* ---------- PRODUCT HERO ---------- */}
+    <section class="pb-[64px] md:pb-[80px]">
+      <div class="container-site max-w-[1100px]">
+        <div class="grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-14 items-start">
+          <div class="reveal">
+            <div class="flex items-center gap-2 flex-wrap mb-4">
+              <span class="tag-pill">{data.category}</span>
+              <span class:list={['tag-pill', comingSoon ? 'tag-pill--soon' : 'tag-pill--available']}>
+                {comingSoon ? 'Próximamente' : 'Disponible'}
+              </span>
+            </div>
+
+            <h1 class="text-[34px] md:text-[44px] lg:text-[52px] font-semibold tracking-[-0.03em] leading-[1.08]">
+              {data.title}
+            </h1>
+            <p class="mt-5 text-lg leading-[1.55] text-foreground-55 max-w-[600px]">{data.tagline}</p>
+
+            <figure class="product-detail-visual mt-10">
+              <div class="img-ph" style="aspect-ratio: 16 / 10; border: none; border-radius: 0;"><span>{asset}</span></div>
+            </figure>
+
+            <div class="prose mt-10">
+              <Content />
+            </div>
+          </div>
+
+          <aside class="product-buy-box card p-7 md:p-8 sticky top-[100px]">
+            <div class="flex items-center justify-between gap-4">
+              <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-foreground-55">{data.category}</span>
+              <span class:list={['product-status', comingSoon && 'product-status--soon']}>
+                {comingSoon ? 'Próximamente' : 'Disponible'}
+              </span>
+            </div>
+
+            <div class="mt-5">
+              {data.price ? (
+                <div class="flex items-baseline gap-2">
+                  <strong class="font-mono text-[42px] font-light tracking-tight leading-none">{data.price}</strong>
+                  {data.period && <span class="text-sm text-foreground-55">{data.period}</span>}
+                </div>
+              ) : (
+                <p class="text-[15px] leading-[1.55] text-foreground-55">
+                  {comingSoon ? 'Este producto está en desarrollo. Dejame tu interés y te aviso cuando esté listo.' : 'Precio a definir.'}
+                </p>
+              )}
+            </div>
+
+            <a href={mailto} class="btn btn-primary btn-block mt-6">
+              {comingSoon ? 'Avisarme cuando esté listo' : 'Comprar ahora'}
+              <Icon name="tabler:arrow-right" width="16" height="16" aria-hidden="true" />
+            </a>
+
+            <p class="mt-4 text-[13px] leading-[1.5] text-foreground-40 text-center">
+              {comingSoon ? 'Sin compromiso. Solo te escribo cuando el producto salga.' : 'Pago seguro por Stripe. Acceso inmediato.'}
+            </p>
+
+            {data.includes.length > 0 && (
+              <div class="mt-7 pt-7 border-t border-primary-10">
+                <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-foreground-55">Qué incluye</span>
+                <ul class="mt-4 grid gap-3">
+                  {data.includes.slice(0, 4).map((item) => (
+                    <li class="flex items-start gap-3 text-[14px] leading-[1.5] text-foreground-65">
+                      <Icon name="tabler:check" width="16" height="16" aria-hidden="true" class="w-[16px] h-[16px] text-primary shrink-0 mt-[2px]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {data.tools.length > 0 && (
+              <div class="mt-7 pt-7 border-t border-primary-10">
+                <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-foreground-55">Herramientas</span>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {data.tools.map((tool) => <span class="tag-pill">{tool}</span>)}
+                </div>
+              </div>
+            )}
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- DETAILS ---------- */}
+    <section class="py-[80px] md:py-[100px] border-t border-primary-6">
+      <div class="container-site max-w-[880px]">
+        <div class="grid md:grid-cols-2 gap-12 lg:gap-16">
+          <div class="reveal">
+            <h2 class="detail-section-title">El problema que resuelve</h2>
+            <p class="mt-4 text-[16px] leading-[1.7] text-foreground-70">{data.problem}</p>
+          </div>
+
+          {data.audience.length > 0 && (
+            <div class="reveal">
+              <h2 class="detail-section-title">Para quién es</h2>
+              <ul class="mt-4 grid gap-3">
+                {data.audience.map((a) => (
+                  <li class="flex items-center gap-3 text-[15px] text-foreground-65">
+                    <Icon name="tabler:check" width="15" height="15" aria-hidden="true" class="w-[15px] h-[15px] text-primary shrink-0" />
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <div class="mt-16 reveal">
+          <h2 class="detail-section-title">Cómo funciona</h2>
+          <ol class="mt-6 grid gap-4">
+            {data.howItWorks.map((step, i) => (
+              <li class="flex items-start gap-4 p-5 rounded-xl border border-primary-10 bg-card">
+                <span class="font-mono text-[14px] text-primary tracking-[0.1em] pt-[2px] shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-[15px] leading-[1.6] text-foreground-70">{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {data.requirements.length > 0 && (
+          <div class="mt-16 reveal">
+            <h2 class="detail-section-title">Requisitos</h2>
+            <ul class="mt-4 grid gap-2">
+              {data.requirements.map((req) => (
+                <li class="flex items-center gap-3 text-[15px] text-foreground-65">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary-35 shrink-0"></span>
+                  {req}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+
+    {data.faqs.length > 0 && (
+      <section class="py-[80px] md:py-[100px] border-t border-primary-6">
+        <div class="container-site max-w-[760px]">
+          <h2 class="text-[24px] font-semibold tracking-tight mb-8 reveal">Preguntas frecuentes</h2>
+          <div class="border-t border-primary-14 reveal-stagger">
+            {data.faqs.map((faq) => (
+              <details class="faq-item border-b border-primary-14">
+                <summary class="flex items-center justify-between gap-4 py-6 px-1 cursor-pointer text-[16px] font-medium leading-[1.4] list-none [&::-webkit-details-marker]:hidden">
+                  {faq.q}
+                  <span class="faq-chev shrink-0 text-primary transition-transform duration-300">
+                    <Icon name="tabler:chevron-down" width="20" height="20" aria-hidden="true" />
+                  </span>
+                </summary>
+                <p class="px-1 pb-7 pt-0 text-[15px] leading-[1.65] text-muted-foreground">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .product-buy-box {
+    border: 1px solid var(--color-primary-14);
+    border-radius: 16px;
+    box-shadow: var(--shadow-elevated);
+  }
+  .product-status {
+    padding: 5px 10px;
+    border-radius: 9999px;
+    background: var(--color-accent);
+    color: #f4f8ff;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .product-status--soon {
+    background: var(--color-primary-14);
+    color: var(--color-foreground-70);
+  }
+
+  .tag-pill--soon {
+    background: var(--color-primary-8);
+    color: var(--color-foreground-70);
+    border-color: var(--color-primary-20);
+  }
+  .tag-pill--available {
+    background: var(--color-accent);
+    color: #f4f8ff;
+    border-color: transparent;
+  }
+
+  .product-detail-visual {
+    overflow: hidden;
+    border: 1px solid var(--color-primary-14);
+    border-radius: 16px;
+    background: var(--color-card);
+  }
+  .detail-section-title {
+    padding-top: 16px;
+    border-top: 1px solid var(--color-primary-14);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .faq-item[open] .faq-chev { transform: rotate(180deg); }
+  .faq-item summary:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+</style>

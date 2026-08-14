@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Página no encontrada — Alex Spelucin"
+  description="La página que buscas no existe."
+  noindex={true}
+>
+  <Nav />
+
+  <main id="main-content">
+    <section class="min-h-[60vh] flex items-center pt-[104px] pb-[80px]">
+      <div class="container-site">
+        <p class="page-head-eyebrow">Error 404</p>
+        <h1 class="page-head-title">Esta página no existe.</h1>
+        <p class="page-head-sub">
+          Puede que se haya movido o que la dirección esté mal escrita.           Aquí están los caminos principales.
+        </p>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <a href="/" class="btn btn-primary">Volver al inicio</a>
+          <a href="/portafolio" class="btn btn-secondary">Ver portafolio</a>
+          <a href="/productos" class="btn btn-secondary">Explorar productos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

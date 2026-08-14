@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Privacidad — Alex Spelucin" description="Información sobre el tratamiento de datos en spelucin.pro." noindex>
+  <Nav />
+  <main id="main-content">
+    <header class="page-head">
+      <div class="container-site max-w-[760px]">
+        <div class="breadcrumb"><a href="/">Inicio</a><span class="breadcrumb-sep">/</span><span aria-current="page">Privacidad</span></div>
+        <h1 class="page-head-title">Privacidad</h1>
+        <p class="page-head-sub">Información clara sobre los datos que compartes al contactar conmigo.</p>
+      </div>
+    </header>
+    <section class="pb-[80px] md:pb-[110px]">
+      <div class="container-site max-w-[760px] prose">
+        <h2>Qué datos recibo</h2>
+        <p>Si escribís a través del formulario, recibo tu nombre, email, motivo y mensaje mediante tu cliente de correo. No hay una base de datos de contactos detrás del formulario.</p>
+        <h2>Para qué los uso</h2>
+        <p>Uso esos datos únicamente para responder a tu mensaje y dar seguimiento a la conversación que iniciaste. No vendo datos ni los uso para publicidad.</p>
+        <h2>Contacto</h2>
+        <p>Para cualquier pregunta sobre privacidad, escribime a <a href="mailto:alex@spelucin.pro">alex@spelucin.pro</a>.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

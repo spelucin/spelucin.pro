@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const links = [
+  { href: '/productos', label: 'Productos' },
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/portafolio', label: 'Portafolio' },
+  { href: '/notas', label: 'Notas' },
+  { href: '/acerca-de', label: 'Acerca de' },
+];
+
+const isActive = (href: string) => current === href || (href !== '/' && current.startsWith(href));
+---
+
+<header id="nav" class="nav fixed top-0 left-0 right-0 z-[100] h-[72px]">
+  <div class="container-site h-[72px] flex items-center">
+    <div class="nav-shell w-full h-[60px] flex items-center justify-between gap-6 px-3 md:px-4">
+      <a href="/" aria-label="spelucin.pro — inicio" class="nav-brand flex items-center gap-[10px] text-foreground font-bold text-[17px] tracking-tight">
+        <img src="/assets/logo.svg" alt="" width="28" height="28" class="w-7 h-7" />
+        <span>spelucin<span class="text-primary">.pro</span></span>
+      </a>
+
+      <nav id="navLinks" class="nav-links hidden md:flex items-center gap-7" aria-label="Navegación principal">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+            class="text-foreground-65 hover:text-foreground text-[15px] font-medium transition-colors"
+          >
+            {link.label}
+          </a>
+        ))}
+        <a href="/contacto" class="btn btn-primary btn-sm nav-cta-mobile md:hidden">Contacto</a>
+      </nav>
+
+      <div class="nav-actions flex items-center gap-3">
+        <a href="/contacto" class="btn btn-primary btn-sm hidden md:inline-flex">Contacto</a>
+        <button
+          id="navToggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="navLinks"
+          type="button"
+          class="nav-toggle md:hidden bg-transparent border border-border rounded-sm p-[9px] text-foreground"
+        >
+          <Icon name="tabler:menu-2" width="20" height="20" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

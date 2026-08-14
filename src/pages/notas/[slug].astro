@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getEntry, render } from 'astro:content';
+import { safeCollection } from '../../lib/content';
+import { readingTime } from '../../lib/readingTime';
+import { formatDate } from '../../lib/formatDate';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const notas = (await safeCollection('notas')).filter((entry) => entry.data.published);
+  return notas.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+const path = `/notas/${entry.id}/`;
+const minutes = readingTime(entry.body ?? '');
+
+const relatedWork = (
+  await Promise.all(data.relatedWork.map((slug) => getEntry('trabajos', slug)))
+).filter(Boolean);
+const relatedProducts = (
+  await Promise.all(data.relatedProducts.map((slug) => getEntry('productos', slug)))
+).filter(Boolean);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.date.toISOString(),
+  author: { '@type': 'Person', name: site.name },
+  publisher: { '@type': 'Person', name: site.name },
+  mainEntityOfPage: `${site.url}${path}`,
+  wordCount: (entry.body ?? '').split(/\s+/).length,
+};
+---
+
+<Layout
+  title={`${data.title} — Notas de Alex Spelucin`}
+  description={data.description}
+  canonical={`${site.url}${path}`}
+  type="article"
+>
+  <Fragment slot="jsonld">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <Nav />
+
+  <main id="main-content">
+    <article>
+      <header class="page-head pb-8">
+        <div class="container-site max-w-[720px]">
+          <div class="breadcrumb">
+            <a href="/">Inicio</a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="/notas/">Notas</a>
+            <span class="breadcrumb-sep">/</span>
+            <span aria-current="page">{data.title}</span>
+          </div>
+          <div class="flex items-center gap-4 flex-wrap mb-5">
+            <span class="font-mono text-[12px] tracking-[0.14em] uppercase text-foreground-55">{formatDate(data.date)}</span>
+            <span class="w-1 h-1 rounded-full bg-primary-35"></span>
+            <span class="font-mono text-[12px] tracking-[0.14em] uppercase text-primary">{data.category}</span>
+            <span class="w-1 h-1 rounded-full bg-primary-35"></span>
+            <span class="font-mono text-[12px] tracking-[0.14em] uppercase text-foreground-55">{minutes} min de lectura</span>
+          </div>
+          <h1 class="page-head-title">{data.title}</h1>
+          <p class="page-head-sub">{data.description}</p>
+        </div>
+      </header>
+
+      <section class="pb-[80px] md:pb-[110px]">
+        <div class="container-site max-w-[720px]">
+          <div class="prose reveal">
+            <Content />
+          </div>
+
+          {(relatedProducts.length > 0 || relatedWork.length > 0) && (
+            <aside class="mt-16 p-8 rounded-xl border border-primary-20 bg-primary-4 reveal">
+              <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-primary">Sigue explorando</span>
+              <div class="mt-4 flex flex-col gap-2">
+                {relatedWork.map((trabajo) => (
+                  <a href={`/portafolio/${trabajo.id}/`} class="text-[15px] text-foreground-70 hover:text-primary transition-colors">
+                    → {trabajo.data.title}
+                  </a>
+                ))}
+                {relatedProducts.map((producto) => (
+                  <a href={`/productos/${producto.id}/`} class="text-[15px] text-foreground-70 hover:text-primary transition-colors">
+                    → {producto.data.title}
+                  </a>
+                ))}
+              </div>
+            </aside>
+          )}
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>

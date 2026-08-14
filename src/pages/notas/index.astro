@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import NoteCard from '../../components/NoteCard.astro';
+import { safeCollection } from '../../lib/content';
+
+const notas = (await safeCollection('notas'))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout
+  title="Notas sobre analítica — Alex Spelucin"
+  description="Artículos y notas sobre analítica digital, medición, reporting y data de marketing."
+>
+  <Nav />
+
+  <main id="main-content">
+    <header class="page-head">
+      <div class="container-site">
+        <div class="breadcrumb">
+          <a href="/">Inicio</a>
+          <span class="breadcrumb-sep">/</span>
+          <span aria-current="page">Notas</span>
+        </div>
+        <p class="page-head-eyebrow">Escritos y notas</p>
+        <h1 class="page-head-title">Pensar en voz alta<br />sobre analítica y datos</h1>
+        <p class="page-head-sub">
+          Notas largas sobre medición, reporting, infraestructura de datos y el oficio de hacer que la data de marketing sea útil.
+        </p>
+      </div>
+    </header>
+
+    <section class="pb-[80px] md:pb-[110px]">
+      <div class="container-site">
+        {notas.length === 0 ? (
+          <div class="empty-state">
+            <strong>La sección está en construcción.</strong>
+            <p>Próximamente escribiré aquí sobre medición, reporting y data de marketing. Si querés enterarte cuando publique, escribime.</p>
+            <a href="/contacto" class="btn btn-primary btn-sm mt-4">Avísame cuando publique</a>
+          </div>
+        ) : (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 reveal-stagger">
+            {notas.map((entry) => <NoteCard entry={entry} />)}
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

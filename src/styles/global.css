@@ -1,0 +1,573 @@
+/* ============================================
+   SPELUCIN.PRO — Global Styles (Tailwind v4)
+   Source of truth for the site's visual identity.
+   Synced with: ../spelucin.mkt/brand/tokens.css
+   Dark theme only. Monochromatic blue.
+   ============================================ */
+
+@import 'tailwindcss';
+
+/* ============================================
+   DESIGN TOKENS → Tailwind theme
+   Generates utilities: bg-background, text-primary,
+   border-border, font-mono, shadow-button, etc.
+   ============================================ */
+@theme {
+  /* Colors — primary (dark theme only) */
+  --color-background: #0a0d14;
+  --color-foreground: #f0f6ff;
+  --color-primary: #60a5fa;
+  --color-primary-foreground: #0a0d14;
+  --color-accent: #1560bd;
+  --color-accent-foreground: #ffffff;
+  --color-card: #0f1219;
+  --color-card-foreground: #f0f6ff;
+
+  /* Colors — secondary */
+  --color-secondary: #101826;
+  --color-secondary-foreground: #60a5fa;
+  --color-muted: rgba(240, 246, 255, 0.06);
+  --color-muted-foreground: rgba(240, 246, 255, 0.55);
+  --color-border: rgba(96, 165, 250, 0.14);
+  --color-ring: rgba(96, 165, 250, 0.35);
+
+  /* Colors — destructive */
+  --color-error: #c0392b;
+
+  /* Colors — chart palette */
+  --color-chart-1: #1560bd;
+  --color-chart-2: #0d4a9e;
+  --color-chart-3: #3b82f6;
+  --color-chart-4: #60a5fa;
+  --color-chart-5: #93c5fd;
+
+  /* Accent opacity scale */
+  --color-primary-3: rgba(96, 165, 250, 0.03);
+  --color-primary-4: rgba(96, 165, 250, 0.04);
+  --color-primary-5: rgba(96, 165, 250, 0.05);
+  --color-primary-6: rgba(96, 165, 250, 0.06);
+  --color-primary-8: rgba(96, 165, 250, 0.08);
+  --color-primary-10: rgba(96, 165, 250, 0.10);
+  --color-primary-14: rgba(96, 165, 250, 0.14);
+  --color-primary-20: rgba(96, 165, 250, 0.20);
+  --color-primary-28: rgba(96, 165, 250, 0.28);
+  --color-primary-35: rgba(96, 165, 250, 0.35);
+  --color-primary-50: rgba(96, 165, 250, 0.50);
+
+  /* Foreground opacity scale */
+  --color-foreground-40: rgba(240, 246, 255, 0.40);
+  --color-foreground-50: rgba(240, 246, 255, 0.50);
+  --color-foreground-55: rgba(240, 246, 255, 0.55);
+  --color-foreground-65: rgba(240, 246, 255, 0.65);
+  --color-foreground-70: rgba(240, 246, 255, 0.70);
+
+  /* Typography */
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows (derived from primary blue) */
+  --shadow-card: 0 1px 3px rgba(21, 96, 189, 0.08);
+  --shadow-elevated: 0 4px 12px rgba(21, 96, 189, 0.12);
+  --shadow-button: 0 4px 16px rgba(21, 96, 189, 0.28);
+  --shadow-button-hover: 0 6px 22px rgba(21, 96, 189, 0.36);
+  --shadow-dashboard: 0 12px 40px rgba(21, 96, 189, 0.10);
+  --shadow-nav: 0 4px 24px rgba(21, 96, 189, 0.08);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-primary-28);
+  color: var(--color-foreground);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(21, 96, 189, 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(21, 96, 189, 0.4); }
+
+/* ============================================
+   COMPONENTS
+   ============================================ */
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  /* Pill badge eyebrow (reference layout pattern) */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    background: var(--color-primary-4);
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 8px var(--color-primary);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    border: 1px solid transparent;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+  }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-primary {
+    background: var(--color-accent);
+    color: #f4f8ff;
+    box-shadow: var(--shadow-button);
+  }
+  .btn-primary:hover {
+    box-shadow: var(--shadow-button-hover);
+    filter: brightness(1.12);
+  }
+  .btn-secondary {
+    background: var(--color-primary-5);
+    border-color: var(--color-border);
+    color: var(--color-foreground);
+  }
+  .btn-secondary:hover {
+    background: var(--color-primary-10);
+    border-color: var(--color-primary-35);
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .btn-sm { padding: 10px 18px; font-size: 14px; }
+  .btn-block { width: 100%; }
+
+  .case-card-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 11px 18px;
+    border: 1px solid var(--color-primary-20);
+    border-radius: 8px;
+    background: var(--color-primary-5);
+    color: var(--color-foreground);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .case-card-link svg { width: 15px; height: 15px; color: var(--color-primary); transition: transform 0.2s ease; }
+  .case-card-link:hover {
+    background: var(--color-primary-10);
+    border-color: var(--color-primary-35);
+    color: var(--color-primary);
+  }
+  .case-card-link:hover svg { transform: translateX(3px); }
+  .case-card-link:active { transform: scale(0.98); }
+
+  .section-kicker { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 16px;
+    z-index: 200;
+    padding: 10px 14px;
+    border: 1px solid var(--color-primary-35);
+    border-radius: 8px;
+    background: var(--color-card);
+    color: var(--color-foreground);
+    transform: translateY(-180%);
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus { transform: translateY(0); }
+
+  /* Card */
+  .card {
+    background: var(--color-card);
+    border: 1px solid var(--color-primary-10);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-hover:hover {
+    border-color: var(--color-primary-28);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Cards in a grid get a grounded left accent edge */
+  .card-group {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-group::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: var(--color-primary-35);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-8);
+    border: 1px solid var(--color-primary-14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
+  /* Dot grid textures (brand signature) */
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(96, 165, 250, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .dot-grid-hero {
+    background-image: radial-gradient(circle, rgba(96, 165, 250, 0.20) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 0%, #000 45%, transparent 100%);
+    mask-image: radial-gradient(ellipse 90% 85% at 50% 0%, #000 45%, transparent 100%);
+  }
+
+  /* CTA panel texture (dot grid + soft glows) */
+  .cta-texture {
+    background:
+      radial-gradient(ellipse at top left, rgba(96, 165, 250, 0.1), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(96, 165, 250, 0.06), transparent 50%),
+      radial-gradient(circle, rgba(96, 165, 250, 0.07) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 24px 24px;
+    background-color: var(--color-card);
+  }
+
+  /* Tag / pill (content collections) */
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    background: var(--color-primary-4);
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  /* Image placeholder — reserved slot while real assets are regenerated */
+  .img-ph {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 120px;
+    overflow: hidden;
+    padding: 16px;
+    border: 1px dashed var(--color-primary-28);
+    border-radius: 8px;
+    background: var(--color-card);
+    color: var(--color-foreground-40);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .img-ph--fill {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    min-height: 0;
+    padding: 8px;
+    border: none;
+    border-radius: 0;
+  }
+
+  /* Page header (collection index + fixed pages) */
+  .page-head {
+    padding-top: 132px;
+    padding-bottom: 56px;
+  }
+  @media (min-width: 768px) {
+    .page-head { padding-top: 148px; padding-bottom: 72px; }
+  }
+
+  .page-head-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .page-head-title {
+    margin-top: 18px;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+  }
+  @media (min-width: 768px) {
+    .page-head-title { font-size: 48px; }
+  }
+  .page-head-sub {
+    margin-top: 20px;
+    max-width: 640px;
+    color: var(--color-foreground-55);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  /* Empty state (collections sin contenido) */
+  .empty-state {
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    padding: 64px 24px;
+    border: 1px dashed var(--color-primary-20);
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-3);
+    text-align: center;
+  }
+  .empty-state strong {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .empty-state p {
+    max-width: 420px;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-foreground-55);
+  }
+  .breadcrumb a {
+    color: var(--color-foreground-55);
+    transition: color 0.2s ease;
+  }
+  .breadcrumb a:hover { color: var(--color-primary); }
+  .breadcrumb-sep {
+    color: var(--color-primary-35);
+  }
+  .breadcrumb [aria-current='page'] {
+    color: var(--color-foreground-70);
+  }
+
+  /* ============================================
+     PROSE — long-form reading (notas, detalle de
+     producto/trabajo). Tipografía editorial legible.
+     ============================================ */
+  .prose {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-foreground-70);
+  }
+  .prose > * + * { margin-top: 1.25em; }
+  .prose h2 {
+    margin-top: 2.2em;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: var(--color-foreground);
+  }
+  .prose h3 {
+    margin-top: 1.9em;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    color: var(--color-foreground);
+  }
+  .prose p { margin-top: 1.15em; }
+  .prose strong { color: var(--color-foreground); font-weight: 600; }
+  .prose a {
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-primary-28);
+    transition: border-color 0.2s ease;
+  }
+  .prose a:hover { border-color: var(--color-primary); }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.4em;
+    margin-top: 1.15em;
+  }
+  .prose ul { list-style: disc; }
+  .prose ol { list-style: decimal; }
+  .prose li { margin-top: 0.45em; padding-left: 0.25em; }
+  .prose li::marker { color: var(--color-primary); }
+  .prose blockquote {
+    margin: 1.6em 0;
+    padding: 18px 22px;
+    border-left: 2px solid var(--color-primary);
+    border-radius: 0 10px 10px 0;
+    background: var(--color-primary-4);
+    color: var(--color-foreground-65);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .prose code {
+    padding: 2px 6px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: 5px;
+    background: var(--color-primary-4);
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+  .prose pre {
+    margin: 1.5em 0;
+    padding: 18px 20px;
+    overflow-x: auto;
+    border: 1px solid var(--color-primary-14);
+    border-radius: 10px;
+    background: var(--color-card);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-foreground-70);
+  }
+  .prose pre code {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+  }
+  .prose hr {
+    margin: 2.4em 0;
+    border: 0;
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.6em 0;
+    font-size: 15px;
+  }
+  .prose th,
+  .prose td {
+    padding: 10px 14px;
+    border: 1px solid var(--color-primary-10);
+    text-align: left;
+  }
+  .prose th {
+    background: var(--color-primary-4);
+    color: var(--color-foreground);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .prose img {
+    display: block;
+    margin: 1.8em 0;
+    max-width: 100%;
+    border: 1px solid var(--color-primary-14);
+    border-radius: 12px;
+  }
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+.js-ready .reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+
+.js-ready .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js-ready .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+.js-ready .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.js-ready .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+.js-ready .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+.js-ready .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
+.js-ready .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.4s; }
+.js-ready .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.5s; }
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

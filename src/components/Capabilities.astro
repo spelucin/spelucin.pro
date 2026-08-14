@@ -1,0 +1,63 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const capabilities = [
+  {
+    title: 'Medición que funciona',
+    text: 'GA4, GTM y tracking que te dan confianza para defender tus decisiones ante cualquier cliente.',
+    icon: 'tabler:chart-histogram',
+  },
+  {
+    title: 'Datos que impulsan decisiones',
+    text: 'Traduzco data de marketing en acciones claras: qué métrica importa, por qué y cuándo ejecutarla.',
+    icon: 'tabler:target-arrow',
+  },
+  {
+    title: 'Sistemas que escalan',
+    text: 'Frameworks reutilizables para reporting: la misma lógica, múltiples clientes, menos trabajo manual.',
+    icon: 'tabler:report-analytics',
+  },
+];
+---
+
+<section class="py-[80px] md:py-[110px] border-t border-primary-6">
+  <div class="container-site">
+    <div class="capabilities-layout">
+      <div class="reveal">
+        <p class="section-kicker">Qué hago</p>
+        <h2 class="text-[34px] md:text-[42px] font-semibold tracking-tight leading-[1.12] max-w-[420px]">
+          Analítica que se <span class="text-primary">puede operar.</span>
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-muted-foreground max-w-[420px]">
+          Aplico criterio técnico a problemas reales de marketing: medición que no miente, reporting que escala y data que el equipo puede usar.
+        </p>
+      </div>
+
+      <div class="capabilities-list reveal-stagger">
+        {capabilities.map((cap, i) => (
+          <article class="capability-row">
+            <span class="capability-number">{String(i + 1).padStart(2, '0')}</span>
+            <div class="capability-icon"><Icon name={cap.icon} width="20" height="20" /></div>
+            <div>
+              <h3 class="text-[18px] font-semibold tracking-tight leading-[1.3]">{cap.title}</h3>
+              <p class="mt-1 text-[15px] leading-[1.55] text-muted-foreground">{cap.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-kicker { margin-bottom: 16px; color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .capabilities-layout { display: grid; gap: 48px; }
+  .capabilities-list { border-top: 1px solid var(--color-primary-14); }
+  .capability-row { display: grid; grid-template-columns: 34px 36px minmax(0, 1fr); gap: 14px; align-items: start; padding: 20px 0; border-bottom: 1px solid var(--color-primary-14); }
+  .capability-number { padding-top: 3px; color: var(--color-primary); font-family: var(--font-mono); font-size: 12px; }
+  .capability-icon { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--color-primary-14); border-radius: 8px; color: var(--color-primary); background: var(--color-primary-4); }
+  @media (min-width: 1024px) {
+    .capabilities-layout { grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr); gap: 96px; align-items: start; }
+    .capabilities-layout > :first-child { position: sticky; top: 112px; }
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import { getCollection } from 'astro:content';
+
+const trabajos = (await getCollection('trabajos'))
+  .filter((entry) => entry.data.published)
+  .sort((a, b) => (b.data.year ?? '').localeCompare(a.data.year ?? ''));
+
+const categories = ['Todas', ...new Set(trabajos.map((t) => t.data.category))];
+---
+
+<Layout
+  title="Portafolio — Alex Spelucin, analítica digital y data de marketing"
+  description="Proyectos y sistemas de analítica, reporting e infraestructura de data de marketing construidos para equipos de marketing."
+>
+  <Nav />
+
+  <main id="main-content">
+    <header class="page-head">
+      <div class="container-site">
+        <div class="breadcrumb">
+          <a href="/">Inicio</a>
+          <span class="breadcrumb-sep">/</span>
+          <span aria-current="page">Portafolio</span>
+        </div>
+        <p class="page-head-eyebrow">Portafolio</p>
+        <h1 class="page-head-title">Proyectos de analítica<br />aplicada.</h1>
+        <p class="page-head-sub">
+          Casos de medición, reporting y data de marketing. Cada uno documenta el contexto, el problema y el sistema que quedó operando.
+        </p>
+      </div>
+    </header>
+
+    <section class="pb-[80px] md:pb-[110px]">
+      <div class="container-site">
+        <div class="flex items-center gap-2 flex-wrap mb-10" role="group" aria-label="Filtrar por categoría">
+          {categories.map((cat, i) => (
+            <button
+              type="button"
+              data-filter={cat}
+              class:list={['filter-chip', i === 0 && 'is-active']}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div class="grid gap-6" data-case-grid>
+          {trabajos.map((entry, i) => (
+            <div data-category={entry.data.category}>
+              <CaseCard entry={entry} index={String(i + 1).padStart(2, '0')} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  const chips = [...document.querySelectorAll('.filter-chip')];
+  const items = [...document.querySelectorAll('[data-category]')];
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach((c) => c.classList.toggle('is-active', c === chip));
+      const filter = chip.dataset.filter;
+      items.forEach((item) => {
+        item.style.display = filter === 'Todas' || item.dataset.category === filter ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .filter-chip {
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    background: var(--color-primary-4);
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-chip:hover {
+    color: var(--color-foreground);
+    border-color: var(--color-primary-35);
+  }
+  .filter-chip:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; }
+  .filter-chip.is-active {
+    background: var(--color-accent);
+    border-color: transparent;
+    color: #f4f8ff;
+  }
+</style>
