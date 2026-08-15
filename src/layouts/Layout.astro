@@ -2,223 +2,63 @@
 import '../styles/global.css';
 import '@fontsource-variable/dm-sans';
 import '@fontsource-variable/jetbrains-mono';
+import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
 
 interface Props {
-  title: string;
-  description: string;
+  t: Translations;
+  title?: string;
+  description?: string;
   image?: string;
-  type?: string;
   canonical?: string;
   noindex?: boolean;
 }
 
-const {
-  title,
-  description,
-  image = '/assets/alex-spelucin-avatar.jpg',
-  type = 'website',
-  canonical,
-  noindex = false,
-} = Astro.props;
+const { t, title, description, image = site.ogImage, canonical, noindex = false } = Astro.props;
 
-const site = 'https://spelucin.pro';
-const url = canonical ?? new URL(Astro.url.pathname, site).toString();
-const ogImage = new URL(image, site).toString();
+const url = canonical ?? new URL(Astro.url.pathname, site.url).toString();
+const ogImage = new URL(image, site.url).toString();
+const titleTag = title ?? t.meta.title;
+const descriptionTag = description ?? t.meta.description;
+const alternateLinks = [
+  { hreflang: 'es', href: '/' },
+  { hreflang: 'en', href: '/en/' },
+];
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={t.htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{titleTag}</title>
+    <meta name="description" content={descriptionTag} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <link rel="canonical" href={url} />
+    {alternateLinks.map((link) => (
+      <link rel="alternate" hreflang={link.hreflang} href={new URL(link.href, site.url).toString()} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL('/', site.url).toString()} />
     <meta name="theme-color" content="#0a0d14" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <meta property="og:type" content={type} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={titleTag} />
+    <meta property="og:description" content={descriptionTag} />
     <meta property="og:url" content={url} />
-    <meta property="og:site_name" content="Alex Spelucin" />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content={t.ogLocale} />
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={titleTag} />
+    <meta name="twitter:description" content={descriptionTag} />
     <meta name="twitter:image" content={ogImage} />
 
     <slot name="jsonld" />
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <a class="skip-link" href="#main-content">{t.skipLink}</a>
     <slot />
-
-    <script is:inline>
-      document.documentElement.classList.add('js-ready');
-
-      // Sticky nav background on scroll
-      const nav = document.getElementById('nav');
-      if (nav) {
-        const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-      }
-
-      // Mobile nav toggle
-      const navToggle = document.getElementById('navToggle');
-      const navLinks = document.getElementById('navLinks');
-      if (navToggle && navLinks) {
-        const setMenu = (open) => {
-          navLinks.classList.toggle('open', open);
-          navToggle.classList.toggle('is-open', open);
-          navToggle.setAttribute('aria-expanded', String(open));
-          navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-          document.body.style.overflow = open ? 'hidden' : '';
-        };
-
-        navToggle.addEventListener('click', () => {
-          setMenu(!navLinks.classList.contains('open'));
-        });
-        navLinks.querySelectorAll('a').forEach((link) => {
-          link.addEventListener('click', () => setMenu(false));
-        });
-        document.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape' && navLinks.classList.contains('open')) {
-            setMenu(false);
-            navToggle.focus();
-          }
-        });
-      }
-
-      // Scroll reveal animations
-      const revealEls = [...document.querySelectorAll('.reveal, .reveal-stagger')];
-      if ('IntersectionObserver' in window) {
-        const reveal = (el) => {
-          if (el.classList.contains('visible')) return;
-          el.classList.add('visible');
-          revealObserver.unobserve(el);
-        };
-        const revealObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) reveal(entry.target);
-            });
-          },
-          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-        );
-        revealEls.forEach((el) => revealObserver.observe(el));
-
-        // Fallback: fast scrolls / "jump to bottom" can skip elements that never
-        // intersected the viewport. Reveal anything whose top has reached the
-        // viewport's lower edge.
-        let ticking = false;
-        window.addEventListener(
-          'scroll',
-          () => {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(() => {
-              const threshold = window.innerHeight - 40;
-              revealEls.forEach((el) => {
-                if (!el.classList.contains('visible') && el.getBoundingClientRect().top < threshold) reveal(el);
-              });
-              ticking = false;
-            });
-          },
-          { passive: true }
-        );
-      }
-    </script>
-
-    <style is:inline>
-      .nav-shell {
-        border: 1px solid var(--color-primary-10);
-        border-radius: 12px;
-        transition: background 0.3s ease, box-shadow 0.3s ease;
-      }
-      .nav.scrolled {
-        background: transparent;
-      }
-      .nav.scrolled .nav-shell {
-        background: rgba(10, 13, 20, 0.84);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        box-shadow: var(--shadow-nav);
-      }
-      .nav-brand:focus-visible,
-      .nav-toggle:focus-visible {
-        outline: 2px solid var(--color-ring);
-        outline-offset: 3px;
-        border-radius: 5px;
-      }
-      .nav-links > a:not(.btn) {
-        position: relative;
-      }
-      .nav-links > a:not(.btn)::after {
-        position: absolute;
-        right: 0;
-        bottom: -7px;
-        left: 0;
-        height: 1px;
-        background: var(--color-primary);
-        content: '';
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform 0.25s ease;
-      }
-      .nav-links > a:not(.btn):hover::after,
-      .nav-links > a:not(.btn)[aria-current='page']::after {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
-      .nav-links > a[aria-current='page'] {
-        color: var(--color-foreground);
-      }
-      @media (max-width: 719px) {
-        .nav-shell { padding-inline: 10px; }
-        .nav-links {
-          display: flex;
-          position: fixed;
-          top: 78px;
-          left: 24px;
-          right: 24px;
-          flex-direction: column;
-          align-items: stretch;
-          gap: 0;
-          background: rgba(10, 13, 20, 0.97);
-          backdrop-filter: blur(16px);
-          border: 1px solid var(--color-primary-14);
-          border-radius: 12px;
-          padding: 12px 24px 20px;
-          transform: translateY(-8px);
-          opacity: 0;
-          pointer-events: none;
-          visibility: hidden;
-          transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-        }
-        .nav-links.open {
-          transform: translateY(0);
-          opacity: 1;
-          pointer-events: auto;
-          visibility: visible;
-        }
-        .nav-links a {
-          padding: 13px 0;
-          border-bottom: 1px solid var(--color-primary-6);
-        }
-        .nav-links .nav-cta-mobile {
-          display: inline-flex;
-          justify-content: center;
-          border-bottom: none;
-          margin-top: 14px;
-        }
-         .nav-toggle svg { transition: transform 0.25s ease; }
-         .nav-toggle.is-open svg { transform: rotate(90deg); }
-      }
-    </style>
   </body>
 </html>

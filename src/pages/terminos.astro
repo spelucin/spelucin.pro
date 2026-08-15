@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { t } from '../i18n/es';
 ---
 
-<Layout title="Términos — Alex Spelucin" description="Términos de uso de spelucin.pro." noindex>
-  <Nav />
+<Layout t={t} title="Términos — Alex Spelucin" description="Términos de uso de spelucin.pro." noindex>
+  <SiteHeader t={t} />
   <main id="main-content">
     <header class="page-head">
       <div class="container-site max-w-[760px]">
@@ -17,13 +18,13 @@ import Footer from '../components/Footer.astro';
     <section class="pb-[80px] md:pb-[110px]">
       <div class="container-site max-w-[760px] prose">
         <h2>Contenido del sitio</h2>
-        <p>Los textos, casos y recursos de spelucin.pro se comparten con fines informativos. No constituyen asesoría legal, financiera ni una garantía de resultados.</p>
-        <h2>Productos y servicios</h2>
-        <p>Las páginas de productos describen sistemas en desarrollo. El alcance, precio y disponibilidad se confirman por escrito antes de iniciar cualquier trabajo.</p>
+        <p>Los textos e información de spelucin.pro se comparten con fines informativos y profesionales. No constituyen asesoría legal, financiera ni una garantía de resultados.</p>
+        <h2>Propiedad intelectual</h2>
+        <p>El contenido de este sitio es propiedad de Alex Spelucin salvo que se indique lo contrario. No puede reproducirse con fines comerciales sin permiso.</p>
         <h2>Uso responsable</h2>
-        <p>No uses este sitio para enviar contenido ilegal, abusivo o que infrinja derechos de terceros. Si tenés dudas, escribime a <a href="mailto:alex@spelucin.pro">alex@spelucin.pro</a>.</p>
+        <p>No uses este sitio para enviar contenido ilegal, abusivo o que infrinja derechos de terceros. Si tienes dudas, escríbeme a <a href="mailto:alex@spelucin.pro">alex@spelucin.pro</a>.</p>
       </div>
     </section>
   </main>
-  <Footer />
+  <SiteFooter t={t} />
 </Layout>
