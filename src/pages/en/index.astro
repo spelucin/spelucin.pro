@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HomePage from '../../components/HomePage.astro';
+import { t } from '../../i18n/en';
+import { personJsonLd } from '../../i18n/personJsonLd';
+---
+
+<Layout t={t}>
+  <Fragment slot="jsonld">
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd(t))} />
+  </Fragment>
+  <HomePage t={t} />
+</Layout>

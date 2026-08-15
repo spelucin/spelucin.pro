@@ -1,0 +1,105 @@
+---
+import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const contactLinks = [
+  { href: `mailto:${site.email}`, label: site.email },
+  { href: site.linkedin, label: 'LinkedIn' },
+  { href: site.github, label: 'GitHub' },
+  { href: site.cal, label: 'Cal.com' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container-site">
+    <div class="footer-main">
+      <p class="footer-tagline">{t.footer.tagline}</p>
+      <nav class="footer-links" aria-label={t.footer.contactNav}>
+        {contactLinks.map((link) => (
+          <a
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener' : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="footer-meta">
+      <span>{t.footer.rights}</span>
+      <nav class="footer-legal" aria-label={t.footer.legalNav}>
+        <a href="/privacidad">{t.footer.privacy}</a>
+        <a href="/terminos">{t.footer.terms}</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-primary-8);
+    padding: 40px 0 36px;
+  }
+
+  .footer-main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-bottom: 32px;
+  }
+  .footer-tagline {
+    max-width: 420px;
+    color: var(--color-foreground-55);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+  }
+  .footer-links a {
+    color: var(--color-foreground-65);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  .footer-links a:hover { color: var(--color-primary); }
+
+  .footer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-primary-8);
+    color: var(--color-foreground-55);
+    font-size: 13px;
+  }
+  .footer-legal {
+    display: flex;
+    gap: 20px;
+  }
+  .footer-legal a {
+    color: var(--color-foreground-55);
+    transition: color 0.2s ease;
+  }
+  .footer-legal a:hover { color: var(--color-primary); }
+
+  @media (min-width: 768px) {
+    .footer-main {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+</style>

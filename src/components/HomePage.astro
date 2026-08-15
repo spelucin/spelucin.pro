@@ -1,0 +1,1165 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import avatar from '../assets/alex-spelucin-avatar.jpg';
+import dashboardHero from '../assets/dashboard-hero.jpg';
+import practice01 from '../assets/01.png';
+import practice02 from '../assets/02.png';
+import practice04 from '../assets/04.png';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const external = (href: string) => ({
+  target: '_blank',
+  rel: 'noopener',
+});
+
+const practiceImages = [practice01, practice02, practice04];
+
+const projectSlides: { src: string; page: number }[][] = [
+  [
+    { src: '/assets/portfolio/dashboard_torices-2.jpg', page: 2 },
+    { src: '/assets/portfolio/dashboard_torices-3.jpg', page: 3 },
+    { src: '/assets/portfolio/dashboard_torices-7.jpg', page: 7 },
+    { src: '/assets/portfolio/dashboard_torices-9.jpg', page: 9 },
+    { src: '/assets/portfolio/dashboard_torices-12.jpg', page: 12 },
+  ],
+  [
+    { src: '/assets/portfolio/ecommerce_owlbox-1.jpg', page: 1 },
+    { src: '/assets/portfolio/ecommerce_owlbox-4.jpg', page: 4 },
+    { src: '/assets/portfolio/ecommerce_owlbox-6.jpg', page: 6 },
+    { src: '/assets/portfolio/ecommerce_owlbox-9.jpg', page: 9 },
+  ],
+  [
+    { src: '/assets/portfolio/notebook_seo-1.jpg', page: 1 },
+    { src: '/assets/portfolio/notebook_seo-2.jpg', page: 2 },
+    { src: '/assets/portfolio/notebook_seo-7.jpg', page: 7 },
+    { src: '/assets/portfolio/notebook_seo-8.jpg', page: 8 },
+    { src: '/assets/portfolio/notebook_seo-14.jpg', page: 14 },
+    { src: '/assets/portfolio/notebook_seo-18.jpg', page: 18 },
+  ],
+];
+
+const projectLogos = [
+  { src: '/assets/torices-client-logo.svg', alt: 'Torices' },
+  { src: '/assets/owlbox-client-logo.svg', alt: 'Owlbox' },
+  { src: '/assets/notebook-client-logo.svg', alt: 'Notebook Agency' },
+];
+
+const clientLogos: { src: string; alt: string; small?: boolean }[] = [
+  { src: '/assets/notebook-client-logo.svg', alt: 'Notebook Agency' },
+  { src: '/assets/torices-client-logo.svg', alt: 'Torices' },
+  { src: '/assets/owlbox-client-logo.svg', alt: 'Owlbox', small: true },
+  { src: '/assets/picnic-client-logo.svg', alt: 'Picnic' },
+];
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <section class="hero">
+    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-site hero-grid">
+      <div class="hero-copy">
+        <span class="badge">{t.hero.badge}</span>
+        <h1>
+          {t.hero.headline} <span class="text-primary">{t.hero.highlight}</span>
+        </h1>
+        <p class="hero-sub">{t.hero.sub}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href={`#${t.projects.id}`}>
+            {t.hero.cta}
+            <Icon name="tabler:arrow-right" width="16" height="16" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+
+      <figure class="hero-dashboard">
+        <div class="hero-dashboard-frame">
+          <Image
+            src={dashboardHero}
+            alt={t.hero.dashboardAlt}
+            format="avif"
+            widths={[480, 640, 800]}
+            sizes="(min-width: 1024px) 440px, (min-width: 768px) 460px, 90vw"
+            loading="eager"
+            class="hero-dashboard-img"
+          />
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="client-strip-section" aria-label={t.hero.stripLabel}>
+    <div class="container-site">
+      <div class="client-strip">
+        <p class="client-strip-label">{t.hero.stripLabel}</p>
+        <ul class="client-strip-logos">
+          {clientLogos.map((logo) => (
+            <li class:list={['client-strip-logo', logo.small && 'client-strip-logo--sm']}>
+              <img src={logo.src} alt={logo.alt} width="178" height="56" loading="lazy" decoding="async" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id={t.about.id} class="section" aria-labelledby={`${t.about.id}-heading`}>
+    <div class="container-site">
+      <header class="section-head">
+        <span class="section-index">{t.about.index}</span>
+        <h2 id={`${t.about.id}-heading`}>{t.about.heading}</h2>
+      </header>
+      <div class="about-grid">
+        <div class="section-body section-body--prose">
+          {t.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <dl class="about-meta">
+            {t.about.meta.map((item) => (
+              <div class="about-meta-item">
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <figure class="about-portrait">
+          <Image
+            src={avatar}
+            alt={t.about.portraitAlt}
+            width={640}
+            format="avif"
+            widths={[320, 480, 640]}
+            sizes="(min-width: 768px) 320px, 264px"
+            loading="lazy"
+            class="about-portrait-img"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id={t.focus.id} class="section" aria-labelledby={`${t.focus.id}-heading`}>
+    <div class="container-site">
+      <header class="section-head">
+        <span class="section-index">{t.focus.index}</span>
+        <div class="section-head-body">
+          <h2 id={`${t.focus.id}-heading`}>
+            {t.focus.heading} <span class="text-primary">{t.focus.highlight}</span>
+          </h2>
+          <p class="section-head-sub">{t.focus.intro}</p>
+        </div>
+      </header>
+
+      <ul class="focus-grid">
+        {t.focus.practice.groups.map((group, g) => (
+          <li class="focus-card">
+            <figure class="focus-card-media">
+              <Image
+                src={practiceImages[g]}
+                alt={t.focus.practice.images[g].alt}
+                format="avif"
+                widths={[480, 720, 1080]}
+                sizes="(min-width: 900px) 340px, (min-width: 600px) 45vw, 100vw"
+                loading="lazy"
+                class="focus-card-img"
+              />
+            </figure>
+
+            <div class="focus-card-body">
+              <h3>{group.name}</h3>
+              <ul class="focus-card-tools">
+                {group.itemIndexes.map((idx, i) => (
+                  <li>
+                    <span class="focus-tool-index">{String(i + 1).padStart(2, '0')}</span>
+                    {t.focus.items[idx].name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id={t.tools.id} class="section" aria-labelledby={`${t.tools.id}-heading`}>
+    <div class="container-site">
+      <div class="split">
+        <div class="split-intro">
+          <span class="section-index">{t.tools.index}</span>
+          <h2 id={`${t.tools.id}-heading`}>
+            {t.tools.heading} <span class="text-primary">{t.tools.highlight}</span>
+          </h2>
+          <p class="split-intro-text">{t.tools.intro}</p>
+        </div>
+
+        <div class="tools-list">
+          {t.tools.groups.map((group) => (
+            <div class="tool-group">
+              <p class="tool-group-name">{group.name}</p>
+              <ul class="tool-group-items">
+                {group.items.map((item) => (
+                  <li class="chip chip--icon">
+                    <Icon name={item.icon} width="14" height="14" aria-hidden="true" />
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id={t.projects.id} class="section" aria-labelledby={`${t.projects.id}-heading`}>
+    <div class="container-site">
+      <header class="section-head">
+        <span class="section-index">{t.projects.index}</span>
+        <div class="section-head-body">
+          <h2 id={`${t.projects.id}-heading`}>
+            {t.projects.heading} <span class="text-primary">{t.projects.highlight}</span>
+          </h2>
+          <p class="section-head-sub">{t.projects.intro}</p>
+        </div>
+      </header>
+
+      <ul class="projects-list">
+        {t.projects.items.map((project, i) => (
+          <li class="projects-item">
+            <article class="project-card">
+              <div class="project-card-body">
+                <div class="project-card-head">
+                  <img
+                    class={projectLogos[i].src.includes('owlbox') ? 'project-logo project-logo--sm' : 'project-logo'}
+                    src={projectLogos[i].src}
+                    alt={projectLogos[i].alt}
+                    loading="lazy"
+                  />
+                  <p class="project-tag">
+                    <span class="project-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    <span aria-hidden="true">·</span>
+                    {project.scope && (
+                      <>
+                        <span class="project-scope">{project.scope}</span>
+                        <span aria-hidden="true">·</span>
+                      </>
+                    )}
+                    <span class="project-year">{project.year}</span>
+                  </p>
+                </div>
+                <h3>{project.title}</h3>
+                <div class="project-divider" aria-hidden="true"></div>
+                <p class="project-desc">{project.description}</p>
+                <ul class="project-results">
+                  {project.results.map((result) => (
+                    <li class="project-result">
+                      <span class="project-result-value">{result.value}</span>
+                      <span class="project-result-label">{result.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="project-slider" data-project-slider role="group" aria-label={t.projects.sliderAria}>
+                <div class="project-slider-media">
+                  <button
+                    type="button"
+                    class="project-slider-arrow project-slider-arrow--prev"
+                    data-project-slider-prev
+                    aria-label={t.projects.prevLabel}
+                  >
+                    <Icon name="tabler:chevron-left" width="20" height="20" aria-hidden="true" />
+                  </button>
+                  <div class="project-slider-viewport" data-project-slider-viewport>
+                    <ul class="project-slider-track" data-project-slider-track>
+                      {projectSlides[i].map((slide, j) => (
+                        <li class="project-slider-slide">
+                          <img
+                            class="project-slider-image"
+                            src={slide.src}
+                            alt={`${project.title} · ${t.projects.pageLabel} ${slide.page}`}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button
+                    type="button"
+                    class="project-slider-arrow project-slider-arrow--next"
+                    data-project-slider-next
+                    aria-label={t.projects.nextLabel}
+                  >
+                    <Icon name="tabler:chevron-right" width="20" height="20" aria-hidden="true" />
+                  </button>
+                  <div class="project-slider-dots" role="group" aria-label={t.projects.sliderAria}>
+                    {projectSlides[i].map((slide, j) => (
+                      <button
+                        type="button"
+                        class:list={['project-slider-dot', j === 0 && 'is-active']}
+                        data-project-slider-dot
+                        aria-label={`${t.projects.pageLabel} ${slide.page}`}
+                      ></button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id={t.contact.id} class="section section--last" aria-labelledby={`${t.contact.id}-heading`}>
+    <div class="container-site cta-container">
+      <div class="cta-texture cta-panel">
+        <p class="section-kicker">{t.contact.kicker}</p>
+        <h2 id={`${t.contact.id}-heading`}>{t.contact.heading}</h2>
+        <div class="cta-buttons">
+          <a class="btn btn-primary" href={`mailto:${site.email}`}>
+            <Icon name="tabler:mail" width="16" height="16" aria-hidden="true" />
+            {t.contact.emailLabel}
+          </a>
+          <a class="btn btn-secondary" href={site.cal} {...external(site.cal)}>
+            <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
+            {t.contact.calLabel}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<SiteFooter t={t} />
+
+<style>
+  .text-primary { color: var(--color-primary); }
+
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100dvh;
+    padding-top: 96px;
+    padding-bottom: 72px;
+    overflow: hidden;
+  }
+  .hero-texture {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    top: -260px;
+    right: -180px;
+    width: 760px;
+    height: 620px;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(72px);
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.24) 0%, rgba(21, 96, 189, 0.10) 48%, transparent 72%);
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    gap: 56px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-copy h1 {
+    margin-top: 24px;
+    max-width: 620px;
+    font-size: 36px;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+  .hero-sub {
+    margin-top: 20px;
+    max-width: 520px;
+    color: var(--color-foreground-55);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 36px;
+  }
+
+  @keyframes hero-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-copy > * {
+      opacity: 0;
+      animation: hero-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-copy > :nth-child(1) { animation-delay: 0.05s; }
+    .hero-copy > :nth-child(2) { animation-delay: 0.12s; }
+    .hero-copy > :nth-child(3) { animation-delay: 0.19s; }
+    .hero-copy > :nth-child(4) { animation-delay: 0.26s; }
+    .hero-dashboard {
+      opacity: 0;
+      animation: hero-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+    }
+  }
+
+  .hero-dashboard {
+    margin: 0 auto;
+    max-width: 460px;
+    width: 100%;
+    justify-self: center;
+  }
+  .hero-dashboard-frame {
+    position: relative;
+    border: 1px solid var(--color-primary-20);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    box-shadow: 0 24px 60px rgba(21, 96, 189, 0.26), 0 8px 24px rgba(5, 8, 14, 0.5);
+    overflow: hidden;
+  }
+  .hero-dashboard-frame::after {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 1px 0 rgba(240, 246, 255, 0.10), inset 0 0 0 1px rgba(240, 246, 255, 0.02);
+    content: '';
+    pointer-events: none;
+  }
+  .hero-dashboard-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1280 / 1165;
+    object-fit: cover;
+  }
+
+  .client-strip-section {
+    border-top: 1px solid var(--color-primary-8);
+  }
+  .client-strip {
+    display: grid;
+    gap: 18px;
+    padding: 26px 0 30px;
+  }
+  .client-strip-label {
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .client-strip-logos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .client-strip-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+  }
+  .client-strip-logo img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 28px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.45;
+    transition: opacity 0.25s ease;
+  }
+  .client-strip-logo:hover img { opacity: 0.85; }
+  .client-strip-logo--sm img { max-height: 20px; }
+
+  .section {
+    padding: 88px 0;
+    border-top: 1px solid var(--color-primary-8);
+  }
+  .section--last {
+    padding-bottom: 128px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 44px;
+  }
+  .section-index {
+    padding-top: 4px;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .section-head-body {
+    display: grid;
+    gap: 12px;
+  }
+  .section-head h2 {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+  }
+  .section-head-sub {
+    max-width: 560px;
+    color: var(--color-foreground-55);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .about-grid {
+    display: grid;
+    gap: 48px;
+    align-items: start;
+  }
+  .section-body--prose {
+    max-width: 640px;
+  }
+  .section-body--prose p {
+    color: var(--color-foreground-70);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .section-body--prose p + p {
+    margin-top: 1.2em;
+  }
+
+  .about-meta {
+    display: grid;
+    gap: 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--color-primary-14);
+    border-bottom: 1px solid var(--color-primary-14);
+  }
+  .about-meta-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 0;
+  }
+  .about-meta-item + .about-meta-item {
+    border-top: 1px solid var(--color-primary-8);
+  }
+  .about-meta dt {
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .about-meta dd {
+    color: var(--color-foreground-70);
+    font-size: 15px;
+    text-align: right;
+  }
+
+  .about-portrait {
+    position: relative;
+    margin: 0 auto;
+    max-width: 264px;
+    width: 100%;
+    justify-self: center;
+  }
+  .about-portrait::before {
+    content: '';
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.18), transparent 70%);
+    filter: blur(24px);
+    z-index: -1;
+  }
+  .about-portrait-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid var(--color-primary-20);
+    border-radius: var(--radius-md);
+  }
+
+  .split {
+    display: grid;
+    gap: 48px;
+    align-items: start;
+  }
+  .split-intro {
+    display: grid;
+    gap: 14px;
+  }
+  .split-intro h2 {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+  }
+  .split-intro-text {
+    max-width: 44ch;
+    color: var(--color-foreground-55);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .focus-grid {
+    display: grid;
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+  }
+  .focus-card {
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .focus-card:hover {
+    border-color: var(--color-primary-28);
+    transform: translateY(-4px);
+  }
+  .focus-card-media {
+    margin: 0;
+  }
+  .focus-card-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  .focus-card-body {
+    display: grid;
+    gap: 4px;
+    padding: 18px 20px 20px;
+    border-top: 1px solid var(--color-primary-8);
+  }
+  .focus-card-body h3 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin-bottom: 6px;
+  }
+  .focus-card-tools {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .focus-card-tools li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 9px 0;
+    border-top: 1px solid var(--color-primary-8);
+    color: var(--color-foreground-70);
+    font-size: 14px;
+  }
+  .focus-tool-index {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .tools-list {
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .tool-group {
+    display: grid;
+    gap: 12px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-primary-8);
+  }
+  .tool-group-name {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .tool-group-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .projects-list {
+    display: grid;
+    gap: 28px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    overflow: hidden;
+  }
+  .project-card-body {
+    padding: 24px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .projects-item {
+        animation: project-reveal both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 25%;
+      }
+    }
+  }
+  @keyframes project-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+  .project-card-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .project-logo {
+    display: block;
+    width: auto;
+    height: 30px;
+    max-width: 150px;
+    object-fit: contain;
+    opacity: 0.55;
+    filter: saturate(0.7);
+  }
+  .project-logo--sm {
+    height: 20px;
+  }
+  .project-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .project-index {
+    color: var(--color-primary);
+  }
+  .project-scope {
+    color: var(--color-foreground-70);
+  }
+  .project-card h3 {
+    margin-top: 16px;
+    max-width: 640px;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .project-divider {
+    height: 1px;
+    margin-top: 18px;
+    background: linear-gradient(90deg, var(--color-primary-24), transparent);
+  }
+  .project-desc {
+    margin-top: 18px;
+    max-width: 640px;
+    color: var(--color-foreground-70);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .project-results {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px 0;
+    border-top: 1px solid var(--color-primary-10);
+    border-bottom: 1px solid var(--color-primary-10);
+    list-style: none;
+  }
+  .project-result {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--color-primary-8);
+  }
+  .project-result:last-child {
+    border-bottom: 0;
+  }
+  .project-result-value {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-foreground);
+  }
+  .project-result-label {
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .project-slider {
+    display: grid;
+    gap: 18px;
+    padding: 0 0 24px;
+  }
+  .project-slider-media {
+    position: relative;
+  }
+  .project-slider-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    aspect-ratio: 1 / 1;
+  }
+  .project-slider-viewport::-webkit-scrollbar {
+    display: none;
+  }
+  .project-slider-track {
+    display: flex;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .project-slider-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    scroll-snap-align: start;
+  }
+  .project-slider-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .project-slider-image.is-loaded {
+    opacity: 1;
+  }
+  .project-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--color-primary-24);
+    border-radius: 50%;
+    background: rgba(5, 8, 14, 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: var(--color-foreground-70);
+    cursor: pointer;
+    z-index: 2;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  }
+  .project-slider-arrow--prev {
+    left: 16px;
+  }
+  .project-slider-arrow--next {
+    right: 16px;
+  }
+  .project-slider-arrow:hover:not(:disabled) {
+    border-color: var(--color-primary-40);
+    color: var(--color-primary);
+    background: rgba(5, 8, 14, 0.8);
+  }
+  .project-slider-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  .project-slider-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .project-slider-dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .project-slider-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  .project-slider-dot.is-active {
+    background: var(--color-primary);
+    transform: scale(1.15);
+  }
+  .project-slider.is-single .project-slider-arrow,
+  .project-slider.is-single .project-slider-dots {
+    display: none;
+  }
+
+  .cta-container {
+    max-width: 980px;
+  }
+  .cta-panel {
+    padding: 48px 24px;
+    text-align: center;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-lg);
+  }
+  .cta-panel h2 {
+    margin-top: 14px;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding-top: 104px;
+    }
+    .hero-copy h1 {
+      font-size: 46px;
+    }
+    .hero-dashboard {
+      max-width: 480px;
+    }
+    .section {
+      padding: 112px 0;
+    }
+    .section--last {
+      padding-bottom: 152px;
+    }
+    .section-head {
+      margin-bottom: 56px;
+    }
+    .section-head h2,
+    .split-intro h2 {
+      font-size: 38px;
+    }
+    .about-grid {
+      grid-template-columns: minmax(0, 1fr) 320px;
+    }
+    .about-portrait {
+      max-width: 320px;
+      margin: 0;
+      justify-self: end;
+    }
+    .about-meta {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .about-meta-item {
+      display: grid;
+      gap: 8px;
+      padding: 20px 22px 20px 0;
+    }
+    .about-meta-item + .about-meta-item {
+      padding-left: 22px;
+      border-top: none;
+      border-left: 1px solid var(--color-primary-8);
+    }
+    .about-meta dd {
+      text-align: left;
+    }
+    .focus-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .projects-list {
+      gap: 32px;
+    }
+    .project-card-body {
+      padding: 28px 32px;
+    }
+    .project-card-head {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .project-card h3 {
+      font-size: 28px;
+    }
+    .project-desc {
+      font-size: 17px;
+    }
+    .project-result-value {
+      font-size: 20px;
+    }
+    .project-results {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .project-result {
+      display: grid;
+      align-content: start;
+      gap: 6px;
+      padding: 4px 20px 4px 0;
+      border-bottom: 0;
+    }
+    .project-result + .project-result {
+      padding-left: 20px;
+      border-left: 1px solid var(--color-primary-8);
+    }
+    .project-result-label {
+      white-space: normal;
+    }
+    .cta-panel {
+      padding: 56px 64px;
+    }
+    .cta-panel h2 {
+      font-size: 34px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-copy h1 {
+      font-size: 52px;
+    }
+    .hero-dashboard-frame {
+      transform: perspective(1400px) rotateY(-6deg) rotateX(1.5deg);
+    }
+    .hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+    }
+    .client-strip {
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      align-items: stretch;
+      padding: 34px 0 38px;
+    }
+    .client-strip-label {
+      display: flex;
+      align-items: center;
+      padding-right: 28px;
+      border-right: 1px solid var(--color-primary-14);
+    }
+    .client-strip-logos {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .client-strip-logo {
+      flex: 1;
+      min-height: 0;
+      padding: 6px 10px;
+    }
+    .client-strip-logo + .client-strip-logo {
+      border-left: 1px solid var(--color-primary-14);
+    }
+    .split {
+      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+      gap: 72px;
+    }
+    .split-intro {
+      position: sticky;
+      top: 112px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-dashboard-frame { transform: none; }
+  }
+</style>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('[data-project-slider]').forEach((slider) => {
+    const viewport = slider.querySelector('[data-project-slider-viewport]');
+    const prev = slider.querySelector('[data-project-slider-prev]');
+    const next = slider.querySelector('[data-project-slider-next]');
+    const dots = [...slider.querySelectorAll('[data-project-slider-dot]')];
+    const total = slider.querySelector('[data-project-slider-track]').children.length;
+
+    if (reduced) {
+      slider.querySelectorAll('.project-slider-image').forEach((img) => img.classList.add('is-loaded'));
+    } else {
+      slider.querySelectorAll('.project-slider-image').forEach((img) => {
+        if (img.complete) img.classList.add('is-loaded');
+        else img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+      });
+    }
+
+    if (total <= 1) {
+      slider.classList.add('is-single');
+      return;
+    }
+
+    const render = () => {
+      const i = Math.min(Math.max(Math.round(viewport.scrollLeft / viewport.clientWidth), 0), total - 1);
+      prev.disabled = i === 0;
+      next.disabled = i === total - 1;
+      dots.forEach((dot, d) => {
+        const active = d === i;
+        dot.classList.toggle('is-active', active);
+        if (active) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    };
+    const go = (i) => {
+      viewport.scrollTo({ left: i * viewport.clientWidth, behavior: reduced ? 'auto' : 'smooth' });
+    };
+
+    prev.addEventListener('click', () => go(Math.round(viewport.scrollLeft / viewport.clientWidth) - 1));
+    next.addEventListener('click', () => go(Math.round(viewport.scrollLeft / viewport.clientWidth) + 1));
+    dots.forEach((dot, d) => dot.addEventListener('click', () => go(d)));
+    viewport.addEventListener('scroll', render, { passive: true });
+    window.addEventListener('resize', render);
+    render();
+  });
+</script>
