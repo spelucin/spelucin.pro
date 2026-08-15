@@ -34,8 +34,8 @@
   --color-foreground-70: rgba(240, 246, 255, 0.70);
 
   /* Typography */
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'DM Sans Variable', 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
 
   /* Radius */
   --radius-sm: 8px;

@@ -47,6 +47,7 @@ export interface Translations {
   meta: {
     title: string;
     description: string;
+    imageAlt: string;
   };
   skipLink: string;
   nav: { label: string; href: string; index: string }[];

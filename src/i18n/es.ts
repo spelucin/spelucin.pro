@@ -5,9 +5,10 @@ export const t: Translations = {
   htmlLang: 'es',
   ogLocale: 'es_ES',
   meta: {
-    title: 'Alex Spelucin — Analista Digital',
+    title: 'Alex Spelucin · Analista de marketing y datos',
     description:
-      'Analista Digital especializado en marketing analytics, medición, reporting y data. Trabaja con GA4, Google Tag Manager, Looker Studio, BigQuery y SQL.',
+      'Ayudo a equipos y agencias de marketing a decidir con datos confiables. Medición, reporting y analítica pensados para usarse todos los días.',
+    imageAlt: 'Alex Spelucin · Analista de marketing y datos',
   },
   skipLink: 'Saltar al contenido',
   nav: [

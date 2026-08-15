@@ -8,6 +8,7 @@ export function personJsonLd(t: Translations) {
     '@type': 'Person',
     name: site.name,
     url: canonical,
+    image: new URL(site.ogImage, site.url).toString(),
     email: `mailto:${site.email}`,
     jobTitle: t.hero.role,
     description: t.meta.description,

@@ -20,10 +20,13 @@ const url = canonical ?? new URL(Astro.url.pathname, site.url).toString();
 const ogImage = new URL(image, site.url).toString();
 const titleTag = title ?? t.meta.title;
 const descriptionTag = description ?? t.meta.description;
-const alternateLinks = [
-  { hreflang: 'es', href: '/' },
-  { hreflang: 'en', href: '/en/' },
-];
+const isRootPage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/';
+const alternateLinks = isRootPage
+  ? [
+      { hreflang: 'es', href: '/' },
+      { hreflang: 'en', href: '/en/' },
+    ]
+  : [];
 ---
 
 <!doctype html>
@@ -34,11 +37,14 @@ const alternateLinks = [
     <title>{titleTag}</title>
     <meta name="description" content={descriptionTag} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="author" content={site.name} />
     <link rel="canonical" href={url} />
     {alternateLinks.map((link) => (
       <link rel="alternate" hreflang={link.hreflang} href={new URL(link.href, site.url).toString()} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={new URL('/', site.url).toString()} />
+    {alternateLinks.length > 0 && (
+      <link rel="alternate" hreflang="x-default" href={new URL('/', site.url).toString()} />
+    )}
     <meta name="theme-color" content="#0a0d14" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -48,9 +54,13 @@ const alternateLinks = [
     <meta property="og:description" content={descriptionTag} />
     <meta property="og:url" content={url} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={site.ogImageWidth} />
+    <meta property="og:image:height" content={site.ogImageHeight} />
+    <meta property="og:image:alt" content={t.meta.imageAlt} />
     <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:locale:alternate" content={t.ogLocale === 'es_ES' ? 'en_US' : 'es_ES'} />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={titleTag} />
     <meta name="twitter:description" content={descriptionTag} />
     <meta name="twitter:image" content={ogImage} />

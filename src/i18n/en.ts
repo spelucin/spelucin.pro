@@ -5,9 +5,10 @@ export const t: Translations = {
   htmlLang: 'en',
   ogLocale: 'en_US',
   meta: {
-    title: 'Alex Spelucin — Digital Analyst',
+    title: 'Alex Spelucin · Marketing Data Analyst',
     description:
-      'Digital Analyst focused on marketing analytics, measurement, reporting and data. Works with GA4, Google Tag Manager, Looker Studio, BigQuery and SQL.',
+      'I help marketing teams and agencies make decisions on data they can trust. Measurement, reporting and analytics people actually use every day.',
+    imageAlt: 'Alex Spelucin · Marketing data analyst',
   },
   skipLink: 'Skip to content',
   nav: [
