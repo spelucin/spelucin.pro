@@ -17,11 +17,6 @@ interface Props {
 
 const { t } = Astro.props;
 
-const external = (href: string) => ({
-  target: '_blank',
-  rel: 'noopener',
-});
-
 const practiceImages = [practice01, practice02, practice04];
 
 const projectSlides: { src: string; page: number }[][] = [
@@ -76,7 +71,13 @@ const clientLogos: { src: string; alt: string; small?: boolean }[] = [
         </h1>
         <p class="hero-sub">{t.hero.sub}</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href={`#${t.projects.id}`}>
+          <a
+            class="btn btn-primary"
+            href={`#${t.projects.id}`}
+            data-cta
+            data-cta-text={t.hero.cta}
+            data-cta-location="hero"
+          >
             {t.hero.cta}
             <Icon name="tabler:arrow-right" width="16" height="16" aria-hidden="true" />
           </a>
@@ -329,11 +330,27 @@ const clientLogos: { src: string; alt: string; small?: boolean }[] = [
         <p class="section-kicker">{t.contact.kicker}</p>
         <h2 id={`${t.contact.id}-heading`}>{t.contact.heading}</h2>
         <div class="cta-buttons">
-          <a class="btn btn-primary" href={`mailto:${site.email}`}>
+          <a
+            class="btn btn-primary"
+            href={`mailto:${site.email}`}
+            data-cta
+            data-cta-text={t.contact.emailLabel}
+            data-cta-location="contact"
+            data-lead
+            data-lead-source="email"
+            data-lead-type="email"
+          >
             <Icon name="tabler:mail" width="16" height="16" aria-hidden="true" />
             {t.contact.emailLabel}
           </a>
-          <a class="btn btn-secondary" href={site.cal} {...external(site.cal)}>
+          <a
+            class="btn btn-secondary"
+            href={site.cal}
+            data-cal-link="spelucin"
+            data-cal-namespace="spelucin"
+            data-calendar
+            data-calendar-location="contact"
+          >
             <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
             {t.contact.calLabel}
           </a>

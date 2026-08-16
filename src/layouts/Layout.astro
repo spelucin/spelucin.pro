@@ -65,10 +65,95 @@ const alternateLinks = isRootPage
     <meta name="twitter:description" content={descriptionTag} />
     <meta name="twitter:image" content={ogImage} />
 
+    <script is:inline>
+      (function (C, A, L) {
+        var p = function (a, ar) { a.q.push(ar); };
+        var d = C.document;
+        C.Cal = C.Cal || function () {
+          var cal = C.Cal;
+          var ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement('script')).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            var api = function () { p(api, arguments); };
+            var namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === 'string') cal.ns[namespace] = api;
+            else p(cal, namespace);
+            return api;
+          }
+          p(cal, ar);
+        };
+      })(window, 'https://app.cal.com/embed/embed.js', 'init');
+      Cal('init', 'spelucin', { origin: 'https://spelucin.pro' });
+    </script>
+
     <slot name="jsonld" />
   </head>
   <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K7VLRW2S" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="skip-link" href="#main-content">{t.skipLink}</a>
     <slot />
   </body>
 </html>
+
+<script>
+  const dataLayer = window.dataLayer || (window.dataLayer = []);
+
+  document.addEventListener('click', (event) => {
+    const cta = event.target.closest('[data-cta]');
+    if (cta) {
+      dataLayer.push({
+        event: 'cta_click',
+        cta_text: cta.dataset.ctaText,
+        cta_location: cta.dataset.ctaLocation,
+      });
+    }
+    const lead = event.target.closest('[data-lead]');
+    if (lead) {
+      dataLayer.push({
+        event: 'generate_lead',
+        lead_source: lead.dataset.leadSource,
+        lead_type: lead.dataset.leadType,
+      });
+    }
+    const calendar = event.target.closest('[data-calendar]');
+    if (calendar) {
+      dataLayer.push({
+        event: 'calendar_open',
+        calendar_location: calendar.dataset.calendarLocation,
+      });
+    }
+  });
+
+  const registerBookingListener = () => {
+    const ns = window.Cal?.ns?.['spelucin'];
+    if (!ns) return false;
+    ns('on', {
+      action: 'bookingSuccessfulV2',
+      callback: (data) => {
+        const booking = data?.detail?.data ?? {};
+        const email = booking.responses?.email?.value ?? booking.email ?? '';
+        dataLayer.push({
+          event: 'generate_lead',
+          lead_source: 'calendar',
+          lead_type: 'calendar',
+          event_title: booking.eventTitle ?? '',
+          booking_email: email,
+        });
+      },
+    });
+    return true;
+  };
+
+  if (!registerBookingListener()) {
+    const timer = setInterval(() => {
+      if (registerBookingListener()) clearInterval(timer);
+    }, 300);
+    setTimeout(() => clearInterval(timer), 10000);
+  }
+</script>

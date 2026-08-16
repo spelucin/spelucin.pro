@@ -9,10 +9,10 @@ interface Props {
 const { t } = Astro.props;
 
 const contactLinks = [
-  { href: `mailto:${site.email}`, label: site.email },
+  { href: `mailto:${site.email}`, label: site.email, tag: 'lead' },
   { href: site.linkedin, label: 'LinkedIn' },
   { href: site.github, label: 'GitHub' },
-  { href: site.cal, label: 'Cal.com' },
+  { href: site.cal, label: 'Cal.com', tag: 'calendar' },
 ];
 ---
 
@@ -26,6 +26,13 @@ const contactLinks = [
             href={link.href}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noopener' : undefined}
+            data-cal-link={link.tag === 'calendar' ? 'spelucin' : undefined}
+            data-cal-namespace={link.tag === 'calendar' ? 'spelucin' : undefined}
+            data-calendar={link.tag === 'calendar' ? true : undefined}
+            data-calendar-location={link.tag === 'calendar' ? 'footer' : undefined}
+            data-lead={link.tag === 'lead' ? true : undefined}
+            data-lead-source={link.tag === 'lead' ? 'email' : undefined}
+            data-lead-type={link.tag === 'lead' ? 'email' : undefined}
           >
             {link.label}
           </a>

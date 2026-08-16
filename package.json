@@ -16,6 +16,7 @@
     "@iconify-json/tabler": "^1.2.38",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^7.2.2",
+    "astro-gtm-lite": "^1.0.2",
     "astro-icon": "^1.1.5",
     "sharp": "^0.35.3",
     "tailwindcss": "^4.1.11"
