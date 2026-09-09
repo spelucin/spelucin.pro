@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServicesPage from '../../components/ServicesPage.astro';
+import { t } from '../../i18n/es';
+---
+
+<Layout
+  t={t}
+  title={t.services.seo.title}
+  description={t.services.seo.description}
+  breadcrumb={[{ name: 'Servicios', path: '/services' }]}
+>
+  <ServicesPage t={t} />
+</Layout>

@@ -279,12 +279,14 @@ export interface Translations {
     proof: {
       index: string;
       heading: string;
+      highlight: string;
       intro: string;
       stats: StatBlock[];
     };
     faq: {
       index: string;
       heading: string;
+      highlight: string;
       items: FaqItem[];
     };
   };
