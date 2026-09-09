@@ -19,27 +19,29 @@ const { t } = Astro.props;
 
 const practiceImages = [practice01, practice02, practice04];
 
+import { caseImages } from '../data/caseImages';
+
 const projectSlides: { src: string; page: number }[][] = [
   [
-    { src: '/assets/portfolio/dashboard_torices-2.jpg', page: 2 },
-    { src: '/assets/portfolio/dashboard_torices-3.jpg', page: 3 },
-    { src: '/assets/portfolio/dashboard_torices-7.jpg', page: 7 },
-    { src: '/assets/portfolio/dashboard_torices-9.jpg', page: 9 },
-    { src: '/assets/portfolio/dashboard_torices-12.jpg', page: 12 },
+    { src: caseImages.torices[0].src, page: 2 },
+    { src: caseImages.torices[1].src, page: 3 },
+    { src: caseImages.torices[2].src, page: 7 },
+    { src: caseImages.torices[3].src, page: 9 },
+    { src: caseImages.torices[4].src, page: 12 },
   ],
   [
-    { src: '/assets/portfolio/ecommerce_owlbox-1.jpg', page: 1 },
-    { src: '/assets/portfolio/ecommerce_owlbox-4.jpg', page: 4 },
-    { src: '/assets/portfolio/ecommerce_owlbox-6.jpg', page: 6 },
-    { src: '/assets/portfolio/ecommerce_owlbox-9.jpg', page: 9 },
+    { src: caseImages.owlbox[0].src, page: 1 },
+    { src: caseImages.owlbox[1].src, page: 4 },
+    { src: caseImages.owlbox[2].src, page: 6 },
+    { src: caseImages.owlbox[3].src, page: 9 },
   ],
   [
-    { src: '/assets/portfolio/notebook_seo-1.jpg', page: 1 },
-    { src: '/assets/portfolio/notebook_seo-2.jpg', page: 2 },
-    { src: '/assets/portfolio/notebook_seo-7.jpg', page: 7 },
-    { src: '/assets/portfolio/notebook_seo-8.jpg', page: 8 },
-    { src: '/assets/portfolio/notebook_seo-14.jpg', page: 14 },
-    { src: '/assets/portfolio/notebook_seo-18.jpg', page: 18 },
+    { src: caseImages.notebook[0].src, page: 1 },
+    { src: caseImages.notebook[1].src, page: 2 },
+    { src: caseImages.notebook[2].src, page: 7 },
+    { src: caseImages.notebook[3].src, page: 8 },
+    { src: caseImages.notebook[4].src, page: 14 },
+    { src: caseImages.notebook[5].src, page: 18 },
   ],
 ];
 
