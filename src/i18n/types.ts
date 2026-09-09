@@ -1,5 +1,102 @@
 export type Lang = 'es' | 'en';
 
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export interface Seo {
+  title: string;
+  description: string;
+}
+
+export interface PainItem {
+  title: string;
+  text: string;
+}
+
+export interface Pillar {
+  title: string;
+  text: string;
+  tags: string[];
+}
+
+export interface ProcessStep {
+  title: string;
+  text: string;
+}
+
+export interface StackItem {
+  name: string;
+  icon: string;
+}
+
+export interface StackLayer {
+  name: string;
+  items: StackItem[];
+}
+
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+export interface StatBlock {
+  value: string;
+  label: string;
+}
+
+export interface ServiceComponent {
+  title: string;
+  text: string;
+  tags: string[];
+}
+
+export interface CaseTeaser {
+  slug: string;
+  client: string;
+  sector: string;
+  year: string;
+  title: string;
+  summary: string;
+  result: string;
+  alt: string;
+  imagesAlt: string[];
+}
+
+export interface CaseProblemItem {
+  title: string;
+  text: string;
+}
+
+export interface CaseBuiltItem {
+  title: string;
+  text: string;
+}
+
+export interface CaseStudy {
+  slug: string;
+  client: string;
+  sector: string;
+  year: string;
+  kicker: string;
+  title: string;
+  heroResult: string;
+  alt: string;
+  imagesAlt: string[];
+  context: string[];
+  problems: CaseProblemItem[];
+  built: {
+    heading: string;
+    items: CaseBuiltItem[];
+  };
+  results: {
+    heading: string;
+    stats: StatBlock[];
+  };
+}
+
+/* Existing single-page surface (kept until the multi-page rebuild removes it) */
 export interface FocusItem {
   name: string;
   tagline: string;
@@ -50,6 +147,192 @@ export interface Translations {
     imageAlt: string;
   };
   skipLink: string;
+
+  /* Multi-page navigation and persistent labels */
+  siteNav: NavItem[];
+  ctaLabel: string;
+  ctaSeeWork: string;
+
+  home: {
+    hero: {
+      badge: string;
+      headline: string;
+      highlight: string;
+      sub: string;
+      ctaSecondary: string;
+      visualAlt: string;
+    };
+    trust: {
+      label: string;
+    };
+    problem: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+      items: PainItem[];
+    };
+    service: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+      pillars: Pillar[];
+    };
+    proof: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+      stats: StatBlock[];
+      featured: string[];
+    };
+  };
+
+  process: {
+    index: string;
+    heading: string;
+    highlight: string;
+    intro: string;
+    steps: ProcessStep[];
+  };
+
+  stack: {
+    index: string;
+    heading: string;
+    highlight: string;
+    intro: string;
+    layers: StackLayer[];
+  };
+
+  ctaSection: {
+    heading: string;
+    sub: string;
+    hint: string;
+  };
+
+  agencies: {
+    seo: Seo;
+    hero: {
+      badge: string;
+      headline: string;
+      highlight: string;
+      sub: string;
+      ctaSecondary: string;
+      visualAlt: string;
+    };
+    takeover: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+      items: PainItem[];
+    };
+    proof: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+      stats: StatBlock[];
+    };
+    sprint: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+      weeks: ProcessStep[];
+      includeHeading: string;
+      include: string[];
+    };
+    fit: {
+      index: string;
+      heading: string;
+      highlight: string;
+      goodHeading: string;
+      good: string[];
+      poorHeading: string;
+      poor: string[];
+    };
+    faq: {
+      index: string;
+      heading: string;
+      highlight: string;
+      items: FaqItem[];
+    };
+  };
+
+  services: {
+    seo: Seo;
+    hero: {
+      badge: string;
+      headline: string;
+      highlight: string;
+      sub: string;
+    };
+    components: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+      items: ServiceComponent[];
+    };
+    proof: {
+      index: string;
+      heading: string;
+      intro: string;
+      stats: StatBlock[];
+    };
+    faq: {
+      index: string;
+      heading: string;
+      items: FaqItem[];
+    };
+  };
+
+  work: {
+    seo: Seo;
+    hero: {
+      index: string;
+      heading: string;
+      highlight: string;
+      sub: string;
+    };
+    cases: CaseTeaser[];
+  };
+
+  aboutPage: {
+    seo: Seo;
+    hero: {
+      index: string;
+      headline: string;
+      highlight: string;
+      sub: string;
+    };
+    capabilities: {
+      index: string;
+      heading: string;
+      highlight: string;
+      intro: string;
+    };
+  };
+
+  contactPage: {
+    seo: Seo;
+    heading: string;
+    sub: string;
+    emailLabel: string;
+    calLabel: string;
+    linkedinLabel: string;
+    availability: string;
+  };
+
+  caseStudies: {
+    torices: CaseStudy;
+    owlbox: CaseStudy;
+    notebook: CaseStudy;
+  };
+
+  /* Existing single-page surface (kept until the multi-page rebuild removes it) */
   nav: { label: string; href: string; index: string }[];
   header: {
     aria: string;
@@ -122,6 +405,7 @@ export interface Translations {
   };
   footer: {
     tagline: string;
+    exploreNav: string;
     contactNav: string;
     legalNav: string;
     rights: string;
