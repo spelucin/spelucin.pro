@@ -1,0 +1,14 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import AboutPage from '../../../components/AboutPage.astro';
+import { t } from '../../../i18n/en';
+---
+
+<Layout
+  t={t}
+  title={t.aboutPage.seo.title}
+  description={t.aboutPage.seo.description}
+  breadcrumb={[{ name: 'About', path: '/en/about' }]}
+>
+  <AboutPage t={t} />
+</Layout>

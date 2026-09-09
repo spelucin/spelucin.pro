@@ -1,0 +1,249 @@
+---
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SectionHead from './SectionHead.astro';
+import BookCall from './BookCall.astro';
+import type { Translations } from '../i18n/types';
+
+interface Props {
+  t: Translations;
+}
+
+const { t }: Props = Astro.props;
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <section class="hero">
+    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-site">
+      <span class="badge">{t.aboutPage.hero.index}</span>
+      <h1>
+        {t.aboutPage.hero.headline} <span class="text-primary">{t.aboutPage.hero.highlight}</span>
+      </h1>
+      <p class="hero-sub">{t.aboutPage.hero.sub}</p>
+      <dl class="hero-meta">
+        {t.about.meta.map((m) => (
+          <div class="hero-meta-item">
+            <dt>{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="story section-block reveal">
+    <div class="container-site">
+      <span class="section-index" aria-hidden="true">01</span>
+      {t.about.paragraphs.map((p) => (
+        <p class="story-para">{p}</p>
+      ))}
+    </div>
+  </section>
+
+  <section class="capabilities section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        index={t.aboutPage.capabilities.index}
+        heading={t.aboutPage.capabilities.heading}
+        highlight={t.aboutPage.capabilities.highlight}
+        intro={t.aboutPage.capabilities.intro}
+      />
+      <ul class="cap-list" role="list">
+        {t.focus.items.map((item, i) => (
+          <li class="cap-row">
+            <div class="cap-left">
+              <span class="cap-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="cap-name">{item.name}</h3>
+              <ul class="cap-tags" role="list">
+                {item.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            </div>
+            <p class="cap-detail">{item.detail}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <BookCall t={t} location="about" />
+</main>
+
+<SiteFooter t={t} />
+
+<script>
+  const elements = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    );
+    elements.forEach((el) => io.observe(el));
+  } else {
+    elements.forEach((el) => el.classList.add('is-visible'));
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 132px 0 0;
+    overflow: hidden;
+  }
+  .hero h1 {
+    max-width: 24ch;
+    margin: 24px 0 0;
+    font-size: clamp(40px, 6.5vw, 62px);
+    font-weight: 680;
+    letter-spacing: -0.04em;
+    line-height: 1.03;
+  }
+  .hero-sub {
+    max-width: 560px;
+    margin: 20px 0 0;
+    color: var(--color-foreground-55);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 48px;
+    margin: 44px 0 0;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .hero-meta-item dt {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .hero-meta-item dd {
+    margin: 6px 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-foreground-70);
+  }
+
+  .section-block {
+    padding: 96px 0;
+  }
+
+  .section-index {
+    display: inline-block;
+    margin-bottom: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .story-para {
+    margin: 0;
+    max-width: 64ch;
+    font-size: 20px;
+    line-height: 1.7;
+    color: var(--color-foreground-55);
+  }
+  .story-para + .story-para {
+    margin-top: 20px;
+  }
+
+  .cap-list {
+    list-style: none;
+    margin: 56px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .cap-row {
+    display: grid;
+    gap: 12px;
+    padding: 30px 4px;
+    border-bottom: 1px solid var(--color-primary-14);
+  }
+  .cap-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .cap-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-primary);
+  }
+  .cap-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-foreground-70);
+  }
+  .cap-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cap-tags li {
+    padding: 4px 10px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-foreground-55);
+  }
+  .cap-detail {
+    margin: 0;
+    max-width: 58ch;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding: 168px 0 0;
+    }
+    .cap-row {
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 48px;
+      align-items: baseline;
+    }
+    .cap-left {
+      flex-wrap: wrap;
+    }
+  }
+</style>
