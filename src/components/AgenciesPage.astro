@@ -1,0 +1,523 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import dashboardHero from '../assets/dashboard-hero.jpg';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SectionHead from './SectionHead.astro';
+import StatsBlocks from './StatsBlocks.astro';
+import BookCall from './BookCall.astro';
+import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
+import { localizeHref } from '../utils/lang';
+
+interface Props {
+  t: Translations;
+}
+
+const { t }: Props = Astro.props;
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <section class="hero">
+    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-site hero-grid">
+      <div class="hero-copy">
+        <span class="badge">{t.agencies.hero.badge}</span>
+        <h1>
+          {t.agencies.hero.headline} <span class="text-primary">{t.agencies.hero.highlight}</span>
+        </h1>
+        <p class="hero-sub">{t.agencies.hero.sub}</p>
+        <div class="hero-actions">
+          <a
+            class="btn btn-primary"
+            href={localizeHref('/services', t.lang)}
+            data-cta
+            data-cta-text={t.agencies.hero.ctaSecondary}
+            data-cta-location="agencies-hero"
+          >
+            {t.agencies.hero.ctaSecondary}
+            <Icon name="tabler:arrow-right" width="16" height="16" aria-hidden="true" />
+          </a>
+          <a
+            class="btn btn-secondary"
+            href={site.cal}
+            target="_blank"
+            rel="noopener"
+            data-cal-link="spelucin"
+            data-cal-namespace="spelucin"
+            data-calendar
+            data-calendar-location="agencies-hero"
+            data-cta
+            data-cta-text={t.ctaLabel}
+            data-cta-location="agencies-hero"
+          >
+            <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
+            {t.ctaLabel}
+          </a>
+        </div>
+      </div>
+
+      <figure class="hero-dashboard">
+        <div class="hero-dashboard-frame">
+          <Image
+            src={dashboardHero}
+            alt={t.agencies.hero.visualAlt}
+            format="avif"
+            widths={[480, 640, 800]}
+            sizes="(min-width: 1024px) 440px, (min-width: 768px) 460px, 90vw"
+          />
+        </div>
+        <figcaption class="sr-only">{t.agencies.hero.visualAlt}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="takeover section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        index={t.agencies.takeover.index}
+        heading={t.agencies.takeover.heading}
+        highlight={t.agencies.takeover.highlight}
+        intro={t.agencies.takeover.intro}
+      />
+      <ul class="pain-list" role="list">
+        {t.agencies.takeover.items.map((item) => (
+          <li class="pain-card">
+            <span class="pain-title">{item.title}</span>
+            <span class="pain-text">{item.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="proof section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        index={t.agencies.proof.index}
+        heading={t.agencies.proof.heading}
+        highlight={t.agencies.proof.highlight}
+        intro={t.agencies.proof.intro}
+      />
+      <StatsBlocks stats={t.agencies.proof.stats} />
+    </div>
+  </section>
+
+  <section class="sprint section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        index={t.agencies.sprint.index}
+        heading={t.agencies.sprint.heading}
+        highlight={t.agencies.sprint.highlight}
+        intro={t.agencies.sprint.intro}
+      />
+      <ol class="weeks" role="list">
+        {t.agencies.sprint.weeks.map((week, i) => (
+          <li class="week">
+            <span class="week-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="week-title">{week.title}</h3>
+            <p class="week-text">{week.text}</p>
+          </li>
+        ))}
+      </ol>
+      <aside class="include">
+        <h3 class="include-heading">{t.agencies.sprint.includeHeading}</h3>
+        <ul class="include-list" role="list">
+          {t.agencies.sprint.include.map((item) => (
+            <li class="include-item">
+              <Icon name="tabler:check" width="16" height="16" aria-hidden="true" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="fit section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        index={t.agencies.fit.index}
+        heading={t.agencies.fit.heading}
+        highlight={t.agencies.fit.highlight}
+      />
+      <div class="fit-grid">
+        <div class="fit-col fit-col--good">
+          <h3 class="fit-heading fit-heading--good">{t.agencies.fit.goodHeading}</h3>
+          <ul class="fit-list" role="list">
+            {t.agencies.fit.good.map((item) => (
+              <li class="fit-item">
+                <Icon name="tabler:check" width="16" height="16" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="fit-col fit-col--poor">
+          <h3 class="fit-heading fit-heading--poor">{t.agencies.fit.poorHeading}</h3>
+          <ul class="fit-list" role="list">
+            {t.agencies.fit.poor.map((item) => (
+              <li class="fit-item">
+                <Icon name="tabler:x" width="16" height="16" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        index={t.agencies.faq.index}
+        heading={t.agencies.faq.heading}
+        highlight={t.agencies.faq.highlight}
+      />
+      <div class="faq-list">
+        {t.agencies.faq.items.map((item) => (
+          <details class="faq-item">
+            <summary>
+              <span>{item.q}</span>
+              <span class="faq-icon" aria-hidden="true">
+                <Icon name="tabler:chevron-down" width="18" height="18" />
+              </span>
+            </summary>
+            <p class="faq-answer">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BookCall t={t} location="agencies" />
+</main>
+
+<SiteFooter t={t} />
+
+<script>
+  const elements = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    );
+    elements.forEach((el) => io.observe(el));
+  } else {
+    elements.forEach((el) => el.classList.add('is-visible'));
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 132px 0 72px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(38px, 6vw, 60px);
+    font-weight: 680;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+    margin: 0;
+  }
+  .hero-sub {
+    max-width: 520px;
+    margin: 0;
+    color: var(--color-foreground-55);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .hero-dashboard {
+    margin: 0;
+  }
+  .hero-dashboard-frame {
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: 0 30px 80px rgba(4, 8, 16, 0.5);
+  }
+  .hero-dashboard-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .section-block {
+    padding: 96px 0;
+  }
+
+  .pain-list {
+    list-style: none;
+    margin: 56px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .pain-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 26px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-4);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .pain-card:hover {
+    border-color: var(--color-primary-20);
+  }
+  .pain-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-foreground-70);
+  }
+  .pain-text {
+    color: var(--color-foreground-55);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .weeks {
+    list-style: none;
+    margin: 56px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .week {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-4);
+  }
+  .week-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+  }
+  .week-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-foreground-70);
+  }
+  .week-text {
+    margin: 0;
+    color: var(--color-foreground-55);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .include {
+    margin-top: 48px;
+    padding: 28px 30px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-4);
+  }
+  .include-heading {
+    margin: 0 0 18px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-foreground-55);
+  }
+  .include-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .include-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    color: var(--color-foreground-65);
+    font-size: 15px;
+  }
+  .include-item svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    transform: translateY(2px);
+  }
+
+  .fit-grid {
+    margin-top: 56px;
+    display: grid;
+    gap: 14px;
+  }
+  .fit-col {
+    padding: 30px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+  }
+  .fit-col--good {
+    background: var(--color-primary-4);
+  }
+  .fit-col--poor {
+    background: transparent;
+  }
+  .fit-heading {
+    margin: 0 0 22px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-foreground-70);
+  }
+  .fit-heading--good {
+    color: var(--color-primary);
+  }
+  .fit-heading--poor {
+    color: var(--color-foreground-55);
+  }
+  .fit-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .fit-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    color: var(--color-foreground-65);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .fit-col--good .fit-item svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    transform: translateY(2px);
+  }
+  .fit-col--poor .fit-item svg {
+    color: var(--color-foreground-35);
+    flex-shrink: 0;
+    transform: translateY(2px);
+  }
+
+  .faq-list {
+    margin-top: 56px;
+    display: grid;
+    gap: 12px;
+  }
+  .faq-item {
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-4);
+    overflow: hidden;
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 22px 26px;
+    font-size: 16px;
+    font-weight: 550;
+    color: var(--color-foreground-70);
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.2s ease;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:hover { color: var(--color-foreground); }
+  .faq-icon {
+    color: var(--color-primary-35);
+    transition: transform 0.24s ease, color 0.2s ease;
+    flex-shrink: 0;
+  }
+  .faq-item[open] summary { color: var(--color-foreground); }
+  .faq-item[open] .faq-icon {
+    color: var(--color-primary);
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    margin: 0;
+    padding: 0 26px 24px;
+    max-width: 62ch;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding: 168px 0 96px;
+    }
+    .hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+    }
+    .pain-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .weeks {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .include-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .fit-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

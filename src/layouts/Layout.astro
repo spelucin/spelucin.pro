@@ -111,12 +111,15 @@ const alternateLinks = [
       <script type="application/ld+json" set:html={JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
-        itemListElement: breadcrumb.map((crumb, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: crumb.name,
-          item: new URL(crumb.path, site.url).toString(),
-        })),
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+          ...breadcrumb.map((crumb, i) => ({
+            '@type': 'ListItem',
+            position: i + 2,
+            name: crumb.name,
+            item: new URL(crumb.path, site.url).toString(),
+          })),
+        ],
       })} />
     )}
   </head>
