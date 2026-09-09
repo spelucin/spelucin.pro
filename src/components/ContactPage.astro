@@ -1,0 +1,148 @@
+---
+import { Icon } from 'astro-icon/components';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
+
+interface Props {
+  t: Translations;
+}
+
+const { t }: Props = Astro.props;
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <section class="hero">
+    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-site">
+      <h1>{t.contactPage.heading}</h1>
+      <p class="hero-sub">{t.contactPage.sub}</p>
+      <p class="hero-availability">{t.contactPage.availability}</p>
+      <div class="actions">
+        <a class="action-card" href={`mailto:${site.email}`} data-lead>
+          <Icon name="tabler:mail" width="22" height="22" aria-hidden="true" />
+          <span class="action-label">{t.contactPage.emailLabel}</span>
+          <span class="action-value">{site.email}</span>
+        </a>
+        <a
+          class="action-card"
+          href="https://cal.com/spelucin"
+          target="_blank"
+          rel="noopener"
+          data-cal-link="spelucin"
+          data-cal-namespace="spelucin"
+          data-cta
+          data-cta-location="contact"
+        >
+          <Icon name="tabler:calendar-event" width="22" height="22" aria-hidden="true" />
+          <span class="action-label">{t.contactPage.calLabel}</span>
+          <span class="action-value">cal.com/spelucin</span>
+        </a>
+        <a
+          class="action-card"
+          href={site.linkedin}
+          target="_blank"
+          rel="noopener"
+          data-cta
+          data-cta-location="contact"
+        >
+          <Icon name="tabler:brand-linkedin" width="22" height="22" aria-hidden="true" />
+          <span class="action-label">{t.contactPage.linkedinLabel}</span>
+          <span class="action-value">/in/spelucin</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<SiteFooter t={t} />
+
+<style>
+  .hero {
+    position: relative;
+    padding: 148px 0 96px;
+    overflow: hidden;
+  }
+  .hero h1 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(46px, 8vw, 76px);
+    font-weight: 680;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+  .hero-sub {
+    max-width: 520px;
+    margin: 28px 0 0;
+    color: var(--color-foreground-55);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+  .hero-availability {
+    margin: 32px 0 0;
+    padding-left: 16px;
+    border-left: 2px solid var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--color-foreground-70);
+  }
+
+  .actions {
+    display: grid;
+    gap: 14px;
+    margin-top: 56px;
+  }
+  .action-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 24px 26px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-4);
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+  .action-card:hover {
+    border-color: var(--color-primary-35);
+    background: var(--color-primary-8);
+    transform: translateY(-2px);
+  }
+  .action-card > svg {
+    color: var(--color-primary);
+  }
+  .action-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-foreground-70);
+  }
+  .action-value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-foreground-55);
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding: 196px 0 120px;
+    }
+    .actions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .action-card {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .action-value {
+      padding-top: 10px;
+      border-top: 1px solid var(--color-primary-14);
+    }
+  }
+</style>
