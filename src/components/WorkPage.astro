@@ -1,0 +1,227 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import BookCall from './BookCall.astro';
+import type { Translations } from '../i18n/types';
+import { caseImages } from '../data/caseImages';
+import { localizeHref } from '../utils/lang';
+
+interface Props {
+  t: Translations;
+}
+
+const { t }: Props = Astro.props;
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <section class="hero">
+    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-site">
+      <span class="badge">{t.work.hero.index}</span>
+      <h1>
+        {t.work.hero.heading} <span class="text-primary">{t.work.hero.highlight}</span>
+      </h1>
+      <p class="hero-sub">{t.work.hero.sub}</p>
+    </div>
+  </section>
+
+  <section class="cases section-block">
+    <div class="container-site">
+      <ul class="case-list" role="list">
+        {t.work.cases.map((c, i) => {
+          const images = caseImages[c.slug as keyof typeof caseImages];
+          return (
+            <li class:list={['case-row', i % 2 === 1 && 'case-row--flip']}>
+              <a
+                class="case-visual"
+                href={localizeHref(`/case-studies/${c.slug}`, t.lang)}
+                aria-label={c.title}
+              >
+                <Image
+                  class="case-image"
+                  src={images[0]}
+                  alt={c.alt}
+                  format="avif"
+                  widths={[640, 960, 1280]}
+                  sizes="(min-width: 1024px) 560px, 92vw"
+                />
+                <span class="case-cover" aria-hidden="true"></span>
+                <span class="case-page-note">
+                  <Icon name="tabler:arrow-right" width="18" height="18" aria-hidden="true" />
+                </span>
+              </a>
+              <div class="case-copy">
+                <p class="case-meta">
+                  {c.client} <span aria-hidden="true">·</span> {c.sector}
+                  <span aria-hidden="true">·</span> {c.year}
+                </p>
+                <h2 class="case-title">
+                  <a href={localizeHref(`/case-studies/${c.slug}`, t.lang)}>{c.title}</a>
+                </h2>
+                <p class="case-summary">{c.summary}</p>
+                <p class="case-result">{c.result}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <BookCall t={t} location="work" />
+</main>
+
+<SiteFooter t={t} />
+
+<style>
+  .hero {
+    position: relative;
+    padding: 132px 0 0;
+    overflow: hidden;
+  }
+  .hero h1 {
+    max-width: 20ch;
+    margin: 24px 0 0;
+    font-size: clamp(40px, 7vw, 64px);
+    font-weight: 680;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+  }
+  .hero-sub {
+    max-width: 560px;
+    margin: 20px 0 0;
+    color: var(--color-foreground-55);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .section-block {
+    padding: 96px 0 48px;
+  }
+
+  .case-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 96px;
+  }
+
+  .case-row {
+    display: grid;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .case-visual {
+    position: relative;
+    display: block;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-primary-14);
+    background: var(--color-surface);
+    box-shadow: 0 30px 70px rgba(4, 8, 16, 0.45);
+  }
+  .case-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.6s ease;
+  }
+  .case-visual:hover .case-image {
+    transform: scale(1.02);
+  }
+  .case-cover {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(10, 13, 20, 0.5));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .case-visual:hover .case-cover {
+    opacity: 1;
+  }
+  .case-page-note {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-primary);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .case-visual:hover .case-page-note {
+    opacity: 1;
+    transform: none;
+  }
+
+  .case-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .case-meta {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .case-title {
+    margin: 0;
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 640;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+  .case-title a {
+    color: var(--color-foreground);
+    transition: color 0.2s ease;
+  }
+  .case-title a:hover {
+    color: var(--color-primary);
+  }
+  .case-summary {
+    margin: 0;
+    max-width: 52ch;
+    color: var(--color-foreground-55);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .case-result {
+    margin: 4px 0 0;
+    padding: 10px 16px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-foreground-70);
+    background: var(--color-primary-4);
+  }
+
+  @media (min-width: 1024px) {
+    .hero {
+      padding: 168px 0 0;
+    }
+    .case-row {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+    }
+    .case-row--flip .case-visual {
+      order: 2;
+    }
+  }
+</style>

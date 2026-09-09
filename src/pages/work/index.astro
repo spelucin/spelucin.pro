@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WorkPage from '../../components/WorkPage.astro';
+import { t } from '../../i18n/es';
+---
+
+<Layout
+  t={t}
+  title={t.work.seo.title}
+  description={t.work.seo.description}
+  breadcrumb={[{ name: 'Trabajo', path: '/work' }]}
+>
+  <WorkPage t={t} />
+</Layout>
