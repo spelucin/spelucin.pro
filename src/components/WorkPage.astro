@@ -40,6 +40,10 @@ const { t }: Props = Astro.props;
               <a
                 class="case-visual"
                 href={localizeHref(`/case-studies/${c.slug}`, t.lang)}
+                data-case-study
+                data-case-study-slug={c.slug}
+                data-case-study-name={c.client}
+                data-case-study-industry={c.sector}
                 aria-label={c.title}
               >
                 <Image
@@ -61,7 +65,13 @@ const { t }: Props = Astro.props;
                   <span aria-hidden="true">·</span> {c.year}
                 </p>
                 <h2 class="case-title">
-                  <a href={localizeHref(`/case-studies/${c.slug}`, t.lang)}>{c.title}</a>
+                  <a
+                  href={localizeHref(`/case-studies/${c.slug}`, t.lang)}
+                  data-case-study
+                  data-case-study-slug={c.slug}
+                  data-case-study-name={c.client}
+                  data-case-study-industry={c.sector}
+                >{c.title}</a>
                 </h2>
                 <p class="case-summary">{c.summary}</p>
                 <p class="case-result">{c.result}</p>

@@ -173,6 +173,22 @@ const alternateLinks = [
         calendar_location: calendar.dataset.calendarLocation,
       });
     }
+    const langLink = target?.closest<HTMLElement>('[data-lang-switch]');
+    if (langLink) {
+      dataLayer.push({
+        event: 'language_switch',
+        lang_to: langLink.dataset.langTo,
+      });
+    }
+    const caseLink = target?.closest<HTMLElement>('[data-case-study]');
+    if (caseLink) {
+      dataLayer.push({
+        event: 'case_study_click',
+        case_study_slug: caseLink.dataset.caseStudySlug,
+        case_study_name: caseLink.dataset.caseStudyName,
+        case_study_industry: caseLink.dataset.caseStudyIndustry,
+      });
+    }
   });
 
   const registerBookingListener = () => {

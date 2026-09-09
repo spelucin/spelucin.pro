@@ -55,12 +55,16 @@ const activeHref = navItems.find((item) => item.href === currentPath)?.href;
           href={equivalentPath(currentPath, 'es')}
           lang="es"
           hreflang="es"
+          data-lang-switch
+          data-lang-to="es"
           aria-current={currentLang === 'es' ? 'true' : undefined}
         >ES</a>
         <a
           href={equivalentPath(currentPath, 'en')}
           lang="en"
           hreflang="en"
+          data-lang-switch
+          data-lang-to="en"
           aria-current={currentLang === 'en' ? 'true' : undefined}
         >EN</a>
       </nav>

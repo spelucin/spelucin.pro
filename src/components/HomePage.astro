@@ -165,7 +165,14 @@ const featuredCases = t.home.proof.featured.map((slug) => t.caseStudies[slug]);
       <ul class="featured" role="list">
         {featuredCases.map((c) => (
           <li>
-            <a class="featured-card" href={localizeHref(`/case-studies/${c.slug}`, t.lang)}>
+            <a
+                class="featured-card"
+                href={localizeHref(`/case-studies/${c.slug}`, t.lang)}
+                data-case-study
+                data-case-study-slug={c.slug}
+                data-case-study-name={c.client}
+                data-case-study-industry={c.sector}
+              >
               <Image
                 class="featured-image"
                 src={caseImages[c.slug as keyof typeof caseImages][0]}
