@@ -1,26 +1,42 @@
 ---
 import type { Translations } from '../i18n/types';
 import { site } from '../data/site';
+import { localizeHref } from '../utils/lang';
 
 interface Props {
   t: Translations;
 }
 
 const { t } = Astro.props;
-
 const contactLinks = [
   { href: `mailto:${site.email}`, label: site.email, tag: 'lead' },
   { href: site.linkedin, label: 'LinkedIn' },
   { href: site.github, label: 'GitHub' },
   { href: site.cal, label: 'Cal.com', tag: 'calendar' },
 ];
+const exploreLinks = t.siteNav.map((item) => ({
+  label: item.label,
+  href: localizeHref(item.href, t.lang),
+}));
 ---
 
 <footer class="site-footer">
   <div class="container-site">
     <div class="footer-main">
-      <p class="footer-tagline">{t.footer.tagline}</p>
-      <nav class="footer-links" aria-label={t.footer.contactNav}>
+      <div class="footer-brand">
+        <p class="footer-tagline">{t.footer.tagline}</p>
+        <span class="footer-rights">{t.footer.rights}</span>
+      </div>
+
+      <nav class="footer-col" aria-label={t.footer.exploreNav}>
+        <h2 class="footer-heading">{t.footer.exploreNav}</h2>
+        {exploreLinks.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+
+      <nav class="footer-col" aria-label={t.footer.contactNav}>
+        <h2 class="footer-heading">{t.footer.contactNav}</h2>
         {contactLinks.map((link) => (
           <a
             href={link.href}
@@ -51,33 +67,52 @@ const contactLinks = [
 <style>
   .site-footer {
     border-top: 1px solid var(--color-primary-8);
-    padding: 40px 0 36px;
+    padding: 48px 0 36px;
   }
 
   .footer-main {
+    display: grid;
+    gap: 32px;
+    padding-bottom: 36px;
+  }
+
+  .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    padding-bottom: 32px;
+    gap: 14px;
   }
   .footer-tagline {
-    max-width: 420px;
+    max-width: 380px;
     color: var(--color-foreground-55);
     font-size: 14px;
     line-height: 1.6;
   }
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 28px;
+  .footer-rights {
+    display: none;
   }
-  .footer-links a {
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .footer-heading {
+    margin-bottom: 4px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary-35);
+  }
+  .footer-col a {
     color: var(--color-foreground-65);
     font-size: 14px;
     font-weight: 500;
     transition: color 0.2s ease;
   }
-  .footer-links a:hover { color: var(--color-primary); }
+  .footer-col a:hover { color: var(--color-primary); }
 
   .footer-meta {
     display: flex;
@@ -102,9 +137,18 @@ const contactLinks = [
 
   @media (min-width: 768px) {
     .footer-main {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-rights {
+      display: block;
+      color: var(--color-foreground-55);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    .footer-meta span {
+      display: none;
     }
   }
 </style>
