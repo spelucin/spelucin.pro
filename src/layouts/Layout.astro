@@ -120,8 +120,7 @@ const alternateLinks = isRootPage
     if (lead) {
       dataLayer.push({
         event: 'generate_lead',
-        lead_source: lead.dataset.leadSource,
-        lead_type: lead.dataset.leadType,
+        lead_source: 'email',
       });
     }
     const calendar = event.target.closest('[data-calendar]');
@@ -138,15 +137,10 @@ const alternateLinks = isRootPage
     if (!ns) return false;
     ns('on', {
       action: 'bookingSuccessfulV2',
-      callback: (data) => {
-        const booking = data?.detail?.data ?? {};
-        const email = booking.responses?.email?.value ?? booking.email ?? '';
+      callback: () => {
         dataLayer.push({
           event: 'generate_lead',
           lead_source: 'calendar',
-          lead_type: 'calendar',
-          event_title: booking.eventTitle ?? '',
-          booking_email: email,
         });
       },
     });
