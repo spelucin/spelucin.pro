@@ -4,6 +4,12 @@ import '@fontsource-variable/dm-sans';
 import '@fontsource-variable/jetbrains-mono';
 import type { Translations } from '../i18n/types';
 import { site } from '../data/site';
+import { equivalentPath } from '../utils/lang';
+
+interface BreadcrumbItem {
+  name: string;
+  path: string;
+}
 
 interface Props {
   t: Translations;
@@ -12,21 +18,28 @@ interface Props {
   image?: string;
   canonical?: string;
   noindex?: boolean;
+  breadcrumb?: BreadcrumbItem[];
 }
 
-const { t, title, description, image = site.ogImage, canonical, noindex = false } = Astro.props;
+const {
+  t,
+  title,
+  description,
+  image = site.ogImage,
+  canonical,
+  noindex = false,
+  breadcrumb = [],
+} = Astro.props;
 
 const url = canonical ?? new URL(Astro.url.pathname, site.url).toString();
 const ogImage = new URL(image, site.url).toString();
 const titleTag = title ?? t.meta.title;
 const descriptionTag = description ?? t.meta.description;
-const isRootPage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/';
-const alternateLinks = isRootPage
-  ? [
-      { hreflang: 'es', href: '/' },
-      { hreflang: 'en', href: '/en/' },
-    ]
-  : [];
+const alternateLinks = [
+  { hreflang: 'es', href: equivalentPath(Astro.url.pathname, 'es') },
+  { hreflang: 'en', href: equivalentPath(Astro.url.pathname, 'en') },
+  { hreflang: 'x-default', href: '/' },
+];
 ---
 
 <!doctype html>
@@ -42,9 +55,6 @@ const alternateLinks = isRootPage
     {alternateLinks.map((link) => (
       <link rel="alternate" hreflang={link.hreflang} href={new URL(link.href, site.url).toString()} />
     ))}
-    {alternateLinks.length > 0 && (
-      <link rel="alternate" hreflang="x-default" href={new URL('/', site.url).toString()} />
-    )}
     <meta name="theme-color" content="#0a0d14" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -96,6 +106,19 @@ const alternateLinks = isRootPage
     </script>
 
     <slot name="jsonld" />
+
+    {breadcrumb.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumb.map((crumb, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: crumb.name,
+          item: new URL(crumb.path, site.url).toString(),
+        })),
+      })} />
+    )}
   </head>
   <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K7VLRW2S" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
