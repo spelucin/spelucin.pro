@@ -96,6 +96,11 @@ export interface CaseStudy {
   };
 }
 
+export type CaseStudyKey = Exclude<
+  keyof Translations['caseStudies'],
+  'challengeHeading' | 'backToWork'
+>;
+
 /* Existing single-page surface (kept until the multi-page rebuild removes it) */
 export interface FocusItem {
   name: string;
@@ -185,7 +190,7 @@ export interface Translations {
       highlight: string;
       intro: string;
       stats: StatBlock[];
-      featured: string[];
+      featured: CaseStudyKey[];
     };
   };
 
@@ -329,6 +334,8 @@ export interface Translations {
   };
 
   caseStudies: {
+    challengeHeading: string;
+    backToWork: string;
     torices: CaseStudy;
     owlbox: CaseStudy;
     notebook: CaseStudy;

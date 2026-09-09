@@ -1,0 +1,336 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SectionHead from './SectionHead.astro';
+import StatsBlocks from './StatsBlocks.astro';
+import BookCall from './BookCall.astro';
+import { localizeHref } from '../utils/lang';
+import type { CaseStudy, Translations } from '../i18n/types';
+import type { CaseImage } from '../data/caseImages';
+
+interface Props {
+  t: Translations;
+  study: CaseStudy;
+  images: CaseImage[];
+}
+
+const { t, study, images }: Props = Astro.props;
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <section class="hero">
+    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-site">
+      <a class="hero-back" href={localizeHref('/work', t.lang)}>
+        <Icon name="tabler:arrow-left" width="16" height="16" aria-hidden="true" />
+        {t.caseStudies.backToWork}
+      </a>
+      <span class="badge">{study.kicker}</span>
+      <p class="hero-meta">
+        {study.client} <span aria-hidden="true">·</span> {study.sector}
+        <span aria-hidden="true">·</span> {study.year}
+      </p>
+      <h1>{study.title}</h1>
+      <p class="hero-result">{study.heroResult}</p>
+    </div>
+  </section>
+
+  <section class="context section-block">
+    <div class="container-site">
+      <span class="section-index" aria-hidden="true">01</span>
+      {study.context.map((p) => (
+        <p class="context-para">{p}</p>
+      ))}
+    </div>
+  </section>
+
+  <section class="problems section-block reveal">
+    <div class="container-site">
+      <span class="section-index" aria-hidden="true">02</span>
+      <h2 class="block-heading">{t.caseStudies.challengeHeading}</h2>
+      <ul class="problem-list" role="list">
+        {study.problems.map((problem) => (
+          <li class="problem-card">
+            <h3 class="problem-title">{problem.title}</h3>
+            <p class="problem-text">{problem.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="built section-block reveal">
+    <div class="container-site">
+      <SectionHead index="03" heading={study.built.heading} />
+      <ul class="built-list" role="list">
+        {study.built.items.map((item) => (
+          <li class="built-item">
+            <h3 class="built-title">{item.title}</h3>
+            <p class="built-text">{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="gallery section-block reveal">
+    <div class="container-site">
+      <span class="section-index" aria-hidden="true">04</span>
+      <div class="gallery">
+        {images.map((image, i) => (
+          <figure class="shot">
+            <Image
+              src={image}
+              alt={study.imagesAlt[i]}
+              format="avif"
+              widths={[960, 1400, 1920]}
+              sizes="(min-width: 1024px) 900px, 92vw"
+              loading="lazy"
+            />
+            <figcaption class="shot-caption">
+              {String(i + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')} ·{' '}
+              {study.imagesAlt[i]}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="results section-block reveal">
+    <div class="container-site">
+      <SectionHead index="05" heading={study.results.heading} />
+      <StatsBlocks stats={study.results.stats} />
+    </div>
+  </section>
+
+  <BookCall t={t} location={`case-${study.slug}`} />
+</main>
+
+<SiteFooter t={t} />
+
+<script>
+  const elements = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    );
+    elements.forEach((el) => io.observe(el));
+  } else {
+    elements.forEach((el) => el.classList.add('is-visible'));
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 132px 0 0;
+    overflow: hidden;
+  }
+  .hero-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-foreground-55);
+    transition: color 0.2s ease;
+  }
+  .hero-back:hover {
+    color: var(--color-primary);
+  }
+  .hero-meta {
+    margin: 20px 0 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+  .hero h1 {
+    max-width: 22ch;
+    margin: 20px 0 0;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 680;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+  .hero-result {
+    display: inline-block;
+    margin: 28px 0 0;
+    padding: 10px 18px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-foreground-70);
+    background: var(--color-primary-4);
+  }
+
+  .section-block {
+    padding: 96px 0;
+  }
+
+  .section-index {
+    display: inline-block;
+    margin-bottom: 22px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .context-para {
+    margin: 0;
+    max-width: 64ch;
+    font-size: 20px;
+    line-height: 1.7;
+    color: var(--color-foreground-55);
+  }
+  .context-para + .context-para {
+    margin-top: 18px;
+  }
+
+  .block-heading {
+    margin: 0 0 32px;
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .problem-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .problem-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 26px 28px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-4);
+  }
+  .problem-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-foreground-70);
+  }
+  .problem-text {
+    margin: 0;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .built-list {
+    list-style: none;
+    margin: 48px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .built-item {
+    display: grid;
+    gap: 8px;
+    padding: 26px 4px;
+    border-bottom: 1px solid var(--color-primary-14);
+  }
+  .built-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-foreground-70);
+  }
+  .built-text {
+    margin: 0;
+    max-width: 56ch;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .gallery {
+    display: grid;
+    gap: 20px;
+  }
+  .shot {
+    position: relative;
+    margin: 0;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+    box-shadow: 0 24px 60px rgba(4, 8, 16, 0.35);
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .shot-caption {
+    padding: 14px 20px;
+    border-top: 1px solid var(--color-primary-8);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--color-foreground-55);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding: 168px 0 0;
+    }
+    .problem-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .built-item {
+      grid-template-columns: 240px 1fr;
+      gap: 28px;
+      align-items: baseline;
+    }
+    .gallery {
+      gap: 28px;
+    }
+  }
+</style>

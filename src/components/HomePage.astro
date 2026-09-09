@@ -26,8 +26,7 @@ const clientLogos: { src: string; alt: string; small?: boolean }[] = [
   { src: '/assets/picnic-client-logo.svg', alt: 'Picnic' },
 ];
 
-const featuredSlugs = t.home.proof.featured as (keyof typeof t.caseStudies)[];
-const featuredCases = featuredSlugs.map((slug) => t.caseStudies[slug]);
+const featuredCases = t.home.proof.featured.map((slug) => t.caseStudies[slug]);
 ---
 
 <SiteHeader t={t} />

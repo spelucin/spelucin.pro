@@ -468,6 +468,8 @@ export const t: Translations = {
     availability: 'Available for agencies in LATAM, Spain and the US.',
   },
   caseStudies: {
+    challengeHeading: 'The challenge',
+    backToWork: 'Back to work',
     torices: {
       slug: 'torices',
       client: 'Torices Digital',

@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CaseStudyPage from '../../components/CaseStudyPage.astro';
+import { t as esT } from '../../i18n/es';
+import { caseImages } from '../../data/caseImages';
+
+export async function getStaticPaths() {
+  const slugs = Object.keys(caseImages) as (keyof typeof caseImages)[];
+  return slugs.map((slug) => ({
+    params: { slug },
+    props: {
+      study: esT.caseStudies[slug],
+      images: caseImages[slug],
+    },
+  }));
+}
+
+const { study, images } = Astro.props;
+---
+
+<Layout
+  t={esT}
+  title={`${study.title} · ${study.client} | ${esT.meta.title}`}
+  description={study.context[0]}
+  breadcrumb={[
+    { name: 'Trabajo', path: '/work' },
+    { name: study.client, path: `/case-studies/${study.slug}` },
+  ]}
+>
+  <CaseStudyPage t={esT} study={study} images={images} />
+</Layout>
