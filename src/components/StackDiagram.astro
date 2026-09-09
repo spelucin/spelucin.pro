@@ -8,7 +8,7 @@ interface Props {
   id?: string;
 }
 
-const { layers, caption, id } = Astro.props;
+const { layers, caption, id }: Props = Astro.props;
 ---
 
 <figure class="stack" id={id}>

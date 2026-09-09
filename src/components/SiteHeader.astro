@@ -8,9 +8,8 @@ interface Props {
   t: Translations;
 }
 
-const { t } = Astro.props;
+const { t }: Props = Astro.props;
 const currentLang = t.lang;
-const langSwitch = currentLang === 'es' ? 'en' : 'es';
 const currentPath = Astro.url.pathname;
 const navItems = t.siteNav.map((item) => ({
   label: item.label,

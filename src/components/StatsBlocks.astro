@@ -5,7 +5,7 @@ interface Props {
   stats: StatBlock[];
 }
 
-const { stats } = Astro.props;
+const { stats }: Props = Astro.props;
 ---
 
 <ul class="stats" role="list">
