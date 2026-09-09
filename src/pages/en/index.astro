@@ -7,7 +7,7 @@ import { personJsonLd } from '../../i18n/personJsonLd';
 
 <Layout t={t}>
   <Fragment slot="jsonld">
-    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd(t))} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personJsonLd(t))} />
   </Fragment>
   <HomePage t={t} />
 </Layout>
