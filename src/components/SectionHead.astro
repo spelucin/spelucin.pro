@@ -1,0 +1,47 @@
+---
+interface Props {
+  id?: string;
+  index?: string;
+  heading: string;
+  highlight?: string;
+  intro?: string;
+}
+
+const { id, index, heading, highlight, intro } = Astro.props;
+---
+
+<div class="section-head">
+  {index && <span class="section-index">{index}</span>}
+  <h2 id={id}>
+    {heading} {highlight && <span class="text-primary">{highlight}</span>}
+  </h2>
+  {intro && <p class="section-head-intro">{intro}</p>}
+</div>
+
+<style>
+  .section-index {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  h2 {
+    margin-top: 14px;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    color: var(--color-foreground);
+  }
+
+  .section-head-intro {
+    margin-top: 16px;
+    max-width: 560px;
+    color: var(--color-foreground-55);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import type { StatBlock } from '../i18n/types';
+
+interface Props {
+  stats: StatBlock[];
+}
+
+const { stats } = Astro.props;
+---
+
+<ul class="stats" role="list">
+  {stats.map((stat) => (
+    <li class="stat">
+      <span class="stat-value">{stat.value}</span>
+      <span class="stat-label">{stat.label}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .stats {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 32px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-primary-14);
+  }
+
+  .stat-value {
+    font-family: var(--font-mono);
+    font-size: clamp(30px, 4vw, 38px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--color-primary);
+  }
+
+  .stat-label {
+    color: var(--color-foreground-55);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  @media (min-width: 640px) {
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

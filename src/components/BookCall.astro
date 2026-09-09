@@ -1,0 +1,123 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
+
+interface Props {
+  t: Translations;
+  id?: string;
+  location?: string;
+}
+
+const { t, id, location = 'cta-section' } = Astro.props;
+---
+
+<section class="cta" id={id}>
+  <div class="container-site">
+    <div class="cta-panel cta-texture">
+      <div class="cta-copy">
+        <h2>{t.ctaSection.heading}</h2>
+        <p class="cta-sub">{t.ctaSection.sub}</p>
+        <p class="cta-hint">{t.ctaSection.hint}</p>
+      </div>
+      <div class="cta-actions">
+        <a
+          class="btn btn-primary"
+          href={site.cal}
+          target="_blank"
+          rel="noopener"
+          data-calendar
+          data-calendar-location={location}
+          data-cta
+          data-cta-text={t.ctaLabel}
+          data-cta-location={location}
+        >
+          <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
+          {t.ctaLabel}
+        </a>
+        <a
+          class="btn btn-secondary"
+          href={`mailto:${site.email}`}
+          data-lead
+          data-cta
+          data-cta-text={t.ctaLabel}
+          data-cta-location={location}
+        >
+          <Icon name="tabler:mail" width="16" height="16" aria-hidden="true" />
+          {site.email}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding: 24px 0 88px;
+  }
+
+  .cta-panel {
+    position: relative;
+    padding: 44px 24px 40px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: grid;
+    gap: 28px;
+    justify-items: start;
+  }
+
+  h2 {
+    max-width: 17ch;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    color: var(--color-foreground);
+  }
+
+  .cta-sub {
+    margin-top: 16px;
+    max-width: 480px;
+    color: var(--color-foreground-55);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .cta-hint {
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--color-foreground-55);
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .cta {
+      padding-bottom: 120px;
+    }
+    .cta-panel {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 52px 56px;
+    }
+    .cta-actions {
+      justify-content: flex-end;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 960px) {
+    .cta-panel {
+      grid-template-columns: 1fr;
+    }
+    .cta-actions {
+      justify-content: flex-start;
+    }
+  }
+</style>
