@@ -2,11 +2,11 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import dashboardHero from '../assets/dashboard-hero.jpg';
+import avatar from '../assets/alex-spelucin-avatar.jpg';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 import SectionHead from './SectionHead.astro';
 import StatsBlocks from './StatsBlocks.astro';
-import StackDiagram from './StackDiagram.astro';
 import BookCall from './BookCall.astro';
 import type { Translations } from '../i18n/types';
 import { site } from '../data/site';
@@ -19,80 +19,74 @@ interface Props {
 
 const { t }: Props = Astro.props;
 
-const clientLogos: { src: string; alt: string; small?: boolean }[] = [
-  { src: '/assets/notebook-client-logo.svg', alt: 'Notebook Agency' },
-  { src: '/assets/torices-client-logo.svg', alt: 'Torices' },
-  { src: '/assets/owlbox-client-logo.svg', alt: 'Owlbox', small: true },
-  { src: '/assets/picnic-client-logo.svg', alt: 'Picnic' },
+const clientLogos: { src: string; alt: string; height?: number }[] = [
+  { src: '/assets/notebook-client-logo.svg', alt: 'Notebook Agency', height: 30 },
+  { src: '/assets/torices-client-logo.svg', alt: 'Torices', height: 22 },
+  { src: '/assets/owlbox-client-logo.svg', alt: 'Owlbox', height: 22 },
+  { src: '/assets/picnic-client-logo.svg', alt: 'Picnic', height: 19 },
 ];
 
-const featuredCases = t.home.proof.featured.map((slug) => t.caseStudies[slug]);
+const featuredCases = t.home.proof.featured.map((slug) => {
+  const study = t.caseStudies[slug];
+  const workCase = t.work.cases.find((item) => item.slug === slug);
+  return {
+    ...study,
+    summary: workCase?.summary ?? study.context[0],
+  };
+});
+const clientLogoMap: Record<string, { src: string; height: number }> = {
+  torices: { src: '/assets/torices-client-logo.svg', height: 20 },
+  notebook: { src: '/assets/notebook-client-logo.svg', height: 26 },
+  owlbox: { src: '/assets/owlbox-client-logo.svg', height: 20 },
+};
 ---
 
 <SiteHeader t={t} />
 
 <main id="main-content">
   <section class="hero">
-    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
-    <div class="hero-glow" aria-hidden="true"></div>
-    <div class="container-site hero-grid">
-      <div class="hero-copy">
-        <span class="badge">{t.home.hero.badge}</span>
-        <h1>
-          {t.home.hero.headline} <span class="text-primary">{t.home.hero.highlight}</span>
-        </h1>
-        <p class="hero-sub">{t.home.hero.sub}</p>
-        <div class="hero-actions">
-          <a
-            class="btn btn-primary"
-            href={localizeHref('/work', t.lang)}
-            data-cta
-            data-cta-text={t.ctaSeeWork}
-            data-cta-location="hero"
-          >
-            {t.home.hero.ctaSecondary}
-            <Icon name="tabler:arrow-right" width="16" height="16" aria-hidden="true" />
-          </a>
-          <a
-            class="btn btn-secondary"
-            href={site.cal}
-            target="_blank"
-            rel="noopener"
-            data-cal-link="spelucin"
-            data-cal-namespace="spelucin"
-            data-calendar
-            data-calendar-location="hero"
-            data-cta
-            data-cta-text={t.ctaLabel}
-            data-cta-location="hero"
-          >
-            <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
-            {t.ctaLabel}
-          </a>
-        </div>
-      </div>
+    <div class="container-site hero-copy">
+      <h1>{t.home.hero.headline} <span class="text-primary">{t.home.hero.highlight}</span></h1>
+      <p class="hero-sub">{t.home.hero.sub}</p>
+      <a
+        class="btn btn-primary"
+        href={site.cal}
+        data-cal-modal
+        data-calendar
+        data-calendar-location="hero"
+        data-cta
+        data-cta-text={t.ctaLabel}
+        data-cta-location="hero"
+      >
+        {t.ctaLabel}
+        <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
+      </a>
+    </div>
+  </section>
 
-      <figure class="hero-dashboard">
-        <div class="hero-dashboard-frame">
+  <section class="hero-visual reveal" aria-label={t.home.hero.visualAlt}>
+    <div class="container-site">
+      <figure class="hero-media">
+        <div class="hero-media-frame">
           <Image
             src={dashboardHero}
             alt={t.home.hero.visualAlt}
             format="avif"
-            widths={[480, 640, 800]}
-            sizes="(min-width: 1024px) 440px, (min-width: 768px) 460px, 90vw"
+            widths={[640, 900, 1280]}
+            sizes="(min-width: 1024px) 980px, 92vw"
+            priority
           />
         </div>
-        <figcaption class="sr-only">{t.home.hero.visualAlt}</figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="trust" aria-label={t.home.trust.label}>
-    <div class="container-site trust-inner">
-      <p class="trust-label">{t.home.trust.label}</p>
-      <ul class="trust-logos" role="list">
+  <section class="clients" aria-label={t.home.trust.label}>
+    <div class="container-site clients-inner">
+      <p class="clients-label">{t.home.trust.label}</p>
+      <ul class="client-logos" role="list">
         {clientLogos.map((logo) => (
-          <li class:list={['trust-logo', logo.small && 'trust-logo--small']}>
+          <li class="client-logo" style={`--logo-h: ${logo.height ?? 22}px`}>
             <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
           </li>
         ))}
@@ -100,7 +94,7 @@ const featuredCases = t.home.proof.featured.map((slug) => t.caseStudies[slug]);
     </div>
   </section>
 
-  <section class="problem section-block reveal">
+  <section class="problem home-section reveal">
     <div class="container-site">
       <SectionHead
         index={t.home.problem.index}
@@ -108,18 +102,21 @@ const featuredCases = t.home.proof.featured.map((slug) => t.caseStudies[slug]);
         highlight={t.home.problem.highlight}
         intro={t.home.problem.intro}
       />
-      <ul class="pain-list" role="list">
-        {t.home.problem.items.map((item) => (
-          <li class="pain-card">
-            <span class="pain-title">{item.title}</span>
-            <span class="pain-text">{item.text}</span>
-          </li>
+      <div class="problem-list">
+        {t.home.problem.items.map((item, i) => (
+          <article class="problem-row">
+            <span class="row-number">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          </article>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
-  <section class="service section-block reveal">
+  <section class="sprint home-section reveal">
     <div class="container-site">
       <SectionHead
         index={t.home.service.index}
@@ -127,106 +124,204 @@ const featuredCases = t.home.proof.featured.map((slug) => t.caseStudies[slug]);
         highlight={t.home.service.highlight}
         intro={t.home.service.intro}
       />
-      <div class="pillars">
-        {t.home.service.pillars.map((pillar, i) => (
-          <article
-            class:list={[
-              'pillar-card',
-              i === 0 && 'pillar-card--wide',
-              i === 1 && 'pillar-card--narrow',
-              i === 2 && 'pillar-card--offset',
-            ]}
-          >
-            <h3 class="pillar-title">
-              <span class="pillar-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              {pillar.title}
-            </h3>
-            <p class="pillar-text">{pillar.text}</p>
-            <ul class="pillar-tags" role="list">
-              {pillar.tags.map((tag) => (
-                <li class="pillar-tag">{tag}</li>
-              ))}
-            </ul>
-          </article>
+
+      <ol class="sprint-weeks" role="list">
+        {t.home.service.weeks.map((week, i) => (
+          <li class="sprint-week">
+            <span class="sprint-week-index">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{week.title}</h3>
+              <p>{week.text}</p>
+            </div>
+          </li>
         ))}
+      </ol>
+
+      <div class="sprint-include">
+        <h3>{t.home.service.includeHeading}</h3>
+        <ul class="sprint-include-list" role="list">
+          {t.home.service.include.map((item) => (
+            <li>
+              <Icon name="tabler:check" width="14" height="14" aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="sprint-fit">
+        <div class="sprint-fit-col">
+          <h3>{t.home.service.fit.goodHeading}</h3>
+          <ul role="list">
+            {t.home.service.fit.good.map((item) => (
+              <li>
+                <Icon name="tabler:check" width="14" height="14" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="sprint-fit-col sprint-fit-col--poor">
+          <h3>{t.home.service.fit.poorHeading}</h3>
+          <ul role="list">
+            {t.home.service.fit.poor.map((item) => (
+              <li>
+                <Icon name="tabler:x" width="14" height="14" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="showcase-cta sprint-cta">
+        <a
+          class="btn btn-primary btn-lg"
+          href={site.cal}
+          data-cal-modal
+          data-calendar
+          data-calendar-location="home-sprint"
+          data-cta
+          data-cta-text={t.ctaLabel}
+          data-cta-location="home-sprint"
+        >
+          {t.ctaLabel}
+          <Icon name="tabler:arrow-up-right" width="18" height="18" aria-hidden="true" />
+        </a>
+        <a
+          class="btn btn-secondary btn-lg"
+          href={localizeHref('/case-studies', t.lang)}
+          data-cta
+          data-cta-text={t.ctaSeeWork}
+          data-cta-location="home-sprint"
+        >
+          {t.ctaSeeWork}
+          <Icon name="tabler:arrow-right" width="18" height="18" aria-hidden="true" />
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="proof section-block reveal">
+  <section class="proof home-section reveal">
     <div class="container-site">
       <SectionHead
+        wide
         index={t.home.proof.index}
         heading={t.home.proof.heading}
         highlight={t.home.proof.highlight}
         intro={t.home.proof.intro}
       />
+
       <StatsBlocks stats={t.home.proof.stats} />
-      <ul class="featured" role="list">
+
+      <div class="horizontal-cases">
         {featuredCases.map((c) => (
-          <li>
-            <a
-                class="featured-card"
-                href={localizeHref(`/case-studies/${c.slug}`, t.lang)}
-                data-case-study
-                data-case-study-slug={c.slug}
-                data-case-study-name={c.client}
-                data-case-study-industry={c.sector}
-              >
+          <a
+            class="horizontal-card"
+            href={localizeHref(`/case-studies/${c.slug}`, t.lang)}
+            data-case-study
+            data-case-study-slug={c.slug}
+            data-case-study-name={c.client}
+            data-case-study-industry={c.sector}
+          >
+            <div class="horizontal-media">
               <Image
-                class="featured-image"
                 src={caseImages[c.slug as keyof typeof caseImages][0]}
                 alt={c.alt}
                 format="avif"
-                widths={[480, 640]}
-                sizes="(min-width: 1024px) 320px, (min-width: 640px) 300px, 90vw"
+                widths={[400, 700]}
+                sizes="(min-width: 768px) 340px, 92vw"
+                loading="lazy"
               />
-              <div class="featured-meta">
-                <span class="featured-client">
-                  {c.client} <span aria-hidden="true">/</span> {c.year}
+            </div>
+            <div class="horizontal-body">
+              <h3 class="horizontal-title">{c.title}</h3>
+              <p class="horizontal-summary">{c.summary}</p>
+              <div class="horizontal-footer">
+                {clientLogoMap[c.slug] ? (
+                  <img
+                    src={clientLogoMap[c.slug].src}
+                    alt={c.client}
+                    class="client-logo-muted"
+                    style={`--logo-h: ${clientLogoMap[c.slug].height}px`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span class="badge-sub">{c.client}</span>
+                )}
+                <span class="horizontal-cta">
+                  <span>{t.lang === 'es' ? 'Ver caso' : 'View case'}</span>
+                  <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
                 </span>
-                <h3 class="featured-title">{c.title}</h3>
-                <p class="featured-result">{c.heroResult}</p>
               </div>
-              <span class="featured-arrow" aria-hidden="true">
-                <Icon name="tabler:arrow-right" width="18" height="18" />
-              </span>
-            </a>
-          </li>
+            </div>
+          </a>
         ))}
-      </ul>
+      </div>
+
+      <div class="showcase-cta">
+        <a
+          class="btn btn-secondary btn-lg"
+          href={localizeHref('/case-studies', t.lang)}
+          data-cta
+          data-cta-text={t.ctaSeeWork}
+          data-cta-location="proof"
+        >
+          {t.ctaSeeWork}
+          <Icon name="tabler:arrow-right" width="18" height="18" aria-hidden="true" />
+        </a>
+      </div>
     </div>
   </section>
 
-  <section class="process section-block reveal">
-    <div class="container-site">
-      <SectionHead
-        index={t.process.index}
-        heading={t.process.heading}
-        highlight={t.process.highlight}
-        intro={t.process.intro}
-      />
-      <ol class="steps" role="list">
-        {t.process.steps.map((step, i) => (
-          <li class="step">
-            <span class="step-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="step-title">{step.title}</h3>
-            <p class="step-text">{step.text}</p>
-          </li>
-        ))}
-      </ol>
+  <section class="credibility home-section reveal" id="sobre-mi">
+    <div class="container-site credibility-grid">
+      <div class="credibility-copy">
+        <Image class="avatar" src={avatar} alt={t.about.portraitAlt} width={88} height={88} format="webp" loading="lazy" />
+        <p class="section-kicker">{t.about.kicker}</p>
+        <h2>{t.about.heading}</h2>
+        {t.about.paragraphs.slice(0, 1).map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <div class="credibility-side">
+        <dl>
+          {t.about.meta.map((item) => (
+            <div><dt>{item.label}</dt><dd>{item.value}</dd></div>
+          ))}
+        </dl>
+        <div class="stack-note">
+          <span>{t.stack.heading} {t.stack.highlight}</span>
+          <p>{t.stack.intro}</p>
+          <ul class="stack-pills" role="list">
+            {t.stack.layers.flatMap((layer) => layer.items).slice(0, 8).map((item) => (
+              <li><Icon name={item.icon} width="14" height="14" aria-hidden="true" />{item.name}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="stack section-block reveal">
-    <div class="container-site">
+  <section class="faq home-section reveal">
+    <div class="container-site faq-container">
       <SectionHead
-        index={t.stack.index}
-        heading={t.stack.heading}
-        highlight={t.stack.highlight}
-        intro={t.stack.intro}
+        flush
+        index={t.home.faq.index}
+        heading={t.home.faq.heading}
+        highlight={t.home.faq.highlight}
       />
-      <StackDiagram layers={t.stack.layers} caption={t.stack.heading} />
+      <div class="faq-list">
+        {t.home.faq.items.map((item, i) => (
+          <details>
+            <summary>
+              <span class="faq-q-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="faq-q">{item.q}</span>
+              <Icon name="tabler:plus" width="18" height="18" aria-hidden="true" />
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -236,381 +331,241 @@ const featuredCases = t.home.proof.featured.map((slug) => t.caseStudies[slug]);
 <SiteFooter t={t} />
 
 <script>
-  const elements = document.querySelectorAll<HTMLElement>('.reveal');
-
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
-    );
-    elements.forEach((el) => io.observe(el));
-  } else {
-    elements.forEach((el) => el.classList.add('is-visible'));
-  }
+  import '../scripts/reveal';
 </script>
 
 <style>
   .hero {
     position: relative;
-    padding: 132px 0 72px;
+    padding: 128px 0 72px;
     overflow: hidden;
+    text-align: center;
   }
+  .hero::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 460px;
+    background-image: radial-gradient(circle, rgba(96, 165, 250, 0.11) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 86%);
+    mask-image: linear-gradient(to bottom, #000, transparent 86%);
+    pointer-events: none;
+    content: '';
+  }
+  .hero-copy { position: relative; display: grid; justify-items: center; gap: 24px; max-width: 760px; }
+  .hero-copy h1 {
+    max-width: 15ch;
+    margin: 0;
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 680;
+    letter-spacing: -0.065em;
+    line-height: 0.98;
+  }
+  .hero-sub { max-width: 520px; margin: 0; color: var(--color-foreground-65); font-size: 17px; line-height: 1.6; }
+  .hero-visual { padding-bottom: 72px; }
+  .hero-media { max-width: 980px; margin: 0 auto; }
+  .hero-media-frame { position: relative; overflow: hidden; border: 1px solid var(--color-primary-20); border-radius: var(--radius-lg); background: var(--color-card); box-shadow: 0 24px 70px rgba(4, 8, 16, 0.38); }
+  .hero-media-frame::after { position: absolute; inset: 0; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: inherit; pointer-events: none; content: ''; }
+  .hero-media img { display: block; width: 100%; height: auto; }
 
-  .hero-grid {
-    position: relative;
+  .clients { border-top: 1px solid var(--color-primary-14); border-bottom: 1px solid var(--color-primary-14); }
+  .clients-inner { display: flex; flex-direction: column; gap: 18px; padding-top: 22px; padding-bottom: 22px; }
+  .clients-label { margin: 0; color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .client-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 44px; margin: 0; padding: 0; list-style: none; }
+  .client-logo img { display: block; width: auto; height: var(--logo-h, 22px); filter: grayscale(1); opacity: 0.72; }
+
+  .home-section { padding: 128px 0; }
+
+  .problem-list { border-top: 1px solid var(--color-primary-14); }
+  .problem-row { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; padding: 26px 0; border-bottom: 1px solid var(--color-primary-14); }
+  .row-number { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .problem-row h3 { margin: 0; color: var(--color-foreground); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+  .problem-row p { max-width: 58ch; margin: 8px 0 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
+
+  .sprint-weeks {
+    padding: 0;
+    margin: 0;
     display: grid;
-    gap: 48px;
-    align-items: center;
+    gap: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-primary-14);
+    border-bottom: 1px solid var(--color-primary-14);
   }
+  .sprint-week { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; padding: 28px 0; }
+  .sprint-week::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 1px; background: var(--color-primary-14); }
+  .sprint-week:first-child::before { top: 50%; }
+  .sprint-week:last-child::before { bottom: 50%; }
+  .sprint-week-index { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin-top: 2px; border: 1px solid var(--color-primary-28); border-radius: 50%; background: var(--color-background); color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .sprint-week h3 { margin: 0; color: var(--color-foreground); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+  .sprint-week p { max-width: 58ch; margin: 8px 0 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
 
-  .hero-copy {
+  .sprint-include { margin-top: 56px; }
+  .sprint-include h3 { margin: 0 0 18px; color: var(--color-foreground); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .sprint-include-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .sprint-include-list li { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--color-primary-14); border-radius: 999px; color: var(--color-foreground-70); font-size: 13.5px; }
+  .sprint-include-list svg { color: var(--color-primary); }
+
+  .sprint-fit { display: grid; gap: 16px; margin-top: 56px; }
+  .sprint-fit-col { padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); }
+  .sprint-fit-col--poor { border-color: var(--color-primary-8); }
+  .sprint-fit-col h3 { margin: 0 0 16px; color: var(--color-foreground); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .sprint-fit-col ul { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
+  .sprint-fit-col li { display: flex; align-items: flex-start; gap: 9px; color: var(--color-foreground-55); font-size: 14px; line-height: 1.5; }
+  .sprint-fit-col svg { flex-shrink: 0; margin-top: 2px; color: var(--color-primary); }
+  .sprint-fit-col--poor svg { color: var(--color-foreground-35); }
+  .sprint-cta { flex-wrap: wrap; gap: 12px; }
+
+  .horizontal-cases { display: flex; flex-direction: column; gap: 20px; margin-top: 56px; }
+  .horizontal-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .hero-copy h1 {
-    font-size: clamp(40px, 7vw, 68px);
-    font-weight: 680;
-    letter-spacing: -0.04em;
-    line-height: 1.02;
-    margin: 0;
-  }
-
-  .hero-sub {
-    max-width: 520px;
-    margin: 0;
-    color: var(--color-foreground-55);
-    font-size: 18px;
-    line-height: 1.65;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 8px;
-  }
-
-  .hero-dashboard {
-    margin: 0;
-  }
-  .hero-dashboard-frame {
-    border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--color-surface);
-    box-shadow: 0 30px 80px rgba(4, 8, 16, 0.5);
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    color: var(--color-foreground);
+    text-decoration: none;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .hero-dashboard-frame img {
+  .horizontal-card:hover {
+    border-color: var(--color-primary-35);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 48px rgba(4, 8, 16, 0.45);
+  }
+  .horizontal-media {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #080b11;
+  }
+  .horizontal-media img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
   }
+  .horizontal-card:hover .horizontal-media img { transform: scale(1.035); }
 
-  .trust-inner {
+  .horizontal-body {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 24px 26px;
+  }
+  .horizontal-header { display: flex; align-items: center; }
+  .client-logo-muted {
+    display: block;
+    width: auto;
+    height: var(--logo-h, 20px);
+    filter: grayscale(1);
+    opacity: 0.5;
+    transition: opacity 0.25s ease, filter 0.25s ease;
+  }
+  .horizontal-card:hover .client-logo-muted {
+    opacity: 0.85;
+    filter: grayscale(0.2);
+  }
+  .horizontal-title {
+    margin: 0;
+    font-size: clamp(18px, 2.2vw, 22px);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    color: var(--color-foreground);
+  }
+  .horizontal-summary {
+    margin: 0;
+    color: var(--color-foreground-55);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .horizontal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 16px;
-    align-items: flex-start;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 14px;
     border-top: 1px solid var(--color-primary-8);
   }
-  .trust-label {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-foreground-55);
-  }
-  .trust-logos {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+  .horizontal-cta {
+    display: inline-flex;
     align-items: center;
-    gap: 22px 34px;
-    opacity: 0.85;
-  }
-  .trust-logo img {
-    height: 22px;
-    width: auto;
-    filter: grayscale(1);
-    opacity: 0.75;
-  }
-  .trust-logo--small img {
-    height: 18px;
-  }
-
-  .section-block {
-    padding: 96px 0;
-  }
-
-  .pain-list {
-    list-style: none;
-    margin: 56px 0 0;
-    padding: 0;
-    display: grid;
-    gap: 14px;
-  }
-
-  .pain-card {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 24px 26px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-md);
-    background: var(--color-primary-4);
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-  }
-  .pain-card:hover {
-    border-color: var(--color-primary-20);
-    background: var(--color-primary-8);
-  }
-  .pain-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-foreground-70);
-  }
-  .pain-text {
-    color: var(--color-foreground-55);
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .pillars {
-    margin-top: 56px;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 14px;
-  }
-
-  .pillar-card {
-    grid-column: span 12;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 30px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-md);
-    background: var(--color-primary-4);
-    transition: border-color 0.2s ease, transform 0.25s ease;
-  }
-  .pillar-card:hover {
-    border-color: var(--color-primary-35);
-    transform: translateY(-2px);
-  }
-
-  .pillar-index {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    gap: 6px;
     color: var(--color-primary);
-  }
-  .pillar-title {
-    margin: 0;
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    font-size: 22px;
-    font-weight: 620;
-    letter-spacing: -0.02em;
-    color: var(--color-foreground);
-  }
-  .pillar-text {
-    margin: 0;
-    max-width: 46ch;
-    color: var(--color-foreground-55);
-    font-size: 15px;
-    line-height: 1.65;
-  }
-  .pillar-tags {
-    list-style: none;
-    margin: 6px 0 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .pillar-tag {
-    padding: 6px 12px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: 999px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-primary);
-  }
-
-  .featured {
-    list-style: none;
-    margin: 64px 0 0;
-    padding: 0;
-    display: grid;
-    gap: 14px;
-  }
-
-  .featured-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 14px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-md);
-    background: var(--color-primary-4);
-    color: var(--color-foreground);
-    transition: border-color 0.2s ease, transform 0.25s ease;
-  }
-  .featured-card:hover {
-    border-color: var(--color-primary-35);
-    transform: translateY(-2px);
-  }
-  .featured-image {
-    display: block;
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: calc(var(--radius-md) - 6px);
-    border: 1px solid var(--color-primary-8);
-  }
-  .featured-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 2px 8px 12px;
-  }
-  .featured-client {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-primary);
-  }
-  .featured-title {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.3;
-  }
-  .featured-result {
-    margin: 0;
-    color: var(--color-foreground-55);
     font-size: 14px;
-  }
-  .featured-arrow {
-    position: absolute;
-    right: 18px;
-    bottom: 18px;
-    color: var(--color-primary-35);
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-  .featured-card:hover .featured-arrow {
-    color: var(--color-primary);
-    transform: translateX(3px);
-  }
-
-  .steps {
-    list-style: none;
-    margin: 56px 0 0;
-    padding: 0;
-    display: grid;
-    gap: 14px;
-  }
-
-  .step {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 22px;
-    border-top: 1px solid var(--color-primary-14);
-  }
-  .step-index {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--color-primary);
-  }
-  .step-title {
-    margin: 0;
-    font-size: 18px;
     font-weight: 600;
-    color: var(--color-foreground-70);
+    transition: transform 0.2s ease;
   }
-  .step-text {
-    margin: 0;
-    color: var(--color-foreground-55);
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
+  .horizontal-card:hover .horizontal-cta { transform: translateX(4px); }
+  .showcase-cta { display: flex; justify-content: center; margin-top: 44px; }
+  .btn-lg { padding: 14px 28px; font-size: 15px; }
 
   @media (min-width: 768px) {
-    .hero {
-      padding: 168px 0 96px;
+    .horizontal-card {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      align-items: stretch;
     }
-    .hero-grid {
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 56px;
+    .horizontal-media {
+      height: 100%;
+      aspect-ratio: auto;
+      border-right: 1px solid var(--color-primary-14);
     }
-    .trust-inner {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .trust-logos {
-      gap: 34px;
-    }
-    .pain-list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-    .featured {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .steps {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
+    .horizontal-body {
+      padding: 28px 32px;
+      justify-content: center;
     }
   }
 
-  @media (min-width: 1024px) {
-    .pillar-card--wide {
-      grid-column: span 7;
-    }
-    .pillar-card--narrow {
-      grid-column: span 5;
-    }
-    .pillar-card--offset {
-      grid-column: 8 / span 5;
-    }
+  .credibility { border-top: 1px solid var(--color-primary-14); }
+  .credibility-grid { display: grid; gap: 64px; }
+  .credibility-copy { max-width: 580px; }
+  .avatar { display: block; width: 88px; height: 88px; margin-bottom: 28px; border: 1px solid var(--color-primary-20); border-radius: 50%; object-fit: cover; }
+  .credibility .section-kicker { margin: 0 0 14px; }
+  .credibility h2 { max-width: 17ch; margin: 0 0 20px; font-size: var(--text-h2); font-weight: 650; letter-spacing: -0.04em; line-height: 1.08; }
+  .credibility-copy > p:last-child { max-width: 58ch; margin: 0; color: var(--color-foreground-55); font-size: 18px; line-height: 1.65; }
+  .credibility-side dl { display: grid; gap: 0; margin: 0; }
+  .credibility-side dl div { display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid var(--color-primary-14); }
+  .credibility-side dt { color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .credibility-side dd { margin: 0; color: var(--color-foreground-70); font-size: 14px; text-align: right; }
+  .stack-note { margin-top: 52px; padding-top: 22px; border-top: 1px solid var(--color-primary-14); }
+  .stack-note > span { color: var(--color-foreground); font-size: 18px; font-weight: 600; }
+  .stack-note p { margin: 10px 0 18px; color: var(--color-foreground-55); font-size: 14px; line-height: 1.55; }
+  .stack-pills { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
+  .stack-pills li { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border: 1px solid var(--color-primary-14); border-radius: 999px; color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; }
+  .stack-pills svg { color: var(--color-foreground-35); }
+
+  .faq-container { display: grid; gap: 48px; }
+  .faq-list { border-top: 1px solid var(--color-primary-14); }
+  .faq-list details { border-bottom: 1px solid var(--color-primary-14); }
+  .faq-list summary { display: grid; grid-template-columns: 44px 1fr auto; gap: 18px; align-items: baseline; padding: 22px 0; list-style: none; cursor: pointer; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-q-num { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .faq-q { color: var(--color-foreground); font-size: 18px; font-weight: 550; letter-spacing: -0.015em; }
+  .faq-list summary svg { align-self: center; color: var(--color-primary-35); transition: transform 0.2s ease, color 0.2s ease; }
+  .faq-list details[open] summary svg { transform: rotate(45deg); color: var(--color-primary); }
+  .faq-list details p { grid-column: 2 / 4; max-width: 58ch; margin: -4px 0 26px; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
+
+  @media (min-width: 700px) {
+    .clients-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 32px; }
+    .client-logos { gap: 32px 56px; }
+    .credibility-grid { grid-template-columns: 1fr 0.85fr; gap: 96px; }
+  }
+
+  @media (min-width: 900px) {
+    .sprint-fit { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  }
+
+  @media (min-width: 900px) {
+    .showcase-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .showcase-card--featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; }
+    .showcase-card--featured .window-frame { border-bottom: 0; border-right: 1px solid var(--color-primary-14); height: 100%; }
+    .showcase-card--featured .showcase-info { padding: 36px; justify-content: center; }
+    .showcase-card--featured .showcase-title { font-size: clamp(24px, 3vw, 32px); }
   }
 </style>
