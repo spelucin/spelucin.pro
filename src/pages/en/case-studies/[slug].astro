@@ -23,7 +23,7 @@ const { study, images } = Astro.props;
   title={`${study.title} · ${study.client} | ${enT.meta.title}`}
   description={study.context[0]}
   breadcrumb={[
-    { name: 'Work', path: '/en/work' },
+    { name: 'Case studies', path: '/en/case-studies' },
     { name: study.client, path: `/en/case-studies/${study.slug}` },
   ]}
 >

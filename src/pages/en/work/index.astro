@@ -1,14 +1,3 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import WorkPage from '../../../components/WorkPage.astro';
-import { t } from '../../../i18n/en';
+return Astro.redirect('/en/case-studies');
 ---
-
-<Layout
-  t={t}
-  title={t.work.seo.title}
-  description={t.work.seo.description}
-  breadcrumb={[{ name: 'Work', path: '/en/work' }]}
->
-  <WorkPage t={t} />
-</Layout>
