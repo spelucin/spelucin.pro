@@ -24,10 +24,7 @@ const { t, id, location = 'cta-section' } = Astro.props;
         <a
           class="btn btn-primary"
           href={site.cal}
-          target="_blank"
-          rel="noopener"
-          data-cal-link="spelucin"
-          data-cal-namespace="spelucin"
+          data-cal-modal
           data-calendar
           data-calendar-location={location}
           data-cta
@@ -36,17 +33,6 @@ const { t, id, location = 'cta-section' } = Astro.props;
         >
           <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
           {t.ctaLabel}
-        </a>
-        <a
-          class="btn btn-secondary"
-          href={`mailto:${site.email}`}
-          data-lead
-          data-cta
-          data-cta-text={t.ctaLabel}
-          data-cta-location={location}
-        >
-          <Icon name="tabler:mail" width="16" height="16" aria-hidden="true" />
-          {site.email}
         </a>
       </div>
     </div>

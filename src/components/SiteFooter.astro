@@ -10,8 +10,8 @@ interface Props {
 const { t }: Props = Astro.props;
 const contactLinks = [
   { href: `mailto:${site.email}`, label: site.email, tag: 'lead' },
-  { href: site.linkedin, label: 'LinkedIn' },
-  { href: site.github, label: 'GitHub' },
+  { href: site.linkedin, label: 'LinkedIn', external: true },
+  { href: site.github, label: 'GitHub', external: true },
   { href: site.cal, label: 'Cal.com', tag: 'calendar' },
 ];
 const exploreLinks = t.siteNav.map((item) => ({
@@ -24,6 +24,7 @@ const exploreLinks = t.siteNav.map((item) => ({
   <div class="container-site">
     <div class="footer-main">
       <div class="footer-brand">
+        <img class="footer-logo" src="/assets/logo.svg" alt="" width="22" height="22" loading="lazy" aria-hidden="true" />
         <p class="footer-tagline">{t.footer.tagline}</p>
         <span class="footer-rights">{t.footer.rights}</span>
       </div>
@@ -40,10 +41,9 @@ const exploreLinks = t.siteNav.map((item) => ({
         {contactLinks.map((link) => (
           <a
             href={link.href}
-            target={link.href.startsWith('http') ? '_blank' : undefined}
-            rel={link.href.startsWith('http') ? 'noopener' : undefined}
-            data-cal-link={link.tag === 'calendar' ? 'spelucin' : undefined}
-            data-cal-namespace={link.tag === 'calendar' ? 'spelucin' : undefined}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener' : undefined}
+            data-cal-modal={link.tag === 'calendar' ? true : undefined}
             data-calendar={link.tag === 'calendar' ? true : undefined}
             data-calendar-location={link.tag === 'calendar' ? 'footer' : undefined}
             data-lead={link.tag === 'lead' ? true : undefined}
@@ -80,6 +80,13 @@ const exploreLinks = t.siteNav.map((item) => ({
     display: flex;
     flex-direction: column;
     gap: 14px;
+  }
+  .footer-logo {
+    display: block;
+    width: 22px;
+    height: 22px;
+    opacity: 0.45;
+    filter: grayscale(0.35);
   }
   .footer-tagline {
     max-width: 380px;

@@ -127,6 +127,19 @@ const alternateLinks = [
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K7VLRW2S" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a class="skip-link" href="#main-content">{t.skipLink}</a>
     <slot />
+    <div class="cal-modal" data-cal-modal-overlay hidden>
+      <div class="cal-modal-dialog" role="dialog" aria-modal="true" aria-label={t.calModal.label}>
+        <div class="cal-modal-toolbar">
+          <span class="cal-modal-dots">
+            <button type="button" class="cal-modal-dot cal-modal-dot--close" data-cal-modal-close aria-label={t.calModal.close}></button>
+            <span class="cal-modal-dot cal-modal-dot--min"></span>
+            <span class="cal-modal-dot cal-modal-dot--max"></span>
+          </span>
+          <span class="cal-modal-title">{t.calModal.label}</span>
+        </div>
+        <div id="cal-inline" class="cal-modal-slot"></div>
+      </div>
+    </div>
   </body>
 </html>
 
@@ -135,6 +148,7 @@ const alternateLinks = [
     interface Window {
       dataLayer: Record<string, unknown>[];
       Cal?: {
+        (command: string, ...args: unknown[]): void;
         ns?: {
           spelucin?: {
             (action: string, opts: Record<string, unknown>): void;
@@ -189,6 +203,59 @@ const alternateLinks = [
         case_study_industry: caseLink.dataset.caseStudyIndustry,
       });
     }
+    const calModal = target?.closest<HTMLElement>('[data-cal-modal]');
+    if (calModal) {
+      event.preventDefault();
+      const details = calModal.closest('details');
+      if (details) details.open = false;
+      openCalModal(calModal);
+    }
+  });
+
+  const calOverlay = document.querySelector<HTMLElement>('[data-cal-modal-overlay]');
+  const calSlot = document.querySelector<HTMLElement>('#cal-inline');
+  const calCloseBtn = document.querySelector<HTMLElement>('[data-cal-modal-close]');
+  let calRendered = false;
+  let lastFocused: HTMLElement | null = null;
+
+  const openCalModal = (trigger: HTMLElement) => {
+    if (!calOverlay || !calSlot) return;
+    lastFocused = trigger;
+    calOverlay.hidden = false;
+    document.body.classList.add('cal-modal-open');
+    calCloseBtn?.focus();
+    if (!calRendered) {
+      if (typeof window.Cal === 'function') {
+        window.Cal('inline', {
+          calLink: 'spelucin',
+          elementOrSelector: '#cal-inline',
+          config: { theme: 'dark', layout: 'month_view' },
+        });
+      } else {
+        calSlot.innerHTML =
+          '<iframe src="https://cal.com/spelucin?embed=true&amp;embedType=inline&amp;theme=dark&amp;layout=month_view" title="Cal.com" loading="lazy"></iframe>';
+      }
+      calRendered = true;
+    }
+  };
+
+  const closeCalModal = () => {
+    if (!calOverlay) return;
+    calOverlay.hidden = true;
+    document.body.classList.remove('cal-modal-open');
+    lastFocused?.focus();
+  };
+
+  calCloseBtn?.addEventListener('click', closeCalModal);
+
+  calOverlay?.addEventListener('click', (event) => {
+    if (event.target === calOverlay) closeCalModal();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && calOverlay && !calOverlay.hidden) {
+      closeCalModal();
+    }
   });
 
   const registerBookingListener = () => {
@@ -213,3 +280,58 @@ const alternateLinks = [
     setTimeout(() => clearInterval(timer), 10000);
   }
 </script>
+
+<style>
+  .cal-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: grid;
+    place-items: center;
+    padding: clamp(12px, 4vw, 36px);
+    background: rgba(5, 8, 14, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow-y: auto;
+  }
+  .cal-modal[hidden] { display: none; }
+  .cal-modal-dialog {
+    position: relative;
+    width: min(94vw, 860px);
+    margin: auto;
+    border: 1px solid rgba(240, 246, 255, 0.1);
+    border-radius: 14px;
+    background: var(--color-card);
+    box-shadow: 0 40px 110px rgba(3, 5, 10, 0.65);
+    overflow: hidden;
+  }
+  .cal-modal-toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--color-primary-14);
+    background: rgba(240, 246, 255, 0.02);
+  }
+  .cal-modal-dots { display: inline-flex; gap: 8px; justify-self: start; }
+  .cal-modal-dot { width: 12px; height: 12px; border: 0; padding: 0; border-radius: 50%; }
+  .cal-modal-dot--close { background: #ff5f57; cursor: pointer; transition: filter 0.2s ease; }
+  .cal-modal-dot--close:hover { filter: brightness(1.15); }
+  .cal-modal-dot--close:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+  .cal-modal-dot--min { background: #febc2e; }
+  .cal-modal-dot--max { background: #28c840; }
+  .cal-modal-title {
+    justify-self: center;
+    overflow: hidden;
+    max-width: 70%;
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cal-modal-slot { height: min(80vh, 680px); padding: 26px 24px 30px; }
+  .cal-modal-slot iframe { display: block; width: 100%; height: 100%; border: 0; }
+  body.cal-modal-open { overflow: hidden; }
+</style>
