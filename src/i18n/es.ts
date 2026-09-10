@@ -94,6 +94,7 @@ export const t: Translations = {
         { value: '20+', label: 'dashboards entregados como freelance' },
       ],
       featured: ['notebook', 'torices', 'owlbox'],
+      caseCta: 'Ver caso',
     },
     faq: {
       index: '04',
@@ -125,9 +126,8 @@ export const t: Translations = {
   },
   process: {
     index: '04',
-    heading: 'Cómo funciona,',
-    highlight: 'de principio a fin.',
-    intro: 'Cuatro etapas, con entregables claros en cada una. Primero acordamos el modelo; después construimos.',
+    heading: 'Así empieza el trabajo.',
+    intro: 'Primero entendemos el problema. Después decidimos qué vale la pena construir.',
     steps: [
       {
         title: 'Auditoría',
@@ -273,11 +273,12 @@ export const t: Translations = {
         'Casos de medición y reporting construidos para agencias, con dashboards y decisiones técnicas documentadas.',
     },
     hero: {
-      index: '01',
+      eyebrow: 'Casos de Estudio',
       heading: 'Casos de estudio',
       highlight: 'reales.',
       sub: 'Sistemas construidos para agencias. Mira qué problema había, qué se construyó y cómo quedó la operación.',
     },
+    caseCta: 'Ver caso completo',
     cases: [
       {
         slug: 'torices',
@@ -287,15 +288,7 @@ export const t: Translations = {
         title: 'Reporting orgánico y pagado cara a cara',
         summary:
           'Una serie de reportes que muestra el tráfico orgánico y pagado en paralelo, con las fuentes revisadas para sostener la lectura.',
-        result: 'Sistema para 10+ clientes',
         alt: 'Vista de los reportes de tráfico orgánico y pagado de Torices Digital',
-        imagesAlt: [
-          'Vista del reporte orgánico y pagado: portada',
-          'Vista del reporte: métricas de tráfico',
-          'Vista del reporte: sesiones y páginas',
-          'Vista del reporte: canales de adquisición',
-          'Vista del reporte: resumen mensual',
-        ],
       },
       {
         slug: 'notebook',
@@ -305,16 +298,7 @@ export const t: Translations = {
         title: 'Medición conectada a cada reporte',
         summary:
           'Un sistema de medición y reporting para clientes B2B/SaaS, con seguimiento de páginas conectado a cada reporte.',
-        result: 'Sistema para 30+ clientes',
         alt: 'Vista del sistema de medición y reportes de Notebook Agency',
-        imagesAlt: [
-          'Vista del sistema de medición: vista general',
-          'Vista del sistema de medición: métricas clave',
-          'Vista del sistema de medición: detalle de páginas',
-          'Vista del sistema de medición: consultas SEO',
-          'Vista del sistema de medición: resúmenes',
-          'Vista del sistema de medición: reporte final',
-        ],
       },
       {
         slug: 'owlbox',
@@ -324,14 +308,7 @@ export const t: Translations = {
         title: 'Dashboards de ecommerce para clientes LATAM',
         summary:
           'Un set de dashboards con las métricas que sus clientes necesitan: ROAS, ingresos de paid, gasto y mejores productos.',
-        result: 'Reporting para 10+ clientes',
         alt: 'Vista de los dashboards de comercio electrónico de Owlbox',
-        imagesAlt: [
-          'Vista del dashboard de ecommerce de Owlbox: vista general',
-          'Vista del dashboard de ecommerce de Owlbox: ingresos y gasto',
-          'Vista del dashboard de ecommerce de Owlbox: mejores productos',
-          'Vista del dashboard de ecommerce de Owlbox: resumen ejecutivo',
-        ],
       },
     ],
   },
@@ -342,7 +319,6 @@ export const t: Translations = {
         'Trabajo en la intersección entre marketing y data: medición confiable, reporting que escala y sistemas que los equipos usan a diario.',
     },
     hero: {
-      index: '01',
       headline: 'De SEO enterprise a sistemas',
       highlight: 'de reporting para agencias.',
       sub: 'Analista de datos de marketing. Construyo los sistemas que sostienen el reporting de agencias y equipos.',

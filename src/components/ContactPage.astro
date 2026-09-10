@@ -87,8 +87,8 @@ const { t }: Props = Astro.props;
     <div class="container-site">
       <SectionHead
         index={t.process.index}
-        heading={t.lang === 'es' ? 'Así empieza el trabajo.' : 'This is how the work starts.'}
-        intro={t.lang === 'es' ? 'Primero entendemos el problema. Después decidimos qué vale la pena construir.' : 'First we understand the problem. Then we decide what is worth building.'}
+        heading={t.process.heading}
+        intro={t.process.intro}
       />
 
       <ol class="process-grid">

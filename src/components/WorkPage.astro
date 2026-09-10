@@ -25,7 +25,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 <main id="main-content">
   <section class="page-hero reveal">
     <div class="container-site">
-      <p class="hero-eyebrow">{t.lang === 'es' ? 'Casos de Estudio' : 'Case Studies'}</p>
+      <p class="hero-eyebrow">{t.work.hero.eyebrow}</p>
       <h1 class="hero-title">{t.work.hero.heading} <span class="text-primary">{t.work.hero.highlight}</span></h1>
       <p class="hero-intro">{t.work.hero.sub}</p>
     </div>
@@ -71,7 +71,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
                   <span class="case-client">{c.client}</span>
                 )}
                 <span class="case-link">
-                  <span>{t.lang === 'es' ? 'Ver caso completo' : 'View full case'}</span>
+                  <span>{t.work.caseCta}</span>
                   <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
                 </span>
               </div>

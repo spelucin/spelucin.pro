@@ -53,9 +53,7 @@ export interface CaseTeaser {
   year: string;
   title: string;
   summary: string;
-  result: string;
   alt: string;
-  imagesAlt: string[];
 }
 
 export interface CaseProblemItem {
@@ -161,6 +159,7 @@ export interface Translations {
       intro: string;
       stats: StatBlock[];
       featured: CaseStudyKey[];
+      caseCta: string;
     };
     faq: {
       index: string;
@@ -173,7 +172,6 @@ export interface Translations {
   process: {
     index: string;
     heading: string;
-    highlight: string;
     intro: string;
     steps: ProcessStep[];
   };
@@ -225,18 +223,18 @@ export interface Translations {
   work: {
     seo: Seo;
     hero: {
-      index: string;
+      eyebrow: string;
       heading: string;
       highlight: string;
       sub: string;
     };
+    caseCta: string;
     cases: CaseTeaser[];
   };
 
   aboutPage: {
     seo: Seo;
     hero: {
-      index: string;
       headline: string;
       highlight: string;
       sub: string;

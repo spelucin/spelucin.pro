@@ -94,6 +94,7 @@ export const t: Translations = {
         { value: '20+', label: 'freelance dashboards delivered' },
       ],
       featured: ['notebook', 'torices', 'owlbox'],
+      caseCta: 'View case',
     },
     faq: {
       index: '04',
@@ -125,9 +126,8 @@ export const t: Translations = {
   },
   process: {
     index: '04',
-    heading: 'How it works,',
-    highlight: 'start to finish.',
-    intro: 'Four stages, with clear deliverables at each one. We agree on the model before we build.',
+    heading: 'This is how the work starts.',
+    intro: 'First we understand the problem. Then we decide what is worth building.',
     steps: [
       {
         title: 'Audit',
@@ -273,11 +273,12 @@ export const t: Translations = {
         'Case studies of measurement and reporting built for agencies, with dashboards and documented technical decisions.',
     },
     hero: {
-      index: '01',
+      eyebrow: 'Case Studies',
       heading: 'Case studies',
       highlight: 'from the work.',
       sub: 'Systems built for agencies. See the problem, what shipped and how the operation changed.',
     },
+    caseCta: 'View full case',
     cases: [
       {
         slug: 'torices',
@@ -287,15 +288,7 @@ export const t: Translations = {
         title: 'Organic and paid reporting, side by side',
         summary:
           'A report series that shows organic and paid traffic in parallel, with the sources reviewed to support the reading.',
-        result: 'System for 10+ clients',
         alt: 'View of the organic and paid traffic reports for Torices Digital',
-        imagesAlt: [
-          'View of the organic and paid report: cover',
-          'View of the report: traffic metrics',
-          'View of the report: sessions and pages',
-          'View of the report: acquisition channels',
-          'View of the report: monthly summary',
-        ],
       },
       {
         slug: 'notebook',
@@ -305,16 +298,7 @@ export const t: Translations = {
         title: 'Measurement wired into every report',
         summary:
           'A measurement and reporting system for B2B/SaaS clients, with page tracking wired into every report.',
-        result: 'System for 30+ clients',
         alt: 'View of the Notebook Agency measurement and reporting system',
-        imagesAlt: [
-          'View of the measurement system: overview',
-          'View of the measurement system: key metrics',
-          'View of the measurement system: page detail',
-          'View of the measurement system: SEO queries',
-          'View of the measurement system: summaries',
-          'View of the measurement system: final report',
-        ],
       },
       {
         slug: 'owlbox',
@@ -324,14 +308,7 @@ export const t: Translations = {
         title: 'Ecommerce dashboards for LATAM clients',
         summary:
           'A set of dashboards with the metrics their clients need: ROAS, paid revenue, spend and top products.',
-        result: 'Reporting for 10+ clients',
         alt: 'View of the Owlbox e-commerce dashboards',
-        imagesAlt: [
-          'View of the Owlbox ecommerce dashboard: overview',
-          'View of the Owlbox ecommerce dashboard: revenue and spend',
-          'View of the Owlbox ecommerce dashboard: top products',
-          'View of the Owlbox ecommerce dashboard: executive summary',
-        ],
       },
     ],
   },
@@ -342,7 +319,6 @@ export const t: Translations = {
         'I work at the intersection of marketing and data: reliable measurement, reporting that scales and systems teams use every day.',
     },
     hero: {
-      index: '01',
       headline: 'From enterprise SEO to agency',
       highlight: 'reporting systems.',
       sub: 'Marketing data analyst building the systems that run agency reporting.',
