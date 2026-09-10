@@ -1,10 +1,10 @@
 ---
-import { Icon } from 'astro-icon/components';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 import SectionHead from './SectionHead.astro';
 import StatsBlocks from './StatsBlocks.astro';
 import BookCall from './BookCall.astro';
+import Faq from './Faq.astro';
 import type { Translations } from '../i18n/types';
 
 interface Props {
@@ -64,29 +64,12 @@ const { t }: Props = Astro.props;
     </div>
   </section>
 
-  <section class="faq section-block reveal">
-    <div class="container-site faq-container">
-      <SectionHead
-        flush
-        index={t.services.faq.index}
-        heading={t.services.faq.heading}
-        highlight={t.services.faq.highlight}
-      />
-
-      <div class="faq-list">
-        {t.services.faq.items.map((item, i) => (
-          <details>
-            <summary>
-              <span class="faq-q-num">{String(i + 1).padStart(2, '0')}</span>
-              <span class="faq-q">{item.q}</span>
-              <Icon name="tabler:plus" width="18" height="18" aria-hidden="true" />
-            </summary>
-            <p>{item.a}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Faq
+    index={t.services.faq.index}
+    heading={t.services.faq.heading}
+    highlight={t.services.faq.highlight}
+    items={t.services.faq.items}
+  />
 
   <BookCall t={t} location="services" />
 </main>
@@ -105,17 +88,6 @@ const { t }: Props = Astro.props;
   .component-card h3 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.02em; }
   .component-card p { margin: 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; flex-grow: 1; }
   .chips-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
-
-  .faq-container { display: grid; gap: 48px; }
-  .faq-list { border-top: 1px solid var(--color-primary-14); }
-  .faq-list details { border-bottom: 1px solid var(--color-primary-14); }
-  .faq-list summary { display: grid; grid-template-columns: 44px 1fr auto; gap: 18px; align-items: baseline; padding: 22px 0; list-style: none; cursor: pointer; }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-q-num { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
-  .faq-q { color: var(--color-foreground); font-size: 18px; font-weight: 550; letter-spacing: -0.015em; }
-  .faq-list summary svg { align-self: center; color: var(--color-primary-35); transition: transform 0.2s ease, color 0.2s ease; }
-  .faq-list details[open] summary svg { transform: rotate(45deg); color: var(--color-primary); }
-  .faq-list details p { grid-column: 2 / 4; max-width: 58ch; margin: -4px 0 26px; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
 
   @media (min-width: 768px) {
     .components-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }

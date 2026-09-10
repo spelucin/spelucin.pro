@@ -8,6 +8,7 @@ import SiteFooter from './SiteFooter.astro';
 import SectionHead from './SectionHead.astro';
 import StatsBlocks from './StatsBlocks.astro';
 import BookCall from './BookCall.astro';
+import Faq from './Faq.astro';
 import type { Translations } from '../i18n/types';
 import { site } from '../data/site';
 import { caseImages } from '../data/caseImages';
@@ -251,7 +252,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
                   <span class="badge-sub">{c.client}</span>
                 )}
                 <span class="horizontal-cta">
-                  <span>{t.lang === 'es' ? 'Ver caso' : 'View case'}</span>
+                  <span>{t.home.proof.caseCta}</span>
                   <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
                 </span>
               </div>
@@ -302,28 +303,13 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     </div>
   </section>
 
-  <section class="faq home-section reveal">
-    <div class="container-site faq-container">
-      <SectionHead
-        flush
-        index={t.home.faq.index}
-        heading={t.home.faq.heading}
-        highlight={t.home.faq.highlight}
-      />
-      <div class="faq-list">
-        {t.home.faq.items.map((item, i) => (
-          <details>
-            <summary>
-              <span class="faq-q-num">{String(i + 1).padStart(2, '0')}</span>
-              <span class="faq-q">{item.q}</span>
-              <Icon name="tabler:plus" width="18" height="18" aria-hidden="true" />
-            </summary>
-            <p>{item.a}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Faq
+    sectionClass="home-section"
+    index={t.home.faq.index}
+    heading={t.home.faq.heading}
+    highlight={t.home.faq.highlight}
+    items={t.home.faq.items}
+  />
 
   <BookCall t={t} location="home" />
 </main>
@@ -457,7 +443,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     gap: 14px;
     padding: 24px 26px;
   }
-  .horizontal-header { display: flex; align-items: center; }
   .client-logo-muted {
     display: block;
     width: auto;
@@ -540,17 +525,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   .stack-pills li { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border: 1px solid var(--color-primary-14); border-radius: 999px; color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; }
   .stack-pills svg { color: var(--color-foreground-35); }
 
-  .faq-container { display: grid; gap: 48px; }
-  .faq-list { border-top: 1px solid var(--color-primary-14); }
-  .faq-list details { border-bottom: 1px solid var(--color-primary-14); }
-  .faq-list summary { display: grid; grid-template-columns: 44px 1fr auto; gap: 18px; align-items: baseline; padding: 22px 0; list-style: none; cursor: pointer; }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-q-num { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
-  .faq-q { color: var(--color-foreground); font-size: 18px; font-weight: 550; letter-spacing: -0.015em; }
-  .faq-list summary svg { align-self: center; color: var(--color-primary-35); transition: transform 0.2s ease, color 0.2s ease; }
-  .faq-list details[open] summary svg { transform: rotate(45deg); color: var(--color-primary); }
-  .faq-list details p { grid-column: 2 / 4; max-width: 58ch; margin: -4px 0 26px; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
-
   @media (min-width: 700px) {
     .clients-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 32px; }
     .client-logos { gap: 32px 56px; }
@@ -559,13 +533,5 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 
   @media (min-width: 900px) {
     .sprint-fit { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-  }
-
-  @media (min-width: 900px) {
-    .showcase-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-    .showcase-card--featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; }
-    .showcase-card--featured .window-frame { border-bottom: 0; border-right: 1px solid var(--color-primary-14); height: 100%; }
-    .showcase-card--featured .showcase-info { padding: 36px; justify-content: center; }
-    .showcase-card--featured .showcase-title { font-size: clamp(24px, 3vw, 32px); }
   }
 </style>

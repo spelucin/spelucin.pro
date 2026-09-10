@@ -1,0 +1,86 @@
+---
+import { Icon } from 'astro-icon/components';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  index: string;
+  heading: string;
+  highlight?: string;
+  items: { q: string; a: string }[];
+  sectionClass?: string;
+}
+
+const { index, heading, highlight, items, sectionClass = 'section-block' } = Astro.props;
+---
+
+<section class={`faq ${sectionClass} reveal`}>
+  <div class="container-site faq-container">
+    <SectionHead flush index={index} heading={heading} highlight={highlight} />
+    <div class="faq-list">
+      {items.map((item: { q: string; a: string }, i: number) => (
+        <details>
+          <summary>
+            <span class="faq-q-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="faq-q">{item.q}</span>
+            <Icon name="tabler:plus" width="18" height="18" aria-hidden="true" />
+          </summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-container {
+    display: grid;
+    gap: 48px;
+  }
+  .faq-list {
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .faq-list details {
+    border-bottom: 1px solid var(--color-primary-14);
+  }
+  .faq-list summary {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 18px;
+    align-items: baseline;
+    padding: 22px 0;
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-q-num {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .faq-q {
+    color: var(--color-foreground);
+    font-size: 18px;
+    font-weight: 550;
+    letter-spacing: -0.015em;
+  }
+  .faq-list summary svg {
+    align-self: center;
+    color: var(--color-primary-35);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .faq-list details[open] summary svg {
+    transform: rotate(45deg);
+    color: var(--color-primary);
+  }
+  .faq-list details p {
+    grid-column: 2 / 4;
+    max-width: 58ch;
+    margin: -4px 0 26px;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+</style>

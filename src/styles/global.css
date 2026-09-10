@@ -170,12 +170,6 @@ summary:focus-visible {
     border-color: var(--color-primary-35);
     color: var(--color-foreground-70);
   }
-  .chip--icon {
-    gap: 8px;
-  }
-  .chip--icon svg {
-    flex-shrink: 0;
-  }
 
   /* Buttons */
   .btn {
