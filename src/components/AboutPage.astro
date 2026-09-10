@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import avatar from '../assets/alex-spelucin-avatar.jpg';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 import SectionHead from './SectionHead.astro';
@@ -15,32 +18,32 @@ const { t }: Props = Astro.props;
 <SiteHeader t={t} />
 
 <main id="main-content">
-  <section class="hero">
-    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
-    <div class="hero-glow" aria-hidden="true"></div>
+  <section class="page-hero reveal">
     <div class="container-site">
-      <span class="badge">{t.aboutPage.hero.index}</span>
-      <h1>
-        {t.aboutPage.hero.headline} <span class="text-primary">{t.aboutPage.hero.highlight}</span>
-      </h1>
-      <p class="hero-sub">{t.aboutPage.hero.sub}</p>
-      <dl class="hero-meta">
-        {t.about.meta.map((m) => (
-          <div class="hero-meta-item">
-            <dt>{m.label}</dt>
-            <dd>{m.value}</dd>
-          </div>
-        ))}
-      </dl>
+      <p class="hero-eyebrow">{t.hero.role}</p>
+      <h1 class="hero-title">{t.aboutPage.hero.headline} <span class="text-primary">{t.aboutPage.hero.highlight}</span></h1>
+      <p class="hero-intro">{t.aboutPage.hero.sub}</p>
     </div>
   </section>
 
-  <section class="story section-block reveal">
-    <div class="container-site">
-      <span class="section-index" aria-hidden="true">01</span>
-      {t.about.paragraphs.map((p) => (
-        <p class="story-para">{p}</p>
-      ))}
+  <section class="bio section-block reveal">
+    <div class="container-site bio-grid">
+      <div class="bio-main">
+        <Image class="avatar" src={avatar} alt={t.about.portraitAlt} width={100} height={100} format="webp" loading="lazy" />
+        <div class="bio-paragraphs">
+          {t.about.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+      <div class="bio-side">
+        <dl class="meta-dl">
+          {t.about.meta.map((item) => (
+            <div>
+              <dt>{item.label}</dt>
+              <dd>{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </div>
   </section>
 
@@ -52,22 +55,49 @@ const { t }: Props = Astro.props;
         highlight={t.aboutPage.capabilities.highlight}
         intro={t.aboutPage.capabilities.intro}
       />
-      <ul class="cap-list" role="list">
+
+      <div class="capabilities-grid">
         {t.focus.items.map((item, i) => (
-          <li class="cap-row">
-            <div class="cap-left">
-              <span class="cap-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <h3 class="cap-name">{item.name}</h3>
-              <ul class="cap-tags" role="list">
-                {item.tags.map((tag) => (
-                  <li>{tag}</li>
-                ))}
-              </ul>
-            </div>
-            <p class="cap-detail">{item.detail}</p>
-          </li>
+          <article class="capability-card">
+            <span class="row-number">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{item.name}</h3>
+            <p class="tagline">{item.tagline}</p>
+            <p class="detail">{item.detail}</p>
+            <ul class="chips-list" role="list">
+              {item.tags.map((tag) => (
+                <li class="chip">{tag}</li>
+              ))}
+            </ul>
+          </article>
         ))}
-      </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        index={t.stack.index}
+        heading={t.stack.heading}
+        highlight={t.stack.highlight}
+        intro={t.stack.intro}
+      />
+
+      <div class="stack-layers">
+        {t.stack.layers.map((layer) => (
+          <div class="stack-layer">
+            <h3>{layer.name}</h3>
+            <ul class="stack-items" role="list">
+              {layer.items.map((item) => (
+                <li class="stack-item">
+                  <Icon name={item.icon} width="20" height="20" aria-hidden="true" />
+                  <span>{item.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -77,173 +107,40 @@ const { t }: Props = Astro.props;
 <SiteFooter t={t} />
 
 <script>
-  const elements = document.querySelectorAll<HTMLElement>('.reveal');
-
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
-    );
-    elements.forEach((el) => io.observe(el));
-  } else {
-    elements.forEach((el) => el.classList.add('is-visible'));
-  }
+  import '../scripts/reveal';
 </script>
 
 <style>
-  .hero {
-    position: relative;
-    padding: 132px 0 0;
-    overflow: hidden;
-  }
-  .hero h1 {
-    max-width: 24ch;
-    margin: 24px 0 0;
-    font-size: clamp(40px, 6.5vw, 62px);
-    font-weight: 680;
-    letter-spacing: -0.04em;
-    line-height: 1.03;
-  }
-  .hero-sub {
-    max-width: 560px;
-    margin: 20px 0 0;
-    color: var(--color-foreground-55);
-    font-size: 18px;
-    line-height: 1.65;
-  }
-  .hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 48px;
-    margin: 44px 0 0;
-    padding-top: 28px;
-    border-top: 1px solid var(--color-primary-14);
-  }
-  .hero-meta-item dt {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-primary);
-  }
-  .hero-meta-item dd {
-    margin: 6px 0 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--color-foreground-70);
-  }
+  .bio-grid { display: grid; gap: 48px; align-items: start; }
+  .avatar { display: block; width: 100px; height: 100px; margin-bottom: 24px; border: 1px solid var(--color-primary-20); border-radius: 50%; object-fit: cover; }
+  .bio-paragraphs { display: grid; gap: 16px; color: var(--color-foreground-70); font-size: 18px; line-height: 1.7; }
+  .meta-dl { display: grid; gap: 0; margin: 0; padding: 20px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); }
+  .meta-dl div { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--color-primary-8); }
+  .meta-dl div:last-child { border-bottom: 0; }
+  .meta-dl dt { color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .meta-dl dd { margin: 0; color: var(--color-foreground); font-size: 14px; text-align: right; }
 
-  .section-block {
-    padding: 96px 0;
+  .capabilities-grid { display: grid; gap: 18px; }
+  .capability-card {
+    display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); transition: border-color 0.2s ease, transform 0.2s ease;
   }
+  .capability-card:hover { border-color: var(--color-primary-35); transform: translateY(-2px); }
+  .row-number { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .capability-card h3 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.02em; }
+  .tagline { margin: 0; color: var(--color-primary); font-family: var(--font-mono); font-size: 12px; }
+  .detail { margin: 0; color: var(--color-foreground-55); font-size: 14px; line-height: 1.6; flex-grow: 1; }
+  .chips-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
 
-  .section-index {
-    display: inline-block;
-    margin-bottom: 22px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-primary);
-  }
-  .story-para {
-    margin: 0;
-    max-width: 64ch;
-    font-size: 20px;
-    line-height: 1.7;
-    color: var(--color-foreground-55);
-  }
-  .story-para + .story-para {
-    margin-top: 20px;
-  }
-
-  .cap-list {
-    list-style: none;
-    margin: 56px 0 0;
-    padding: 0;
-    border-top: 1px solid var(--color-primary-14);
-  }
-  .cap-row {
-    display: grid;
-    gap: 12px;
-    padding: 30px 4px;
-    border-bottom: 1px solid var(--color-primary-14);
-  }
-  .cap-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .cap-num {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-primary);
-  }
-  .cap-name {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-foreground-70);
-  }
-  .cap-tags {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .cap-tags li {
-    padding: 4px 10px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: 999px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-foreground-55);
-  }
-  .cap-detail {
-    margin: 0;
-    max-width: 58ch;
-    color: var(--color-foreground-55);
-    font-size: 15px;
-    line-height: 1.65;
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
+  .stack-layers { display: grid; gap: 24px; }
+  .stack-layer { padding: 28px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-primary-4); }
+  .stack-layer h3 { margin: 0 0 20px; color: var(--color-foreground-70); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .stack-items { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .stack-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border: 1px solid var(--color-primary-14); border-radius: 999px; background: var(--color-card); font-size: 14px; font-weight: 500; }
+  .stack-item svg { color: var(--color-primary); }
 
   @media (min-width: 768px) {
-    .hero {
-      padding: 168px 0 0;
-    }
-    .cap-row {
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 48px;
-      align-items: baseline;
-    }
-    .cap-left {
-      flex-wrap: wrap;
-    }
+    .bio-grid { grid-template-columns: 1.2fr 0.8fr; gap: 64px; }
+    .capabilities-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .stack-layers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 </style>
