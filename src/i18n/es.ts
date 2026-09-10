@@ -12,31 +12,32 @@ export const t: Translations = {
   },
   skipLink: 'Saltar al contenido',
   siteNav: [
-    { label: 'Trabajo', href: '/work' },
-    { label: 'Servicios', href: '/services' },
-    { label: 'Para agencias', href: '/agencies' },
-    { label: 'Sobre mí', href: '/about' },
+    { label: 'Inicio', href: '/' },
+    { label: 'Casos', href: '/case-studies' },
+    { label: 'Contacto', href: '/contact' },
   ],
   ctaLabel: 'Agendar llamada',
-  ctaSeeWork: 'Ver el trabajo',
+  ctaSeeWork: 'Ver casos',
+  calModal: {
+    label: 'Agenda una llamada',
+    close: 'Cerrar el calendario',
+  },
   home: {
     hero: {
-      badge: 'Reporting para agencias',
-      headline: 'Reportes de clientes que',
-      highlight: 'se hacen solos.',
-      sub: 'Diseño el sistema de data y reporting detrás de los reportes de tus clientes, para que tu equipo deje de rearmarlos cada mes.',
-      ctaSecondary: 'Ver el trabajo',
+      headline: 'El reporting de tus clientes',
+      highlight: 'no debería rehacerse cada mes.',
+      sub: 'Construyo sistemas de medición y reporting para agencias que necesitan entregar resultados sin depender de una sola persona.',
       visualAlt: 'Vista de un sistema de reporting de marketing',
     },
     trust: {
-      label: 'Trabajando con:',
+      label: 'Clientes con los que he trabajado:',
     },
     problem: {
       index: '01',
-      heading: 'El reporting no debería',
-      highlight: 'duplicarse con cada cliente.',
+      heading: 'El costo de armar',
+      highlight: 'reportes a mano.',
       intro:
-        'Cuando cada mes se arma a mano, los errores, las esperas y la inconsistencia se vuelven parte de la operación.',
+        'Cuando el reporte se arma a mano cada mes, los errores y las esperas pasan a formar parte del trabajo.',
       items: [
         {
           title: 'Manual todos los meses',
@@ -54,171 +55,6 @@ export const t: Translations = {
     },
     service: {
       index: '02',
-      heading: 'Un solo servicio:',
-      highlight: 'el sistema detrás de tus reportes.',
-      intro: 'Dashboards, data warehouse, entrega y automatización como un sistema, no como archivos sueltos.',
-      pillars: [
-        {
-          title: 'Dashboards & Reporting',
-          text: 'Dashboards en Looker Studio que tus clientes abren a diario: performance, pagado y orgánico frente a frente, ROAS y mejores productos.',
-          tags: ['Looker Studio', 'KPIs', 'GA4 · Ads · SEO'],
-        },
-        {
-          title: 'Warehouse & Pipelines',
-          text: 'Una capa de datos limpia en BigQuery, con Dataform y Google Cloud, para que cada número salga de la misma fuente de verdad.',
-          tags: ['BigQuery', 'Dataform', 'Google Cloud'],
-        },
-        {
-          title: 'Automatización & Delivery',
-          text: 'Entrega en Google Sheets y automatización con Apps Script: reportes programados, formateados y enviados sin una persona en el medio.',
-          tags: ['Google Sheets', 'Apps Script', 'Scheduling'],
-        },
-      ],
-    },
-    proof: {
-      index: '03',
-      heading: 'Hecho para agencias de',
-      highlight: 'growth, ecommerce y SEO.',
-      intro: 'Sistemas ya corriendo en agencias, con horas reales devueltas a los equipos.',
-      stats: [
-        { value: '20+', label: 'clientes que reportan con estos sistemas' },
-        { value: '60 h', label: 'ahorradas al mes en una agencia SEO' },
-        { value: '12 h', label: 'ahorradas a la semana en una agencia de growth' },
-        { value: '10 h', label: 'ahorradas a la semana en una agencia de ecommerce' },
-      ],
-      featured: ['notebook', 'torices', 'owlbox'],
-    },
-  },
-  process: {
-    index: '04',
-    heading: 'Cómo funciona,',
-    highlight: 'de principio a fin.',
-    intro: 'Cuatro etapas, cada una con entregables claros. Nada se construye antes de acordar el modelo.',
-    steps: [
-      {
-        title: 'Auditoría',
-        text: 'Mapeamos tus fuentes, tus reportes de clientes y de dónde vienen las inconsistencias.',
-      },
-      {
-        title: 'Diseño',
-        text: 'Acordamos métricas, modelo de datos y dashboards antes de construir nada.',
-      },
-      {
-        title: 'Construcción',
-        text: 'Warehouse, transformaciones y dashboards con el naming y los procesos de tu equipo.',
-      },
-      {
-        title: 'Entrega',
-        text: 'Documentación y automatización para que el sistema funcione sin ti.',
-      },
-    ],
-  },
-  stack: {
-    index: '05',
-    heading: 'El stack,',
-    highlight: 'todo en Google.',
-    intro: 'Un solo ecosistema, de la fuente al delivery. Si tus clientes reportan en Looker Studio, esto se integra directo.',
-    layers: [
-      {
-        name: 'Fuentes de datos',
-        items: [
-          { name: 'Google Analytics 4', icon: 'simple-icons:googleanalytics' },
-          { name: 'Google Ads', icon: 'simple-icons:googleads' },
-          { name: 'Meta Ads', icon: 'simple-icons:meta' },
-          { name: 'Search Console', icon: 'simple-icons:googlesearchconsole' },
-          { name: 'APIs y otras fuentes', icon: 'tabler:api' },
-        ],
-      },
-      {
-        name: 'Warehouse & transformación',
-        items: [
-          { name: 'Google Cloud', icon: 'simple-icons:googlecloud' },
-          { name: 'BigQuery', icon: 'simple-icons:googlebigquery' },
-          { name: 'Dataform', icon: 'tabler:database' },
-        ],
-      },
-      {
-        name: 'Reporting & delivery',
-        items: [
-          { name: 'Looker Studio', icon: 'simple-icons:googledatastudio' },
-          { name: 'Google Sheets', icon: 'simple-icons:googlesheets' },
-        ],
-      },
-      {
-        name: 'Automatización',
-        items: [
-          { name: 'Apps Script', icon: 'simple-icons:googleappsscript' },
-          { name: 'Google Tag Manager', icon: 'simple-icons:googletagmanager' },
-          { name: 'APIs', icon: 'tabler:plug-connected' },
-        ],
-      },
-    ],
-  },
-  ctaSection: {
-    heading: 'Veamos qué te puede ahorrar una llamada.',
-    sub: '20 minutos, sin pitch. Trae un reporte que entregues seguido y buscamos lo primero que se puede automatizar.',
-    hint: 'Disponible en español e inglés.',
-  },
-  agencies: {
-    seo: {
-      title: 'Para agencias · Sistemas de reporting | Alex Spelucin',
-      description:
-        'Sistemas de data y reporting para agencias: un modelo, cada cliente y cero rearmes manuales. Dashboards, warehouse y automatización en Google.',
-    },
-    hero: {
-      badge: 'Para dueños de agencias',
-      headline: 'Súmale clientes',
-      highlight: 'sin el trabajo de reporting.',
-      sub: 'Un sistema de data y reporting construido para agencias: un solo modelo, cada cliente, cero rearmes manuales.',
-      ctaSecondary: 'Ver el sistema',
-      visualAlt: 'Vista de un sistema de reporting de marketing',
-    },
-    takeover: {
-      index: '01',
-      heading: 'Los dolores que',
-      highlight: 'cambian con un sistema.',
-      intro: 'La operación real de una agencia que crece de 5 a 15 clientes.',
-      items: [
-        {
-          title: 'Cada cliente nuevo es un template nuevo',
-          text: 'Tu analista rearma el mismo dashboard por quinta vez, a mano.',
-        },
-        {
-          title: 'Números que se contradicen',
-          text: 'Ads, Search Console y los datos del propio cliente nunca coinciden del todo, y lo sientes en cada revisión.',
-        },
-        {
-          title: 'La entrega es una emergencia recurrente',
-          text: 'El cliente vuelve a preguntar a fin de mes y el apuro empieza de nuevo.',
-        },
-        {
-          title: 'El reporte desluce el trabajo',
-          text: 'Buen trabajo enviado en una hoja de cálculo que lo hace ver menor.',
-        },
-        {
-          title: 'El retainer se sostiene en reportes',
-          text: 'El valor que entregas cada mes aparece como un archivo, no como un sistema.',
-        },
-        {
-          title: 'Crecer significa más de lo mismo',
-          text: 'Pasar de 5 a 15 clientes no debería significar triplicar las horas de reporting.',
-        },
-      ],
-    },
-    proof: {
-      index: '02',
-      heading: 'Sistemas ya en marcha',
-      highlight: 'en agencias.',
-      intro: 'Tres agencias, tres sectores, las mismas horas devueltas al equipo.',
-      stats: [
-        { value: '20+', label: 'clientes que reportan con estos sistemas' },
-        { value: '60 h', label: 'ahorradas al mes en una agencia SEO' },
-        { value: '12 h', label: 'ahorradas a la semana en una agencia de growth' },
-        { value: '10 h', label: 'ahorradas a la semana en una agencia de ecommerce' },
-      ],
-    },
-    sprint: {
-      index: '03',
       heading: 'El Sprint del',
       highlight: 'Sistema de Reporting.',
       intro: 'Un engagement fijo de 4 semanas para diseñar y construir el sistema detrás de los reportes de tus clientes.',
@@ -230,27 +66,37 @@ export const t: Translations = {
       ],
       includeHeading: 'Qué incluye',
       include: ['Un modelo de datos documentado', 'Dashboards en Looker Studio', 'Entrega automatizada', 'Docs de handover'],
+      fit: {
+        goodHeading: 'Buen fit',
+        good: [
+          'Reportas para 5+ clientes',
+          'Ya usas (o quieres) Looker Studio',
+          'Los números nunca acaban de cuadrar',
+          'Quieres que el reporting deje de ser un incendio',
+        ],
+        poorHeading: 'No es tu caso si',
+        poor: [
+          'Buscas un dashboard gratis para un solo canal',
+          'Eres un equipo de uno que solo quiere un reporte puntual',
+          'Buscas reemplazar a tu equipo, no su sistema',
+        ],
+      },
     },
-    fit: {
-      index: '04',
-      heading: '¿Es para',
-      highlight: 'tu agencia?',
-      goodHeading: 'Buen fit',
-      good: [
-        'Reportas para 5+ clientes',
-        'Ya usas (o quieres) Looker Studio',
-        'Los números nunca acaban de cuadrar',
-        'Quieres que el reporting deje de ser un incendio',
+    proof: {
+      index: '03',
+      heading: 'Reporting para agencias de',
+      highlight: 'growth, ecommerce y SEO.',
+      intro: 'Trabajo con equipos que necesitan repetir el reporting sin perder criterio ni contexto.',
+      stats: [
+        { value: '6+', label: 'años en analítica de marketing' },
+        { value: '15-20', label: 'cuentas concurrentes en Notebook Agency' },
+        { value: '10+', label: 'clientes en sistemas de reporting para Torices' },
+        { value: '20+', label: 'dashboards entregados como freelance' },
       ],
-      poorHeading: 'No es tu caso si',
-      poor: [
-        'Buscas un dashboard gratis para un solo canal',
-        'Eres un equipo de uno que solo quiere un reporte puntual',
-        'Buscas reemplazar a tu equipo, no su sistema',
-      ],
+      featured: ['notebook', 'torices', 'owlbox'],
     },
     faq: {
-      index: '05',
+      index: '04',
       heading: 'Preguntas',
       highlight: 'frecuentes.',
       items: [
@@ -277,23 +123,76 @@ export const t: Translations = {
       ],
     },
   },
+  process: {
+    index: '04',
+    heading: 'Cómo funciona,',
+    highlight: 'de principio a fin.',
+    intro: 'Cuatro etapas, con entregables claros en cada una. Primero acordamos el modelo; después construimos.',
+    steps: [
+      {
+        title: 'Auditoría',
+        text: 'Mapeamos tus fuentes, tus reportes de clientes y de dónde vienen las inconsistencias.',
+      },
+      {
+        title: 'Diseño',
+        text: 'Acordamos métricas, modelo de datos y dashboards antes de construir nada.',
+      },
+      {
+        title: 'Construcción',
+        text: 'Warehouse, transformaciones y dashboards con el naming y los procesos de tu equipo.',
+      },
+      {
+        title: 'Entrega',
+        text: 'Documentación y automatización para que el sistema funcione sin ti.',
+      },
+    ],
+  },
+  stack: {
+    index: '05',
+    heading: 'La parte técnica que sostiene',
+    highlight: 'el reporting.',
+    intro: 'Todo el stack gira alrededor de la nube de Google: la data vive en BigQuery, se transforma con SQL y el reporting sale por Looker Studio.',
+    layers: [
+      {
+        name: 'Datos & transformación',
+        items: [
+          { name: 'Python', icon: 'simple-icons:python' },
+          { name: 'SQL', icon: 'tabler:sql' },
+          { name: 'Dataform', icon: 'tabler:transform' },
+        ],
+      },
+      {
+        name: 'Google Cloud & reporting',
+        items: [
+          { name: 'Google Cloud', icon: 'simple-icons:googlecloud' },
+          { name: 'Apps Script', icon: 'simple-icons:googleappsscript' },
+          { name: 'Data Studio', icon: 'simple-icons:googledatastudio' },
+        ],
+      },
+    ],
+  },
+  ctaSection: {
+    heading: 'Veamos qué te puede ahorrar una llamada.',
+    sub: '20 minutos, sin pitch. Trae un reporte que entregues seguido y buscamos lo primero que se puede automatizar.',
+    hint: 'Disponible en español e inglés.',
+  },
   services: {
     seo: {
       title: 'Servicios · Sistema de reporting para agencias | Alex Spelucin',
       description:
-        'Un solo servicio de punta a punta: auditoría, modelo de datos, warehouse, dashboards, entrega y automatización para el reporting de tus clientes.',
+        'Reporting y medición para agencias: fuentes auditadas, KPIs claros, dashboards y documentación para repetir el trabajo con cada cliente.',
     },
     hero: {
       badge: 'Servicios',
-      headline: 'El sistema detrás de los',
-      highlight: 'reportes de tus clientes.',
-      sub: 'Un solo servicio, de punta a punta: auditoría, modelo de datos, warehouse, dashboards, entrega y automatización.',
+      headline: 'Reporting para',
+      highlight: 'agencias que crecen.',
+      sub: 'Auditoría, medición, KPIs, dashboards y documentación para que el equipo pueda repetir el trabajo con cada cliente.',
     },
     components: {
       index: '01',
-      heading: 'Qué incluye',
-      highlight: 'el sistema.',
-      intro: 'Seis piezas que llegan juntas. Sin archivos sueltos ni dependencias escondidas.',
+      heading: 'Qué necesita tu',
+      highlight: 'reporting.',
+      intro: 'Las piezas que ordenan la medición y hacen que el trabajo se pueda repetir.',
       items: [
         {
           title: 'Auditoría de fuentes',
@@ -301,9 +200,9 @@ export const t: Translations = {
           tags: ['Fuentes', 'QA', 'Exactitud'],
         },
         {
-          title: 'Modelo y warehouse',
-          text: 'BigQuery con transformaciones en Dataform. Una sola fuente de verdad.',
-          tags: ['BigQuery', 'Dataform'],
+          title: 'Modelo de datos',
+          text: 'Un modelo que explica de dónde sale cada número y cómo se usa en el reporting.',
+          tags: ['KPIs', 'Fuentes', 'Modelo'],
         },
         {
           title: 'Dashboards',
@@ -322,21 +221,21 @@ export const t: Translations = {
         },
         {
           title: 'Documentación y handover',
-          text: 'Para que el sistema lo opere tu equipo, no yo.',
+          text: 'Para que el equipo pueda mantener el reporting sin depender de una sola persona.',
           tags: ['Docs', 'Entrenamiento'],
         },
       ],
     },
     proof: {
       index: '02',
-      heading: 'Probado en',
+      heading: 'Trabajo hecho para',
       highlight: 'agencias reales.',
-      intro: 'Las horas que estos sistemas devolvieron a los equipos.',
+      intro: 'Reporting y medición construidos para equipos con varios clientes.',
       stats: [
-        { value: '20+', label: 'clientes que reportan con estos sistemas' },
-        { value: '60 h', label: 'ahorradas al mes en una agencia SEO' },
-        { value: '12 h', label: 'ahorradas a la semana en una agencia de growth' },
-        { value: '10 h', label: 'ahorradas a la semana en una agencia de ecommerce' },
+        { value: '6+', label: 'años en analítica de marketing' },
+        { value: '15-20', label: 'cuentas concurrentes en Notebook Agency' },
+        { value: '10+', label: 'clientes en sistemas de reporting para Torices' },
+        { value: '20+', label: 'dashboards entregados como freelance' },
       ],
     },
     faq: {
@@ -369,15 +268,15 @@ export const t: Translations = {
   },
   work: {
     seo: {
-      title: 'Trabajo · Sistemas de reporting reales | Alex Spelucin',
+      title: 'Casos de estudio · Sistemas de reporting | Alex Spelucin',
       description:
-        'Tres sistemas de medición y reporting construidos para agencias: dashboards reales y las horas que devolvieron a cada equipo.',
+        'Casos de medición y reporting construidos para agencias, con dashboards y decisiones técnicas documentadas.',
     },
     hero: {
       index: '01',
-      heading: 'Sistemas de reporting',
+      heading: 'Casos de estudio',
       highlight: 'reales.',
-      sub: 'Tres sistemas construidos para agencias. Mira los dashboards reales y las horas que ahorraron.',
+      sub: 'Sistemas construidos para agencias. Mira qué problema había, qué se construyó y cómo quedó la operación.',
     },
     cases: [
       {
@@ -387,8 +286,8 @@ export const t: Translations = {
         year: '2026',
         title: 'Reporting orgánico y pagado cara a cara',
         summary:
-          'Una serie de reportes que muestra el impacto del tráfico orgánico y pagado frente a frente, con las fuentes de datos auditadas.',
-        result: '12 h ahorradas / semana',
+          'Una serie de reportes que muestra el tráfico orgánico y pagado en paralelo, con las fuentes revisadas para sostener la lectura.',
+        result: 'Sistema para 10+ clientes',
         alt: 'Vista de los reportes de tráfico orgánico y pagado de Torices Digital',
         imagesAlt: [
           'Vista del reporte orgánico y pagado: portada',
@@ -405,8 +304,8 @@ export const t: Translations = {
         year: '2025',
         title: 'Medición conectada a cada reporte',
         summary:
-          'Un sistema de medición y reportes para que la agencia muestre resultados a sus clientes B2B/SaaS, con medición de páginas por reporte y 2 conectores custom.',
-        result: '60 h ahorradas / mes',
+          'Un sistema de medición y reporting para clientes B2B/SaaS, con seguimiento de páginas conectado a cada reporte.',
+        result: 'Sistema para 30+ clientes',
         alt: 'Vista del sistema de medición y reportes de Notebook Agency',
         imagesAlt: [
           'Vista del sistema de medición: vista general',
@@ -425,7 +324,7 @@ export const t: Translations = {
         title: 'Dashboards de ecommerce para clientes LATAM',
         summary:
           'Un set de dashboards con las métricas que sus clientes necesitan: ROAS, ingresos de paid, gasto y mejores productos.',
-        result: '10 h ahorradas / semana',
+        result: 'Reporting para 10+ clientes',
         alt: 'Vista de los dashboards de comercio electrónico de Owlbox',
         imagesAlt: [
           'Vista del dashboard de ecommerce de Owlbox: vista general',
@@ -460,16 +359,19 @@ export const t: Translations = {
       title: 'Contacto · Hablemos | Alex Spelucin',
       description: 'Una llamada de 20 minutos, sin pitch. Veamos si un sistema de reporting tiene sentido para tu agencia.',
     },
-    heading: 'Hablemos.',
-    sub: 'Una llamada de 20 minutos, sin pitch. Trae un reporte que entregues seguido.',
+    heading: 'Construyamos algo que tu equipo pueda usar.',
+    sub: 'Una llamada de 20 minutos, sin pitch. Trae un reporte que entregues seguido y revisamos dónde se está yendo el tiempo.',
     emailLabel: 'Escríbeme',
     calLabel: 'Agendar llamada',
     linkedinLabel: 'LinkedIn',
-    availability: 'Disponible para agencias en LATAM, España y US.',
+    availability: 'Disponible para agencias en LATAM, España y Estados Unidos.',
   },
   caseStudies: {
     challengeHeading: 'El desafío',
-    backToWork: 'Volver al trabajo',
+    contextHeading: 'Contexto',
+    galleryHeading: 'El trabajo',
+    moreHeading: 'Más casos',
+    backToWork: 'Volver a los casos',
     torices: {
       slug: 'torices',
       client: 'Torices Digital',
@@ -477,7 +379,7 @@ export const t: Translations = {
       year: '2026',
       kicker: 'Caso de estudio',
       title: 'Reporting de orgánico y pagado cara a cara',
-      heroResult: '12 h ahorradas / semana',
+      heroResult: 'Sistema para 10+ clientes',
       alt: 'Vista de los reportes de tráfico orgánico y pagado de Torices Digital',
       imagesAlt: [
         'Vista del reporte orgánico y pagado: portada',
@@ -512,7 +414,7 @@ export const t: Translations = {
           },
           {
             title: 'Auditoría de fuentes',
-            text: '12+ cuentas auditadas para que los números llegaran limpios a los reportes.',
+            text: 'Fuentes revisadas para que los números llegaran con una lógica consistente a los reportes.',
           },
           {
             title: 'Un sistema reutilizable',
@@ -524,8 +426,8 @@ export const t: Translations = {
         heading: 'Resultados',
         stats: [
           { value: '10+', label: 'clientes reportando' },
-          { value: '12+', label: 'cuentas auditadas' },
-          { value: '12 h', label: 'ahorradas por semana' },
+          { value: '01', label: 'sistema de reporting' },
+          { value: '10+', label: 'clientes atendidos' },
         ],
       },
     },
@@ -536,7 +438,7 @@ export const t: Translations = {
       year: '2024',
       kicker: 'Caso de estudio',
       title: 'Dashboards de ecommerce para clientes LATAM',
-      heroResult: '10 h ahorradas / semana',
+      heroResult: 'Reporting para 10+ clientes',
       alt: 'Vista de los dashboards de comercio electrónico de Owlbox',
       imagesAlt: [
         'Vista del dashboard de ecommerce de Owlbox: vista general',
@@ -558,7 +460,7 @@ export const t: Translations = {
         },
         {
           title: 'El reporte no contaba la historia',
-          text: 'Los números estaban; la historia del trimestre, no.',
+          text: 'Las métricas estaban repartidas y cada revisión necesitaba volver a juntarlas.',
         },
       ],
       built: {
@@ -569,8 +471,8 @@ export const t: Translations = {
             text: 'Dashboards con ROAS, ingresos de paid, gasto y mejores productos para cada cliente.',
           },
           {
-            title: '5 fuentes en un solo lugar',
-            text: 'Los datos confluyen en una vista única por cliente.',
+            title: 'Una vista compartida por cliente',
+            text: 'La información de Meta Ads, CRM y GA4 se revisa en un mismo contexto por cliente.',
           },
           {
             title: 'Plantilla que se repite',
@@ -581,9 +483,9 @@ export const t: Translations = {
       results: {
         heading: 'Resultados',
         stats: [
-          { value: '12+', label: 'clientes reportando' },
-          { value: '10 h', label: 'ahorradas por semana' },
-          { value: '05', label: 'fuentes de datos' },
+          { value: '10+', label: 'clientes soportados' },
+          { value: '03', label: 'plataformas contrastadas' },
+          { value: '01', label: 'vista de reporting por cliente' },
         ],
       },
     },
@@ -594,7 +496,7 @@ export const t: Translations = {
       year: '2025',
       kicker: 'Caso de estudio',
       title: 'Medición conectada a cada reporte SEO',
-      heroResult: '60 h ahorradas / mes',
+      heroResult: 'Sistema para 30+ clientes',
       alt: 'Vista del sistema de medición y reportes de Notebook Agency',
       imagesAlt: [
         'Vista del sistema de medición: vista general',
@@ -605,7 +507,7 @@ export const t: Translations = {
         'Vista del sistema de medición: reporte final',
       ],
       context: [
-        'Notebook es una agencia SEO premier con clientes B2B y SaaS. Su reporting tenía que justificar estrategia con data, cada mes, a escala.',
+        'Notebook es una agencia SEO con clientes B2B y SaaS. Su reporting tenía que sostener la estrategia con data, cada mes y para varios clientes.',
       ],
       problems: [
         {
@@ -626,11 +528,11 @@ export const t: Translations = {
         items: [
           {
             title: 'Sistema de medición de páginas',
-            text: 'Conectado a cada reporte, para que cada entregable lleve la data que describe.',
+            text: 'Conectado a cada reporte para que cada entrega incluya la data de las páginas que analiza.',
           },
           {
-            title: '2 conectores custom de Data Studio',
-            text: 'Alimentan el dashboard con seguimiento de consultas SEO.',
+            title: 'Seguimiento de consultas SEO',
+            text: 'La información de consultas SEO queda conectada al reporting de cada cliente.',
           },
           {
             title: 'Arquitectura de reporting',
@@ -641,45 +543,25 @@ export const t: Translations = {
       results: {
         heading: 'Resultados',
         stats: [
-          { value: '20+', label: 'clientes reportando' },
-          { value: '60 h', label: 'ahorradas por mes' },
-          { value: '02', label: 'conectores custom' },
+          { value: '30+', label: 'clientes servidos por el sistema' },
+          { value: '10', label: 'cuentas GA4 auditadas' },
+          { value: '15-20', label: 'cuentas concurrentes gestionadas' },
         ],
       },
     },
   },
-  nav: [
-    { label: 'Sobre mí', href: '#sobre-mi', index: '01' },
-    { label: 'Enfoque', href: '#enfoque', index: '02' },
-    { label: 'Herramientas', href: '#herramientas', index: '03' },
-    { label: 'Proyectos', href: '#proyectos', index: '04' },
-    { label: 'Contacto', href: '#contacto', index: '05' },
-  ],
   header: {
-    aria: 'Navegación principal',
-    navAria: 'Secciones',
     langLabel: 'Cambiar idioma',
-    menuOpen: 'Abrir menú',
-    menuClose: 'Cerrar menú',
   },
   hero: {
-    badge: 'Analista digital',
-    headline: 'Usa la data del marketing',
-    highlight: 'a tu favor.',
-    sub: 'Construyo sistemas de medición, reporting y analítica de marketing digital para equipos y agencias.',
-    cta: 'Ver proyectos',
     role: 'Analista Digital',
-    dashboardAlt: 'Vista de un sistema de reporting de marketing',
-    stripLabel: 'Ellos confiaron en mí:',
   },
   about: {
-    id: 'sobre-mi',
-    index: '01',
     heading: 'Sobre mí',
     kicker: 'Quién soy',
     paragraphs: [
-      'Trabajo en la intersección entre marketing y data. Mi foco es la analítica digital y los sistemas que la sostienen: medición confiable, reporting que escala y data que los equipos usan sin depender de una persona.',
-      'Empecé en el SEO técnico a escala enterprise (Ripley, Intercorp Retail) y lideré analítica en agencias en Canadá, México, Argentina y Perú. En todos estos lugares, el patrón siempre es el mismo: los equipos no necesitan más data, necesitan la versión confiable y usable de la que ya tienen.',
+      'Trabajo entre marketing y data. Construyo reporting para agencias: medición confiable, KPIs claros y documentación para que el equipo pueda mantener el trabajo.',
+      'Empecé en el SEO técnico a escala enterprise (Ripley, Intercorp Retail) y después lideré analítica en Notebook Agency. También construí sistemas de reporting para Torices y Owlbox. El problema se repite: los equipos no necesitan más data, necesitan saber cuál número pueden usar.',
     ],
     meta: [
       { label: 'Base', value: 'Lima, Perú' },
@@ -689,13 +571,6 @@ export const t: Translations = {
     portraitAlt: 'Retrato de Alex Spelucin',
   },
   focus: {
-    id: 'enfoque',
-    index: '02',
-    kicker: 'Qué hago',
-    heading: 'Experiencia técnica',
-    highlight: 'en analítica y data.',
-    intro:
-      'Nueve áreas donde trabajo con criterio técnico aplicado a problemas reales de marketing. Cada una con oficio, no con teoría.',
     items: [
       {
         name: 'Planeamiento de la medición',
@@ -761,120 +636,9 @@ export const t: Translations = {
         tags: ['Monitoreo', 'QA', 'Alertas'],
       },
     ],
-    practice: {
-      groups: [
-        { name: 'Medición', itemIndexes: [0, 1, 2] },
-        { name: 'Reporting', itemIndexes: [3, 4, 5] },
-        { name: 'Sistemas', itemIndexes: [6, 7, 8] },
-      ],
-      images: [
-        { alt: 'Vista de la auditoría de fuentes de datos' },
-        { alt: 'Vista de la medición de eventos y conversiones corregida' },
-        { alt: 'Vista del sistema de reporting y documentación del equipo' },
-      ],
-    },
-  },
-  tools: {
-    id: 'herramientas',
-    index: '03',
-    kicker: 'Stack',
-    heading: 'Herramientas',
-    highlight: 'y Stack',
-    intro: 'El stack con el que resuelvo medición, reporting y data de marketing desde el origen hasta el final del dato.',
-    groups: [
-      {
-        name: 'Medición',
-        items: [
-          { name: 'Google Analytics 4', icon: 'simple-icons:googleanalytics' },
-          { name: 'Google Tag Manager', icon: 'simple-icons:googletagmanager' },
-          { name: 'JavaScript', icon: 'simple-icons:javascript' },
-        ],
-      },
-      {
-        name: 'Reportes y visualización',
-        items: [
-          { name: 'Google Data Studio', icon: 'simple-icons:googledatastudio' },
-          { name: 'Google Sheets', icon: 'simple-icons:googlesheets' },
-        ],
-      },
-      {
-        name: 'Análisis de datos',
-        items: [
-          { name: 'Python', icon: 'simple-icons:python' },
-          { name: 'R', icon: 'simple-icons:r' },
-          { name: 'SQL', icon: 'tabler:sql' },
-          { name: 'BigQuery', icon: 'simple-icons:googlebigquery' },
-        ],
-      },
-      {
-        name: 'ETL y canalizaciones',
-        items: [
-          { name: 'Dataform', icon: 'tabler:database' },
-          { name: 'Google Cloud', icon: 'simple-icons:googlecloud' },
-        ],
-      },
-    ],
-  },
-  projects: {
-    id: 'proyectos',
-    index: '04',
-    kicker: 'Proyectos',
-    heading: 'Casos',
-    highlight: 'reales.',
-    intro: 'Sistemas de medición y reporting que armé para agencias. Imágenes del trabajo real.',
-    sliderAria: 'Galería de proyectos',
-    prevLabel: 'Proyecto anterior',
-    nextLabel: 'Proyecto siguiente',
-    pageLabel: 'Página',
-    items: [
-      {
-        title: 'Reportes para agencia de growth marketing',
-        scope: '',
-        year: '2026',
-        alt: 'Vista de los reportes de tráfico orgánico y pagado de Torices Digital',
-        description: 'Junto a Torices Digital, trabajamos una serie de reportes para mostrar el impacto del tráfico orgánico y pagado frente a frente, además de auditar sus principales fuentes de datos para lograr una mayor precisión en los números.',
-        results: [
-          { label: 'Clientes', value: '10+' },
-          { label: 'Cuentas auditadas', value: '12+' },
-          { label: 'Horas/semana ahorradas', value: '12' },
-        ],
-      },
-      {
-        title: 'Dashboards para agencia de growth para comercio electrónico',
-        scope: '',
-        year: '2024',
-        alt: 'Vista de los dashboards de comercio electrónico de Owlbox',
-        description: 'Owlbox se especializa en comercio electrónico para distintos clientes de LATAM. La misión fue elaborar un set de dashboards que permita visualizar las métricas principales para sus clientes: ROAS, ingresos de paid, gasto y mejores productos.',
-        results: [
-          { label: 'Clientes', value: '12+' },
-          { label: 'Horas/semana ahorradas', value: '10' },
-          { label: 'Fuentes de datos', value: '05' },
-        ],
-      },
-      {
-        title: 'Medición a escala para una agencia SEO premier',
-        scope: '',
-        year: '2025',
-        alt: 'Vista del sistema de medición y reportes de Notebook Agency',
-        description: 'Junto a Notebook Agency, desarrollamos un sistema de medición y reportes que permiten a la agencia mostrar sus resultados ante sus clientes B2B/SaaS. Además levantamos un sistema de medición de páginas conectado a cada reporte. También se desarrollaron 2 conectores de Data Studio para alimentar el dashboard con seguimiento de consultas SEO.',
-        results: [
-          { label: 'Clientes', value: '20+' },
-          { label: 'Horas ahorradas/mes', value: '60' },
-          { label: 'Conectores Data Studio custom', value: '02' },
-        ],
-      },
-    ],
-  },
-  contact: {
-    id: 'contacto',
-    index: '06',
-    kicker: 'Conversemos',
-    heading: 'Todo equipo o agencia de marketing necesita datos. Que no te jueguen en contra.',
-    emailLabel: 'Escríbeme',
-    calLabel: 'Agendar llamada',
   },
   footer: {
-    tagline: 'Analista Digital. Marketing analytics, medición, reporting y data.',
+    tagline: 'Analista de datos de marketing. Sistemas de reporting para agencias.',
     exploreNav: 'Explorar',
     contactNav: 'Contacto',
     legalNav: 'Legal',

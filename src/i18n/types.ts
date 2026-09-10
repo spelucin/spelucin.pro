@@ -15,12 +15,6 @@ export interface PainItem {
   text: string;
 }
 
-export interface Pillar {
-  title: string;
-  text: string;
-  tags: string[];
-}
-
 export interface ProcessStep {
   title: string;
   text: string;
@@ -98,48 +92,14 @@ export interface CaseStudy {
 
 export type CaseStudyKey = Exclude<
   keyof Translations['caseStudies'],
-  'challengeHeading' | 'backToWork'
+  'challengeHeading' | 'contextHeading' | 'galleryHeading' | 'moreHeading' | 'backToWork'
 >;
 
-/* Existing single-page surface (kept until the multi-page rebuild removes it) */
 export interface FocusItem {
   name: string;
   tagline: string;
   detail: string;
   tags: string[];
-}
-
-export interface PracticeImage {
-  alt: string;
-}
-
-export interface PracticeGroup {
-  name: string;
-  itemIndexes: number[];
-}
-
-export interface ToolItem {
-  name: string;
-  icon: string;
-}
-
-export interface ToolGroup {
-  name: string;
-  items: ToolItem[];
-}
-
-export interface ProjectResult {
-  label: string;
-  value: string;
-}
-
-export interface ProjectCard {
-  title: string;
-  scope: string;
-  year: string;
-  alt: string;
-  description: string;
-  results: ProjectResult[];
 }
 
 export interface Translations {
@@ -157,14 +117,16 @@ export interface Translations {
   siteNav: NavItem[];
   ctaLabel: string;
   ctaSeeWork: string;
+  calModal: {
+    label: string;
+    close: string;
+  };
 
   home: {
     hero: {
-      badge: string;
       headline: string;
       highlight: string;
       sub: string;
-      ctaSecondary: string;
       visualAlt: string;
     };
     trust: {
@@ -182,7 +144,15 @@ export interface Translations {
       heading: string;
       highlight: string;
       intro: string;
-      pillars: Pillar[];
+      weeks: ProcessStep[];
+      includeHeading: string;
+      include: string[];
+      fit: {
+        goodHeading: string;
+        good: string[];
+        poorHeading: string;
+        poor: string[];
+      };
     };
     proof: {
       index: string;
@@ -191,6 +161,12 @@ export interface Translations {
       intro: string;
       stats: StatBlock[];
       featured: CaseStudyKey[];
+    };
+    faq: {
+      index: string;
+      heading: string;
+      highlight: string;
+      items: FaqItem[];
     };
   };
 
@@ -214,56 +190,6 @@ export interface Translations {
     heading: string;
     sub: string;
     hint: string;
-  };
-
-  agencies: {
-    seo: Seo;
-    hero: {
-      badge: string;
-      headline: string;
-      highlight: string;
-      sub: string;
-      ctaSecondary: string;
-      visualAlt: string;
-    };
-    takeover: {
-      index: string;
-      heading: string;
-      highlight: string;
-      intro: string;
-      items: PainItem[];
-    };
-    proof: {
-      index: string;
-      heading: string;
-      highlight: string;
-      intro: string;
-      stats: StatBlock[];
-    };
-    sprint: {
-      index: string;
-      heading: string;
-      highlight: string;
-      intro: string;
-      weeks: ProcessStep[];
-      includeHeading: string;
-      include: string[];
-    };
-    fit: {
-      index: string;
-      heading: string;
-      highlight: string;
-      goodHeading: string;
-      good: string[];
-      poorHeading: string;
-      poor: string[];
-    };
-    faq: {
-      index: string;
-      heading: string;
-      highlight: string;
-      items: FaqItem[];
-    };
   };
 
   services: {
@@ -335,34 +261,22 @@ export interface Translations {
 
   caseStudies: {
     challengeHeading: string;
+    contextHeading: string;
+    galleryHeading: string;
+    moreHeading: string;
     backToWork: string;
     torices: CaseStudy;
     owlbox: CaseStudy;
     notebook: CaseStudy;
   };
 
-  /* Existing single-page surface (kept until the multi-page rebuild removes it) */
-  nav: { label: string; href: string; index: string }[];
   header: {
-    aria: string;
-    navAria: string;
     langLabel: string;
-    menuOpen: string;
-    menuClose: string;
   };
   hero: {
-    badge: string;
-    headline: string;
-    highlight: string;
-    sub: string;
-    cta: string;
     role: string;
-    dashboardAlt: string;
-    stripLabel: string;
   };
   about: {
-    id: string;
-    index: string;
     heading: string;
     kicker: string;
     paragraphs: string[];
@@ -370,47 +284,7 @@ export interface Translations {
     portraitAlt: string;
   };
   focus: {
-    id: string;
-    index: string;
-    kicker: string;
-    heading: string;
-    highlight: string;
-    intro: string;
     items: FocusItem[];
-    practice: {
-      groups: PracticeGroup[];
-      images: PracticeImage[];
-    };
-  };
-  tools: {
-    id: string;
-    index: string;
-    kicker: string;
-    heading: string;
-    highlight: string;
-    intro: string;
-    groups: ToolGroup[];
-  };
-  projects: {
-    id: string;
-    index: string;
-    kicker: string;
-    heading: string;
-    highlight: string;
-    intro: string;
-    sliderAria: string;
-    prevLabel: string;
-    nextLabel: string;
-    pageLabel: string;
-    items: ProjectCard[];
-  };
-  contact: {
-    id: string;
-    index: string;
-    kicker: string;
-    heading: string;
-    emailLabel: string;
-    calLabel: string;
   };
   footer: {
     tagline: string;
