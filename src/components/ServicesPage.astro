@@ -12,22 +12,16 @@ interface Props {
 }
 
 const { t }: Props = Astro.props;
-
-const clawing = [7, 5, 5, 7, 8, 4] as const;
 ---
 
 <SiteHeader t={t} />
 
 <main id="main-content">
-  <section class="hero">
-    <div class="dot-grid-hero hero-texture" aria-hidden="true"></div>
-    <div class="hero-glow" aria-hidden="true"></div>
+  <section class="page-hero reveal">
     <div class="container-site">
-      <span class="badge">{t.services.hero.badge}</span>
-      <h1>
-        {t.services.hero.headline} <span class="text-primary">{t.services.hero.highlight}</span>
-      </h1>
-      <p class="hero-sub">{t.services.hero.sub}</p>
+      <p class="hero-eyebrow">{t.services.hero.badge}</p>
+      <h1 class="hero-title">{t.services.hero.headline} <span class="text-primary">{t.services.hero.highlight}</span></h1>
+      <p class="hero-intro">{t.services.hero.sub}</p>
     </div>
   </section>
 
@@ -39,15 +33,16 @@ const clawing = [7, 5, 5, 7, 8, 4] as const;
         highlight={t.services.components.highlight}
         intro={t.services.components.intro}
       />
+
       <div class="components-grid">
         {t.services.components.items.map((item, i) => (
-          <article class:list={['component-card', `component-card--${clawing[i]}`]}>
-            <span class="component-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="component-title">{item.title}</h3>
-            <p class="component-text">{item.text}</p>
-            <ul class="component-tags" role="list">
+          <article class="component-card">
+            <span class="row-number">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <ul class="chips-list" role="list">
               {item.tags.map((tag) => (
-                <li class="component-tag">{tag}</li>
+                <li class="chip">{tag}</li>
               ))}
             </ul>
           </article>
@@ -64,27 +59,29 @@ const clawing = [7, 5, 5, 7, 8, 4] as const;
         highlight={t.services.proof.highlight}
         intro={t.services.proof.intro}
       />
+
       <StatsBlocks stats={t.services.proof.stats} />
     </div>
   </section>
 
   <section class="faq section-block reveal">
-    <div class="container-site">
+    <div class="container-site faq-container">
       <SectionHead
+        flush
         index={t.services.faq.index}
         heading={t.services.faq.heading}
         highlight={t.services.faq.highlight}
       />
+
       <div class="faq-list">
-        {t.services.faq.items.map((item) => (
-          <details class="faq-item">
+        {t.services.faq.items.map((item, i) => (
+          <details>
             <summary>
-              <span>{item.q}</span>
-              <span class="faq-icon" aria-hidden="true">
-                <Icon name="tabler:chevron-down" width="18" height="18" />
-              </span>
+              <span class="faq-q-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="faq-q">{item.q}</span>
+              <Icon name="tabler:plus" width="18" height="18" aria-hidden="true" />
             </summary>
-            <p class="faq-answer">{item.a}</p>
+            <p>{item.a}</p>
           </details>
         ))}
       </div>
@@ -97,179 +94,30 @@ const clawing = [7, 5, 5, 7, 8, 4] as const;
 <SiteFooter t={t} />
 
 <script>
-  const elements = document.querySelectorAll<HTMLElement>('.reveal');
-
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
-    );
-    elements.forEach((el) => io.observe(el));
-  } else {
-    elements.forEach((el) => el.classList.add('is-visible'));
-  }
+  import '../scripts/reveal';
 </script>
 
 <style>
-  .hero {
-    position: relative;
-    padding: 132px 0 0;
-    overflow: hidden;
-  }
-  .hero h1 {
-    max-width: 18ch;
-    margin: 24px 0 0;
-    font-size: clamp(40px, 7vw, 64px);
-    font-weight: 680;
-    letter-spacing: -0.04em;
-    line-height: 1.02;
-  }
-  .hero-sub {
-    max-width: 560px;
-    margin: 20px 0 0;
-    color: var(--color-foreground-55);
-    font-size: 18px;
-    line-height: 1.65;
-  }
+  .components-grid { display: grid; gap: 18px; }
+  .component-card { display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); transition: border-color 0.2s ease, transform 0.2s ease; }
+  .component-card:hover { border-color: var(--color-primary-35); transform: translateY(-2px); }
+  .row-number { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .component-card h3 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.02em; }
+  .component-card p { margin: 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; flex-grow: 1; }
+  .chips-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
 
-  .section-block {
-    padding: 96px 0;
-  }
-
-  .components-grid {
-    margin-top: 56px;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 14px;
-  }
-  .component-card {
-    grid-column: span 12;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 30px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-md);
-    background: var(--color-primary-4);
-    transition: border-color 0.2s ease, transform 0.25s ease;
-  }
-  .component-card:hover {
-    border-color: var(--color-primary-35);
-    transform: translateY(-2px);
-  }
-  .component-index {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--color-primary);
-  }
-  .component-title {
-    margin: 0;
-    font-size: 21px;
-    font-weight: 620;
-    letter-spacing: -0.02em;
-    color: var(--color-foreground);
-  }
-  .component-text {
-    margin: 0;
-    max-width: 46ch;
-    color: var(--color-foreground-55);
-    font-size: 15px;
-    line-height: 1.65;
-  }
-  .component-tags {
-    list-style: none;
-    margin: 6px 0 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .component-tag {
-    padding: 6px 12px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: 999px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--color-primary);
-  }
-
-  .faq-list {
-    margin-top: 56px;
-    display: grid;
-    gap: 12px;
-  }
-  .faq-item {
-    border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-md);
-    background: var(--color-primary-4);
-    overflow: hidden;
-  }
-  .faq-item summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 22px 26px;
-    font-size: 16px;
-    font-weight: 550;
-    color: var(--color-foreground-70);
-    cursor: pointer;
-    list-style: none;
-    transition: color 0.2s ease;
-  }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-item summary:hover { color: var(--color-foreground); }
-  .faq-icon {
-    color: var(--color-primary-35);
-    transition: transform 0.24s ease, color 0.2s ease;
-    flex-shrink: 0;
-  }
-  .faq-item[open] summary { color: var(--color-foreground); }
-  .faq-item[open] .faq-icon {
-    color: var(--color-primary);
-    transform: rotate(180deg);
-  }
-  .faq-answer {
-    margin: 0;
-    padding: 0 26px 24px;
-    max-width: 62ch;
-    color: var(--color-foreground-55);
-    font-size: 15px;
-    line-height: 1.65;
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
+  .faq-container { display: grid; gap: 48px; }
+  .faq-list { border-top: 1px solid var(--color-primary-14); }
+  .faq-list details { border-bottom: 1px solid var(--color-primary-14); }
+  .faq-list summary { display: grid; grid-template-columns: 44px 1fr auto; gap: 18px; align-items: baseline; padding: 22px 0; list-style: none; cursor: pointer; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-q-num { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .faq-q { color: var(--color-foreground); font-size: 18px; font-weight: 550; letter-spacing: -0.015em; }
+  .faq-list summary svg { align-self: center; color: var(--color-primary-35); transition: transform 0.2s ease, color 0.2s ease; }
+  .faq-list details[open] summary svg { transform: rotate(45deg); color: var(--color-primary); }
+  .faq-list details p { grid-column: 2 / 4; max-width: 58ch; margin: -4px 0 26px; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
 
   @media (min-width: 768px) {
-    .hero {
-      padding: 168px 0 0;
-    }
-    .component-card--7 { grid-column: span 7; }
-    .component-card--5 { grid-column: span 5; }
-    .component-card--8 { grid-column: span 8; }
-    .component-card--4 { grid-column: span 4; }
+    .components-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 </style>
