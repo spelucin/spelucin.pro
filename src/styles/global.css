@@ -29,6 +29,7 @@
   --color-primary-35: rgba(96, 165, 250, 0.35);
 
   /* Foreground opacity scale */
+  --color-foreground-35: rgba(240, 246, 255, 0.35);
   --color-foreground-55: rgba(240, 246, 255, 0.55);
   --color-foreground-65: rgba(240, 246, 255, 0.65);
   --color-foreground-70: rgba(240, 246, 255, 0.70);
@@ -41,6 +42,12 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
+
+  /* Type scale — single section heading */
+  --text-h2: clamp(32px, 5vw, 48px);
+
+  /* Rhythm — uniform section block spacing */
+  --space-block: 96px;
 }
 
 /* ============================================
@@ -91,37 +98,49 @@ summary:focus-visible {
     padding-inline: 24px;
   }
 
-  /* Pill badge eyebrow */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 7px 14px;
-    border: 1px solid var(--color-primary-14);
-    border-radius: 9999px;
-    background: var(--color-primary-4);
-    color: var(--color-primary);
+  /* Hero — shared minimal interior hero */
+  .page-hero {
+    position: relative;
+    padding: 112px 0 56px;
+  }
+  @media (min-width: 768px) {
+    .page-hero {
+      padding: 136px 0 64px;
+    }
+  }
+  .hero-eyebrow {
+    margin: 0 0 20px;
     font-family: var(--font-mono);
     font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
+    color: var(--color-primary);
   }
-  .badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    box-shadow: 0 0 8px var(--color-primary);
+  .hero-title {
+    max-width: 19ch;
+    margin: 0;
+    font-size: clamp(34px, 4.6vw, 54px);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+    color: var(--color-foreground);
+  }
+  .hero-intro {
+    max-width: 540px;
+    margin: 20px 0 0;
+    color: var(--color-foreground-65);
+    font-size: 17px;
+    line-height: 1.6;
   }
 
-  /* Dot grid texture (brand signature) */
-  .dot-grid-hero {
-    background-image: radial-gradient(circle, rgba(96, 165, 250, 0.18) 1px, transparent 1px);
-    background-size: 22px 22px;
-    -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 0%, #000 45%, transparent 100%);
-    mask-image: radial-gradient(ellipse 90% 85% at 50% 0%, #000 45%, transparent 100%);
+  /* Section rhythm — uniform block spacing */
+  .section-block {
+    padding: var(--space-block) 0;
+  }
+
+  /* Brand-highlight text */
+  .text-primary {
+    color: var(--color-primary);
   }
 
   /* Section kicker (mono uppercase eyebrow) */
@@ -204,6 +223,20 @@ summary:focus-visible {
       radial-gradient(circle, rgba(96, 165, 250, 0.07) 1px, transparent 1px);
     background-size: 100% 100%, 100% 100%, 24px 24px;
     background-color: var(--color-card);
+  }
+
+  /* Reveal animation (script: src/scripts/reveal.ts) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
   }
 
   .skip-link {

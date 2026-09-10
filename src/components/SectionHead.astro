@@ -5,12 +5,17 @@ interface Props {
   heading: string;
   highlight?: string;
   intro?: string;
+  wide?: boolean;
+  flush?: boolean;
 }
 
-const { id, index, heading, highlight, intro } = Astro.props;
+const { id, index, heading, highlight, intro, wide = false, flush = false } = Astro.props;
+const classes = ['section-head', wide && 'section-head--wide', flush && 'section-head--flush']
+  .filter(Boolean)
+  .join(' ');
 ---
 
-<div class="section-head">
+<div class={classes}>
   {index && <span class="section-index">{index}</span>}
   <h2 id={id}>
     {heading} {highlight && <span class="text-primary">{highlight}</span>}
@@ -19,6 +24,19 @@ const { id, index, heading, highlight, intro } = Astro.props;
 </div>
 
 <style>
+  .section-head {
+    display: grid;
+    gap: 14px;
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+  .section-head--wide {
+    max-width: 780px;
+  }
+  .section-head--flush {
+    margin-bottom: 0;
+  }
+
   .section-index {
     display: inline-block;
     font-family: var(--font-mono);
@@ -29,16 +47,15 @@ const { id, index, heading, highlight, intro } = Astro.props;
   }
 
   h2 {
-    margin-top: 14px;
-    font-size: clamp(28px, 4vw, 40px);
+    margin: 0;
+    font-size: var(--text-h2);
     font-weight: 650;
-    letter-spacing: -0.03em;
-    line-height: 1.12;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
     color: var(--color-foreground);
   }
 
   .section-head-intro {
-    margin-top: 16px;
     max-width: 560px;
     color: var(--color-foreground-55);
     font-size: 17px;
