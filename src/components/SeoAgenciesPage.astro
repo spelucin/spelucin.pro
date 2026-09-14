@@ -1,0 +1,920 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SectionHead from './SectionHead.astro';
+import Faq from './Faq.astro';
+import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
+import { caseImages } from '../data/caseImages';
+import { localizeHref } from '../utils/lang';
+import dashboardHero from '../assets/dashboard-hero.jpg';
+import media01 from '../assets/01.png';
+import media02 from '../assets/02.png';
+import media04 from '../assets/04.png';
+
+interface Props {
+  t: Translations;
+}
+
+const { t }: Props = Astro.props;
+
+const sa = t.seoAgencies;
+const notebook = t.caseStudies.notebook;
+const casePath = localizeHref(`/case-studies/${notebook.slug}`, t.lang);
+const caseCover = caseImages.notebook[0];
+const systemMedia = [media01, media02, media04];
+const heroCaseAttrs = {
+  'data-case-study': '',
+  'data-case-study-slug': notebook.slug,
+  'data-case-study-name': notebook.client,
+  'data-case-study-industry': notebook.sector,
+};
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <section class="seo-hero">
+    <div class="container-site seo-hero-grid">
+      <div class="seo-hero-copy">
+        <p class="hero-eyebrow">{sa.hero.eyebrow}</p>
+        <h1 class="seo-hero-title">
+          {sa.hero.headline} <span class="text-primary">{sa.hero.highlight}</span>
+        </h1>
+        <p class="hero-intro">{sa.hero.sub}</p>
+        <div class="seo-hero-actions">
+          <a
+            class="btn btn-primary"
+            href={site.cal}
+            data-cal-modal
+            data-calendar
+            data-calendar-location="seo-agencies-hero"
+            data-cta
+            data-cta-text={sa.hero.ctaPrimary}
+            data-cta-location="seo-agencies-hero"
+          >
+            <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
+            {sa.hero.ctaPrimary}
+          </a>
+        </div>
+      </div>
+      <figure class="hero-dashboard">
+        <div class="hero-dashboard-frame">
+          <Image
+            src={dashboardHero}
+            alt={sa.hero.visualAlt}
+            format="avif"
+            widths={[480, 640, 800]}
+            sizes="(min-width: 1024px) 440px, (min-width: 768px) 420px, 90vw"
+          />
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="credibility-strip" aria-label={sa.credibility.label}>
+    <div class="container-site credibility-inner">
+      <p class="credibility-label">{sa.credibility.label}</p>
+      <p class="credibility-text">{sa.credibility.text}</p>
+    </div>
+  </section>
+
+  <section id="problem" class="problem section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        id="problem-heading"
+        heading={sa.problem.heading}
+        highlight={sa.problem.highlight}
+        intro={sa.problem.intro}
+      />
+      <div class="problem-list">
+        {sa.problem.items.map((item, i) => (
+          <article class="problem-row">
+            <span class="row-number">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="system" class="system section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        id="system-heading"
+        heading={sa.system.heading}
+        highlight={sa.system.highlight}
+        intro={sa.system.intro}
+      />
+      <div class="system-grid">
+        {sa.system.blocks.map((block, i) => (
+          <article class="system-block">
+            <figure class="system-figure">
+              <Image
+                src={systemMedia[i]}
+                alt={block.image.alt}
+                format="avif"
+                widths={[480, 640, 920]}
+                sizes="(min-width: 1080px) 400px, (min-width: 900px) 420px, (min-width: 680px) 420px, 92vw"
+                loading="lazy"
+              />
+              <figcaption>{block.image.caption}</figcaption>
+            </figure>
+            <span class="row-number">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{block.title}</h3>
+            <p class="system-text">{block.text}</p>
+            <p class="system-detail">{block.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="case-study" class="case-section section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        id="case-study-heading"
+        heading={sa.caseStudy.heading}
+        highlight={sa.caseStudy.highlight}
+        intro={sa.caseStudy.intro}
+      />
+      <article class="notebook-card">
+        <a class="notebook-cover" href={casePath} {...heroCaseAttrs} aria-label={`${notebook.kicker} · ${notebook.client}`}>
+          <Image
+            src={caseCover}
+            alt={notebook.alt}
+            format="avif"
+            widths={[640, 900, 1280]}
+            sizes="(min-width: 960px) 480px, 92vw"
+            loading="lazy"
+          />
+          <span class="notebook-cover-index">{notebook.kicker}</span>
+        </a>
+        <div class="notebook-body">
+          <p class="notebook-kicker">{notebook.client} · {notebook.sector}</p>
+          <h3 class="notebook-title">{notebook.title}</h3>
+          <ul class="notebook-points" role="list">
+            {sa.caseStudy.points.map((point) => (
+              <li>
+                <Icon name="tabler:check" width="14" height="14" aria-hidden="true" />
+                {point}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="notebook-foot">
+          <a class="btn btn-primary" href={casePath} {...heroCaseAttrs}>
+            {sa.caseStudy.cta}
+            <Icon name="tabler:arrow-right" width="16" height="16" aria-hidden="true" />
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="offer" class="offer-section section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        id="offer-heading"
+        heading={sa.offer.heading}
+        highlight={sa.offer.highlight}
+      />
+      <div class="offer-card">
+        <div class="offer-head">
+          <div>
+            <p class="offer-index">{sa.offer.tag}</p>
+            <h3 class="offer-name">{sa.offer.name}</h3>
+          </div>
+        </div>
+        <div class="offer-grid">
+          <div class="offer-intro">
+            {sa.offer.paragraphs.map((p: string) => <p>{p}</p>)}
+          </div>
+          <div class="offer-deliverables">
+            <p class="offer-label">{sa.offer.tag}</p>
+            <ul class="offer-include" role="list">
+              {sa.offer.items.map((item) => (
+                <li>
+                  <Icon name="tabler:check" width="14" height="14" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div class="offer-foot">
+          <p class="offer-hint">{sa.offer.ctaHint}</p>
+          <a
+            class="btn btn-primary"
+            href={site.cal}
+            data-cal-modal
+            data-calendar
+            data-calendar-location="seo-agencies-offer"
+            data-cta
+            data-cta-text={sa.offer.cta}
+            data-cta-location="seo-agencies-offer"
+          >
+            <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
+            {sa.offer.cta}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="engagement" class="engagement section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        id="engagement-heading"
+        heading={sa.engagement.heading}
+        highlight={sa.engagement.highlight}
+        intro={sa.engagement.intro}
+      />
+      <ol class="engagement-steps" role="list">
+        {sa.engagement.steps.map((step, i) => (
+          <li class="engagement-step">
+            <span class="engagement-index">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="fit" class="fit section-block reveal">
+    <div class="container-site">
+      <SectionHead
+        id="fit-heading"
+        heading={sa.fit.heading}
+        highlight={sa.fit.highlight}
+      />
+      <div class="fit-grid">
+        <div class="fit-col">
+          <h3>{sa.fit.goodHeading}</h3>
+          <ul role="list">
+            {sa.fit.good.map((item) => (
+              <li>
+                <Icon name="tabler:check" width="14" height="14" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="fit-col fit-col--poor">
+          <h3>{sa.fit.poorHeading}</h3>
+          <ul role="list">
+            {sa.fit.poor.map((item) => (
+              <li>
+                <Icon name="tabler:x" width="14" height="14" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    heading={sa.faq.heading}
+    highlight={sa.faq.highlight}
+    items={sa.faq.items}
+  />
+
+  <section class="final-cta" aria-labelledby="final-cta-heading">
+    <div class="container-site">
+      <div class="final-panel">
+        <div class="final-copy">
+          <h2 id="final-cta-heading">
+            {sa.finalCta.heading} <span class="text-primary">{sa.finalCta.highlight}</span>
+          </h2>
+          <p class="final-sub">{sa.finalCta.sub}</p>
+        </div>
+        <div class="final-actions">
+          <a
+            class="btn btn-primary"
+            href={site.cal}
+            data-cal-modal
+            data-calendar
+            data-calendar-location="seo-agencies-final"
+            data-cta
+            data-cta-text={sa.finalCta.ctaPrimary}
+            data-cta-location="seo-agencies-final"
+          >
+            <Icon name="tabler:calendar" width="16" height="16" aria-hidden="true" />
+            {sa.finalCta.ctaPrimary}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<SiteFooter t={t} />
+
+<script>
+  import '../scripts/reveal';
+</script>
+
+<style>
+  .seo-hero {
+    position: relative;
+    padding: 104px 0 76px;
+    border-bottom: 1px solid var(--color-primary-20);
+    overflow: hidden;
+    text-align: left;
+  }
+  .seo-hero::before {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(90deg, rgba(96, 165, 250, 0.08) 1px, transparent 1px);
+    background-size: 25% 100%;
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, #000, transparent 80%);
+    mask-image: linear-gradient(to right, #000, transparent 80%);
+    pointer-events: none;
+    content: '';
+  }
+  .seo-hero-grid {
+    position: relative;
+    display: grid;
+    gap: 56px;
+    align-items: center;
+  }
+  .seo-hero-copy {
+    display: grid;
+    justify-items: start;
+    gap: 22px;
+    max-width: 640px;
+  }
+  .seo-hero-title {
+    margin: 0;
+    max-width: 13ch;
+    font-size: clamp(40px, 5.2vw, 66px);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 1.02;
+  }
+  .seo-hero .hero-intro {
+    max-width: 480px;
+    margin-inline: 0;
+  }
+  .seo-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .hero-dashboard {
+    margin: 0;
+    min-width: 0;
+  }
+  .hero-dashboard-frame {
+    overflow: hidden;
+    border: 1px solid var(--color-primary-28);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    box-shadow: 12px 12px 0 rgba(96, 165, 250, 0.08);
+  }
+  .hero-dashboard-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .credibility-strip {
+    border-top: 1px solid var(--color-primary-14);
+    border-bottom: 1px solid var(--color-primary-14);
+    background: var(--color-primary-4);
+  }
+  .credibility-inner {
+    display: grid;
+    gap: 14px;
+    padding: 26px 0;
+  }
+  .credibility-label {
+    margin: 0;
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .credibility-text {
+    margin: 0;
+    max-width: 64ch;
+    color: var(--color-foreground-70);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 860px) {
+    .credibility-inner {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 32px;
+    }
+  }
+
+  .problem-list {
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .problem-row {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 18px;
+    align-items: start;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--color-primary-14);
+  }
+  .row-number {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .problem-row h3 {
+    margin: 0;
+    color: var(--color-foreground);
+    font-size: 22px;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+  .problem-row p {
+    max-width: 58ch;
+    margin: 8px 0 0;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .system-grid {
+    display: grid;
+    gap: 20px;
+  }
+  .system-block {
+    display: grid;
+    gap: 13px;
+    align-content: start;
+    min-width: 0;
+    padding: 20px 22px 26px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    background: rgba(15, 18, 25, 0.66);
+    box-shadow: 8px 8px 0 rgba(96, 165, 250, 0.06);
+  }
+  .system-block h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    color: var(--color-foreground);
+  }
+  .system-text {
+    margin: 0;
+    color: var(--color-foreground);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .system-detail {
+    margin: 0;
+    color: var(--color-foreground-55);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .system-figure {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    background: #080b11;
+  }
+  .system-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .system-figure figcaption {
+    padding: 9px 14px;
+    border-top: 1px solid var(--color-primary-14);
+    color: var(--color-foreground-45);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 680px) {
+    .system-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 900px) {
+    .system-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .notebook-card {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    box-shadow: 8px 8px 0 rgba(96, 165, 250, 0.07);
+  }
+  .notebook-cover {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #080b11;
+  }
+  .notebook-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .notebook-cover:hover img { transform: scale(1.03); }
+  .notebook-cover-index {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 5px 9px;
+    border: 1px solid var(--color-primary-28);
+    border-radius: var(--radius-sm);
+    background: rgba(8, 11, 17, 0.78);
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .notebook-body {
+    display: grid;
+    gap: 18px;
+    padding: 28px 28px 24px;
+  }
+  .notebook-kicker {
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .notebook-title {
+    margin: 0;
+    max-width: 26ch;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    color: var(--color-foreground);
+  }
+  .notebook-points {
+    display: grid;
+    gap: 10px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .notebook-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--color-foreground-70);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .notebook-points svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--color-primary);
+  }
+  .notebook-foot {
+    padding: 18px 28px;
+    border-top: 1px solid var(--color-primary-14);
+    background: var(--color-primary-4);
+  }
+  .notebook-foot .btn {
+    width: 100%;
+    padding: 16px 26px;
+  }
+
+  @media (min-width: 960px) {
+    .notebook-card {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    }
+    .notebook-cover {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      aspect-ratio: auto;
+      min-height: 100%;
+    }
+    .notebook-body {
+      grid-column: 2;
+      grid-row: 1;
+      align-content: start;
+      padding: 30px 34px 22px;
+    }
+    .notebook-title { font-size: clamp(22px, 1.6vw, 26px); }
+    .notebook-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .notebook-foot { grid-column: 2; grid-row: 2; padding: 18px 34px; }
+  }
+
+  .offer-card {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    box-shadow: 8px 8px 0 rgba(96, 165, 250, 0.07);
+  }
+  .offer-head {
+    display: block;
+    padding: 30px 30px 0;
+  }
+  .offer-index, .offer-label {
+    margin: 0 0 12px;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .offer-name {
+    margin: 0;
+    font-size: clamp(28px, 3.6vw, 40px);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--color-foreground);
+  }
+  .offer-grid {
+    display: grid;
+    gap: 32px;
+    margin-top: 26px;
+    padding: 26px 30px 30px;
+    border-top: 1px solid var(--color-primary-14);
+  }
+  .offer-intro p {
+    max-width: 54ch;
+    margin: 14px 0 0;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .offer-intro p:first-child { margin-top: 0; }
+  .offer-label { color: var(--color-foreground-55); }
+  .offer-include {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .offer-include li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--color-foreground-70);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  .offer-include svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--color-primary);
+  }
+  .offer-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 20px 30px;
+    border-top: 1px solid var(--color-primary-14);
+    background: var(--color-primary-4);
+  }
+  .offer-hint {
+    margin: 0;
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .offer-foot .btn { flex: 0 1 auto; white-space: nowrap; }
+
+  .engagement-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    border-top: 1px solid var(--color-primary-14);
+    border-bottom: 1px solid var(--color-primary-14);
+  }
+  .engagement-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    align-items: start;
+    padding: 30px 0;
+  }
+  .engagement-step::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-primary-14);
+  }
+  .engagement-step:first-child::before { top: 50%; }
+  .engagement-step:last-child::before { bottom: 50%; }
+  .engagement-index {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-top: 2px;
+    border: 1px solid var(--color-primary-28);
+    border-radius: 50%;
+    background: var(--color-background);
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .engagement-step h3 {
+    margin: 0;
+    color: var(--color-foreground);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .engagement-step p {
+    max-width: 58ch;
+    margin: 8px 0 0;
+    color: var(--color-foreground-55);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .fit-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .fit-col {
+    padding: 26px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+  }
+  .fit-col--poor { border-color: var(--color-primary-8); }
+  .fit-col h3 {
+    margin: 0 0 16px;
+    color: var(--color-foreground);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .fit-col ul {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .fit-col li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: var(--color-foreground-55);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .fit-col svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--color-primary);
+  }
+  .fit-col--poor svg { color: var(--color-foreground-35); }
+
+  @media (min-width: 900px) {
+    .fit-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .offer-grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 48px;
+    }
+  }
+
+  .final-cta {
+    padding: 24px 0 88px;
+  }
+  .final-panel {
+    position: relative;
+    display: grid;
+    gap: 28px;
+    justify-items: start;
+    padding: 44px 24px 40px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: 10px 10px 0 rgba(96, 165, 250, 0.08);
+  }
+  .final-copy h2 {
+    margin: 0;
+    max-width: 18ch;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+    color: var(--color-foreground);
+  }
+  .final-sub {
+    margin: 18px 0 0;
+    max-width: 520px;
+    color: var(--color-foreground-55);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .final-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .final-cta {
+      padding-bottom: 120px;
+    }
+    .final-panel {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 52px 56px;
+    }
+    .final-actions {
+      justify-content: flex-end;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 960px) {
+    .final-panel { grid-template-columns: 1fr; }
+    .final-actions { justify-content: flex-start; }
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (min-width: 820px) {
+    .notebook-points {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 840px) {
+    .seo-hero-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 440px);
+      gap: 72px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .seo-hero { padding-top: 72px; }
+    .seo-hero-title { font-size: clamp(44px, 15vw, 60px); }
+    .notebook-cover { aspect-ratio: 4 / 3; }
+    .notebook-body, .notebook-foot { padding-inline: 22px; }
+    .notebook-foot .btn { width: 100%; white-space: normal; }
+    .offer-head, .offer-grid, .offer-foot { padding-inline: 22px; }
+    .offer-foot .btn { width: 100%; white-space: normal; }
+  }
+</style>

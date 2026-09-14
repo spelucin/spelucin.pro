@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SeoAgenciesPage from '../../components/SeoAgenciesPage.astro';
+import { t } from '../../i18n/es';
+---
+
+<Layout
+  t={t}
+  title={t.seoAgencies.seo.title}
+  description={t.seoAgencies.seo.description}
+  breadcrumb={[{ name: 'Agencias SEO', path: '/agencias-seo' }]}
+>
+  <SeoAgenciesPage t={t} />
+</Layout>
