@@ -3,19 +3,18 @@ import { Icon } from 'astro-icon/components';
 import SectionHead from './SectionHead.astro';
 
 interface Props {
-  index: string;
   heading: string;
   highlight?: string;
   items: { q: string; a: string }[];
   sectionClass?: string;
 }
 
-const { index, heading, highlight, items, sectionClass = 'section-block' } = Astro.props;
+const { heading, highlight, items, sectionClass = 'section-block' } = Astro.props;
 ---
 
 <section class={`faq ${sectionClass} reveal`}>
   <div class="container-site faq-container">
-    <SectionHead flush index={index} heading={heading} highlight={highlight} />
+    <SectionHead flush heading={heading} highlight={highlight} />
     <div class="faq-list">
       {items.map((item: { q: string; a: string }, i: number) => (
         <details>
