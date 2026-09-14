@@ -46,6 +46,13 @@ export interface ServiceComponent {
   tags: string[];
 }
 
+export interface SystemStep {
+  title: string;
+  text: string;
+  detail: string;
+  image: { alt: string; caption: string };
+}
+
 export interface CaseTeaser {
   slug: string;
   client: string;
@@ -131,14 +138,12 @@ export interface Translations {
       label: string;
     };
     problem: {
-      index: string;
       heading: string;
       highlight: string;
       intro: string;
       items: PainItem[];
     };
     service: {
-      index: string;
       heading: string;
       highlight: string;
       intro: string;
@@ -153,7 +158,6 @@ export interface Translations {
       };
     };
     proof: {
-      index: string;
       heading: string;
       highlight: string;
       intro: string;
@@ -162,22 +166,89 @@ export interface Translations {
       caseCta: string;
     };
     faq: {
-      index: string;
       heading: string;
       highlight: string;
       items: FaqItem[];
     };
   };
 
+  seoAgencies: {
+    seo: Seo;
+    hero: {
+      eyebrow: string;
+      headline: string;
+      highlight: string;
+      sub: string;
+      visualAlt: string;
+      ctaPrimary: string;
+    };
+    credibility: {
+      label: string;
+      text: string;
+    };
+    problem: {
+      heading: string;
+      highlight: string;
+      intro: string;
+      items: PainItem[];
+    };
+    system: {
+      heading: string;
+      highlight: string;
+      intro: string;
+      blocks: SystemStep[];
+    };
+    caseStudy: {
+      heading: string;
+      highlight: string;
+      intro: string;
+      points: string[];
+      cta: string;
+    };
+    offer: {
+      heading: string;
+      highlight: string;
+      name: string;
+      tag: string;
+      paragraphs: string[];
+      items: string[];
+      cta: string;
+      ctaHint: string;
+    };
+    engagement: {
+      heading: string;
+      highlight: string;
+      intro: string;
+      steps: ProcessStep[];
+    };
+    fit: {
+      heading: string;
+      highlight: string;
+      goodHeading: string;
+      good: string[];
+      poorHeading: string;
+      poor: string[];
+    };
+    faq: {
+      heading: string;
+      highlight: string;
+      items: FaqItem[];
+    };
+    finalCta: {
+      heading: string;
+      highlight: string;
+      sub: string;
+      ctaPrimary: string;
+    };
+  };
+
   process: {
-    index: string;
     heading: string;
     intro: string;
     steps: ProcessStep[];
   };
 
   stack: {
-    index: string;
     heading: string;
     highlight: string;
     intro: string;
@@ -199,21 +270,12 @@ export interface Translations {
       sub: string;
     };
     components: {
-      index: string;
       heading: string;
       highlight: string;
       intro: string;
       items: ServiceComponent[];
     };
-    proof: {
-      index: string;
-      heading: string;
-      highlight: string;
-      intro: string;
-      stats: StatBlock[];
-    };
     faq: {
-      index: string;
       heading: string;
       highlight: string;
       items: FaqItem[];
@@ -240,7 +302,6 @@ export interface Translations {
       sub: string;
     };
     capabilities: {
-      index: string;
       heading: string;
       highlight: string;
       intro: string;
