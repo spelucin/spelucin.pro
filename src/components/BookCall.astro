@@ -14,7 +14,7 @@ const { t, id, location = 'cta-section' } = Astro.props;
 
 <section class="cta" id={id}>
   <div class="container-site">
-    <div class="cta-panel cta-texture">
+    <div class="cta-panel">
       <div class="cta-copy">
         <h2>{t.ctaSection.heading}</h2>
         <p class="cta-sub">{t.ctaSection.sub}</p>
@@ -41,15 +41,16 @@ const { t, id, location = 'cta-section' } = Astro.props;
 
 <style>
   .cta {
-    padding: 24px 0 88px;
+    padding: 40px 0 96px;
   }
 
   .cta-panel {
     position: relative;
-    padding: 44px 24px 40px;
+    padding: 52px 28px 46px;
     border: 1px solid var(--color-primary-14);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    box-shadow: 10px 10px 0 rgba(96, 165, 250, 0.08);
     display: grid;
     gap: 28px;
     justify-items: start;
@@ -93,7 +94,7 @@ const { t, id, location = 'cta-section' } = Astro.props;
     .cta-panel {
       grid-template-columns: 1fr auto;
       align-items: center;
-      padding: 52px 56px;
+      padding: 60px 64px;
     }
     .cta-actions {
       justify-content: flex-end;
