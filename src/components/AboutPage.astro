@@ -50,7 +50,6 @@ const { t }: Props = Astro.props;
   <section class="capabilities section-block reveal">
     <div class="container-site">
       <SectionHead
-        index={t.aboutPage.capabilities.index}
         heading={t.aboutPage.capabilities.heading}
         highlight={t.aboutPage.capabilities.highlight}
         intro={t.aboutPage.capabilities.intro}
@@ -77,7 +76,6 @@ const { t }: Props = Astro.props;
   <section class="stack section-block reveal">
     <div class="container-site">
       <SectionHead
-        index={t.stack.index}
         heading={t.stack.heading}
         highlight={t.stack.highlight}
         intro={t.stack.intro}
@@ -142,5 +140,19 @@ const { t }: Props = Astro.props;
     .bio-grid { grid-template-columns: 1.2fr 0.8fr; gap: 64px; }
     .capabilities-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .stack-layers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  .bio { padding-top: 48px; }
+  .capability-card, .stack-layer, .meta-dl { border-radius: var(--radius-sm); }
+  .capability-card { min-height: 300px; box-shadow: 6px 6px 0 rgba(96, 165, 250, 0.05); }
+  .capability-card:nth-child(2) { transform: translateY(28px); }
+  .capability-card:nth-child(2):hover { transform: translateY(24px); }
+  .capability-card:nth-child(3) { transform: translateY(56px); }
+  .capability-card:nth-child(3):hover { transform: translateY(52px); }
+  .stack-layer { background: rgba(15, 18, 25, 0.7); }
+
+  @media (max-width: 767px) {
+    .capability-card:nth-child(2), .capability-card:nth-child(3) { transform: none; }
+    .capability-card:nth-child(2):hover, .capability-card:nth-child(3):hover { transform: translateY(-2px); }
   }
 </style>

@@ -368,4 +368,18 @@ const { t, study, images }: Props = Astro.props;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+
+  .context, .problems, .built, .gallery, .results, .other-cases { border-top-color: var(--color-primary-20); }
+  .problem-card, .other-case, .shot-media { border-radius: var(--radius-sm); }
+  .problem-card { box-shadow: 5px 5px 0 rgba(96, 165, 250, 0.05); }
+  .problem-card:nth-child(2) { transform: translateY(20px); }
+  .problem-card:nth-child(2):hover { transform: translateY(16px); }
+  .problem-card:nth-child(3) { transform: translateY(40px); }
+  .problem-card:nth-child(3):hover { transform: translateY(36px); }
+  .hero-result { color: var(--color-primary); }
+
+  @media (max-width: 767px) {
+    .problem-card:nth-child(2), .problem-card:nth-child(3) { transform: none; }
+    .problem-card:nth-child(2):hover, .problem-card:nth-child(3):hover { transform: translateY(-2px); }
+  }
 </style>

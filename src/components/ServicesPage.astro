@@ -2,7 +2,6 @@
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 import SectionHead from './SectionHead.astro';
-import StatsBlocks from './StatsBlocks.astro';
 import BookCall from './BookCall.astro';
 import Faq from './Faq.astro';
 import type { Translations } from '../i18n/types';
@@ -28,7 +27,6 @@ const { t }: Props = Astro.props;
   <section class="components section-block reveal">
     <div class="container-site">
       <SectionHead
-        index={t.services.components.index}
         heading={t.services.components.heading}
         highlight={t.services.components.highlight}
         intro={t.services.components.intro}
@@ -51,21 +49,7 @@ const { t }: Props = Astro.props;
     </div>
   </section>
 
-  <section class="proof section-block reveal">
-    <div class="container-site">
-      <SectionHead
-        index={t.services.proof.index}
-        heading={t.services.proof.heading}
-        highlight={t.services.proof.highlight}
-        intro={t.services.proof.intro}
-      />
-
-      <StatsBlocks stats={t.services.proof.stats} />
-    </div>
-  </section>
-
   <Faq
-    index={t.services.faq.index}
     heading={t.services.faq.heading}
     highlight={t.services.faq.highlight}
     items={t.services.faq.items}
@@ -91,5 +75,17 @@ const { t }: Props = Astro.props;
 
   @media (min-width: 768px) {
     .components-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  .components { padding-top: 48px; }
+  .component-card { min-height: 260px; border-radius: var(--radius-sm); box-shadow: 6px 6px 0 rgba(96, 165, 250, 0.05); }
+  .component-card:nth-child(2) { transform: translateY(24px); }
+  .component-card:nth-child(2):hover { transform: translateY(20px); }
+  .component-card:nth-child(5) { transform: translateY(24px); }
+  .component-card:nth-child(5):hover { transform: translateY(20px); }
+
+  @media (max-width: 767px) {
+    .component-card:nth-child(2), .component-card:nth-child(5) { transform: none; }
+    .component-card:nth-child(2):hover, .component-card:nth-child(5):hover { transform: translateY(-2px); }
   }
 </style>

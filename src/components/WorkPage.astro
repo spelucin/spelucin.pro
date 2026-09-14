@@ -209,4 +209,20 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
       justify-content: center;
     }
   }
+
+  .cases { padding-top: 40px; }
+  .case-list { gap: 28px; }
+  .case-card { border-radius: var(--radius-sm); box-shadow: 8px 8px 0 rgba(96, 165, 250, 0.06); }
+  .case-card:nth-child(2) { transform: translateX(5%); }
+  .case-card:nth-child(2):hover { transform: translateX(5%) translateY(-3px); }
+  .case-card:nth-child(3) { transform: translateX(10%); }
+  .case-card:nth-child(3):hover { transform: translateX(10%) translateY(-3px); }
+  .case-media { filter: saturate(0.75); }
+  .case-title { font-size: clamp(22px, 3vw, 30px); letter-spacing: -0.045em; }
+  .case-link { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  @media (max-width: 767px) {
+    .case-card:nth-child(2), .case-card:nth-child(3) { transform: none; }
+    .case-card:nth-child(2):hover, .case-card:nth-child(3):hover { transform: translateY(-3px); }
+  }
 </style>

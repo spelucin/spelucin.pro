@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import dashboardHero from '../assets/dashboard-hero.jpg';
 import avatar from '../assets/alex-spelucin-avatar.jpg';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
@@ -46,39 +45,63 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 
 <main id="main-content">
   <section class="hero">
-    <div class="container-site hero-copy">
-      <h1>{t.home.hero.headline} <span class="text-primary">{t.home.hero.highlight}</span></h1>
-      <p class="hero-sub">{t.home.hero.sub}</p>
-      <a
-        class="btn btn-primary"
-        href={site.cal}
-        data-cal-modal
-        data-calendar
-        data-calendar-location="hero"
-        data-cta
-        data-cta-text={t.ctaLabel}
-        data-cta-location="hero"
-      >
-        {t.ctaLabel}
-        <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
-      </a>
-    </div>
-  </section>
-
-  <section class="hero-visual reveal" aria-label={t.home.hero.visualAlt}>
     <div class="container-site">
-      <figure class="hero-media">
-        <div class="hero-media-frame">
-          <Image
-            src={dashboardHero}
-            alt={t.home.hero.visualAlt}
-            format="avif"
-            widths={[640, 900, 1280]}
-            sizes="(min-width: 1024px) 980px, 92vw"
-            priority
-          />
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="hero-mark">MARKETING DATA / SYSTEMS</p>
+          <h1>{t.home.hero.headline} <span class="text-primary">{t.home.hero.highlight}</span></h1>
+          <p class="hero-sub">{t.home.hero.sub}</p>
+          <div class="hero-actions">
+            <a
+              class="btn btn-primary"
+              href={site.cal}
+              data-cal-modal
+              data-calendar
+              data-calendar-location="hero"
+              data-cta
+              data-cta-text={t.ctaLabel}
+              data-cta-location="hero"
+            >
+              {t.ctaLabel}
+              <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
+            </a>
+          </div>
         </div>
-      </figure>
+        <aside class="hero-preview" aria-label={t.home.hero.visualAlt}>
+          <div class="preview-bar">
+            <span class="preview-bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="preview-bar-title">CLIENT REPORTING SYSTEM</span>
+            <span class="preview-bar-status"><i></i>SYNC</span>
+          </div>
+          <div class="preview-metrics" role="list">
+            <div class="preview-metric" role="listitem">
+              <span class="preview-metric-label">Sessiones</span>
+              <strong class="preview-metric-value">12.4K</strong>
+              <span class="preview-metric-delta preview-delta-up">+8.2%</span>
+            </div>
+            <div class="preview-metric" role="listitem">
+              <span class="preview-metric-label">ROAS</span>
+              <strong class="preview-metric-value">4.6x</strong>
+              <span class="preview-metric-delta preview-delta-up">+0.4</span>
+            </div>
+            <div class="preview-metric" role="listitem">
+              <span class="preview-metric-label">Conversion</span>
+              <strong class="preview-metric-value">2.8%</strong>
+              <span class="preview-metric-delta preview-delta-down">-0.3</span>
+            </div>
+          </div>
+          <ul class="preview-sources" role="list">
+            <li><span>GA4</span><b>SYNCED</b></li>
+            <li><span>SEARCH CONSOLE</span><b>SYNCED</b></li>
+            <li><span>META ADS</span><b>SYNCED</b></li>
+            <li><span>CRM</span><b>SYNCED</b></li>
+          </ul>
+          <div class="preview-foot">
+            <span>BIGQUERY → LOOKER STUDIO</span>
+            <span>01 / 04</span>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
@@ -98,7 +121,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   <section class="problem home-section reveal">
     <div class="container-site">
       <SectionHead
-        index={t.home.problem.index}
         heading={t.home.problem.heading}
         highlight={t.home.problem.highlight}
         intro={t.home.problem.intro}
@@ -120,7 +142,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   <section class="sprint home-section reveal">
     <div class="container-site">
       <SectionHead
-        index={t.home.service.index}
         heading={t.home.service.heading}
         highlight={t.home.service.highlight}
         intro={t.home.service.intro}
@@ -189,16 +210,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
           {t.ctaLabel}
           <Icon name="tabler:arrow-up-right" width="18" height="18" aria-hidden="true" />
         </a>
-        <a
-          class="btn btn-secondary btn-lg"
-          href={localizeHref('/case-studies', t.lang)}
-          data-cta
-          data-cta-text={t.ctaSeeWork}
-          data-cta-location="home-sprint"
-        >
-          {t.ctaSeeWork}
-          <Icon name="tabler:arrow-right" width="18" height="18" aria-hidden="true" />
-        </a>
       </div>
     </div>
   </section>
@@ -207,7 +218,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     <div class="container-site">
       <SectionHead
         wide
-        index={t.home.proof.index}
         heading={t.home.proof.heading}
         highlight={t.home.proof.highlight}
         intro={t.home.proof.intro}
@@ -305,7 +315,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 
   <Faq
     sectionClass="home-section"
-    index={t.home.faq.index}
     heading={t.home.faq.heading}
     highlight={t.home.faq.highlight}
     items={t.home.faq.items}
@@ -323,36 +332,164 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 <style>
   .hero {
     position: relative;
-    padding: 128px 0 72px;
+    padding: 104px 0 76px;
+    border-bottom: 1px solid var(--color-primary-20);
     overflow: hidden;
-    text-align: center;
   }
   .hero::before {
     position: absolute;
-    inset: 0 0 auto;
-    height: 460px;
-    background-image: radial-gradient(circle, rgba(96, 165, 250, 0.11) 1px, transparent 1px);
-    background-size: 24px 24px;
-    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 86%);
-    mask-image: linear-gradient(to bottom, #000, transparent 86%);
+    inset: 0;
+    background-image: linear-gradient(90deg, rgba(96, 165, 250, 0.08) 1px, transparent 1px);
+    background-size: 25% 100%;
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, #000, transparent 80%);
+    mask-image: linear-gradient(to right, #000, transparent 80%);
     pointer-events: none;
     content: '';
   }
-  .hero-copy { position: relative; display: grid; justify-items: center; gap: 24px; max-width: 760px; }
-  .hero-copy h1 {
-    max-width: 15ch;
-    margin: 0;
-    font-size: clamp(42px, 7vw, 76px);
-    font-weight: 680;
-    letter-spacing: -0.065em;
-    line-height: 0.98;
+  .hero-inner {
+    position: relative;
+    display: grid;
+    gap: 56px;
+    align-items: center;
   }
-  .hero-sub { max-width: 520px; margin: 0; color: var(--color-foreground-65); font-size: 17px; line-height: 1.6; }
-  .hero-visual { padding-bottom: 72px; }
-  .hero-media { max-width: 980px; margin: 0 auto; }
-  .hero-media-frame { position: relative; overflow: hidden; border: 1px solid var(--color-primary-20); border-radius: var(--radius-lg); background: var(--color-card); box-shadow: 0 24px 70px rgba(4, 8, 16, 0.38); }
-  .hero-media-frame::after { position: absolute; inset: 0; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: inherit; pointer-events: none; content: ''; }
-  .hero-media img { display: block; width: 100%; height: auto; }
+  .hero-copy {
+    display: grid;
+    justify-items: start;
+    gap: 22px;
+    max-width: 640px;
+  }
+  .hero-mark {
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .hero-copy h1 {
+    margin: 0;
+    max-width: 13ch;
+    font-size: clamp(40px, 5.2vw, 66px);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 1.02;
+  }
+  .hero-sub {
+    max-width: 480px;
+    margin: 0;
+    color: var(--color-foreground-70);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .hero-preview {
+    display: grid;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--color-primary-28);
+    border-radius: var(--radius-sm);
+    background: rgba(9, 12, 18, 0.72);
+    box-shadow: 12px 12px 0 rgba(96, 165, 250, 0.08);
+  }
+  .preview-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-primary-14);
+    background: var(--color-card);
+  }
+  .preview-bar-dots { display: inline-flex; gap: 5px; }
+  .preview-bar-dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-foreground-35); }
+  .preview-bar-title {
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .preview-bar-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+  .preview-bar-status i {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+  }
+  .preview-metrics { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .preview-metric { display: grid; gap: 6px; padding: 18px 16px; }
+  .preview-metric + .preview-metric { border-left: 1px solid var(--color-primary-14); }
+  .preview-metric-label {
+    color: var(--color-foreground-45);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .preview-metric-value {
+    color: var(--color-foreground);
+    font-size: 26px;
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .preview-metric-delta { font-family: var(--font-mono); font-size: 10px; }
+  .preview-delta-up { color: var(--color-primary); }
+  .preview-delta-down { color: var(--color-foreground-45); }
+  .preview-sources { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-primary-14); }
+  .preview-sources li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 16px;
+    border-top: 1px solid var(--color-primary-8);
+  }
+  .preview-sources li:first-child { border-top: 0; }
+  .preview-sources span {
+    color: var(--color-foreground-55);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .preview-sources b {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+  .preview-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--color-primary-14);
+    color: var(--color-foreground-45);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
   .clients { border-top: 1px solid var(--color-primary-14); border-bottom: 1px solid var(--color-primary-14); }
   .clients-inner { display: flex; flex-direction: column; gap: 18px; padding-top: 22px; padding-bottom: 22px; }
@@ -533,5 +670,34 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 
   @media (min-width: 900px) {
     .sprint-fit { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  }
+
+  /* Composition refinements */
+  .clients { border-color: var(--color-primary-20); background: var(--color-primary-4); }
+  .client-logo img { filter: grayscale(1) contrast(1.2); opacity: 0.62; }
+  .home-section { padding: 132px 0; }
+  .problem-row { padding: 32px 0; }
+  .problem-row h3, .sprint-week h3 { font-size: 22px; font-weight: 650; }
+  .sprint-week-index { border-radius: var(--radius-sm); background: var(--color-card); }
+  .sprint-fit-col, .horizontal-card { border-radius: var(--radius-sm); }
+  .horizontal-card { background: rgba(9, 12, 18, 0.72); }
+  .horizontal-card:hover { box-shadow: 8px 8px 0 rgba(96, 165, 250, 0.1); }
+  .avatar { border-radius: var(--radius-sm); border-color: var(--color-primary-35); }
+  .stack-pills li { border-radius: var(--radius-sm); }
+
+  @media (min-width: 840px) {
+    .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(340px, 440px); gap: 72px; }
+  }
+
+  @media (min-width: 561px) and (max-width: 839px) {
+    .hero-preview { max-width: 460px; }
+  }
+
+  @media (max-width: 560px) {
+    .hero { padding-top: 72px; }
+    .hero-copy h1 { font-size: clamp(44px, 15vw, 60px); }
+    .preview-metric { padding: 14px 12px; }
+    .preview-metric-value { font-size: 20px; }
+    .preview-metric-delta { display: none; }
   }
 </style>
