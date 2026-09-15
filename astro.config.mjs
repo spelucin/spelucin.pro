@@ -10,9 +10,15 @@ export default defineConfig({
     icon(),
     gtm({ id: 'GTM-K7VLRW2S' }),
     sitemap({
-       filter: (page) => !page.includes('/404') && !page.includes('/privacidad') && !page.includes('/terminos'),
+       filter: (page) => !page.includes('/404') && !page.includes('/legal'),
     }),
   ],
+  redirects: {
+    '/privacidad': '/legal',
+    '/terminos': '/legal',
+    '/en/privacy': '/en/legal',
+    '/en/terms': '/en/legal',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
