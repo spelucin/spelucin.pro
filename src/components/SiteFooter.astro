@@ -54,8 +54,7 @@ const exploreLinks = t.siteNav.map((item) => ({
     <div class="footer-meta">
       <span>{t.footer.rights}</span>
       <nav class="footer-legal" aria-label={t.footer.legalNav}>
-        <a href="/privacidad">{t.footer.privacy}</a>
-        <a href="/terminos">{t.footer.terms}</a>
+        <a href={localizeHref('/legal', t.lang)}>{t.footer.legal}</a>
       </nav>
     </div>
   </div>

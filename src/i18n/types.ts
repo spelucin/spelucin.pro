@@ -351,7 +351,6 @@ export interface Translations {
     contactNav: string;
     legalNav: string;
     rights: string;
-    privacy: string;
-    terms: string;
+    legal: string;
   };
 }

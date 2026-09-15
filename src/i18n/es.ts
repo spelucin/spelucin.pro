@@ -747,7 +747,6 @@ export const t: Translations = {
     contactNav: 'Contacto',
     legalNav: 'Legal',
     rights: '© 2026 Alex Spelucin',
-    privacy: 'Privacidad',
-    terms: 'Términos',
+    legal: 'Privacidad y términos',
   },
 };
