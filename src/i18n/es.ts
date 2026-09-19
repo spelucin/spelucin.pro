@@ -220,8 +220,6 @@ export const t: Translations = {
       cta: 'Leer el caso de estudio de Notebook',
     },
     offer: {
-      heading: 'Toma un reporte',
-      highlight: 'y desármalo.',
       name: 'Revisión de medición',
       tag: 'Punto de partida',
       paragraphs: [

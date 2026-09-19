@@ -206,8 +206,6 @@ export interface Translations {
       cta: string;
     };
     offer: {
-      heading: string;
-      highlight: string;
       name: string;
       tag: string;
       paragraphs: string[];

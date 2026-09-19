@@ -220,8 +220,6 @@ export const t: Translations = {
       cta: 'Read the Notebook case study',
     },
     offer: {
-      heading: 'Take one report',
-      highlight: 'apart.',
       name: 'Measurement Teardown',
       tag: 'Starting point',
       paragraphs: [
