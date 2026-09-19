@@ -238,8 +238,8 @@ export const t: Translations = {
       ctaHint: '30 minutes, no pitch.',
     },
     engagement: {
-      heading: 'Start with one client,',
-      highlight: 'then scale it.',
+      heading: 'Try it on one client,',
+      highlight: 'then the whole list.',
       intro: 'We start with one client. If it works for the team, we roll it out to the rest.',
       steps: [
         {
