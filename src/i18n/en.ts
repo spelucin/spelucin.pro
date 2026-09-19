@@ -261,19 +261,19 @@ export const t: Translations = {
       ],
     },
     fit: {
-      heading: 'Where it',
-      highlight: 'fits.',
+      heading: 'Who this is',
+      highlight: 'for.',
       goodHeading: 'This may be useful if:',
       good: [
-        'You report for SEO clients and the numbers do not quite line up',
-        'You want to connect strategy with what pages and queries actually do',
-        'You want new clients to start from a shared base',
+        'You report for SEO clients and the numbers never quite line up',
+        'You want to point at the pages and queries that actually move the result',
+        'You want every new client to start from the same base, not from scratch',
       ],
       poorHeading: 'It is probably not for you if:',
       poor: [
-        'You work alone with one client',
-        'You want a free dashboard for a one-off problem',
-        'You want to hire an analyst, not improve the team\'s system',
+        'You are a solo analyst with one client',
+        'You need a one-off dashboard, not a repeatable system',
+        'You want to hire an analyst, not change how reporting is built',
       ],
     },
     faq: {

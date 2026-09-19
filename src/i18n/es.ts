@@ -261,19 +261,19 @@ export const t: Translations = {
       ],
     },
     fit: {
-      heading: 'Dónde',
-      highlight: 'encaja.',
+      heading: 'Para quién es',
+      highlight: 'este servicio.',
       goodHeading: 'Te puede servir si:',
       good: [
         'Reportas para clientes SEO y los números no terminan de cuadrar',
-        'Quieres relacionar la estrategia con lo que hacen las páginas y consultas',
-        'Quieres que los clientes nuevos partan de una base común',
+        'Quieres señalar las páginas y consultas que de verdad mueven el resultado',
+        'Quieres que cada cliente nuevo parta de la misma base, no desde cero',
       ],
       poorHeading: 'No es para ti si:',
       poor: [
         'Trabajas por tu cuenta con un solo cliente',
-        'Buscas un dashboard gratis para resolver algo puntual',
-        'Quieres contratar a un analista, no mejorar el sistema del equipo',
+        'Necesitas un dashboard puntual, no un sistema que se repita',
+        'Quieres sumar un analista, no cambiar cómo se arma el reporting',
       ],
     },
     faq: {
