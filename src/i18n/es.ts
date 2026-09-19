@@ -32,7 +32,7 @@ export const t: Translations = {
       label: 'Clientes con los que he trabajado:',
     },
     problem: {
-      heading: 'El costo de armar',
+      heading: 'Lo que cuesta armar',
       highlight: 'reportes a mano.',
       intro:
         'Si cada reporte empieza desde cero, los errores y las esperas terminan formando parte del trabajo.',
@@ -52,8 +52,8 @@ export const t: Translations = {
       ],
     },
     service: {
-      heading: 'El Sprint del',
-      highlight: 'Sistema de Reporting.',
+      heading: 'Cuatro semanas, un',
+      highlight: 'sistema de reporting.',
       intro: 'En cuatro semanas ordenamos las fuentes, definimos las métricas y dejamos funcionando el sistema detrás de tus reportes.',
       weeks: [
         { title: 'Semana 1 · Auditoría', text: 'Revisamos las fuentes y los reportes. Dejamos anotadas las diferencias.' },
@@ -135,7 +135,7 @@ export const t: Translations = {
     },
     credibility: {
       label: 'Hecho para el reporting de agencias',
-      text: 'Soy Alex Spelucin. Diseño sistemas de medición para agencias y equipos de reporting.',
+      text: 'Soy Alex Spelucin. Armo los sistemas de medición desde los que las agencias reportan.',
     },
     problem: {
       heading: 'Por qué las agencias se queman',
@@ -206,8 +206,8 @@ export const t: Translations = {
       ],
     },
     caseStudy: {
-      heading: 'Un sistema de medición,',
-      highlight: 'de verdad.',
+      heading: 'Notebook ahora reporta con',
+      highlight: 'un solo sistema.',
       intro: 'Notebook Agency necesitaba sostener su estrategia con datos, mes tras mes y para varios clientes. El sistema ahora alimenta cada reporte.',
       points: [
         '30+ clientes SEO atendidos por el sistema',
@@ -220,8 +220,8 @@ export const t: Translations = {
       cta: 'Leer el caso de estudio de Notebook',
     },
     offer: {
-      heading: 'Un punto de entrada',
-      highlight: 'de bajo costo.',
+      heading: 'Toma un reporte',
+      highlight: 'y desármalo.',
       name: 'Revisión de medición',
       tag: 'Punto de partida',
       paragraphs: [
@@ -334,8 +334,8 @@ export const t: Translations = {
     ],
   },
   stack: {
-    heading: 'La parte técnica que sostiene',
-    highlight: 'el reporting.',
+    heading: 'Bajo el capó',
+    highlight: 'del reporting.',
     intro: 'La data vive en BigQuery, se transforma con SQL y llega a los dashboards de Looker Studio.',
     layers: [
       {

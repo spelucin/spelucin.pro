@@ -52,8 +52,8 @@ export const t: Translations = {
       ],
     },
     service: {
-      heading: 'The Reporting',
-      highlight: 'System Sprint.',
+      heading: 'Four weeks, one',
+      highlight: 'reporting system.',
       intro: 'In four weeks we sort the sources, define the metrics and leave the system behind your reports working.',
       weeks: [
         { title: 'Week 1 · Audit', text: 'We review the sources and reports, then note where they differ.' },
@@ -135,7 +135,7 @@ export const t: Translations = {
     },
     credibility: {
       label: 'Built for agency reporting',
-      text: 'I am Alex Spelucin. I design measurement systems for agencies and reporting teams.',
+      text: "I'm Alex Spelucin. I build the measurement systems agencies report from.",
     },
     problem: {
       heading: 'Why agencies burn out',
@@ -206,8 +206,8 @@ export const t: Translations = {
       ],
     },
     caseStudy: {
-      heading: 'A measurement system,',
-      highlight: 'for real.',
+      heading: 'Notebook now reports from',
+      highlight: 'one system.',
       intro: 'Notebook Agency needed to use data consistently in monthly reporting across several clients. The system now feeds every report.',
       points: [
         '30+ SEO clients served by the system',
@@ -220,8 +220,8 @@ export const t: Translations = {
       cta: 'Read the Notebook case study',
     },
     offer: {
-      heading: 'A low-cost',
-      highlight: 'entry point.',
+      heading: 'Take one report',
+      highlight: 'apart.',
       name: 'Measurement Teardown',
       tag: 'Starting point',
       paragraphs: [
@@ -334,8 +334,8 @@ export const t: Translations = {
     ],
   },
   stack: {
-    heading: 'The tech that supports',
-    highlight: 'the reporting.',
+    heading: 'Under the hood',
+    highlight: 'of the reporting.',
     intro: 'Data lives in BigQuery, gets shaped with SQL and reaches the dashboards through Looker Studio.',
     layers: [
       {
@@ -495,8 +495,8 @@ export const t: Translations = {
       sub: 'Marketing data analyst building the systems agencies use to report.',
     },
     capabilities: {
-      heading: 'What I have',
-      highlight: 'craft in.',
+      heading: 'What I know how',
+      highlight: 'to do.',
       intro: 'Three areas where I work with marketing teams.',
     },
   },
