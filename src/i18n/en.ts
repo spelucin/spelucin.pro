@@ -206,7 +206,7 @@ export const t: Translations = {
       ],
     },
     caseStudy: {
-      heading: 'Notebook now reports from',
+      heading: 'Notebook Agency now reports from',
       highlight: 'one system.',
       intro: 'Notebook Agency needed to use data consistently in monthly reporting across several clients. The system now feeds every report.',
       points: [
@@ -217,7 +217,7 @@ export const t: Translations = {
         'Query-level measurement',
         'New reports without starting from scratch',
       ],
-      cta: 'Read the Notebook case study',
+      cta: 'Read the Notebook Agency case study',
     },
     offer: {
       name: 'Measurement Teardown',
@@ -650,7 +650,7 @@ export const t: Translations = {
         'View of the measurement system: final report',
       ],
       context: [
-        'Notebook is an SEO agency with B2B and SaaS clients. It needed consistent data in its monthly reporting.',
+        'Notebook Agency is an SEO agency with B2B and SaaS clients. It needed consistent data in its monthly reporting.',
       ],
       problems: [
         {

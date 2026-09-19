@@ -206,7 +206,7 @@ export const t: Translations = {
       ],
     },
     caseStudy: {
-      heading: 'Notebook ahora reporta con',
+      heading: 'Notebook Agency ahora reporta con',
       highlight: 'un solo sistema.',
       intro: 'Notebook Agency necesitaba sostener su estrategia con datos, mes tras mes y para varios clientes. El sistema ahora alimenta cada reporte.',
       points: [
@@ -217,7 +217,7 @@ export const t: Translations = {
         'Medición a nivel de consulta',
         'Reportes nuevos sin empezar desde cero',
       ],
-      cta: 'Leer el caso de estudio de Notebook',
+      cta: 'Leer el caso de estudio de Notebook Agency',
     },
     offer: {
       name: 'Revisión de medición',
@@ -651,7 +651,7 @@ export const t: Translations = {
         'Vista del sistema de medición: reporte final',
       ],
       context: [
-        'Notebook es una agencia SEO con clientes B2B y SaaS. Necesitaba usar datos de forma consistente en sus reportes mensuales.',
+        'Notebook Agency es una agencia SEO con clientes B2B y SaaS. Necesitaba usar datos de forma consistente en sus reportes mensuales.',
       ],
       problems: [
         {
