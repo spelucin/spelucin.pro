@@ -66,7 +66,7 @@ const { t }: Props = Astro.props;
 
 <style>
   .components-grid { display: grid; gap: 18px; }
-  .component-card { display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); transition: border-color 0.2s ease, transform 0.2s ease; }
+  .component-card { display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: var(--color-card); transition: border-color 0.2s ease, transform 0.2s ease; }
   .component-card:hover { border-color: var(--color-primary-35); transform: translateY(-2px); }
   .row-number { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
   .component-card h3 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.02em; }
@@ -78,7 +78,7 @@ const { t }: Props = Astro.props;
   }
 
   .components { padding-top: 48px; }
-  .component-card { min-height: 260px; border-radius: var(--radius-sm); box-shadow: 6px 6px 0 rgba(96, 165, 250, 0.05); }
+  .component-card { min-height: 260px; box-shadow: 6px 6px 0 rgba(96, 165, 250, 0.05); }
   .component-card:nth-child(2) { transform: translateY(24px); }
   .component-card:nth-child(2):hover { transform: translateY(20px); }
   .component-card:nth-child(5) { transform: translateY(24px); }
