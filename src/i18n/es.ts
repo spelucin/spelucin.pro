@@ -234,7 +234,7 @@ export const t: Translations = {
         'Un documento interno con los hallazgos y los siguientes pasos',
       ],
       cta: 'Agendar una revisión de medición',
-      ctaHint: '30 minutos, sin pitch.',
+      ctaHint: '20 minutos, sin pitch.',
     },
     engagement: {
       heading: 'Pruébalo con un cliente,',
