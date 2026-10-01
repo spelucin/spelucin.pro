@@ -110,9 +110,9 @@ const { t }: Props = Astro.props;
 
 <style>
   .bio-grid { display: grid; gap: 48px; align-items: start; }
-  .avatar { display: block; width: 100px; height: 100px; margin-bottom: 24px; border: 1px solid var(--color-primary-20); border-radius: 50%; object-fit: cover; }
+  .avatar { display: block; width: 100px; height: 100px; margin-bottom: 24px; border: 1px solid var(--color-primary-35); border-radius: var(--radius-sm); object-fit: cover; }
   .bio-paragraphs { display: grid; gap: 16px; color: var(--color-foreground-70); font-size: 18px; line-height: 1.7; }
-  .meta-dl { display: grid; gap: 0; margin: 0; padding: 20px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); }
+  .meta-dl { display: grid; gap: 0; margin: 0; padding: 20px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: var(--color-card); }
   .meta-dl div { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--color-primary-8); }
   .meta-dl div:last-child { border-bottom: 0; }
   .meta-dl dt { color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -120,7 +120,7 @@ const { t }: Props = Astro.props;
 
   .capabilities-grid { display: grid; gap: 18px; }
   .capability-card {
-    display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); transition: border-color 0.2s ease, transform 0.2s ease;
+    display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: var(--color-card); transition: border-color 0.2s ease, transform 0.2s ease;
   }
   .capability-card:hover { border-color: var(--color-primary-35); transform: translateY(-2px); }
   .row-number { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
@@ -130,10 +130,10 @@ const { t }: Props = Astro.props;
   .chips-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
 
   .stack-layers { display: grid; gap: 24px; }
-  .stack-layer { padding: 28px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-primary-4); }
+  .stack-layer { padding: 28px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: rgba(15, 18, 25, 0.7); }
   .stack-layer h3 { margin: 0 0 20px; color: var(--color-foreground-70); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
   .stack-items { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; }
-  .stack-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border: 1px solid var(--color-primary-14); border-radius: 999px; background: var(--color-card); font-size: 14px; font-weight: 500; }
+  .stack-item { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: var(--color-card); font-size: 14px; font-weight: 500; }
   .stack-item svg { color: var(--color-primary); }
 
   @media (min-width: 768px) {
@@ -143,13 +143,11 @@ const { t }: Props = Astro.props;
   }
 
   .bio { padding-top: 48px; }
-  .capability-card, .stack-layer, .meta-dl { border-radius: var(--radius-sm); }
   .capability-card { min-height: 300px; box-shadow: 6px 6px 0 rgba(96, 165, 250, 0.05); }
   .capability-card:nth-child(2) { transform: translateY(28px); }
   .capability-card:nth-child(2):hover { transform: translateY(24px); }
   .capability-card:nth-child(3) { transform: translateY(56px); }
   .capability-card:nth-child(3):hover { transform: translateY(52px); }
-  .stack-layer { background: rgba(15, 18, 25, 0.7); }
 
   @media (max-width: 767px) {
     .capability-card:nth-child(2), .capability-card:nth-child(3) { transform: none; }
