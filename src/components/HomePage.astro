@@ -491,18 +491,18 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     text-transform: uppercase;
   }
 
-  .clients { border-top: 1px solid var(--color-primary-14); border-bottom: 1px solid var(--color-primary-14); }
+  .clients { border-top: 1px solid var(--color-primary-14); border-bottom: 1px solid var(--color-primary-14); border-color: var(--color-primary-20); background: var(--color-primary-4); }
   .clients-inner { display: flex; flex-direction: column; gap: 18px; padding-top: 22px; padding-bottom: 22px; }
   .clients-label { margin: 0; color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
   .client-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 44px; margin: 0; padding: 0; list-style: none; }
-  .client-logo img { display: block; width: auto; height: var(--logo-h, 22px); filter: grayscale(1); opacity: 0.72; }
+  .client-logo img { display: block; width: auto; height: var(--logo-h, 22px); filter: grayscale(1) contrast(1.2); opacity: 0.62; }
 
-  .home-section { padding: 128px 0; }
+  .home-section { padding: 132px 0; }
 
   .problem-list { border-top: 1px solid var(--color-primary-14); }
-  .problem-row { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; padding: 26px 0; border-bottom: 1px solid var(--color-primary-14); }
+  .problem-row { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; padding: 32px 0; border-bottom: 1px solid var(--color-primary-14); }
   .row-number { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
-  .problem-row h3 { margin: 0; color: var(--color-foreground); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+  .problem-row h3 { margin: 0; color: var(--color-foreground); font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
   .problem-row p { max-width: 58ch; margin: 8px 0 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
 
   .sprint-weeks {
@@ -518,18 +518,18 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   .sprint-week::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 1px; background: var(--color-primary-14); }
   .sprint-week:first-child::before { top: 50%; }
   .sprint-week:last-child::before { bottom: 50%; }
-  .sprint-week-index { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; margin-top: 2px; border: 1px solid var(--color-primary-28); border-radius: 50%; background: var(--color-background); color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
-  .sprint-week h3 { margin: 0; color: var(--color-foreground); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+  .sprint-week-index { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; justify-self: center; width: 42px; height: 42px; margin-top: 2px; border: 1px solid var(--color-primary-28); border-radius: var(--radius-sm); background: var(--color-card); color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .sprint-week h3 { margin: 0; color: var(--color-foreground); font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
   .sprint-week p { max-width: 58ch; margin: 8px 0 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
 
   .sprint-include { margin-top: 56px; }
   .sprint-include h3 { margin: 0 0 18px; color: var(--color-foreground); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
   .sprint-include-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .sprint-include-list li { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--color-primary-14); border-radius: 999px; color: var(--color-foreground-70); font-size: 13.5px; }
+  .sprint-include-list li { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); color: var(--color-foreground-70); font-size: 13.5px; }
   .sprint-include-list svg { color: var(--color-primary); }
 
   .sprint-fit { display: grid; gap: 16px; margin-top: 56px; }
-  .sprint-fit-col { padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-md); background: var(--color-card); }
+  .sprint-fit-col { padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: var(--color-card); }
   .sprint-fit-col--poor { border-color: var(--color-primary-8); }
   .sprint-fit-col h3 { margin: 0 0 16px; color: var(--color-foreground); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
   .sprint-fit-col ul { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
@@ -545,8 +545,8 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     flex-direction: column;
     overflow: hidden;
     border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-md);
-    background: var(--color-card);
+    border-radius: var(--radius-sm);
+    background: rgba(9, 12, 18, 0.72);
     color: var(--color-foreground);
     text-decoration: none;
     transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -647,7 +647,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   .credibility { border-top: 1px solid var(--color-primary-14); }
   .credibility-grid { display: grid; gap: 64px; }
   .credibility-copy { max-width: 580px; }
-  .avatar { display: block; width: 88px; height: 88px; margin-bottom: 28px; border: 1px solid var(--color-primary-20); border-radius: 50%; object-fit: cover; }
+  .avatar { display: block; width: 88px; height: 88px; margin-bottom: 28px; border: 1px solid var(--color-primary-35); border-radius: var(--radius-sm); object-fit: cover; }
   .credibility .section-kicker { margin: 0 0 14px; }
   .credibility h2 { max-width: 17ch; margin: 0 0 20px; font-size: var(--text-h2); font-weight: 650; letter-spacing: -0.04em; line-height: 1.08; }
   .credibility-copy > p:last-child { max-width: 58ch; margin: 0; color: var(--color-foreground-55); font-size: 18px; line-height: 1.65; }
@@ -659,7 +659,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   .stack-note > span { color: var(--color-foreground); font-size: 18px; font-weight: 600; }
   .stack-note p { margin: 10px 0 18px; color: var(--color-foreground-55); font-size: 14px; line-height: 1.55; }
   .stack-pills { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
-  .stack-pills li { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border: 1px solid var(--color-primary-14); border-radius: 999px; color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; }
+  .stack-pills li { display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; }
   .stack-pills svg { color: var(--color-foreground-35); }
 
   @media (min-width: 700px) {
@@ -671,19 +671,6 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   @media (min-width: 900px) {
     .sprint-fit { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   }
-
-  /* Composition refinements */
-  .clients { border-color: var(--color-primary-20); background: var(--color-primary-4); }
-  .client-logo img { filter: grayscale(1) contrast(1.2); opacity: 0.62; }
-  .home-section { padding: 132px 0; }
-  .problem-row { padding: 32px 0; }
-  .problem-row h3, .sprint-week h3 { font-size: 22px; font-weight: 650; }
-  .sprint-week-index { border-radius: var(--radius-sm); background: var(--color-card); }
-  .sprint-fit-col, .horizontal-card { border-radius: var(--radius-sm); }
-  .horizontal-card { background: rgba(9, 12, 18, 0.72); }
-  .horizontal-card:hover { box-shadow: 8px 8px 0 rgba(96, 165, 250, 0.1); }
-  .avatar { border-radius: var(--radius-sm); border-color: var(--color-primary-35); }
-  .stack-pills li { border-radius: var(--radius-sm); }
 
   @media (min-width: 840px) {
     .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(340px, 440px); gap: 72px; }
