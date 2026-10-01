@@ -39,10 +39,14 @@
   --font-body: 'DM Sans Variable', 'DM Sans', sans-serif;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
 
-  /* Radius */
+  /* Radius — the only structural radius on the site.
+     Shape contract: every card, panel, chip, tag, icon box, media frame and
+     modal uses --radius-sm. Circles (border-radius: 50%) are reserved for
+     genuinely round things only — status dots, window-bar dots, pulse dots.
+     No pill shapes (999px). No larger radius on structural surfaces.
+     Declare radius once, on the component's own rule — never in a second
+     override block further down the file. */
   --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
 
   /* Type scale — single section heading */
   --text-h2: clamp(34px, 5vw, 58px);
@@ -90,7 +94,7 @@ button:focus-visible,
 summary:focus-visible {
   outline: 2px solid var(--color-ring);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 /* ============================================
@@ -241,7 +245,7 @@ summary:focus-visible {
     z-index: 200;
     padding: 10px 14px;
     border: 1px solid var(--color-primary-35);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     background: var(--color-card);
     color: var(--color-foreground);
     transform: translateY(-180%);
