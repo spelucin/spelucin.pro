@@ -1,0 +1,17 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import CommercialPage from '../../../../components/CommercialPage.astro';
+import { t } from '../../../../i18n/en';
+import { commercialEn } from '../../../../i18n/commercial-en';
+
+const page = commercialEn.pages.tiendanube;
+---
+
+<Layout
+  t={t}
+  title={page.seo.title}
+  description={page.seo.description}
+  breadcrumb={[{ name: 'Platforms', path: '/en/platforms' }, { name: 'Tiendanube', path: '/en/platforms/tiendanube' }]}
+>
+  <CommercialPage t={t} page={page} />
+</Layout>

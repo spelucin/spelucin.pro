@@ -1,0 +1,17 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import CommercialPage from '../../../../components/CommercialPage.astro';
+import { t } from '../../../../i18n/en';
+import { commercialEn } from '../../../../i18n/commercial-en';
+
+const page = commercialEn.pages.analysis;
+---
+
+<Layout
+  t={t}
+  title={page.seo.title}
+  description={page.seo.description}
+  breadcrumb={[{ name: 'Services', path: '/en/services' }, { name: 'Business analysis', path: '/en/services/business-analysis' }]}
+>
+  <CommercialPage t={t} page={page} />
+</Layout>

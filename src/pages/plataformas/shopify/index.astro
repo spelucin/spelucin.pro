@@ -1,0 +1,17 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CommercialPage from '../../../components/CommercialPage.astro';
+import { t } from '../../../i18n/es';
+import { commercialEs } from '../../../i18n/commercial-es';
+
+const page = commercialEs.pages.shopify;
+---
+
+<Layout
+  t={t}
+  title={page.seo.title}
+  description={page.seo.description}
+  breadcrumb={[{ name: 'Plataformas', path: '/plataformas' }, { name: 'Shopify', path: '/plataformas/shopify' }]}
+>
+  <CommercialPage t={t} page={page} />
+</Layout>

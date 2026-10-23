@@ -38,7 +38,7 @@ const descriptionTag = description ?? t.meta.description;
 const alternateLinks = [
   { hreflang: 'es', href: equivalentPath(Astro.url.pathname, 'es') },
   { hreflang: 'en', href: equivalentPath(Astro.url.pathname, 'en') },
-  { hreflang: 'x-default', href: '/' },
+  { hreflang: 'x-default', href: equivalentPath(Astro.url.pathname, 'es') },
 ];
 ---
 

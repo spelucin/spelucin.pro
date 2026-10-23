@@ -1,0 +1,139 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { CommercialCard } from '../i18n/commercialTypes';
+import type { Lang } from '../i18n/types';
+import { commercialHref } from '../data/commercialRoutes';
+
+interface Props {
+  cards: CommercialCard[];
+  lang: Lang;
+  linkLabel: string;
+  location?: string;
+}
+
+const { cards, lang, linkLabel, location = 'offers' } = Astro.props;
+
+const icons: Record<string, string> = {
+  implementation: 'tabler:settings-code',
+  audit: 'tabler:search',
+  dashboards: 'tabler:layout-dashboard',
+  analysis: 'tabler:chart-line',
+  shopify: 'simple-icons:shopify',
+};
+---
+
+<div class:list={["offer-grid", cards.length === 3 && "offer-grid--featured"]}>
+  {cards.map((card: CommercialCard, i: number) => (
+    <a
+      class:list={["offer-card", i === 0 && cards.length === 3 && "offer-card--featured"]}
+      href={commercialHref(card.key, lang)}
+      data-cta
+      data-cta-text={card.title}
+      data-cta-location={`${location}-${card.key}`}
+    >
+      <div class="offer-top">
+        <span class="offer-index">{String(i + 1).padStart(2, '0')}</span>
+        {card.key === 'tiendanube' ? (
+          <span class="offer-platform-name">Tiendanube</span>
+        ) : (
+          <span class="offer-icon"><Icon name={icons[card.key]} width="20" height="20" aria-hidden="true" /></span>
+        )}
+      </div>
+      <h3>{card.title}</h3>
+      <p>{card.text}</p>
+      <ul class="offer-tags" role="list">
+        {card.tags.map((tag: string) => <li>{tag}</li>)}
+      </ul>
+      <span class="offer-link">
+        <span>{linkLabel}</span>
+        <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
+      </span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .offer-grid { display: grid; gap: 18px; }
+  .offer-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 26px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    color: var(--color-foreground);
+    text-decoration: none;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .offer-card:hover {
+    border-color: var(--color-primary-35);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+  .offer-top { display: flex; align-items: center; justify-content: space-between; }
+  .offer-index { color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .offer-platform-name { color: var(--color-foreground-70); font-size: 13px; font-weight: 600; }
+  .offer-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    background: var(--color-primary-4);
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  }
+  .offer-icon svg { transition: transform 0.25s ease; }
+  .offer-card:hover .offer-icon {
+    border-color: var(--color-primary-35);
+    background: var(--color-primary-8);
+    transform: translateY(-2px);
+  }
+  .offer-card:hover .offer-icon svg { transform: scale(1.06); }
+  h3 { margin: 4px 0 0; font-size: 22px; font-weight: 650; letter-spacing: -0.03em; }
+  p { margin: 0; color: var(--color-foreground-55); font-size: 14.5px; line-height: 1.6; }
+  .offer-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 0; padding: 16px 0 0; list-style: none; }
+  .offer-tags li {
+    padding: 5px 9px;
+    border: 1px solid var(--color-primary-14);
+    border-radius: var(--radius-sm);
+    color: var(--color-foreground-45);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .offer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 14px;
+    border-top: 1px solid var(--color-primary-8);
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .offer-link svg { transition: transform 0.25s ease; }
+  .offer-card:hover .offer-link svg { transform: translate(2px, -2px); }
+  @media (min-width: 768px) {
+    .offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .offer-grid--featured { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+    .offer-grid--featured .offer-card--featured { grid-row: span 2; padding: 32px; }
+    .offer-grid--featured .offer-card--featured h3 { font-size: 27px; }
+    .offer-grid--featured .offer-card--featured p { max-width: 38ch; font-size: 15.5px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .offer-card,
+    .offer-icon,
+    .offer-icon svg,
+    .offer-link svg { transition: none; }
+    .offer-card:hover { transform: none; }
+    .offer-card:hover .offer-icon,
+    .offer-card:hover .offer-icon svg,
+    .offer-card:hover .offer-link svg { transform: none; }
+  }
+</style>

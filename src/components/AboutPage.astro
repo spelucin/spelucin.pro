@@ -88,7 +88,7 @@ const { t }: Props = Astro.props;
             <ul class="stack-items" role="list">
               {layer.items.map((item) => (
                 <li class="stack-item">
-                  <Icon name={item.icon} width="20" height="20" aria-hidden="true" />
+                  {item.icon && <Icon name={item.icon} width="20" height="20" aria-hidden="true" />}
                   <span>{item.name}</span>
                 </li>
               ))}
@@ -138,19 +138,11 @@ const { t }: Props = Astro.props;
 
   @media (min-width: 768px) {
     .bio-grid { grid-template-columns: 1.2fr 0.8fr; gap: 64px; }
-    .capabilities-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .capabilities-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
     .stack-layers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   .bio { padding-top: 48px; }
-  .capability-card { min-height: 300px; box-shadow: 6px 6px 0 rgba(96, 165, 250, 0.05); }
-  .capability-card:nth-child(2) { transform: translateY(28px); }
-  .capability-card:nth-child(2):hover { transform: translateY(24px); }
-  .capability-card:nth-child(3) { transform: translateY(56px); }
-  .capability-card:nth-child(3):hover { transform: translateY(52px); }
-
-  @media (max-width: 767px) {
-    .capability-card:nth-child(2), .capability-card:nth-child(3) { transform: none; }
-    .capability-card:nth-child(2):hover, .capability-card:nth-child(3):hover { transform: translateY(-2px); }
-  }
+  .capability-card { min-height: 300px; box-shadow: var(--shadow-panel); }
+  .capability-card:hover { box-shadow: var(--shadow-hover); }
 </style>

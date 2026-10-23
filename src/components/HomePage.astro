@@ -8,7 +8,11 @@ import SectionHead from './SectionHead.astro';
 import StatsBlocks from './StatsBlocks.astro';
 import BookCall from './BookCall.astro';
 import Faq from './Faq.astro';
+import OfferGrid from './OfferGrid.astro';
+import ServiceDiagram from './ServiceDiagram.astro';
 import type { Translations } from '../i18n/types';
+import { commercialEs } from '../i18n/commercial-es';
+import { commercialEn } from '../i18n/commercial-en';
 import { site } from '../data/site';
 import { caseImages } from '../data/caseImages';
 import { localizeHref } from '../utils/lang';
@@ -18,13 +22,9 @@ interface Props {
 }
 
 const { t }: Props = Astro.props;
-
-const clientLogos: { src: string; alt: string; height?: number }[] = [
-  { src: '/assets/notebook-client-logo.svg', alt: 'Notebook Agency', height: 30 },
-  { src: '/assets/torices-client-logo.svg', alt: 'Torices', height: 22 },
-  { src: '/assets/owlbox-client-logo.svg', alt: 'Owlbox', height: 22 },
-  { src: '/assets/picnic-client-logo.svg', alt: 'Picnic', height: 19 },
-];
+const commercial = t.lang === 'es' ? commercialEs : commercialEn;
+const offerCards = commercial.servicesHub.cards;
+const offerLinkLabel = t.lang === 'es' ? 'Ver servicio' : 'View service';
 
 const featuredCases = t.home.proof.featured.map((slug) => {
   const study = t.caseStudies[slug];
@@ -34,11 +34,6 @@ const featuredCases = t.home.proof.featured.map((slug) => {
     summary: workCase?.summary ?? study.context[0],
   };
 });
-const clientLogoMap: Record<string, { src: string; height: number }> = {
-  torices: { src: '/assets/torices-client-logo.svg', height: 20 },
-  notebook: { src: '/assets/notebook-client-logo.svg', height: 26 },
-  owlbox: { src: '/assets/owlbox-client-logo.svg', height: 20 },
-};
 ---
 
 <SiteHeader t={t} />
@@ -48,7 +43,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     <div class="container-site">
       <div class="hero-inner">
         <div class="hero-copy">
-          <p class="hero-mark">MARKETING DATA / SYSTEMS</p>
+          <p class="hero-mark">ECOMMERCE ANALYTICS / DATA SYSTEMS</p>
           <h1>{t.home.hero.headline} <span class="text-primary">{t.home.hero.highlight}</span></h1>
           <p class="hero-sub">{t.home.hero.sub}</p>
           <div class="hero-actions">
@@ -67,54 +62,10 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
             </a>
           </div>
         </div>
-        <aside class="hero-preview" aria-label={t.home.hero.visualAlt}>
-          <div class="preview-bar">
-            <span class="preview-bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span class="preview-bar-title">CLIENT REPORTING SYSTEM</span>
-            <span class="preview-bar-status"><i></i>SYNC</span>
-          </div>
-          <div class="preview-metrics" role="list">
-            <div class="preview-metric" role="listitem">
-              <span class="preview-metric-label">Sessiones</span>
-              <strong class="preview-metric-value">12.4K</strong>
-              <span class="preview-metric-delta preview-delta-up">+8.2%</span>
-            </div>
-            <div class="preview-metric" role="listitem">
-              <span class="preview-metric-label">ROAS</span>
-              <strong class="preview-metric-value">4.6x</strong>
-              <span class="preview-metric-delta preview-delta-up">+0.4</span>
-            </div>
-            <div class="preview-metric" role="listitem">
-              <span class="preview-metric-label">Conversion</span>
-              <strong class="preview-metric-value">2.8%</strong>
-              <span class="preview-metric-delta preview-delta-down">-0.3</span>
-            </div>
-          </div>
-          <ul class="preview-sources" role="list">
-            <li><span>GA4</span><b>SYNCED</b></li>
-            <li><span>SEARCH CONSOLE</span><b>SYNCED</b></li>
-            <li><span>META ADS</span><b>SYNCED</b></li>
-            <li><span>CRM</span><b>SYNCED</b></li>
-          </ul>
-          <div class="preview-foot">
-            <span>BIGQUERY → LOOKER STUDIO</span>
-            <span>01 / 04</span>
-          </div>
-        </aside>
       </div>
-    </div>
-  </section>
-
-  <section class="clients" aria-label={t.home.trust.label}>
-    <div class="container-site clients-inner">
-      <p class="clients-label">{t.home.trust.label}</p>
-      <ul class="client-logos" role="list">
-        {clientLogos.map((logo) => (
-          <li class="client-logo" style={`--logo-h: ${logo.height ?? 22}px`}>
-            <img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
-          </li>
-        ))}
-      </ul>
+      <div class="hero-diagram">
+        <ServiceDiagram variant="home" lang={t.lang} />
+      </div>
     </div>
   </section>
 
@@ -139,18 +90,34 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     </div>
   </section>
 
-  <section class="sprint home-section reveal">
+  <section class="offers home-section reveal">
     <div class="container-site">
       <SectionHead
-        heading={t.home.service.heading}
-        highlight={t.home.service.highlight}
-        intro={t.home.service.intro}
+        heading={t.home.offers.heading}
+        highlight={t.home.offers.highlight}
+        intro={t.home.offers.intro}
+      />
+      <OfferGrid
+        cards={offerCards}
+        lang={t.lang}
+        linkLabel={offerLinkLabel}
+        location="home-offers"
+      />
+    </div>
+  </section>
+
+  <section class="process home-section reveal">
+    <div class="container-site">
+      <SectionHead
+        heading={t.home.process.heading}
+        highlight={t.home.process.highlight}
+        intro={t.home.process.intro}
       />
 
-      <ol class="sprint-weeks" role="list">
-        {t.home.service.weeks.map((week, i) => (
-          <li class="sprint-week">
-            <span class="sprint-week-index">{String(i + 1).padStart(2, '0')}</span>
+      <ol class="process-list" role="list">
+        {t.home.process.weeks.map((week, i) => (
+          <li class="process-row">
+            <span class="process-index">{String(i + 1).padStart(2, '0')}</span>
             <div>
               <h3>{week.title}</h3>
               <p>{week.text}</p>
@@ -159,53 +126,44 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
         ))}
       </ol>
 
-      <div class="sprint-include">
-        <h3>{t.home.service.includeHeading}</h3>
-        <ul class="sprint-include-list" role="list">
-          {t.home.service.include.map((item) => (
-            <li>
-              <Icon name="tabler:check" width="14" height="14" aria-hidden="true" />
-              {item}
-            </li>
+      <div class="process-include">
+        <h3>{t.home.process.includeHeading}</h3>
+        <ul class="chip-list" role="list">
+          {t.home.process.include.map((item) => (
+            <li><Icon name="tabler:check" width="14" height="14" aria-hidden="true" />{item}</li>
           ))}
         </ul>
       </div>
 
-      <div class="sprint-fit">
-        <div class="sprint-fit-col">
-          <h3>{t.home.service.fit.goodHeading}</h3>
+      <div class="fit-grid">
+        <div class="fit-col">
+          <h3>{t.home.process.fit.goodHeading}</h3>
           <ul role="list">
-            {t.home.service.fit.good.map((item) => (
-              <li>
-                <Icon name="tabler:check" width="14" height="14" aria-hidden="true" />
-                {item}
-              </li>
+            {t.home.process.fit.good.map((item) => (
+              <li><Icon name="tabler:check" width="14" height="14" aria-hidden="true" />{item}</li>
             ))}
           </ul>
         </div>
-        <div class="sprint-fit-col sprint-fit-col--poor">
-          <h3>{t.home.service.fit.poorHeading}</h3>
+        <div class="fit-col fit-col--poor">
+          <h3>{t.home.process.fit.poorHeading}</h3>
           <ul role="list">
-            {t.home.service.fit.poor.map((item) => (
-              <li>
-                <Icon name="tabler:x" width="14" height="14" aria-hidden="true" />
-                {item}
-              </li>
+            {t.home.process.fit.poor.map((item) => (
+              <li><Icon name="tabler:x" width="14" height="14" aria-hidden="true" />{item}</li>
             ))}
           </ul>
         </div>
       </div>
 
-      <div class="showcase-cta sprint-cta">
+      <div class="section-cta">
         <a
           class="btn btn-primary btn-lg"
           href={site.cal}
           data-cal-modal
           data-calendar
-          data-calendar-location="home-sprint"
+          data-calendar-location="home-process"
           data-cta
           data-cta-text={t.ctaLabel}
-          data-cta-location="home-sprint"
+          data-cta-location="home-process"
         >
           {t.ctaLabel}
           <Icon name="tabler:arrow-up-right" width="18" height="18" aria-hidden="true" />
@@ -225,17 +183,17 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 
       <StatsBlocks stats={t.home.proof.stats} />
 
-      <div class="horizontal-cases">
+      <div class="case-list">
         {featuredCases.map((c) => (
           <a
-            class="horizontal-card"
+            class="case-card"
             href={localizeHref(`/case-studies/${c.slug}`, t.lang)}
             data-case-study
             data-case-study-slug={c.slug}
             data-case-study-name={c.client}
             data-case-study-industry={c.sector}
           >
-            <div class="horizontal-media">
+            <div class="case-media">
               <Image
                 src={caseImages[c.slug as keyof typeof caseImages][0]}
                 alt={c.alt}
@@ -245,23 +203,13 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
                 loading="lazy"
               />
             </div>
-            <div class="horizontal-body">
-              <h3 class="horizontal-title">{c.title}</h3>
-              <p class="horizontal-summary">{c.summary}</p>
-              <div class="horizontal-footer">
-                {clientLogoMap[c.slug] ? (
-                  <img
-                    src={clientLogoMap[c.slug].src}
-                    alt={c.client}
-                    class="client-logo-muted"
-                    style={`--logo-h: ${clientLogoMap[c.slug].height}px`}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : (
-                  <span class="badge-sub">{c.client}</span>
-                )}
-                <span class="horizontal-cta">
+            <div class="case-body">
+              <p class="case-meta">{c.sector} · {c.year}</p>
+              <h3 class="case-title">{c.title}</h3>
+              <p class="case-summary">{c.summary}</p>
+              <div class="case-footer">
+                <img src="/assets/owlbox-client-logo.svg" alt={c.client} class="case-logo" loading="lazy" decoding="async" />
+                <span class="case-link">
                   <span>{t.home.proof.caseCta}</span>
                   <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
                 </span>
@@ -271,7 +219,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
         ))}
       </div>
 
-      <div class="showcase-cta">
+      <div class="section-cta">
         <a
           class="btn btn-secondary btn-lg"
           href={localizeHref('/case-studies', t.lang)}
@@ -305,7 +253,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
           <p>{t.stack.intro}</p>
           <ul class="stack-pills" role="list">
             {t.stack.layers.flatMap((layer) => layer.items).slice(0, 8).map((item) => (
-              <li><Icon name={item.icon} width="14" height="14" aria-hidden="true" />{item.name}</li>
+              <li>{item.icon && <Icon name={item.icon} width="14" height="14" aria-hidden="true" />}{item.name}</li>
             ))}
           </ul>
         </div>
@@ -332,7 +280,7 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
 <style>
   .hero {
     position: relative;
-    padding: 104px 0 76px;
+    padding: 128px 0 96px;
     border-bottom: 1px solid var(--color-primary-20);
     overflow: hidden;
   }
@@ -347,157 +295,17 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
     pointer-events: none;
     content: '';
   }
-  .hero-inner {
-    position: relative;
-    display: grid;
-    gap: 56px;
-    align-items: center;
-  }
-  .hero-copy {
-    display: grid;
-    justify-items: start;
-    gap: 22px;
-    max-width: 640px;
-  }
-  .hero-mark {
-    margin: 0;
-    color: var(--color-primary);
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-  .hero-copy h1 {
-    margin: 0;
-    max-width: 13ch;
-    font-size: clamp(40px, 5.2vw, 66px);
-    font-weight: 700;
-    letter-spacing: -0.06em;
-    line-height: 1.02;
-  }
-  .hero-sub {
-    max-width: 480px;
-    margin: 0;
-    color: var(--color-foreground-70);
-    font-size: 17px;
-    line-height: 1.6;
-  }
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 6px;
-  }
+  .hero-inner { position: relative; }
+  .hero-copy { display: grid; justify-items: start; gap: 22px; max-width: 640px; }
+  .hero-mark { margin: 0; color: var(--color-primary); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .hero-copy h1 { margin: 0; max-width: 13ch; font-size: clamp(40px, 5.2vw, 66px); font-weight: 700; letter-spacing: -0.06em; line-height: 1.02; text-wrap: balance; }
+  .hero-sub { max-width: 480px; margin: 0; color: var(--color-foreground-70); font-size: 17px; line-height: 1.65; text-wrap: pretty; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
 
-  .hero-preview {
-    display: grid;
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid var(--color-primary-28);
-    border-radius: var(--radius-sm);
-    background: rgba(9, 12, 18, 0.72);
-    box-shadow: 12px 12px 0 rgba(96, 165, 250, 0.08);
-  }
-  .preview-bar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--color-primary-14);
-    background: var(--color-card);
-  }
-  .preview-bar-dots { display: inline-flex; gap: 5px; }
-  .preview-bar-dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-foreground-35); }
-  .preview-bar-title {
-    color: var(--color-foreground-55);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-  .preview-bar-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-left: auto;
-    color: var(--color-primary);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-  }
-  .preview-bar-status i {
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
-  }
-  .preview-metrics { display: grid; grid-template-columns: repeat(3, 1fr); }
-  .preview-metric { display: grid; gap: 6px; padding: 18px 16px; }
-  .preview-metric + .preview-metric { border-left: 1px solid var(--color-primary-14); }
-  .preview-metric-label {
-    color: var(--color-foreground-45);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .preview-metric-value {
-    color: var(--color-foreground);
-    font-size: 26px;
-    font-weight: 650;
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-  .preview-metric-delta { font-family: var(--font-mono); font-size: 10px; }
-  .preview-delta-up { color: var(--color-primary); }
-  .preview-delta-down { color: var(--color-foreground-45); }
-  .preview-sources { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-primary-14); }
-  .preview-sources li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 9px 16px;
-    border-top: 1px solid var(--color-primary-8);
-  }
-  .preview-sources li:first-child { border-top: 0; }
-  .preview-sources span {
-    color: var(--color-foreground-55);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .preview-sources b {
-    color: var(--color-primary);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-  }
-  .preview-foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 12px 16px;
-    border-top: 1px solid var(--color-primary-14);
-    color: var(--color-foreground-45);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
+  .hero-diagram { position: relative; margin-top: clamp(48px, 6vw, 72px); }
 
-  .clients { border-top: 1px solid var(--color-primary-14); border-bottom: 1px solid var(--color-primary-14); border-color: var(--color-primary-20); background: var(--color-primary-4); }
-  .clients-inner { display: flex; flex-direction: column; gap: 18px; padding-top: 22px; padding-bottom: 22px; }
-  .clients-label { margin: 0; color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
-  .client-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 44px; margin: 0; padding: 0; list-style: none; }
-  .client-logo img { display: block; width: auto; height: var(--logo-h, 22px); filter: grayscale(1) contrast(1.2); opacity: 0.62; }
-
-  .home-section { padding: 132px 0; }
+  .home-section { padding: clamp(88px, 9vw, 120px) 0; }
+  .home-section + .home-section { border-top: 1px solid var(--color-primary-14); }
 
   .problem-list { border-top: 1px solid var(--color-primary-14); }
   .problem-row { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: start; padding: 32px 0; border-bottom: 1px solid var(--color-primary-14); }
@@ -505,144 +313,48 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   .problem-row h3 { margin: 0; color: var(--color-foreground); font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
   .problem-row p { max-width: 58ch; margin: 8px 0 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
 
-  .sprint-weeks {
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 0;
-    list-style: none;
-    border-top: 1px solid var(--color-primary-14);
-    border-bottom: 1px solid var(--color-primary-14);
-  }
-  .sprint-week { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; padding: 28px 0; }
-  .sprint-week::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 1px; background: var(--color-primary-14); }
-  .sprint-week:first-child::before { top: 50%; }
-  .sprint-week:last-child::before { bottom: 50%; }
-  .sprint-week-index { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; justify-self: center; width: 42px; height: 42px; margin-top: 2px; border: 1px solid var(--color-primary-28); border-radius: var(--radius-sm); background: var(--color-card); color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
-  .sprint-week h3 { margin: 0; color: var(--color-foreground); font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
-  .sprint-week p { max-width: 58ch; margin: 8px 0 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
+  .process-list { margin: 0; padding: 0; list-style: none; display: grid; border-top: 1px solid var(--color-primary-14); border-bottom: 1px solid var(--color-primary-14); }
+  .process-row { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: start; padding: 28px 0; }
+  .process-row::before { content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 1px; background: var(--color-primary-14); }
+  .process-row:first-child::before { top: 50%; }
+  .process-row:last-child::before { bottom: 50%; }
+  .process-index { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; justify-self: center; width: 42px; height: 42px; margin-top: 2px; border: 1px solid var(--color-primary-28); border-radius: var(--radius-sm); background: var(--color-card); color: var(--color-primary); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; }
+  .process-row h3 { margin: 0; color: var(--color-foreground); font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
+  .process-row p { max-width: 58ch; margin: 8px 0 0; color: var(--color-foreground-55); font-size: 15px; line-height: 1.6; }
 
-  .sprint-include { margin-top: 56px; }
-  .sprint-include h3 { margin: 0 0 18px; color: var(--color-foreground); font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
-  .sprint-include-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .sprint-include-list li { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); color: var(--color-foreground-70); font-size: 13.5px; }
-  .sprint-include-list svg { color: var(--color-primary); }
+  .process-include { margin-top: 56px; }
+  .process-include h3 { margin: 0 0 18px; color: var(--color-foreground); font-size: 15px; font-weight: 600; }
+  .chip-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .chip-list li { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); color: var(--color-foreground-70); font-size: 13.5px; }
+  .chip-list svg { color: var(--color-primary); }
 
-  .sprint-fit { display: grid; gap: 16px; margin-top: 56px; }
-  .sprint-fit-col { padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: var(--color-card); }
-  .sprint-fit-col--poor { border-color: var(--color-primary-8); }
-  .sprint-fit-col h3 { margin: 0 0 16px; color: var(--color-foreground); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
-  .sprint-fit-col ul { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
-  .sprint-fit-col li { display: flex; align-items: flex-start; gap: 9px; color: var(--color-foreground-55); font-size: 14px; line-height: 1.5; }
-  .sprint-fit-col svg { flex-shrink: 0; margin-top: 2px; color: var(--color-primary); }
-  .sprint-fit-col--poor svg { color: var(--color-foreground-35); }
-  .sprint-cta { flex-wrap: wrap; gap: 12px; }
+  .fit-grid { display: grid; gap: 16px; margin-top: 56px; }
+  .fit-col { padding: 26px; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: var(--color-card); }
+  .fit-col--poor { border-color: var(--color-primary-8); }
+  .fit-col h3 { margin: 0 0 16px; color: var(--color-foreground); font-size: 16px; font-weight: 600; }
+  .fit-col ul { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
+  .fit-col li { display: flex; align-items: flex-start; gap: 9px; color: var(--color-foreground-55); font-size: 14px; line-height: 1.5; }
+  .fit-col svg { flex-shrink: 0; margin-top: 2px; color: var(--color-primary); }
+  .fit-col--poor svg { color: var(--color-foreground-35); }
 
-  .horizontal-cases { display: flex; flex-direction: column; gap: 20px; margin-top: 56px; }
-  .horizontal-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid var(--color-primary-14);
-    border-radius: var(--radius-sm);
-    background: rgba(9, 12, 18, 0.72);
-    color: var(--color-foreground);
-    text-decoration: none;
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .horizontal-card:hover {
-    border-color: var(--color-primary-35);
-    transform: translateY(-3px);
-    box-shadow: 8px 8px 0 rgba(96, 165, 250, 0.1);
-  }
-  .horizontal-media {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #080b11;
-  }
-  .horizontal-media img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  .horizontal-card:hover .horizontal-media img { transform: scale(1.035); }
-
-  .horizontal-body {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    justify-content: space-between;
-    gap: 14px;
-    padding: 24px 26px;
-  }
-  .client-logo-muted {
-    display: block;
-    width: auto;
-    height: var(--logo-h, 20px);
-    filter: grayscale(1);
-    opacity: 0.5;
-    transition: opacity 0.25s ease, filter 0.25s ease;
-  }
-  .horizontal-card:hover .client-logo-muted {
-    opacity: 0.85;
-    filter: grayscale(0.2);
-  }
-  .horizontal-title {
-    margin: 0;
-    font-size: clamp(18px, 2.2vw, 22px);
-    font-weight: 650;
-    letter-spacing: -0.025em;
-    line-height: 1.25;
-    color: var(--color-foreground);
-  }
-  .horizontal-summary {
-    margin: 0;
-    color: var(--color-foreground-55);
-    font-size: 14.5px;
-    line-height: 1.6;
-  }
-  .horizontal-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 14px;
-    border-top: 1px solid var(--color-primary-8);
-  }
-  .horizontal-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--color-primary);
-    font-size: 14px;
-    font-weight: 600;
-    transition: transform 0.2s ease;
-  }
-  .horizontal-card:hover .horizontal-cta { transform: translateX(4px); }
-  .showcase-cta { display: flex; justify-content: center; margin-top: 44px; }
+  .case-list { display: flex; flex-direction: column; gap: 20px; margin-top: 56px; }
+  .case-card { position: relative; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--color-primary-14); border-radius: var(--radius-sm); background: rgba(9, 12, 18, 0.72); color: var(--color-foreground); text-decoration: none; transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; }
+  .case-card:hover { border-color: var(--color-primary-35); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .case-card:focus-visible { border-color: var(--color-primary-35); box-shadow: var(--shadow-hover); }
+  .case-media { position: relative; overflow: hidden; width: 100%; aspect-ratio: 16 / 9; background: #080b11; }
+  .case-media :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .case-card:hover .case-media :global(img) { transform: scale(1.035); }
+  .case-body { display: flex; flex-direction: column; flex-grow: 1; justify-content: center; gap: 14px; padding: 24px 26px; }
+  .case-meta { margin: 0; color: var(--color-foreground-55); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .case-logo { display: block; width: auto; height: 20px; filter: grayscale(1); opacity: 0.5; transition: opacity 0.25s ease, filter 0.25s ease; }
+  .case-card:hover .case-logo { opacity: 0.85; filter: grayscale(0.2); }
+  .case-title { margin: 0; font-size: clamp(18px, 2.2vw, 22px); font-weight: 650; letter-spacing: -0.025em; line-height: 1.25; }
+  .case-summary { margin: 0; color: var(--color-foreground-55); font-size: 14.5px; line-height: 1.6; }
+  .case-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; border-top: 1px solid var(--color-primary-8); }
+  .case-link { display: inline-flex; align-items: center; gap: 6px; color: var(--color-primary); font-size: 14px; font-weight: 600; transition: transform 0.2s ease; }
+  .case-card:hover .case-link { transform: translateX(4px); }
+  .section-cta { display: flex; justify-content: center; margin-top: 44px; }
   .btn-lg { padding: 14px 28px; font-size: 15px; }
-
-  @media (min-width: 768px) {
-    .horizontal-card {
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      align-items: stretch;
-    }
-    .horizontal-media {
-      height: 100%;
-      aspect-ratio: auto;
-      border-right: 1px solid var(--color-primary-14);
-    }
-    .horizontal-body {
-      padding: 28px 32px;
-      justify-content: center;
-    }
-  }
 
   .credibility { border-top: 1px solid var(--color-primary-14); }
   .credibility-grid { display: grid; gap: 64px; }
@@ -663,28 +375,20 @@ const clientLogoMap: Record<string, { src: string; height: number }> = {
   .stack-pills svg { color: var(--color-foreground-35); }
 
   @media (min-width: 700px) {
-    .clients-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 32px; }
-    .client-logos { gap: 32px 56px; }
     .credibility-grid { grid-template-columns: 1fr 0.85fr; gap: 96px; }
   }
-
+  @media (min-width: 768px) {
+    .case-card { display: grid; grid-template-columns: 340px 1fr; align-items: stretch; }
+    .case-media { height: 100%; aspect-ratio: auto; border-right: 1px solid var(--color-primary-14); }
+    .case-body { padding: 28px 32px; }
+  }
   @media (min-width: 900px) {
-    .sprint-fit { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .fit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   }
-
-  @media (min-width: 840px) {
-    .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(340px, 440px); gap: 72px; }
-  }
-
-  @media (min-width: 561px) and (max-width: 839px) {
-    .hero-preview { max-width: 460px; }
-  }
-
   @media (max-width: 560px) {
-    .hero { padding-top: 72px; }
+    .hero { padding: 104px 0 64px; }
+    .hero-diagram { margin-top: 40px; }
     .hero-copy h1 { font-size: clamp(44px, 15vw, 60px); }
-    .preview-metric { padding: 14px 12px; }
-    .preview-metric-value { font-size: 20px; }
-    .preview-metric-delta { display: none; }
+    .home-section { padding: 76px 0; }
   }
 </style>

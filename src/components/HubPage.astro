@@ -1,0 +1,68 @@
+---
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import CommercialHero from './CommercialHero.astro';
+import OfferGrid from './OfferGrid.astro';
+import SectionHead from './SectionHead.astro';
+import Faq from './Faq.astro';
+import BookCall from './BookCall.astro';
+import type { Translations } from '../i18n/types';
+import type { HubContent } from '../i18n/commercialTypes';
+
+interface Props {
+  t: Translations;
+  hub: HubContent;
+  location: 'services' | 'platforms';
+}
+
+const { t, hub, location }: Props = Astro.props;
+const linkLabel = t.lang === 'es' ? 'Ver página' : 'View page';
+---
+
+<SiteHeader t={t} />
+
+<main id="main-content">
+  <CommercialHero
+    eyebrow={hub.eyebrow}
+    headline={hub.hero.headline}
+    highlight={hub.hero.highlight}
+    sub={hub.hero.sub}
+    ctaLabel={t.ctaLabel}
+    ctaPrimary={t.ctaLabel}
+    ctaLocation={`${location}-hub`}
+    lang={t.lang}
+  />
+
+  <section class="hub-section reveal">
+    <div class="container-site">
+      <SectionHead
+        heading={hub.cardsHeading}
+        highlight={hub.cardsHighlight}
+        intro={hub.cardsIntro}
+      />
+      <OfferGrid cards={hub.cards} lang={t.lang} linkLabel={linkLabel} location={`${location}-hub`} />
+    </div>
+  </section>
+
+  <Faq
+    sectionClass="hub-section"
+    heading={hub.faq.heading}
+    highlight={hub.faq.highlight}
+    items={hub.faq.items}
+  />
+
+  <BookCall t={t} location={`${location}-hub`} />
+</main>
+
+<SiteFooter t={t} />
+
+<script>
+  import '../scripts/reveal';
+</script>
+
+<style>
+  .hub-section { padding: var(--space-block) 0; border-top: 1px solid var(--color-primary-14); }
+  @media (max-width: 560px) {
+    .hub-section { padding: 76px 0; }
+  }
+</style>

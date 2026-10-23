@@ -1,0 +1,122 @@
+---
+import { Icon } from 'astro-icon/components';
+import ServiceDiagram from './ServiceDiagram.astro';
+import type { Lang } from '../i18n/types';
+import { site } from '../data/site';
+
+interface Props {
+  eyebrow: string;
+  headline: string;
+  highlight: string;
+  sub: string;
+  ctaLabel: string;
+  ctaPrimary: string;
+  ctaLocation: string;
+  lang: Lang;
+  showCta?: boolean;
+}
+
+const {
+  eyebrow,
+  headline,
+  highlight,
+  sub,
+  ctaLabel,
+  ctaPrimary,
+  ctaLocation,
+  lang,
+  showCta = true,
+} = Astro.props;
+---
+
+<section class="commercial-hero commercial-hero--with-diagram">
+  <div class="container-site">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-mark">{eyebrow}</p>
+        <h1>{headline} <span class="text-primary">{highlight}</span></h1>
+        <p class="hero-sub">{sub}</p>
+        {showCta && (
+          <div class="hero-actions">
+            <a
+              class="btn btn-primary"
+              href={site.cal}
+              data-cal-modal
+              data-calendar
+              data-calendar-location={ctaLocation}
+              data-cta
+              data-cta-text={ctaLabel}
+              data-cta-location={ctaLocation}
+            >
+              {ctaPrimary}
+              <Icon name="tabler:arrow-up-right" width="16" height="16" aria-hidden="true" />
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+    <div class="hero-diagram">
+      <ServiceDiagram variant="home" lang={lang} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .commercial-hero {
+    position: relative;
+    padding: 128px 0 96px;
+    border-bottom: 1px solid var(--color-primary-20);
+    overflow: hidden;
+  }
+  .commercial-hero::before {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(90deg, rgba(96, 165, 250, 0.08) 1px, transparent 1px);
+    background-size: 25% 100%;
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, #000, transparent 80%);
+    mask-image: linear-gradient(to right, #000, transparent 80%);
+    pointer-events: none;
+    content: '';
+  }
+  .hero-inner { position: relative; }
+  .hero-copy {
+    display: grid;
+    justify-items: start;
+    gap: 22px;
+    max-width: 640px;
+  }
+  .hero-mark {
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 0;
+    max-width: 15ch;
+    font-size: clamp(40px, 5.2vw, 66px);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 1.02;
+  }
+  .hero-sub {
+    max-width: 520px;
+    margin: 0;
+    color: var(--color-foreground-70);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+  .hero-diagram { position: relative; margin-top: clamp(44px, 6vw, 72px); }
+  .commercial-hero--with-diagram { padding-bottom: 56px; }
+
+  @media (max-width: 560px) {
+    .commercial-hero { padding: 104px 0 64px; }
+    .commercial-hero--with-diagram { padding-bottom: 44px; }
+    h1 { font-size: clamp(42px, 14vw, 58px); }
+    .hero-diagram { margin-top: 40px; }
+  }
+</style>

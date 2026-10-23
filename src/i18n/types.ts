@@ -22,7 +22,7 @@ export interface ProcessStep {
 
 export interface StackItem {
   name: string;
-  icon: string;
+  icon?: string;
 }
 
 export interface StackLayer {
@@ -38,19 +38,6 @@ export interface FaqItem {
 export interface StatBlock {
   value: string;
   label: string;
-}
-
-export interface ServiceComponent {
-  title: string;
-  text: string;
-  tags: string[];
-}
-
-export interface SystemStep {
-  title: string;
-  text: string;
-  detail: string;
-  image: { alt: string; caption: string };
 }
 
 export interface CaseTeaser {
@@ -97,7 +84,7 @@ export interface CaseStudy {
 
 export type CaseStudyKey = Exclude<
   keyof Translations['caseStudies'],
-  'challengeHeading' | 'contextHeading' | 'galleryHeading' | 'moreHeading' | 'backToWork'
+  'challengeHeading' | 'contextHeading' | 'galleryHeading' | 'moreHeading' | 'backToWork' | 'outcomeLabel'
 >;
 
 export interface FocusItem {
@@ -105,6 +92,28 @@ export interface FocusItem {
   tagline: string;
   detail: string;
   tags: string[];
+}
+
+export interface PreviewMetric {
+  label: string;
+  value: string;
+  delta?: string;
+  trend?: 'up' | 'down';
+}
+
+export interface PreviewSource {
+  name: string;
+  status: string;
+}
+
+export interface PreviewContent {
+  title: string;
+  status: string;
+  label: string;
+  metrics: PreviewMetric[];
+  sources: PreviewSource[];
+  footLeft: string;
+  footRight: string;
 }
 
 export interface Translations {
@@ -118,7 +127,6 @@ export interface Translations {
   };
   skipLink: string;
 
-  /* Multi-page navigation and persistent labels */
   siteNav: NavItem[];
   ctaLabel: string;
   ctaSeeWork: string;
@@ -132,10 +140,6 @@ export interface Translations {
       headline: string;
       highlight: string;
       sub: string;
-      visualAlt: string;
-    };
-    trust: {
-      label: string;
     };
     problem: {
       heading: string;
@@ -143,7 +147,12 @@ export interface Translations {
       intro: string;
       items: PainItem[];
     };
-    service: {
+    offers: {
+      heading: string;
+      highlight: string;
+      intro: string;
+    };
+    process: {
       heading: string;
       highlight: string;
       intro: string;
@@ -172,74 +181,6 @@ export interface Translations {
     };
   };
 
-  seoAgencies: {
-    seo: Seo;
-    hero: {
-      eyebrow: string;
-      headline: string;
-      highlight: string;
-      sub: string;
-      visualAlt: string;
-      ctaPrimary: string;
-    };
-    credibility: {
-      label: string;
-      text: string;
-    };
-    problem: {
-      heading: string;
-      highlight: string;
-      intro: string;
-      items: PainItem[];
-    };
-    system: {
-      heading: string;
-      highlight: string;
-      intro: string;
-      blocks: SystemStep[];
-    };
-    caseStudy: {
-      heading: string;
-      highlight: string;
-      intro: string;
-      points: string[];
-      cta: string;
-    };
-    offer: {
-      name: string;
-      tag: string;
-      paragraphs: string[];
-      items: string[];
-      cta: string;
-      ctaHint: string;
-    };
-    engagement: {
-      heading: string;
-      highlight: string;
-      intro: string;
-      steps: ProcessStep[];
-    };
-    fit: {
-      heading: string;
-      highlight: string;
-      goodHeading: string;
-      good: string[];
-      poorHeading: string;
-      poor: string[];
-    };
-    faq: {
-      heading: string;
-      highlight: string;
-      items: FaqItem[];
-    };
-    finalCta: {
-      heading: string;
-      highlight: string;
-      sub: string;
-      ctaPrimary: string;
-    };
-  };
-
   process: {
     heading: string;
     intro: string;
@@ -257,27 +198,6 @@ export interface Translations {
     heading: string;
     sub: string;
     hint: string;
-  };
-
-  services: {
-    seo: Seo;
-    hero: {
-      badge: string;
-      headline: string;
-      highlight: string;
-      sub: string;
-    };
-    components: {
-      heading: string;
-      highlight: string;
-      intro: string;
-      items: ServiceComponent[];
-    };
-    faq: {
-      heading: string;
-      highlight: string;
-      items: FaqItem[];
-    };
   };
 
   work: {
@@ -322,9 +242,8 @@ export interface Translations {
     galleryHeading: string;
     moreHeading: string;
     backToWork: string;
-    torices: CaseStudy;
+    outcomeLabel: string;
     owlbox: CaseStudy;
-    notebook: CaseStudy;
   };
 
   header: {

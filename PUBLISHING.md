@@ -53,4 +53,8 @@ The GTM API token is read-only, so the `language_switch` resources were NOT crea
 
 - `bookingSuccessfulV2` from the Cal embed exposes no attendee email → booking leads carry no PII. Keep it that way.
 - Data-layer variables use `dataLayerVersion: 2`.
+
+## Current positioning and implementation guidance
+
+The current offer is ecommerce analytics and data systems for growing LATAM stores. See [AGENTS.md](AGENTS.md) for repository conventions and [brand/positioning.md](brand/positioning.md) for the four service scopes, pricing hypotheses, platform focus, visual constraints, and claim rules. Keep these documents in sync with public service copy when scope changes.
 - Container naming convention: tags `GA4 - <event>`, triggers `Event - <event>`, variables `dlv - <key>`.
