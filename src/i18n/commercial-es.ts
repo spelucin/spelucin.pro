@@ -20,7 +20,7 @@ export const commercialEs: CommercialContent = {
       {
         key: 'implementation',
         title: 'Implementación de tracking',
-        text: 'Configuro GA4 y Google Tag Manager para medir eventos de ecommerce y compras en un recorrido estándar.',
+        text: 'Configuro GA4 y Google Tag Manager para medir compras; tracking server-side disponible desde US$500, sujeto a factibilidad.',
         tags: ['Desde US$300', 'Pago único', 'GA4 · GTM'],
       },
       {
@@ -121,13 +121,13 @@ export const commercialEs: CommercialContent = {
       seo: {
         title: 'Implementación de tracking ecommerce: GA4 y GTM | Alex Spelucin',
         description:
-          'Configuración de GA4 y Google Tag Manager, eventos estándar de ecommerce, compra validada y documentación para una tienda.',
+          'Implementación de GA4 y Google Tag Manager, eventos estándar de ecommerce y opción de tracking server-side según la arquitectura de la tienda.',
       },
       eyebrow: 'IMPLEMENTACIÓN DE TRACKING',
       hero: {
         headline: 'Mide el recorrido de compra',
         highlight: 'desde la primera visita.',
-        sub: 'Configuro GA4 y Google Tag Manager para una tienda y un recorrido estándar de compra. Shopify es el foco inicial; el alcance de Tiendanube se confirma según los accesos y la configuración de cada tienda.',
+        sub: 'Configuro GA4 y Google Tag Manager para medir el recorrido de compra. Shopify es el foco inicial; confirmo Tiendanube tienda por tienda. Tracking server-side parte de US$500 como opción independiente, sujeto a validar arquitectura y accesos.',
         ctaPrimary: 'Agendar una llamada',
       },
       problem: {
@@ -148,6 +148,7 @@ export const commercialEs: CommercialContent = {
           { title: 'GA4 y GTM', text: 'Una tienda, una propiedad de GA4 y un contenedor de Google Tag Manager.' },
           { title: 'Eventos estándar', text: 'Eventos de ecommerce y purchase para los pasos que permita el recorrido estándar de compra.' },
           { title: 'Prueba y handover', text: 'Validación básica de compra, revisión de duplicados visibles y documentación de la configuración entregada.' },
+          { title: 'Tracking server-side', text: 'Opción de US$500, pago único, para una tienda y un recorrido estándar; primero confirmo compatibilidad, infraestructura y accesos.' },
         ],
       },
       pricing: {
@@ -167,33 +168,48 @@ export const commercialEs: CommercialContent = {
         boundaries: [
           'Desarrollo complejo o personalizado de data layer.',
           'Checkout personalizado o pasos fuera del recorrido estándar.',
-          'Tracking server-side.',
           'Integraciones extensas, múltiples tiendas, propiedades o contenedores.',
         ],
+        alternative: {
+          heading: 'Tracking server-side',
+          amount: 'US$500',
+          cadence: 'pago único · precio inicial sujeto a validar',
+          detail: 'Alcance para una tienda y un recorrido estándar de compra; confirmo arquitectura, destino de datos y accesos antes de cerrar la propuesta.',
+          scopeHeading: 'Alcance de partida',
+          scope: [
+            'Configuración de un flujo server-side para una tienda y una propiedad de GA4, sujeto a compatibilidad.',
+            'Prueba básica del evento de compra y documentación del flujo entregado.',
+          ],
+          boundariesHeading: 'No incluye',
+          boundaries: [
+            'Hosting, consumo de nube, conectores ni costos de terceros.',
+            'Checkout o data layer personalizado, varias tiendas o propiedades e integraciones extensas.',
+          ],
+        },
       },
       process: {
         heading: 'De la configuración',
         highlight: 'a una compra validada.',
         intro: 'Primero confirmo que el recorrido y los permisos caben en el alcance estándar.',
         steps: [
-          { title: 'Revisar accesos', text: 'Confirmamos tienda, GA4, GTM y pasos del checkout que se pueden probar.' },
-          { title: 'Configurar eventos', text: 'Implemento la estructura acordada para el recorrido estándar y purchase.' },
-          { title: 'Probar y documentar', text: 'Valido el evento de compra y entrego documentación de la configuración.' },
+          { title: 'Revisar accesos', text: 'Confirmamos tienda, GA4, GTM, recorrido y, si aplica, la infraestructura server-side disponible.' },
+          { title: 'Configurar eventos', text: 'Implemento los eventos web y el flujo server-side que queden definidos en el alcance.' },
+          { title: 'Probar y documentar', text: 'Valido la compra y cada flujo incluido; documento la configuración entregada.' },
         ],
       },
       deliverables: {
         heading: 'Lo que',
         highlight: 'recibes.',
         intro: 'La implementación queda entendible y lista para que el equipo sepa qué se mide.',
-        items: ['Configuración acordada en GA4 y GTM', 'Eventos estándar de ecommerce', 'Prueba básica de compra', 'Documento de implementación'],
+        items: ['Configuración acordada en GA4 y GTM', 'Eventos estándar de ecommerce', 'Prueba básica de compra', 'Flujo server-side si se cotizó', 'Documento de implementación'],
       },
       fit: {
         heading: 'Cuándo',
         highlight: 'encaja.',
         goodHeading: 'Buen punto de partida',
-        good: ['La tienda necesita una implementación inicial de GA4 y GTM.', 'El recorrido de compra es estándar y accesible para probar.', 'Hay una propiedad y un contenedor que el equipo puede compartir.'],
+        good: ['La tienda necesita una implementación inicial de GA4 y GTM.', 'El recorrido de compra es estándar y accesible para probar.', 'Quieres evaluar tracking server-side con accesos y arquitectura disponibles.'],
         poorHeading: 'Requiere otro alcance',
-        poor: ['Checkout o data layer altamente personalizados.', 'Tracking server-side o integraciones extensas.', 'Varias tiendas, contenedores o propiedades en el mismo proyecto.'],
+        poor: ['Checkout o data layer altamente personalizados sin alcance definido.', 'La infraestructura o los permisos necesarios no están disponibles.', 'Varias tiendas, contenedores o propiedades en el mismo proyecto.'],
       },
       faq: {
         heading: 'Preguntas',
@@ -201,7 +217,7 @@ export const commercialEs: CommercialContent = {
         items: [
           { q: '¿Esto incluye una auditoría completa?', a: 'No. Incluye una validación básica de la implementación y la compra. Si necesitas revisar una configuración existente en profundidad, podemos definir una auditoría aparte.' },
           { q: '¿Incluye un checkout personalizado?', a: 'No en el precio de partida. Primero revisamos el recorrido y cotizamos por separado el trabajo personalizado.' },
-          { q: '¿Incluye tracking server-side?', a: 'No. El alcance estándar es una implementación web con GA4 y GTM; server-side requiere un proyecto y una cotización separados.' },
+          { q: '¿Cuánto cuesta la implementación server-side?', a: 'La opción tiene un precio inicial de US$500, pago único, para el alcance descrito en esta página. Confirmo antes la compatibilidad, los accesos y los costos externos; no incluye hosting ni consumo de nube.' },
         ],
       },
       relatedHeading: 'También puedes',

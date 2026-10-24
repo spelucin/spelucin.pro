@@ -163,13 +163,13 @@ const alternateLinks = [
     window.dataLayer ?? (window.dataLayer = []);
 
   document.addEventListener('click', (event) => {
-    const target = event.target instanceof HTMLElement ? event.target : null;
+    const target = event.target instanceof Element ? event.target : null;
 
     const cta = target?.closest<HTMLElement>('[data-cta]');
     if (cta) {
       dataLayer.push({
         event: 'cta_click',
-        cta_text: cta.dataset.ctaText,
+        cta_text: cta.dataset.ctaText ?? cta.getAttribute('aria-label') ?? cta.textContent?.replace(/\s+/g, ' ').trim(),
         cta_location: cta.dataset.ctaLocation,
       });
     }

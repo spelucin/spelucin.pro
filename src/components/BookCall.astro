@@ -7,12 +7,15 @@ interface Props {
   t: Translations;
   id?: string;
   location?: string;
+  quiet?: boolean;
 }
 
-const { t, id, location = 'cta-section' } = Astro.props;
+const { t, id, location = 'cta-section', quiet = false } = Astro.props;
+
+const ctaClasses = ['cta', quiet && 'cta--quiet'].filter(Boolean).join(' ');
 ---
 
-<section class="cta" id={id}>
+<section class={ctaClasses} id={id}>
   <div class="container-site">
     <div class="cta-panel">
       <div class="cta-copy">
@@ -88,6 +91,19 @@ const { t, id, location = 'cta-section' } = Astro.props;
     gap: 12px;
   }
 
+  .cta--quiet { padding-top: 24px; }
+  .cta--quiet .cta-panel {
+    padding: 30px 0;
+    border: 0;
+    border-top: 1px solid var(--color-primary-14);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .cta--quiet h2 { max-width: 22ch; margin: 0; font-size: clamp(24px, 2.8vw, 32px); line-height: 1.12; }
+  .cta--quiet .cta-sub { margin-top: 10px; font-size: 15px; }
+  .cta--quiet .cta-hint { margin-top: 10px; font-size: 10px; }
+
   @media (min-width: 768px) {
     .cta {
       padding-bottom: 120px;
@@ -97,6 +113,7 @@ const { t, id, location = 'cta-section' } = Astro.props;
       align-items: center;
       padding: 60px 64px;
     }
+    .cta--quiet .cta-panel { padding: 30px 0; }
     .cta-actions {
       justify-content: flex-end;
     }

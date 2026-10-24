@@ -40,6 +40,9 @@ const exploreLinks = t.siteNav.map((item) => ({
             href={link.href}
             target={link.external ? '_blank' : undefined}
             rel={link.external ? 'noopener' : undefined}
+            data-cta
+            data-cta-text={link.label}
+            data-cta-location="footer"
             data-cal-modal={link.tag === 'calendar' ? true : undefined}
             data-calendar={link.tag === 'calendar' ? true : undefined}
             data-calendar-location={link.tag === 'calendar' ? 'footer' : undefined}

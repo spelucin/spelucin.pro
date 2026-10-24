@@ -20,7 +20,7 @@ export const commercialEn: CommercialContent = {
       {
         key: 'implementation',
         title: 'Tracking implementation',
-        text: 'I configure GA4 and Google Tag Manager to measure ecommerce events and purchases across a standard journey.',
+        text: 'I configure GA4 and Google Tag Manager to measure purchases; server-side tracking is available from US$500, subject to feasibility.',
         tags: ['From US$300', 'One-time', 'GA4 · GTM'],
       },
       {
@@ -121,13 +121,13 @@ export const commercialEn: CommercialContent = {
       seo: {
         title: 'Ecommerce tracking implementation: GA4 and GTM | Alex Spelucin',
         description:
-          'GA4 and Google Tag Manager setup, standard ecommerce events, purchase validation and documentation for one store.',
+          'GA4 and Google Tag Manager implementation, standard ecommerce events and optional server-side tracking based on store architecture.',
       },
       eyebrow: 'TRACKING IMPLEMENTATION',
       hero: {
         headline: 'Measure the purchase journey',
         highlight: 'from the first visit.',
-        sub: 'I configure GA4 and Google Tag Manager for one store and a standard purchase journey. Shopify is the initial focus; Tiendanube scope is confirmed against each store’s access and setup.',
+        sub: 'I configure GA4 and Google Tag Manager for a standard purchase journey. Shopify is the initial focus; Tiendanube is confirmed store by store. Server-side tracking starts at US$500 as a separate option, subject to an architecture and access review.',
         ctaPrimary: 'Book a project call',
       },
       problem: {
@@ -148,6 +148,7 @@ export const commercialEn: CommercialContent = {
           { title: 'GA4 and GTM', text: 'One store, one GA4 property and one Google Tag Manager container.' },
           { title: 'Standard events', text: 'Ecommerce events and purchase for steps available in the standard purchase journey.' },
           { title: 'Test and handover', text: 'Basic purchase validation, a visible duplicate check and notes on the delivered setup.' },
+          { title: 'Server-side tracking', text: 'US$500 one-time option for one store and a standard journey; compatibility, infrastructure and access are confirmed first.' },
         ],
       },
       pricing: {
@@ -167,33 +168,48 @@ export const commercialEn: CommercialContent = {
         boundaries: [
           'Complex or custom data-layer development.',
           'Custom checkout or steps outside the standard journey.',
-          'Server-side tracking.',
           'Extensive integrations, multiple stores, properties or containers.',
         ],
+        alternative: {
+          heading: 'Server-side tracking',
+          amount: 'US$500',
+          cadence: 'one-time · starting hypothesis to validate',
+          detail: 'Starting scope for one store and a standard purchase journey; architecture, data destination and access are confirmed before the proposal.',
+          scopeHeading: 'Starting scope',
+          scope: [
+            'One server-side flow for one store and one GA4 property, subject to compatibility.',
+            'Basic purchase event validation and documentation of the delivered flow.',
+          ],
+          boundariesHeading: 'Not included',
+          boundaries: [
+            'Hosting, cloud usage, connectors or third-party costs.',
+            'Custom checkout or data layer, multiple stores or properties, and extensive integrations.',
+          ],
+        },
       },
       process: {
         heading: 'From setup',
         highlight: 'to a validated purchase.',
         intro: 'First I confirm that the journey and access fit the standard scope.',
         steps: [
-          { title: 'Review access', text: 'We confirm the store, GA4, GTM and the checkout steps available for testing.' },
-          { title: 'Configure events', text: 'I implement the agreed structure for the standard journey and purchase.' },
-          { title: 'Test and document', text: 'I validate the purchase event and hand over setup documentation.' },
+          { title: 'Review access', text: 'We confirm the store, GA4, GTM, journey and, if needed, the available server-side infrastructure.' },
+          { title: 'Configure events', text: 'I implement the web events and server-side flow agreed in the scope.' },
+          { title: 'Test and document', text: 'I validate the purchase and each included flow, then document the setup.' },
         ],
       },
       deliverables: {
         heading: 'What',
         highlight: 'you receive.',
         intro: 'The implementation is documented so the team knows what is being measured.',
-        items: ['Agreed GA4 and GTM setup', 'Standard ecommerce events', 'Basic purchase test', 'Implementation notes'],
+        items: ['Agreed GA4 and GTM setup', 'Standard ecommerce events', 'Basic purchase test', 'Server-side flow if quoted', 'Implementation notes'],
       },
       fit: {
         heading: 'When it',
         highlight: 'fits.',
         goodHeading: 'A good starting point',
-        good: ['The store needs an initial GA4 and GTM setup.', 'The purchase journey is standard and can be tested.', 'There is one property and one container the team can share.'],
+        good: ['The store needs an initial GA4 and GTM setup.', 'The purchase journey is standard and can be tested.', 'You want to assess server-side tracking with the available access and architecture.'],
         poorHeading: 'Needs a different scope',
-        poor: ['A highly customized checkout or data layer.', 'Server-side tracking or extensive integrations.', 'Multiple stores, containers or properties in one project.'],
+        poor: ['A highly customized checkout or data layer without a defined scope.', 'Required infrastructure or permissions are unavailable.', 'Multiple stores, containers or properties in one project.'],
       },
       faq: {
         heading: 'Frequently',
@@ -201,7 +217,7 @@ export const commercialEn: CommercialContent = {
         items: [
           { q: 'Does this include a full audit?', a: 'No. It includes a basic implementation and purchase check. If you need a deeper review of an existing setup, we can scope an audit separately.' },
           { q: 'Does it include a custom checkout?', a: 'Not in the starting price. We review the journey first and quote custom work separately.' },
-          { q: 'Does it include server-side tracking?', a: 'No. The standard scope is a web implementation with GA4 and GTM; server-side work needs a separate project and quote.' },
+          { q: 'How much does server-side implementation cost?', a: 'The option starts at US$500, one-time, for the scope described on this page. I confirm compatibility, access and external costs first; hosting and cloud usage are not included.' },
         ],
       },
       relatedHeading: 'You can also',

@@ -7,14 +7,15 @@ interface Props {
   highlight?: string;
   items: { q: string; a: string }[];
   sectionClass?: string;
+  compact?: boolean;
 }
 
-const { heading, highlight, items, sectionClass = 'section-block' } = Astro.props;
+const { heading, highlight, items, sectionClass = 'section-block', compact = false } = Astro.props;
 ---
 
-<section class={`faq ${sectionClass} reveal`}>
+<section class:list={['faq', compact && 'faq--compact', sectionClass, 'reveal']}>
   <div class="container-site faq-container">
-    <SectionHead flush heading={heading} highlight={highlight} />
+    <SectionHead flush compact={compact} heading={heading} highlight={highlight} />
     <div class="faq-list">
       {items.map((item: { q: string; a: string }, i: number) => (
         <details>
@@ -81,5 +82,20 @@ const { heading, highlight, items, sectionClass = 'section-block' } = Astro.prop
     color: var(--color-foreground-55);
     font-size: 15px;
     line-height: 1.6;
+  }
+
+  .faq--compact .faq-container { gap: 36px; }
+  .faq--compact .faq-q { font-size: 16px; }
+  .faq--compact .faq-list summary { grid-template-columns: 34px 1fr auto; gap: 14px; padding: 18px 0; }
+  .faq--compact .faq-list details p { font-size: 14px; }
+  .faq--compact summary:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 4px; }
+
+  @media (min-width: 900px) {
+    .faq--compact .faq-container { grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr); align-items: start; gap: 64px; }
+  }
+  @media (max-width: 560px) {
+    .faq--compact .faq-container { gap: 28px; }
+    .faq--compact .faq-list summary { grid-template-columns: 28px 1fr auto; gap: 10px; }
+    .faq--compact .faq-q { font-size: 15px; }
   }
 </style>

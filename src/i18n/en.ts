@@ -29,7 +29,7 @@ export const en: Translations = {
     hero: {
       headline: 'Ecommerce measurement',
       highlight: 'built for better decisions.',
-      sub: 'Tracking implementation and audits, connected reporting and performance analysis for growing LATAM stores investing in paid media. Shopify is the initial focus; Tiendanube is being validated with local stores.',
+      sub: 'Tracking implementation and audits, connected reporting and performance analysis for growing LATAM stores investing in paid media.',
     },
     problem: {
       heading: 'The problem is not a lack of data.',
@@ -167,24 +167,33 @@ export const en: Translations = {
   stack: {
     heading: 'Under the hood',
     highlight: 'of the data.',
-    intro: 'I choose the simplest reliable setup for the sources and question. BigQuery is used when the scale and transformations justify it.',
+    intro: 'The setup depends on the question and available data. I confirm access and connection feasibility before defining the scope.',
     layers: [
       {
-        name: 'Store and measurement',
+        name: 'Data sources',
         items: [
           { name: 'Shopify', icon: 'simple-icons:shopify' },
           { name: 'Tiendanube' },
           { name: 'GA4', icon: 'simple-icons:googleanalytics' },
-          { name: 'GTM', icon: 'simple-icons:googletagmanager' },
+          { name: 'Meta Ads', icon: 'simple-icons:meta' },
+          { name: 'Google Ads', icon: 'simple-icons:googleads' },
+          { name: 'ChatGPT Ads', icon: 'simple-icons:openai' },
+          { name: 'Pinterest Ads', icon: 'simple-icons:pinterest' },
+          { name: 'TikTok Ads', icon: 'simple-icons:tiktok' },
         ],
       },
       {
-        name: 'Acquisition and reporting',
+        name: 'Data tools',
         items: [
-          { name: 'Meta Ads', icon: 'simple-icons:meta' },
-          { name: 'Google Ads', icon: 'simple-icons:googleads' },
-          { name: 'Looker Studio', icon: 'simple-icons:googledatastudio' },
-          { name: 'BigQuery', icon: 'simple-icons:googlecloud' },
+          { name: 'Python', icon: 'simple-icons:python' },
+          { name: 'GTM', icon: 'simple-icons:googletagmanager' },
+          { name: 'JavaScript', icon: 'simple-icons:javascript' },
+          { name: 'R', icon: 'simple-icons:r' },
+          { name: 'Data Studio', icon: 'simple-icons:googledatastudio' },
+          { name: 'BigQuery', icon: 'simple-icons:googlebigquery' },
+          { name: 'Dataform' },
+          { name: 'SQL' },
+          { name: 'Google Sheets', icon: 'simple-icons:googlesheets' },
         ],
       },
     ],

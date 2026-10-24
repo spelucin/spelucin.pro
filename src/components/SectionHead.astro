@@ -7,10 +7,11 @@ interface Props {
   intro?: string;
   wide?: boolean;
   flush?: boolean;
+  compact?: boolean;
 }
 
-const { id, index, heading, highlight, intro, wide = false, flush = false } = Astro.props;
-const classes = ['section-head', wide && 'section-head--wide', flush && 'section-head--flush']
+const { id, index, heading, highlight, intro, wide = false, flush = false, compact = false } = Astro.props;
+const classes = ['section-head', wide && 'section-head--wide', flush && 'section-head--flush', compact && 'section-head--compact']
   .filter(Boolean)
   .join(' ');
 ---
@@ -36,6 +37,12 @@ const classes = ['section-head', wide && 'section-head--wide', flush && 'section
   .section-head--flush {
     margin-bottom: 0;
   }
+  .section-head--compact {
+    gap: 14px;
+    max-width: 660px;
+    margin-bottom: 40px;
+  }
+  .section-head--compact.section-head--flush { margin-bottom: 0; }
 
   .section-index {
     display: inline-block;
@@ -55,11 +62,27 @@ const classes = ['section-head', wide && 'section-head--wide', flush && 'section
     color: var(--color-foreground);
     text-wrap: balance;
   }
+  .section-head--compact h2 {
+    font-size: clamp(30px, 3.4vw, 44px);
+    line-height: 1.04;
+  }
 
   .section-head-intro {
     max-width: 560px;
+    margin: 0;
     color: var(--color-foreground-55);
     font-size: 18px;
     line-height: 1.55;
+  }
+  .section-head--compact .section-head-intro {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 560px) {
+    .section-head--compact { margin-bottom: 30px; }
+    .section-head--compact.section-head--flush { margin-bottom: 0; }
+    .section-head--compact h2 { font-size: clamp(28px, 8vw, 34px); }
+    .section-head--compact .section-head-intro { font-size: 15px; }
   }
 </style>

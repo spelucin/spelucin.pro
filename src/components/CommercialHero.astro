@@ -14,6 +14,7 @@ interface Props {
   ctaLocation: string;
   lang: Lang;
   showCta?: boolean;
+  showDiagram?: boolean;
 }
 
 const {
@@ -26,10 +27,11 @@ const {
   ctaLocation,
   lang,
   showCta = true,
+  showDiagram = true,
 } = Astro.props;
 ---
 
-<section class="commercial-hero commercial-hero--with-diagram">
+<section class={`commercial-hero ${showDiagram ? 'commercial-hero--with-diagram' : ''}`}>
   <div class="container-site">
     <div class="hero-inner">
       <div class="hero-copy">
@@ -55,9 +57,11 @@ const {
         )}
       </div>
     </div>
-    <div class="hero-diagram">
-      <ServiceDiagram variant="home" lang={lang} />
-    </div>
+    {showDiagram && (
+      <div class="hero-diagram">
+        <ServiceDiagram variant="home" lang={lang} />
+      </div>
+    )}
   </div>
 </section>
 
@@ -84,7 +88,7 @@ const {
     display: grid;
     justify-items: start;
     gap: 22px;
-    max-width: 640px;
+    max-width: 760px;
   }
   .hero-mark {
     margin: 0;
@@ -96,14 +100,14 @@ const {
   }
   h1 {
     margin: 0;
-    max-width: 15ch;
+    max-width: 16ch;
     font-size: clamp(40px, 5.2vw, 66px);
     font-weight: 700;
     letter-spacing: -0.06em;
     line-height: 1.02;
   }
   .hero-sub {
-    max-width: 520px;
+    max-width: 620px;
     margin: 0;
     color: var(--color-foreground-70);
     font-size: 17px;

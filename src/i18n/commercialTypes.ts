@@ -22,6 +22,11 @@ export interface CommercialPricingOption {
   heading: string;
   amount: string;
   detail: string;
+  cadence?: string;
+  scopeHeading?: string;
+  scope?: string[];
+  boundariesHeading?: string;
+  boundaries?: string[];
 }
 
 export interface CommercialPricing {

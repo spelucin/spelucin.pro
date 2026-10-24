@@ -15,188 +15,165 @@ const { variant, lang, platform, class: className = '' }: Props = Astro.props;
 
 const copy = {
   es: {
-    label: 'ILUSTRATIVO',
-    bar: 'MAPA DEL SISTEMA',
+    bar: 'Mapa del sistema',
     ui: {
-      sources: 'FUENTES',
-      model: 'MODELO',
-      dashboards: 'DASHBOARDS',
-      decisions: 'DECISIONES',
-      cycle: 'CICLO',
-      store: 'TIENDA',
-      pixels: 'PÍXELES',
-      measurement: 'MEDICIÓN',
-      standardJourney: 'RECORRIDO ESTÁNDAR',
-      purchaseEvent: 'EVENTO DE COMPRA',
-      documented: 'DOCUMENTADO',
-      orders: 'PEDIDOS',
-      products: 'PRODUCTOS',
-      customers: 'CLIENTES',
-      channels: 'CANALES',
-      view: 'VISTA',
-      reading: 'UNA LECTURA',
-      price: 'PRECIO',
-      stock: 'STOCK',
-      channel: 'CANAL',
-      action: 'ACCIÓN',
-      output: 'SALIDA',
-      validation: 'VALIDACIÓN',
-      eventsPurchases: 'EVENTOS · COMPRAS',
-      consent: 'CONSENTIMIENTO',
-      data: 'DATOS',
-      reliable: 'CONFIABLES',
-      findings: 'HALLAZGOS',
-      prioritized: 'PRIORIZADOS',
-      sharedView: 'VISTA COMPARTIDA',
-      sales: 'VENTAS',
-      conversion: 'CONV.',
-      ticket: 'TICKET',
-      sameReading: 'MISMA LECTURA',
-      readingTitle: 'LECTURA',
-      hypothesis: 'HIPÓTESIS',
-      cleanSources: 'FUENTES LIMPIAS',
-      whatChanged: 'QUÉ CAMBIÓ',
-      whyHappened: 'POR QUÉ PASÓ',
-      whatToDo: 'QUÉ HACER',
-      eachCycle: 'CADA PERIODO',
-      learnAdjust: 'APRENDER / AJUSTAR',
+      sources: 'Fuentes',
+      model: 'Modelo',
+      dashboards: 'Dashboards',
+      decisions: 'Decisiones',
+      cycle: 'Ciclo',
+      store: 'Tienda',
+      pixels: 'Píxeles',
+      measurement: 'Medición',
+      standardJourney: 'Recorrido estándar',
+      purchaseEvent: 'Evento de compra',
+      documented: 'Documentado',
+      orders: 'Pedidos',
+      products: 'Productos',
+      customers: 'Clientes',
+      channels: 'Canales',
+      agreedFixes: 'Ajustes',
+      onlyIfScoped: 'Si se acuerda',
+      view: 'Vista',
+      sharedView: 'Vista compartida',
+      viewSummary: 'Ventas · conv. · ticket',
+      price: 'Precio',
+      stock: 'Stock',
+      channel: 'Canal',
+      action: 'Acción',
+      output: 'Salida',
+      validation: 'Validación',
+      eventsPurchases: 'Eventos · compras',
+      consent: 'Consentimiento',
+      data: 'Datos',
+      findings: 'Hallazgos',
+      prioritized: 'Priorizados',
+      readingTitle: 'Lectura',
+      hypothesis: 'Hipótesis',
+      cleanSources: 'Fuentes limpias',
+      whatChanged: 'Qué cambió',
+      whyHappened: 'Por qué pasó',
+      whatToDo: 'Qué hacer',
+      eachCycle: 'Cada periodo',
+      learnAdjust: 'Ajuste',
     },
     audit: {
-      kicker: 'FLUJO · AUDITORÍA',
-      caption: 'De fuentes dispersas a datos que puedes usar: revisar, validar y priorizar hallazgos.',
-      title: 'Diagrama de una auditoría de tracking: fuentes, validación y hallazgos priorizados.',
-      foot: 'EVENTOS · COMPRAS · CONSENTIMIENTO',
+      title: 'Auditoría de tracking: revisión y hallazgos priorizados.',
+      desc: 'Resume la revisión ilustrativa de tienda, GA4, GTM y píxeles, con hallazgos priorizados y ajustes validados solo si se acuerdan.',
     },
     implementation: {
-      kicker: 'FLUJO · IMPLEMENTACIÓN',
-      caption: 'Tienda, GTM y GA4: una compra de prueba valida el evento y deja la configuración documentada.',
-      title: 'Flujo de implementación de tracking: tienda, Google Tag Manager, evento de compra en GA4 y validación.',
-      foot: 'TIENDA · GTM · GA4 · VALIDACIÓN',
+      title: 'Implementación de tracking: tienda, GTM y GA4.',
+      desc: 'Muestra eventos de compra que pasan de la tienda por GTM a GA4 y una validación básica; la opción server-side depende de compatibilidad, arquitectura y accesos.',
     },
     dashboards: {
-      kicker: 'FLUJO · DASHBOARDS',
-      caption: 'Las fuentes se conectan a un modelo y terminan en una vista compartida para el equipo.',
-      title: 'Diagrama de dashboards: fuentes, modelo de datos y vista compartida.',
-      foot: 'TIENDA · ANALYTICS · ADS',
+      title: 'Dashboards de rendimiento: fuentes, modelo y vista.',
+      desc: 'Ilustra fuentes de tienda, analytics y anuncios que alimentan un modelo y una vista de rendimiento; las conexiones dependen del alcance y los accesos.',
     },
     analysis: {
-      kicker: 'FLUJO · ANÁLISIS',
-      caption: 'Un ciclo periódico: leer los datos, explicar qué cambió y convertir el hallazgo en una acción.',
-      title: 'Diagrama del análisis periódico: datos, lectura, hipótesis y acción.',
-      foot: 'LECTURA · HIPÓTESIS · ACCIÓN',
+      title: 'Análisis periódico: datos, hipótesis y acción.',
+      desc: 'Muestra un ciclo de lectura de datos, explicación de cambios, hipótesis y acciones para revisar en el siguiente periodo.',
     },
     home: {
-      kicker: 'SISTEMA COMPLETO',
-      caption: 'El recorrido completo: tienda, medición, dashboards y decisiones que vuelven a ajustar la medición.',
-      title: 'Diagrama del sistema de datos para ecommerce: fuentes, modelo, dashboards y decisiones.',
-      foot: 'FUENTES · MODELO · VISTA · DECISIÓN',
+      title: 'Sistema de datos para ecommerce.',
+      desc: 'Ilustra cómo fuentes de tienda, medición y anuncios pueden alimentar un modelo y una vista que apoyen decisiones y ajustes posteriores.',
     },
     platform: {
-      kicker: 'MAPA · FUENTES DE TIENDA',
-      caption: 'Ejemplo de fuentes que pueden revisarse; los campos y vías de conexión dependen de accesos y disponibilidad.',
-      title: 'Mapa ilustrativo de datos de tienda, analytics y anuncios hacia un modelo y una vista de rendimiento.',
-      foot: 'TIENDA · ANALYTICS · ANUNCIOS · REPORTING',
+      title: 'Fuentes de datos para tiendas online.',
+      desc: 'Ilustra fuentes potenciales de tienda, analytics y anuncios hacia un modelo y una vista; los campos y métodos de conexión dependen de su disponibilidad y acceso.',
     },
   },
   en: {
-    label: 'ILLUSTRATIVE',
-    bar: 'SYSTEM MAP',
+    bar: 'System map',
     ui: {
-      sources: 'SOURCES',
-      model: 'MODEL',
-      dashboards: 'DASHBOARDS',
-      decisions: 'DECISIONS',
-      cycle: 'RECURRING LOOP',
-      store: 'STORE',
-      pixels: 'PIXELS',
-      measurement: 'MEASUREMENT',
-      standardJourney: 'STANDARD JOURNEY',
-      purchaseEvent: 'PURCHASE EVENT',
-      documented: 'DOCUMENTED SETUP',
-      orders: 'ORDERS',
-      products: 'PRODUCTS',
-      customers: 'CUSTOMERS',
-      channels: 'CHANNELS',
-      view: 'VIEW',
-      reading: 'ONE READING',
-      price: 'PRICE',
-      stock: 'STOCK',
-      channel: 'CHANNEL',
-      action: 'ACTION',
-      output: 'OUTPUT',
-      validation: 'VALIDATION',
-      eventsPurchases: 'EVENTS · PURCHASES',
-      consent: 'CONSENT',
-      data: 'DATA',
-      reliable: 'RELIABLE',
-      findings: 'FINDINGS',
-      prioritized: 'PRIORITIZED',
-      sharedView: 'SHARED VIEW',
-      sales: 'SALES',
-      conversion: 'CONV.',
-      ticket: 'TICKET',
-      sameReading: 'SAME READING',
-      readingTitle: 'READING',
-      hypothesis: 'HYPOTHESIS',
-      cleanSources: 'CLEAN SOURCES',
-      whatChanged: 'WHAT CHANGED',
-      whyHappened: 'WHY IT HAPPENED',
-      whatToDo: 'WHAT TO DO',
-      eachCycle: 'EACH CYCLE',
-      learnAdjust: 'LEARN / ADJUST',
+      sources: 'Sources',
+      model: 'Model',
+      dashboards: 'Dashboards',
+      decisions: 'Decisions',
+      cycle: 'Recurring loop',
+      store: 'Store',
+      pixels: 'Pixels',
+      measurement: 'Measurement',
+      standardJourney: 'Standard journey',
+      purchaseEvent: 'Purchase event',
+      documented: 'Documented setup',
+      orders: 'Orders',
+      products: 'Products',
+      customers: 'Customers',
+      channels: 'Channels',
+      agreedFixes: 'Fixes',
+      onlyIfScoped: 'If agreed',
+      view: 'View',
+      sharedView: 'Shared view',
+      viewSummary: 'Sales · conv. · AOV',
+      price: 'Price',
+      stock: 'Stock',
+      channel: 'Channel',
+      action: 'Action',
+      output: 'Output',
+      validation: 'Validation',
+      eventsPurchases: 'Events · purchases',
+      consent: 'Consent',
+      data: 'Data',
+      findings: 'Findings',
+      prioritized: 'Prioritized',
+      readingTitle: 'Reading',
+      hypothesis: 'Hypothesis',
+      cleanSources: 'Clean sources',
+      whatChanged: 'What changed',
+      whyHappened: 'Why it happened',
+      whatToDo: 'What to do',
+      eachCycle: 'Each cycle',
+      learnAdjust: 'Adjust',
     },
     audit: {
-      kicker: 'FLOW · AUDIT',
-      caption: 'From scattered sources to data you can use: review, validate and prioritize findings.',
-      title: 'Tracking audit diagram: sources, validation and prioritized findings.',
-      foot: 'EVENTS · PURCHASES · CONSENT',
+      title: 'Tracking audit: review and prioritized findings.',
+      desc: 'Summarizes an illustrative review of the store, GA4, GTM and pixels, with prioritized findings and fixes validated only when agreed.',
     },
     implementation: {
-      kicker: 'FLOW · IMPLEMENTATION',
-      caption: 'Store, GTM and GA4: a test purchase validates the event and leaves the setup documented.',
-      title: 'Tracking implementation flow: store, Google Tag Manager, GA4 purchase event and validation.',
-      foot: 'STORE · GTM · GA4 · VALIDATION',
+      title: 'Tracking setup: store, GTM and GA4.',
+      desc: 'Shows purchase events passing from the store through GTM to GA4 and basic validation; server-side depends on compatibility, architecture and access.',
     },
     dashboards: {
-      kicker: 'FLOW · DASHBOARDS',
-      caption: 'Sources connect to a model and end in one shared view for the team.',
-      title: 'Dashboards diagram: sources, data model and shared view.',
-      foot: 'STORE · ANALYTICS · ADS',
+      title: 'Performance dashboards: sources, model and view.',
+      desc: 'Illustrates store, analytics and ad sources feeding a model and performance view; connections depend on scope and access.',
     },
     analysis: {
-      kicker: 'FLOW · ANALYSIS',
-      caption: 'A recurring cycle: read the data, explain what changed and turn the finding into an action.',
-      title: 'Ongoing analysis diagram: data, reading, hypothesis and action.',
-      foot: 'READING · HYPOTHESIS · ACTION',
+      title: 'Recurring analysis: data, hypothesis and action.',
+      desc: 'Shows a recurring cycle of reading data, explaining changes, forming a hypothesis and choosing actions to review next period.',
     },
     home: {
-      kicker: 'FULL SYSTEM',
-      caption: 'The full path: store, measurement, dashboards and decisions that feed back into measurement.',
-      title: 'Ecommerce data system diagram: sources, model, dashboards and decisions.',
-      foot: 'SOURCES · MODEL · VIEW · DECISION',
+      title: 'Ecommerce data system.',
+      desc: 'Illustrates how store, measurement and ad sources can feed a model and view that support decisions and later adjustments.',
     },
     platform: {
-      kicker: 'MAP · STORE SOURCES',
-      caption: 'An example of sources to review; fields and connection paths depend on access and availability.',
-      title: 'Illustrative map of store, analytics and advertising data flowing into a model and performance view.',
-      foot: 'STORE · ANALYTICS · ADS · REPORTING',
+      title: 'Store data sources.',
+      desc: 'Illustrates potential store, analytics and ad sources for a model and view; fields and connection methods depend on availability and access.',
     },
   },
 } as const;
 
 const c = copy[lang][variant];
 const u = copy[lang].ui;
+const view = {
+  implementation: { box: '0 44 760 212', height: 212 },
+  audit: { box: '0 44 760 260', height: 260 },
+  dashboards: { box: '0 44 760 240', height: 240 },
+  analysis: { box: '0 44 760 276', height: 276 },
+  home: { box: '0 44 760 300', height: 300 },
+  platform: { box: '0 44 760 240', height: 240 },
+}[variant];
 ---
 
 <figure class={`service-diagram service-diagram--${variant} ${className}`}>
-  <figcaption class="diagram-caption">
-    <span class="diagram-kicker">{c.kicker}</span>
-    <span>{c.caption}</span>
-  </figcaption>
-
-  <div class="diagram-frame" tabindex="0" role="region" aria-label={c.kicker}>
-    <svg viewBox="0 0 760 360" role="img" aria-labelledby={`diagram-title-${variant}`}>
+  <div class="diagram-window">
+    <div class="diagram-titlebar" aria-hidden="true">
+      <div class="window-controls"><span></span><span></span><span></span></div>
+      <span class="window-title">{copy[lang].bar}</span>
+    </div>
+    <div class="diagram-frame" tabindex="0" role="region" aria-label={c.title}>
+      <svg viewBox={view.box} role="img" aria-labelledby={`diagram-title-${variant} diagram-desc-${variant}`}>
       <title id={`diagram-title-${variant}`}>{c.title}</title>
+      <desc id={`diagram-desc-${variant}`}>{c.desc}</desc>
       <defs>
         <pattern id={`diagram-grid-${variant}`} width="24" height="24" patternUnits="userSpaceOnUse">
           <path d="M24 0H0V24" fill="none" stroke="var(--color-primary-8)" stroke-width="1" />
@@ -206,30 +183,26 @@ const u = copy[lang].ui;
           viewBox="0 0 10 10"
           refX="8"
           refY="5"
-          markerWidth="7"
-          markerHeight="7"
+          markerWidth="8"
+          markerHeight="8"
+          markerUnits="userSpaceOnUse"
           orient="auto-start-reverse"
         >
           <path d="M0 0L10 5L0 10Z" fill="var(--color-primary)" />
         </marker>
       </defs>
 
-      <rect width="760" height="360" fill="var(--color-card)" />
-      <rect width="760" height="360" fill={`url(#diagram-grid-${variant})`} opacity="0.5" />
-      <line x1="0" y1="44" x2="760" y2="44" stroke="var(--color-primary-14)" />
-      <circle cx="19" cy="23" r="5" class="d-status-ring" />
-      <circle cx="19" cy="23" r="2.2" class="d-status-core" />
-      <text x="32" y="27" class="d-top">{copy[lang].bar}</text>
-      <text x="732" y="27" text-anchor="end" class="d-top">{copy[lang].label}</text>
+      <rect x="0" y="44" width="760" height={view.height} fill="var(--color-card)" />
+      <rect x="0" y="44" width="760" height={view.height} fill={`url(#diagram-grid-${variant})`} opacity="0.55" />
 
       {variant === 'implementation' && (
         <>
-          <text x="32" y="68" class="d-micro">{u.standardJourney}</text>
-          <path class="d-line" d="M186 170H220" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M384 170H418" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M582 170H616" marker-end={`url(#diagram-arrow-${variant})`} />
+          <text x="32" y="68" class="d-stage">{u.standardJourney}</text>
+          <path class="d-line" d="M188 170H220" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M384 170H420" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M584 170H616" marker-end={`url(#diagram-arrow-${variant})`} />
 
-          <rect x="32" y="112" width="154" height="116" rx="2" class="d-panel" />
+          <rect x="32" y="112" width="156" height="116" rx="2" class="d-panel" />
           <g class="d-icon" transform="translate(48 130)"><Icon name="tabler:building-store" width="18" height="18" aria-hidden="true" /></g>
           <text x="76" y="145" class="d-label d-label--strong">{u.store}</text>
           <text x="48" y="177" class="d-micro">{u.eventsPurchases}</text>
@@ -241,13 +214,13 @@ const u = copy[lang].ui;
           <text x="238" y="177" class="d-micro">{u.measurement}</text>
           <text x="238" y="194" class="d-micro">{u.purchaseEvent}</text>
 
-          <rect x="418" y="112" width="164" height="116" rx="2" class="d-panel d-panel--accent" />
-          <g class="d-icon" transform="translate(436 130)"><Icon name="simple-icons:googleanalytics" width="18" height="18" aria-hidden="true" /></g>
-          <text x="464" y="145" class="d-label d-label--strong">GA4</text>
-          <text x="436" y="177" class="d-micro">{u.eventsPurchases}</text>
-          <text x="436" y="194" class="d-micro">{u.purchaseEvent}</text>
+          <rect x="420" y="112" width="164" height="116" rx="2" class="d-panel d-panel--accent" />
+          <g class="d-icon" transform="translate(438 130)"><Icon name="simple-icons:googleanalytics" width="18" height="18" aria-hidden="true" /></g>
+          <text x="466" y="145" class="d-label d-label--strong">GA4</text>
+          <text x="438" y="177" class="d-micro">{u.eventsPurchases}</text>
+          <text x="438" y="194" class="d-micro">{u.purchaseEvent}</text>
 
-          <rect x="616" y="112" width="112" height="116" rx="2" class="d-panel d-panel--validated" />
+          <rect x="616" y="112" width="112" height="116" rx="2" class="d-panel d-panel--outcome" />
           <g class="d-icon d-icon--strong" transform="translate(630 130)"><Icon name="tabler:circle-check" width="18" height="18" aria-hidden="true" /></g>
           <text x="630" y="177" class="d-micro">{u.validation}</text>
           <text x="630" y="194" class="d-micro">{u.documented}</text>
@@ -256,72 +229,68 @@ const u = copy[lang].ui;
 
       {variant === 'audit' && (
         <>
-          <text x="32" y="68" class="d-micro">{u.sources}</text>
-          <text x="296" y="68" class="d-micro">{u.validation}</text>
-          <text x="566" y="68" class="d-micro">{u.output}</text>
+          <text x="32" y="68" class="d-stage">{u.sources}</text>
+          <text x="296" y="68" class="d-stage">{u.validation}</text>
+          <text x="566" y="68" class="d-stage">{u.output}</text>
 
-          <path class="d-line" d="M202 103C250 103 250 180 296 180" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M202 155C250 155 250 180 296 180" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M202 207C250 207 250 180 296 180" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M202 259C250 259 250 180 296 180" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M200 104H296" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M200 156H296" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M200 208H296" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M200 260H296" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M496 132H568" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line d-line--optional" d="M496 220H568" marker-end={`url(#diagram-arrow-${variant})`} />
 
-          <rect x="32" y="84" width="170" height="38" rx="2" class="d-node" />
+          <rect x="32" y="84" width="168" height="40" rx="2" class="d-node" />
           <g class="d-icon" transform="translate(44 96)"><Icon name="tabler:building-store" width="14" height="14" aria-hidden="true" /></g>
           <text x="66" y="108" class="d-label">{u.store}</text>
-          <circle cx="188" cy="103" r="3" class="d-dot d-dot--pulse" />
-          <rect x="32" y="136" width="170" height="38" rx="2" class="d-node" />
+          <rect x="32" y="136" width="168" height="40" rx="2" class="d-node" />
           <g class="d-icon" transform="translate(44 148)"><Icon name="simple-icons:googleanalytics" width="14" height="14" aria-hidden="true" /></g>
           <text x="66" y="160" class="d-label">GA4</text>
-          <circle cx="188" cy="155" r="3" class="d-dot d-dot--pulse" style="animation-delay: 0.5s" />
-          <rect x="32" y="188" width="170" height="38" rx="2" class="d-node" />
+          <rect x="32" y="188" width="168" height="40" rx="2" class="d-node" />
           <g class="d-icon" transform="translate(44 200)"><Icon name="simple-icons:googletagmanager" width="14" height="14" aria-hidden="true" /></g>
           <text x="66" y="212" class="d-label">GTM</text>
-          <circle cx="188" cy="207" r="3" class="d-dot d-dot--pulse" style="animation-delay: 1s" />
-          <rect x="32" y="240" width="170" height="38" rx="2" class="d-node" />
+          <rect x="32" y="240" width="168" height="40" rx="2" class="d-node" />
           <g class="d-icon" transform="translate(44 252)"><Icon name="tabler:tag" width="14" height="14" aria-hidden="true" /></g>
           <text x="66" y="264" class="d-label">{u.pixels}</text>
-          <circle cx="188" cy="259" r="3" class="d-dot d-dot--pulse" style="animation-delay: 1.5s" />
 
-          <rect x="296" y="96" width="200" height="164" rx="2" class="d-panel d-panel--accent d-panel--validated" />
+          <rect x="296" y="84" width="200" height="192" rx="2" class="d-panel d-panel--accent" />
           <text x="396" y="124" text-anchor="middle" class="d-label d-label--strong">{u.validation}</text>
-          <circle cx="396" cy="166" r="34" class="d-halo" />
           <g class="d-icon d-icon--strong" transform="translate(381 151)"><Icon name="tabler:shield-check" width="30" height="30" aria-hidden="true" /></g>
           <text x="396" y="210" text-anchor="middle" class="d-micro">{u.eventsPurchases}</text>
           <text x="396" y="224" text-anchor="middle" class="d-micro">{u.consent}</text>
 
-          <path class="d-line" d="M496 160H532V133H566" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M496 160H532V219H566" marker-end={`url(#diagram-arrow-${variant})`} />
-          <rect x="566" y="104" width="162" height="58" rx="2" class="d-node d-node--accent" />
-          <g class="d-icon" transform="translate(582 118)"><Icon name="tabler:database" width="14" height="14" aria-hidden="true" /></g>
-          <text x="602" y="128" class="d-label d-label--strong">{u.data}</text>
-          <text x="602" y="146" class="d-micro">{u.reliable}</text>
-          <rect x="566" y="190" width="162" height="58" rx="2" class="d-node d-node--attention" />
-          <g class="d-icon" transform="translate(582 204)"><Icon name="tabler:alert-triangle" width="14" height="14" aria-hidden="true" /></g>
-          <text x="602" y="214" class="d-label d-label--strong">{u.findings}</text>
-          <text x="602" y="232" class="d-micro">{u.prioritized}</text>
+          <rect x="568" y="104" width="160" height="56" rx="2" class="d-node d-node--accent" />
+          <g class="d-icon" transform="translate(584 125)"><Icon name="tabler:alert-triangle" width="14" height="14" aria-hidden="true" /></g>
+          <text x="604" y="136" class="d-label d-label--strong">{u.findings}</text>
+          <text x="604" y="152" class="d-micro">{u.prioritized}</text>
+          <rect x="568" y="192" width="160" height="56" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(584 213)"><Icon name="tabler:circle-check" width="14" height="14" aria-hidden="true" /></g>
+          <text x="604" y="224" class="d-label d-label--strong">{u.agreedFixes}</text>
+          <text x="604" y="240" class="d-micro">{u.onlyIfScoped}</text>
         </>
       )}
 
       {(variant === 'dashboards' || variant === 'platform') && (
         <>
-          <text x="32" y="68" class="d-micro">{u.sources}</text>
-          <text x="284" y="68" class="d-micro">{u.model}</text>
-          <text x="514" y="68" class="d-micro">{u.view}</text>
+          <text x="32" y="68" class="d-stage">{u.sources}</text>
+          <text x="284" y="68" class="d-stage">{u.model}</text>
+          <text x="512" y="68" class="d-stage">{u.view}</text>
 
-          <path class="d-line" d="M212 102C252 102 252 180 284 180" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M212 150C252 150 252 180 284 180" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M212 198C252 198 252 180 284 180" marker-end={`url(#diagram-arrow-${variant})`} />
-          <path class="d-line" d="M212 246C252 246 252 180 284 180" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M212 102H284" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M212 150H284" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M212 198H284" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M212 246H284" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M456 168H512" marker-end={`url(#diagram-arrow-${variant})`} />
 
           <rect x="32" y="84" width="180" height="36" rx="2" class="d-node" />
           {variant === 'platform' && platform === 'shopify' && (
             <g class="d-icon" transform="translate(44 95)"><Icon name="simple-icons:shopify" width="14" height="14" aria-hidden="true" /></g>
           )}
           {variant === 'platform' && platform === 'tiendanube' && (
-            <text x="44" y="107" class="d-label">TIENDANUBE</text>
+            <text x="44" y="107" class="d-label">Tiendanube</text>
           )}
           {variant === 'platform' && platform === 'shopify' && (
-            <text x="66" y="107" class="d-label">SHOPIFY</text>
+            <text x="66" y="107" class="d-label">Shopify</text>
           )}
           {variant === 'dashboards' && (
             <g class="d-icon" transform="translate(44 95)"><Icon name="tabler:building-store" width="14" height="14" aria-hidden="true" /></g>
@@ -329,71 +298,47 @@ const u = copy[lang].ui;
           {variant === 'dashboards' && (
             <text x="66" y="107" class="d-label">{u.store}</text>
           )}
-          <circle cx="196" cy="102" r="3" class="d-dot d-dot--pulse" />
           <rect x="32" y="132" width="180" height="36" rx="2" class="d-node" />
           <g class="d-icon" transform="translate(44 143)"><Icon name="simple-icons:googleanalytics" width="14" height="14" aria-hidden="true" /></g>
           <text x="66" y="155" class="d-label">GA4</text>
-          <circle cx="196" cy="150" r="3" class="d-dot d-dot--pulse" style="animation-delay: 0.5s" />
           <rect x="32" y="180" width="180" height="36" rx="2" class="d-node" />
           <g class="d-icon" transform="translate(44 191)"><Icon name="simple-icons:meta" width="14" height="14" aria-hidden="true" /></g>
-          <text x="66" y="203" class="d-label">META ADS</text>
-          <circle cx="196" cy="198" r="3" class="d-dot d-dot--pulse" style="animation-delay: 1s" />
+          <text x="66" y="203" class="d-label">Meta Ads</text>
           <rect x="32" y="228" width="180" height="36" rx="2" class="d-node" />
           <g class="d-icon" transform="translate(44 239)"><Icon name="simple-icons:googleads" width="14" height="14" aria-hidden="true" /></g>
-          <text x="66" y="251" class="d-label">GOOGLE ADS</text>
-          <circle cx="196" cy="246" r="3" class="d-dot d-dot--pulse" style="animation-delay: 1.5s" />
+          <text x="66" y="251" class="d-label">Google Ads</text>
 
-          <rect x="284" y="80" width="170" height="176" rx="2" class="d-panel" />
-          <text x="369" y="108" text-anchor="middle" class="d-label d-label--strong">{u.model}</text>
-          <line x1="302" y1="122" x2="436" y2="122" stroke="var(--color-primary-14)" />
+          <rect x="284" y="80" width="172" height="176" rx="2" class="d-panel" />
+          <text x="370" y="108" text-anchor="middle" class="d-label d-label--strong">{u.model}</text>
+          <line x1="302" y1="122" x2="438" y2="122" stroke="var(--color-primary-14)" />
           <g class="d-icon" transform="translate(302 138)"><Icon name="tabler:receipt" width="12" height="12" aria-hidden="true" /></g>
           <text x="320" y="146" class="d-micro">{u.orders}</text>
-          <text x="436" y="146" text-anchor="end" class="d-dot-text">●</text>
           <g class="d-icon" transform="translate(302 166)"><Icon name="tabler:package" width="12" height="12" aria-hidden="true" /></g>
           <text x="320" y="174" class="d-micro">{u.products}</text>
-          <text x="436" y="174" text-anchor="end" class="d-dot-text">●</text>
           <g class="d-icon" transform="translate(302 194)"><Icon name="tabler:users" width="12" height="12" aria-hidden="true" /></g>
           <text x="320" y="202" class="d-micro">{u.customers}</text>
-          <text x="436" y="202" text-anchor="end" class="d-dot-text">●</text>
           <g class="d-icon" transform="translate(302 222)"><Icon name="tabler:route" width="12" height="12" aria-hidden="true" /></g>
           <text x="320" y="230" class="d-micro">{u.channels}</text>
-          <text x="436" y="230" text-anchor="end" class="d-dot-text">●</text>
 
-          <path class="d-line" d="M454 168H514" marker-end={`url(#diagram-arrow-${variant})`} />
-
-          <rect x="514" y="72" width="214" height="200" rx="2" class="d-panel d-panel--accent" />
-          <rect x="514" y="72" width="214" height="28" rx="2" class="d-panel-head" />
-          <g class="d-icon" transform="translate(530 78)"><Icon name="tabler:layout-dashboard" width="13" height="13" aria-hidden="true" /></g>
-          <text x="548" y="90" class="d-label">{u.sharedView}</text>
-          <line x1="514" y1="100" x2="728" y2="100" stroke="var(--color-primary-14)" />
-
-          <rect x="530" y="112" width="54" height="38" rx="2" class="d-kpi" />
-          <text x="557" y="127" text-anchor="middle" class="d-micro">{u.sales}</text>
-          <line x1="540" y1="139" x2="574" y2="139" class="d-kpi-line" style="animation-delay: 0s" />
-          <rect x="592" y="112" width="54" height="38" rx="2" class="d-kpi" />
-          <text x="619" y="127" text-anchor="middle" class="d-micro">{u.conversion}</text>
-          <line x1="602" y1="139" x2="636" y2="139" class="d-kpi-line" style="animation-delay: 0.7s" />
-          <rect x="654" y="112" width="54" height="38" rx="2" class="d-kpi" />
-          <text x="681" y="127" text-anchor="middle" class="d-micro">{u.ticket}</text>
-          <line x1="664" y1="139" x2="698" y2="139" class="d-kpi-line" style="animation-delay: 1.4s" />
-
-          <path d="M552 214V190M576 214V178M600 214V196M624 214V170M648 214V184M672 214V162" class="d-bars" />
-          <line x1="536" y1="214" x2="706" y2="214" stroke="var(--color-primary-20)" />
-          <text x="530" y="246" class="d-micro">{u.sameReading}</text>
+          <rect x="512" y="112" width="216" height="112" rx="2" class="d-panel d-panel--outcome" />
+          <g class="d-icon d-icon--strong" transform="translate(612 128)"><Icon name="tabler:layout-dashboard" width="16" height="16" aria-hidden="true" /></g>
+          <text x="620" y="170" text-anchor="middle" class="d-label d-label--strong">{u.sharedView}</text>
+          <text x="620" y="192" text-anchor="middle" class="d-micro">{u.viewSummary}</text>
         </>
       )}
 
       {variant === 'analysis' && (
         <>
-          <text x="32" y="68" class="d-micro">{u.cycle}</text>
+          <text x="32" y="68" class="d-stage">{u.cycle}</text>
 
           <path class="d-line" d="M192 148H208" marker-end={`url(#diagram-arrow-${variant})`} />
           <path class="d-line" d="M364 148H380" marker-end={`url(#diagram-arrow-${variant})`} />
           <path class="d-line" d="M536 148H552" marker-end={`url(#diagram-arrow-${variant})`} />
-          <circle cx="200" cy="148" r="2.4" class="d-spark" />
-          <circle cx="372" cy="148" r="2.4" class="d-spark" style="animation-delay: 0.6s" />
-          <circle cx="544" cy="148" r="2.4" class="d-spark" style="animation-delay: 1.2s" />
-
+          <path
+            d="M630 204V268Q630 276 622 276H122Q114 276 114 268V204"
+            class="d-loop"
+            marker-end={`url(#diagram-arrow-${variant})`}
+          />
           <rect x="36" y="92" width="156" height="112" rx="2" class="d-panel" />
           <text x="50" y="116" class="d-num">01</text>
           <text x="50" y="146" class="d-label d-label--strong">{u.data}</text>
@@ -418,182 +363,167 @@ const u = copy[lang].ui;
           <text x="566" y="166" class="d-micro">{u.whatToDo}</text>
           <g class="d-icon" transform="translate(670 104)"><Icon name="tabler:rocket" width="18" height="18" aria-hidden="true" /></g>
 
-          <path
-            d="M630 204C630 276 100 276 100 204"
-            class="d-loop"
-            marker-end={`url(#diagram-arrow-${variant})`}
-          />
-          <text x="365" y="292" text-anchor="middle" class="d-micro">{u.eachCycle}</text>
+          <text x="380" y="295" text-anchor="middle" class="d-micro d-arrow-label">{u.eachCycle}</text>
         </>
       )}
 
       {variant === 'home' && (
         <>
-          <text x="32" y="68" class="d-micro">{u.sources}</text>
-          <text x="206" y="68" class="d-micro">{u.model}</text>
-          <text x="384" y="68" class="d-micro">{u.dashboards}</text>
-          <text x="578" y="68" class="d-micro">{u.decisions}</text>
+          <text x="32" y="68" class="d-stage">{u.sources}</text>
+          <text x="208" y="68" class="d-stage">{u.model}</text>
+          <text x="384" y="68" class="d-stage">{u.dashboards}</text>
+          <text x="576" y="68" class="d-stage">{u.decisions}</text>
 
-          <rect x="28" y="84" width="150" height="180" rx="2" class="d-panel" />
-          <rect x="44" y="102" width="118" height="28" rx="2" class="d-node" />
-          <g class="d-icon" transform="translate(56 109)"><Icon name="tabler:building-store" width="14" height="14" aria-hidden="true" /></g>
-          <text x="76" y="120" class="d-label">{u.store}</text>
-          <rect x="44" y="138" width="118" height="28" rx="2" class="d-node" />
-          <g class="d-icon" transform="translate(56 145)"><Icon name="simple-icons:googleanalytics" width="14" height="14" aria-hidden="true" /></g>
-          <text x="76" y="156" class="d-label">GA4</text>
-          <rect x="44" y="174" width="118" height="28" rx="2" class="d-node" />
-          <g class="d-icon" transform="translate(56 181)"><Icon name="simple-icons:meta" width="14" height="14" aria-hidden="true" /></g>
-          <text x="76" y="192" class="d-label">META ADS</text>
-          <rect x="44" y="210" width="118" height="28" rx="2" class="d-node" />
-          <g class="d-icon" transform="translate(56 217)"><Icon name="simple-icons:googleads" width="14" height="14" aria-hidden="true" /></g>
-          <text x="76" y="228" class="d-label">GOOGLE ADS</text>
-          <text x="44" y="254" class="d-micro">{u.measurement}</text>
-
-          <path class="d-line" d="M178 174H206" marker-end={`url(#diagram-arrow-${variant})`} />
-          <rect x="206" y="84" width="150" height="180" rx="2" class="d-panel d-panel--accent" />
-          <text x="281" y="110" text-anchor="middle" class="d-label d-label--strong">{u.model}</text>
-          <line x1="222" y1="124" x2="340" y2="124" stroke="var(--color-primary-14)" />
-          <g class="d-icon" transform="translate(222 140)"><Icon name="tabler:receipt" width="12" height="12" aria-hidden="true" /></g>
-          <text x="240" y="148" class="d-micro">{u.orders}</text>
-          <g class="d-icon" transform="translate(222 168)"><Icon name="tabler:package" width="12" height="12" aria-hidden="true" /></g>
-          <text x="240" y="176" class="d-micro">{u.products}</text>
-          <g class="d-icon" transform="translate(222 196)"><Icon name="tabler:users" width="12" height="12" aria-hidden="true" /></g>
-          <text x="240" y="204" class="d-micro">{u.customers}</text>
-          <g class="d-icon" transform="translate(222 224)"><Icon name="tabler:route" width="12" height="12" aria-hidden="true" /></g>
-          <text x="240" y="232" class="d-micro">{u.channels}</text>
-
-          <path class="d-line" d="M356 174H384" marker-end={`url(#diagram-arrow-${variant})`} />
-          <rect x="384" y="84" width="166" height="180" rx="2" class="d-panel" />
-          <g class="d-icon" transform="translate(400 97)"><Icon name="tabler:layout-dashboard" width="13" height="13" aria-hidden="true" /></g>
-          <text x="420" y="110" class="d-label d-label--strong">{u.view}</text>
-          <line x1="400" y1="124" x2="534" y2="124" stroke="var(--color-primary-14)" />
-          <rect x="400" y="138" width="42" height="30" rx="2" class="d-kpi" />
-          <rect x="452" y="138" width="42" height="30" rx="2" class="d-kpi" />
-          <rect x="504" y="138" width="30" height="30" rx="2" class="d-kpi" />
-          <path d="M406 208V188M424 208V198M442 208V180M460 208V192M478 208V172M496 208V186" class="d-bars" />
-          <line x1="400" y1="208" x2="534" y2="208" stroke="var(--color-primary-20)" />
-          <text x="400" y="232" class="d-micro">{u.reading}</text>
-
-          <path class="d-line" d="M550 174H578" marker-end={`url(#diagram-arrow-${variant})`} />
-          <rect x="578" y="84" width="154" height="180" rx="2" class="d-panel d-panel--accent d-panel--outcome" />
-          <rect x="594" y="112" width="122" height="28" rx="2" class="d-node" />
-          <g class="d-icon" transform="translate(606 119)"><Icon name="tabler:tag" width="14" height="14" aria-hidden="true" /></g>
-          <text x="626" y="130" class="d-label">{u.price}</text>
-          <rect x="594" y="150" width="122" height="28" rx="2" class="d-node" />
-          <g class="d-icon" transform="translate(606 157)"><Icon name="tabler:packages" width="14" height="14" aria-hidden="true" /></g>
-          <text x="626" y="168" class="d-label">{u.stock}</text>
-          <rect x="594" y="188" width="122" height="28" rx="2" class="d-node" />
-          <g class="d-icon" transform="translate(606 195)"><Icon name="tabler:broadcast" width="14" height="14" aria-hidden="true" /></g>
-          <text x="626" y="206" class="d-label">{u.channel}</text>
-          <text x="594" y="240" class="d-micro">{u.action}</text>
-
+          <path class="d-line" d="M180 174H208" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M360 174H384" marker-end={`url(#diagram-arrow-${variant})`} />
+          <path class="d-line" d="M552 174H576" marker-end={`url(#diagram-arrow-${variant})`} />
           <path
-            d="M655 264C655 306 103 306 103 264"
+            d="M654 264V288Q654 296 646 296H112Q104 296 104 288V264"
             class="d-loop"
             marker-end={`url(#diagram-arrow-${variant})`}
           />
-          <text x="380" y="320" text-anchor="middle" class="d-micro">{u.learnAdjust}</text>
+
+          <rect x="28" y="84" width="152" height="180" rx="2" class="d-panel" />
+          <rect x="44" y="100" width="120" height="28" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(56 107)"><Icon name="tabler:building-store" width="14" height="14" aria-hidden="true" /></g>
+          <text x="76" y="118" class="d-label">{u.store}</text>
+          <rect x="44" y="136" width="120" height="28" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(56 143)"><Icon name="simple-icons:googleanalytics" width="14" height="14" aria-hidden="true" /></g>
+          <text x="76" y="154" class="d-label">GA4</text>
+          <rect x="44" y="172" width="120" height="28" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(56 179)"><Icon name="simple-icons:meta" width="14" height="14" aria-hidden="true" /></g>
+          <text x="76" y="190" class="d-label">Meta Ads</text>
+          <rect x="44" y="208" width="120" height="28" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(56 215)"><Icon name="simple-icons:googleads" width="14" height="14" aria-hidden="true" /></g>
+          <text x="76" y="226" class="d-label">Google Ads</text>
+          <text x="44" y="252" class="d-micro">{u.measurement}</text>
+
+          <rect x="208" y="84" width="152" height="180" rx="2" class="d-panel d-panel--accent" />
+          <text x="284" y="110" text-anchor="middle" class="d-label d-label--strong">{u.model}</text>
+          <line x1="224" y1="124" x2="344" y2="124" stroke="var(--color-primary-14)" />
+          <g class="d-icon" transform="translate(224 140)"><Icon name="tabler:receipt" width="12" height="12" aria-hidden="true" /></g>
+          <text x="242" y="148" class="d-micro">{u.orders}</text>
+          <g class="d-icon" transform="translate(224 168)"><Icon name="tabler:package" width="12" height="12" aria-hidden="true" /></g>
+          <text x="242" y="176" class="d-micro">{u.products}</text>
+          <g class="d-icon" transform="translate(224 196)"><Icon name="tabler:users" width="12" height="12" aria-hidden="true" /></g>
+          <text x="242" y="204" class="d-micro">{u.customers}</text>
+          <g class="d-icon" transform="translate(224 224)"><Icon name="tabler:route" width="12" height="12" aria-hidden="true" /></g>
+          <text x="242" y="232" class="d-micro">{u.channels}</text>
+
+          <rect x="384" y="84" width="168" height="180" rx="2" class="d-panel d-panel--outcome" />
+          <g class="d-icon d-icon--strong" transform="translate(456 128)"><Icon name="tabler:layout-dashboard" width="24" height="24" aria-hidden="true" /></g>
+          <text x="468" y="176" text-anchor="middle" class="d-label d-label--strong">{u.sharedView}</text>
+          <text x="468" y="198" text-anchor="middle" class="d-micro">{u.viewSummary}</text>
+
+          <rect x="576" y="84" width="156" height="180" rx="2" class="d-panel d-panel--accent d-panel--outcome" />
+          <rect x="592" y="112" width="124" height="28" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(604 119)"><Icon name="tabler:tag" width="14" height="14" aria-hidden="true" /></g>
+          <text x="624" y="130" class="d-label">{u.price}</text>
+          <rect x="592" y="148" width="124" height="28" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(604 155)"><Icon name="tabler:packages" width="14" height="14" aria-hidden="true" /></g>
+          <text x="624" y="166" class="d-label">{u.stock}</text>
+          <rect x="592" y="184" width="124" height="28" rx="2" class="d-node" />
+          <g class="d-icon" transform="translate(604 191)"><Icon name="tabler:broadcast" width="14" height="14" aria-hidden="true" /></g>
+          <text x="624" y="202" class="d-label">{u.channel}</text>
+          <text x="592" y="240" class="d-micro">{u.action}</text>
+
+          <text x="380" y="316" text-anchor="middle" class="d-micro d-arrow-label">{u.learnAdjust}</text>
         </>
       )}
-
-      <text x="28" y="340" class="d-micro">{copy[lang][variant].foot}</text>
-      <text x="732" y="340" text-anchor="end" class="d-micro">S / {String(['implementation', 'audit', 'dashboards', 'analysis', 'home', 'platform'].indexOf(variant) + 1).padStart(2, '0')}</text>
-    </svg>
+      </svg>
+    </div>
   </div>
 </figure>
 
 <style>
   .service-diagram {
-    --diagram-success: #8dd9b1;
-    --diagram-attention: #efbb78;
     margin: 0;
+  }
+
+  .diagram-window {
     overflow: hidden;
-    border: 1px solid var(--color-primary-14);
+    border: 1px solid var(--color-primary-20);
     border-radius: var(--radius-sm);
-    background:
-      radial-gradient(720px 280px at 82% -12%, var(--color-primary-8), transparent 62%),
-      var(--color-card);
-    box-shadow: inset 0 1px 0 rgba(240, 246, 255, 0.03), 0 18px 48px rgba(0, 0, 0, 0.18);
-    transition: border-color 260ms ease, box-shadow 260ms ease;
+    background: var(--color-card);
+    box-shadow: var(--shadow-panel);
   }
-  .service-diagram:hover {
-    border-color: var(--color-primary-28);
-    box-shadow: inset 0 1px 0 rgba(240, 246, 255, 0.04), 0 24px 58px rgba(0, 0, 0, 0.26);
+  .diagram-window:focus-within {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
   }
-
-  .diagram-caption {
+  .diagram-titlebar {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 8px 18px;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--color-primary-14);
-    color: var(--color-foreground-55);
-    font-size: 13.5px;
-    line-height: 1.5;
-  }
-  .diagram-kicker {
-    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    color: var(--color-primary);
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    justify-content: center;
+    min-height: 34px;
+    border-bottom: 1px solid var(--color-primary-14);
+    background: var(--color-card);
   }
-  .diagram-kicker::before {
-    content: '';
-    width: 5px;
-    height: 5px;
+  .window-controls {
+    position: absolute;
+    left: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .window-controls span {
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--color-foreground-35);
     border-radius: 50%;
-    background: var(--color-primary);
-    box-shadow: 0 0 0 3px var(--color-primary-10);
-    animation: status-pulse 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    background: var(--color-foreground-35);
+    opacity: 0.55;
   }
-
+  .window-title {
+    color: var(--color-foreground-45);
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
   .diagram-frame {
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--color-primary-28) transparent;
     -webkit-overflow-scrolling: touch;
   }
-  .diagram-frame:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; }
   .diagram-frame svg {
     display: block;
     width: 100%;
-    min-width: 760px;
+    min-width: 720px;
     height: auto;
     font-family: var(--font-mono);
     text-rendering: geometricPrecision;
   }
 
-  .d-top {
-    fill: var(--color-foreground-45);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-  }
   .d-micro {
     fill: var(--color-foreground-45);
-    font-size: 9px;
-    letter-spacing: 0.1em;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+  .d-stage {
+    fill: var(--color-primary);
+    font-size: 8px;
+    letter-spacing: 0.12em;
   }
   .d-label {
     fill: var(--color-foreground-70);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
   .d-label--strong {
     fill: var(--color-foreground);
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: -0.01em;
   }
   .d-num {
-    fill: var(--color-primary);
-    font-size: 9px;
-    letter-spacing: 0.12em;
+    fill: var(--color-foreground-45);
+    font-size: 8px;
+    letter-spacing: 0.1em;
   }
   .d-node {
     fill: var(--color-primary-4);
@@ -611,142 +541,50 @@ const u = copy[lang].ui;
     stroke: var(--color-primary-35);
   }
   .d-panel {
-    fill: rgba(15, 18, 25, 0.78);
-    stroke: var(--color-primary-14);
-    stroke-width: 1;
-  }
-  .d-panel--accent {
-    stroke: var(--color-primary-28);
-    animation: panel-breathe 7s ease-in-out infinite;
-  }
-  .d-panel--validated,
-  .d-panel--outcome {
-    fill: rgba(141, 217, 177, 0.035);
-    stroke: color-mix(in srgb, var(--diagram-success) 56%, transparent);
-  }
-  .d-node--attention {
-    fill: rgba(239, 187, 120, 0.08);
-    stroke: color-mix(in srgb, var(--diagram-attention) 54%, transparent);
-  }
-  .d-panel-head { fill: var(--color-primary-4); stroke: none; }
-  .d-kpi {
     fill: var(--color-primary-4);
     stroke: var(--color-primary-14);
     stroke-width: 1;
   }
-  .d-kpi-line {
-    stroke: var(--color-primary);
-    stroke-width: 2;
-    opacity: 0.5;
-    animation: kpi-read 3.4s ease-in-out infinite;
+  .d-panel--accent {
+    stroke: var(--color-primary-20);
+    animation: panel-breathe 7s ease-in-out infinite;
+  }
+  .d-panel--outcome {
+    fill: var(--color-primary-4);
+    stroke: var(--color-primary-28);
   }
   .d-line {
     fill: none;
-    stroke: var(--color-primary-35);
-    stroke-width: 1.2;
+    stroke: var(--color-primary);
+    stroke-width: 1.4;
     stroke-dasharray: 8 8;
+    opacity: 0.82;
     stroke-linecap: round;
+    stroke-linejoin: round;
     animation: line-flow 3.2s linear infinite;
   }
   .d-line:nth-of-type(even) { animation-delay: -1.4s; }
+  .d-line--optional { stroke-dasharray: 4 4; opacity: 0.78; }
   .d-loop {
     fill: none;
-    stroke: var(--color-primary-20);
-    stroke-width: 1;
-    stroke-dasharray: 4 6;
-    animation: loop-dash 9s linear infinite;
-  }
-  .d-dot { fill: var(--color-primary); }
-  .d-dot--pulse {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: dot-pulse 3.6s ease-in-out infinite;
-  }
-  .d-spark {
-    fill: var(--color-primary);
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: spark-pulse 3.2s ease-in-out infinite;
-  }
-  .d-halo {
-    fill: none;
-    stroke: var(--color-primary-20);
-    stroke-width: 1;
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: halo-pulse 5.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  }
-  .d-status-ring {
-    fill: none;
-    stroke: var(--color-primary-35);
-    stroke-width: 1;
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: status-ring 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  }
-  .d-status-core { fill: var(--color-primary); }
-  .d-dot-text {
-    fill: var(--color-primary);
-    font-size: 8px;
-  }
-  .d-check-ring {
-    fill: var(--color-primary-5);
-    stroke: var(--color-primary-35);
-    stroke-width: 1;
-  }
-  .d-check {
-    fill: none;
     stroke: var(--color-primary);
-    stroke-width: 2.4;
+    stroke-width: 1.35;
+    opacity: 0.76;
+    stroke-dasharray: 4 6;
     stroke-linecap: round;
     stroke-linejoin: round;
+    animation: loop-dash 9s linear infinite;
   }
-  .d-bars {
-    stroke: var(--color-primary-35);
-    stroke-width: 8;
-    stroke-linecap: butt;
-    transform-box: fill-box;
-    transform-origin: center bottom;
-    animation: chart-rise 4.6s ease-in-out infinite;
+  .d-arrow-label {
+    letter-spacing: 0.08em;
   }
-  .d-mini-bars { stroke: var(--color-primary); stroke-width: 2.5; stroke-linecap: round; }
-  .d-eye { fill: none; stroke: var(--color-primary-35); stroke-width: 1.2; }
-  .d-diamond { fill: var(--color-primary-8); stroke: var(--color-primary-35); stroke-width: 1; }
 
-  @keyframes status-pulse {
-    0%, 100% { opacity: 0.55; transform: scale(0.86); }
-    50% { opacity: 1; transform: scale(1.12); }
-  }
-  @keyframes status-ring {
-    0%, 100% { opacity: 0.25; transform: scale(0.9); }
-    50% { opacity: 0.7; transform: scale(1.18); }
-  }
-  @keyframes dot-pulse {
-    0%, 100% { opacity: 0.55; transform: scale(0.82); }
-    50% { opacity: 1; transform: scale(1.22); }
-  }
-  @keyframes spark-pulse {
-    0%, 100% { opacity: 0.18; transform: scale(0.55); }
-    50% { opacity: 1; transform: scale(1); }
-  }
-  @keyframes halo-pulse {
-    0%, 100% { opacity: 0.35; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1.06); }
-  }
   @keyframes panel-breathe {
     0%, 100% { stroke-opacity: 0.7; }
     50% { stroke-opacity: 1; }
   }
   @keyframes line-flow {
     to { stroke-dashoffset: -48; }
-  }
-  @keyframes kpi-read {
-    0%, 100% { opacity: 0.42; }
-    45%, 65% { opacity: 1; }
-  }
-  @keyframes chart-rise {
-    0%, 100% { opacity: 0.72; transform: scaleY(0.94); }
-    50% { opacity: 1; transform: scaleY(1); }
   }
   @keyframes loop-dash {
     to { stroke-dashoffset: -80; }
@@ -755,27 +593,16 @@ const u = copy[lang].ui;
   .service-diagram:hover .d-line { animation-duration: 1.8s; }
   .service-diagram:hover .d-panel--accent { animation-duration: 3.8s; }
 
-  @media (max-width: 640px) {
-    .diagram-caption { padding: 14px 16px; font-size: 12.5px; }
+  @media (prefers-reduced-motion: reduce) {
+    .d-panel--accent,
+    .d-line,
+    .d-loop { animation: none; }
+    .d-line,
+    .d-loop { stroke-dasharray: none; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .diagram-kicker::before,
-    .d-panel--accent,
-    .d-dot--pulse,
-    .d-spark,
-    .d-halo,
-    .d-status-ring,
-    .d-line,
-    .d-kpi-line,
-    .d-bars,
-    .d-loop { animation: none; }
-    .d-dot--pulse { opacity: 1; transform: none; }
-    .d-spark { opacity: 0.7; transform: none; }
-    .d-halo { opacity: 0.6; transform: none; }
-    .d-status-ring { opacity: 0.55; transform: none; }
-    .d-line { stroke-dasharray: none; }
-    .d-kpi-line { opacity: 1; }
-    .d-bars { opacity: 1; transform: none; }
+  @media (max-width: 640px) {
+    .diagram-frame svg { min-width: 680px; }
   }
+
 </style>
